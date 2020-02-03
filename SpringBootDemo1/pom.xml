@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.arnasrad</groupId>
-	<artifactId>SpringBootDemo</artifactId>
+	<artifactId>SpringBootDemo1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBootDemo</name>
+	<name>SpringBootDemo1</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -34,6 +34,28 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
