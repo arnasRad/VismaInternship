@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Bean;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class SpringBootDemo1Application {
+public class OpenBankingApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootDemo1Application.class, args);
+		SpringApplication.run(OpenBankingApp.class, args);
 	}
 
 	@Bean
