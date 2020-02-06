@@ -9,7 +9,6 @@ public class Account {
     private Double balance;
     private String currency;
     private String state;
-    //@JsonValue("public")
     private Boolean isPublic;
     private Date created_at;
     private Date updated_at;
