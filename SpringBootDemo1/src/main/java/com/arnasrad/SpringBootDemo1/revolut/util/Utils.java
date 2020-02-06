@@ -1,6 +1,6 @@
 package com.arnasrad.SpringBootDemo1.revolut.util;
 
-import com.arnasrad.SpringBootDemo1.revolut.Account;
+import com.arnasrad.SpringBootDemo1.revolut.model.Account;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;

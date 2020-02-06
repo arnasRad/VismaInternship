@@ -1,6 +1,4 @@
-package com.arnasrad.SpringBootDemo1.revolut;
-
-import com.fasterxml.jackson.annotation.JsonValue;
+package com.arnasrad.SpringBootDemo1.revolut.model;
 
 import java.util.Date;
 

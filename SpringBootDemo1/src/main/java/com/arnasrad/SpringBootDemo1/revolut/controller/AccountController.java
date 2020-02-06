@@ -1,13 +1,15 @@
-package com.arnasrad.SpringBootDemo1.revolut;
+package com.arnasrad.SpringBootDemo1.revolut.controller;
 
+import com.arnasrad.SpringBootDemo1.revolut.model.Account;
 import com.arnasrad.SpringBootDemo1.revolut.util.Utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +24,7 @@ public class AccountController {
     RestTemplate restTemplate = new RestTemplate();
     final String revolutUrl = "https://sandbox-b2b.revolut.com/api/1.0";
 
-    @Value("${accessToken.constant}")
+    @Value("${revolut.sandbox.accessToken.constant}")
     private String accessToken;
 
     @GetMapping("/")
@@ -35,6 +37,10 @@ public class AccountController {
         HttpHeaders httpHeaders = new HttpHeaders();
         // TODO: implement refresh token
         httpHeaders.setBearerAuth(accessToken);
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("", "");
 
         HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
 
