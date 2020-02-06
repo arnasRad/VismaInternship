@@ -12,14 +12,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -28,11 +25,13 @@ public class AccountController {
     @Value("${revolut.sandbox.constant.accessToken}")
     private String accessToken;
 
+    @Value("${url.revolut.accounts}")
+    private String accountsUrl;
+
     @Autowired
     RefreshTokenService refreshTokenService;
 
     RestTemplate restTemplate = new RestTemplate();
-    final String revolutUrl = "https://sandbox-b2b.revolut.com/api/1.0";
 
     @GetMapping("/")
     String mainPage() {
@@ -40,7 +39,7 @@ public class AccountController {
     }
 
     @GetMapping("/revolut")
-    List<Account> getAccounts() throws JsonProcessingException {
+    List<Account> getAccounts() {
         HttpHeaders httpHeaders = new HttpHeaders();
         // TODO: implement refresh token
         httpHeaders.setBearerAuth(accessToken);
@@ -48,20 +47,31 @@ public class AccountController {
 
         HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
 
-        String jsonResponse = restTemplate.exchange(revolutUrl + "/accounts", HttpMethod.GET, httpEntity, String.class).getBody();
-        if (jsonResponse != null)
-            return Utils.getAccountListFromJsonString(jsonResponse);
-        else
+        try {
+            String jsonResponse = restTemplate.exchange(accountsUrl, HttpMethod.GET, httpEntity, String.class).getBody();
+            if (jsonResponse != null)
+                return Utils.getAccountListFromJsonString(jsonResponse);
+            else
+                return null;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
             return null;
+        }
     }
 
     @Autowired
     JwtTokenService jwtTokenService;
     @Autowired
     KeyLoadService keyLoadService;
-    @GetMapping("/test-token")
+    @GetMapping("/refresh-token")
     String getJwtToken() {
-        return jwtTokenService.generateToken();
+        try {
+            String result = refreshTokenService.refreshToken();
+            return result;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
         //return jwtTokenService.generateToken();
     }
 }
