@@ -28,6 +28,12 @@ public class AccountController {
     @Value("${url.revolut.accounts}")
     private String accountsUrl;
 
+    @Value("${authorization.headerName}")
+    private String headerName;
+
+    @Value("${authorization.headerType}")
+    private String headerType;
+
     @Autowired
     RefreshTokenService refreshTokenService;
 
@@ -41,10 +47,12 @@ public class AccountController {
     @GetMapping("/revolut")
     List<Account> getAccounts() {
         HttpHeaders httpHeaders = new HttpHeaders();
-        // TODO: implement refresh token
-        httpHeaders.setBearerAuth(accessToken);
-        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
+//        httpHeaders.setBearerAuth(accessToken);
+        httpHeaders.add(headerName, headerType + " " + accessToken);
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        httpHeaders.remove(headerName);
+        httpHeaders.add(headerName, headerType + " " + accessToken);
         HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
 
         try {

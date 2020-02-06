@@ -1,6 +1,5 @@
 package com.arnasrad.SpringBootDemo1.revolut.service;
 
-import com.arnasrad.SpringBootDemo1.revolut.util.Utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,6 +47,7 @@ public class RefreshTokenService {
         String jsonResponse = restTemplate.exchange(refreshTokenUrl, HttpMethod.POST, httpEntity, String.class).getBody();
 
         if (jsonResponse != null) {
+            // TODO: update access token property
             JsonNode parent = new ObjectMapper().readTree(jsonResponse);
             return parent.get("access_token").asText();
         } else {
