@@ -1,5 +1,6 @@
 package com.arnasrad.SpringBootDemo1.revolut;
 
+import com.arnasrad.SpringBootDemo1.revolut.util.Utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,12 +38,9 @@ public class AccountController {
 
         HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
 
-        ObjectMapper mapper = new ObjectMapper();
-        JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, Account.class);
-
         String jsonResponse = restTemplate.exchange(revolutUrl + "/accounts", HttpMethod.GET, httpEntity, String.class).getBody();
         if (jsonResponse != null)
-            return mapper.readValue(jsonResponse, type);
+            return Utils.getAccountListFromJsonString(jsonResponse);
         else
             return null;
     }
