@@ -1,5 +1,6 @@
 package com.arnasrad.SpringBootDemo1.config;
 
+import com.arnasrad.SpringBootDemo1.utils.RestTemplateHeaderModifierInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -8,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-/*
+
 @Configuration
 public class RestClientConfig {
 
@@ -20,8 +21,8 @@ public class RestClientConfig {
         if (CollectionUtils.isEmpty(interceptors)) {
             interceptors = new ArrayList<>();
         }
-        interceptors.add(new Resttemplateheader)
-
+        interceptors.add(new RestTemplateHeaderModifierInterceptor());
+        restTemplate.setInterceptors(interceptors);
+        return restTemplate;
     }
 }
-*/
