@@ -7,6 +7,7 @@ import com.amazonaws.http.HttpMethodName;
 import com.arnasrad.SpringBootDemo1.dnb.handlers.ResponseHandlerJSONArray;
 import com.arnasrad.SpringBootDemo1.dnb.handlers.ResponseHandlerJSONObject;
 import com.arnasrad.SpringBootDemo1.dnb.model.Customer;
+import com.arnasrad.SpringBootDemo1.dnb.model.CustomerInfo;
 import com.arnasrad.SpringBootDemo1.dnb.utils.Utils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -82,16 +83,16 @@ public class CustomerController {
 
         Response<JSONArray> response = buildRequest(customerRequest).execute(new ResponseHandlerJSONArray(false));
 
-        return Utils.getCustomerFromJsonString(response.getAwsResponse().toString());
+        return Utils.getCustomerListFromJsonString(response.getAwsResponse().toString());
     }
 
     @GetMapping("/dnb/customer-info")
-    public List<Customer> getCustomerInfo(final String jwtToken) throws IOException {
+    public CustomerInfo getCustomerInfo(final String jwtToken) throws IOException {
         final Request customerRequest = createRequest(HttpMethodName.GET, "/customers/v0/current");
         customerRequest.addHeader(jwtTokenHeader, jwtToken);
 
         Response<JSONObject> response = buildRequest(customerRequest).execute(new ResponseHandlerJSONObject(false));
 
-        return Utils.getCustomerFromJsonString(response.getAwsResponse().toString());
+        return Utils.getCustomerInfoFromJsonString(response.getAwsResponse().toString());
     }
 }
