@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.revolut.controller;
 
+import com.arnasrad.vismainternship.revolut.component.JsonStringConverter;
 import com.arnasrad.vismainternship.revolut.model.Account;
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
 import com.arnasrad.vismainternship.revolut.service.RequestBuilderService;
-import com.arnasrad.vismainternship.revolut.component.JsonStringConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,9 +47,9 @@ public class AccountController {
                 return JsonStringConverter.getAccountList(jsonResponse);
             else
                 return null;
-        } catch (JsonProcessingException e) {
+        } catch (JsonProcessingException e) { // TODO: use logger
             e.printStackTrace();
-            return null;
+            return null; // TODO: return Optional
         }
     }
 }

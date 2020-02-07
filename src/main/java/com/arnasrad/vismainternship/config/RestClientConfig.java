@@ -24,4 +24,8 @@ public class RestClientConfig {
         restTemplate.setInterceptors(interceptors);
         return restTemplate;
     }
+
+    @Bean RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }

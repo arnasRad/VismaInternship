@@ -8,13 +8,9 @@ public class CustomerInfo {
     private Address address;
     private String phone;
     private String countryOfBirth;
-//    @JsonProperty("citizenship")
-//    private JsonNode citizenship;
     private Citizenship[] citizenship;
     private String customerId;
     private String email;
-//    @JsonProperty("countryTax")
-//    private JsonNode countryTax;
     private CountryTax[] countryTax;
 
     public CustomerInfo() {

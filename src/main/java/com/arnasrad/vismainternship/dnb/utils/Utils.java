@@ -23,7 +23,6 @@ public class Utils {
             throws JsonProcessingException {
 
         ObjectMapper mapper = new ObjectMapper();
-        JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, Customer.class);
 
         return mapper.readValue(jsonString, CustomerInfo.class);
     }

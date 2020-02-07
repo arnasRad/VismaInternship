@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccessToken {
 
-
+    // TODO: store access token here
 }
