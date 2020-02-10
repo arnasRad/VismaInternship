@@ -1,10 +1,18 @@
 HELP.md
 target/
-src/main/resources/application.properties
-src/main/resources/static/certificates/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+
+### Properties ###
+src/main/resources/application.properties
+src/main/resources/static/certificates/
+
+src\main\resources\application.properties
+src\main\resources\static\certificates\seb
+src\main\resources\static\certificates\seb\
+src\main\resources\static\certificates
+src\main\resources\static\certificates\
 
 ### STS ###
 .apt_generated
