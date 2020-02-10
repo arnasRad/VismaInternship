@@ -53,15 +53,6 @@ public class RequestBuilderService {
 
     private MultiValueMap<String, String> setupJwtParams() {
 
-        System.out.println("****************");
-
-        System.out.println(grantType);
-        System.out.println(refreshTokenConstant);
-        System.out.println(clientId);
-        System.out.println(clientAssertionType);
-        System.out.println(jwtToken);
-
-        System.out.println("****************");
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", grantType);
         params.add("refresh_token", refreshTokenConstant);
