@@ -37,10 +37,10 @@ public class AccountController {
 
     @GetMapping("/")
     public String mainPage() {
-        return "Revolut Open Banking API!";
+        return "Welcome to Visma Open Banking API!";
     }
 
-    @GetMapping("/revolut")
+    @GetMapping("/revolut-accounts")
     public List<Account> getAccounts() {
 
         HttpEntity<String> httpEntity = requestBuilderService.getAuthorizedHttpEntity();

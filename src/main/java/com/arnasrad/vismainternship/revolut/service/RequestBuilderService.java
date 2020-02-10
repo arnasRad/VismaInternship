@@ -12,10 +12,13 @@ import org.springframework.util.MultiValueMap;
 @Service
 public class RequestBuilderService {
 
+    @Value("${revolut.sandbox.constant.grantType}")
+    private String grantType;
+
     @Value("${revolut.sandbox.constant.accessToken}")
     private String accessToken;
 
-    @Value("${revolut.sandbox.constant.jwtToken")
+    @Value("${revolut.sandbox.constant.jwtToken}")
     private String jwtToken;
 
     @Value("${revolut.sandbox.constant.refreshToken}")
@@ -23,6 +26,9 @@ public class RequestBuilderService {
 
     @Value("${revolut.sandbox.constant.clientId}")
     private String clientId;
+
+    @Value("${revolut.sandbox.constant.clientAssertionType}")
+    private String clientAssertionType;
 
     @Value("${authorization.headerName}")
     private String headerName;
@@ -47,12 +53,21 @@ public class RequestBuilderService {
 
     private MultiValueMap<String, String> setupJwtParams() {
 
+        System.out.println("****************");
+
+        System.out.println(grantType);
+        System.out.println(refreshTokenConstant);
+        System.out.println(clientId);
+        System.out.println(clientAssertionType);
+        System.out.println(jwtToken);
+
+        System.out.println("****************");
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "refresh_token"); // value="refresh_token"
-        params.add("refresh_token", refreshTokenConstant); // value=a_refresh_token
-        params.add("client_id", clientId); // value=your_app_id
-        params.add("client_assertion_type", "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"); // value="urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
-        params.add("client_assertion", jwtToken); // value=generated_jwt_token
+        params.add("grant_type", grantType);
+        params.add("refresh_token", refreshTokenConstant);
+        params.add("client_id", clientId);
+        params.add("client_assertion_type", clientAssertionType);
+        params.add("client_assertion", jwtToken);
 
         return params;
     }
