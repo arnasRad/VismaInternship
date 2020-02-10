@@ -20,6 +20,7 @@ public class KeyLoadService {
     @Value("${resources.privatekey.path}")
     private String privateKeyPath;
 
+
     public PrivateKey getPrivateKeyFromResources(){
 
         return generatePrivateKey(privateKeyPath);

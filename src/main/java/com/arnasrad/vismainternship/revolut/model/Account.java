@@ -11,6 +11,8 @@ public class Account {
     private Double balance;
     private String currency;
     private String state;
+
+    @JsonProperty("public")
     private Boolean isPublic;
 
     @JsonProperty("created_at")
