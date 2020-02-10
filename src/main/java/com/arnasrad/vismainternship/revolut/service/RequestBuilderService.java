@@ -35,29 +35,11 @@ public class RequestBuilderService {
         return new HttpEntity<>(getAuthorizedHttpHeaders());
     }
 
-    private HttpHeaders getAuthorizedHttpHeaders() {
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(headerName, headerType + " " + accessToken);
-        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        httpHeaders.remove(headerName);
-        httpHeaders.add(headerName, headerType + " " + accessToken);
-        return httpHeaders;
-    }
-
     public HttpEntity<MultiValueMap<String, String>> getJwtHttpEntity() {
 
-        HttpHeaders httpHeaders = getHttpHeaders();
         MultiValueMap<String, String> params = setupParams();
+        HttpHeaders httpHeaders = getHttpHeaders();
         return new HttpEntity<>(params, httpHeaders);
-    }
-
-    private HttpHeaders getHttpHeaders() {
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        return httpHeaders;
     }
 
     private MultiValueMap<String, String> setupParams() {
@@ -70,5 +52,23 @@ public class RequestBuilderService {
         params.add("client_assertion", jwtTokenService.generateToken()); // value=generated_jwt_token
 
         return params;
+    }
+
+    private HttpHeaders getAuthorizedHttpHeaders() {
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(headerName, headerType + " " + accessToken);
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        httpHeaders.remove(headerName);
+        httpHeaders.add(headerName, headerType + " " + accessToken);
+        return httpHeaders;
+    }
+
+    private HttpHeaders getHttpHeaders() {
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        return httpHeaders;
     }
 }

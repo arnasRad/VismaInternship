@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.revolut.controller;
 
-import com.arnasrad.vismainternship.revolut.component.JsonStringConverter;
+import com.arnasrad.vismainternship.revolut.component.JsonAccountMapper;
 import com.arnasrad.vismainternship.revolut.model.Account;
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
 import com.arnasrad.vismainternship.revolut.service.RequestBuilderService;
@@ -32,6 +32,9 @@ public class AccountController {
     @Autowired
     private RequestBuilderService requestBuilderService;
 
+    @Autowired
+    private JsonAccountMapper jsonAccountMapper;
+
     @GetMapping("/")
     public String mainPage() {
         return "Revolut Open Banking API!";
@@ -44,9 +47,9 @@ public class AccountController {
         try {
             String jsonResponse = restTemplate.exchange(accountsUrl, HttpMethod.GET, httpEntity, String.class).getBody();
             if (jsonResponse != null)
-                return JsonStringConverter.getAccountList(jsonResponse);
+                return jsonAccountMapper.getAccountList(jsonResponse);
             else
-                return null;
+                return null; // TODO: return Optional
         } catch (JsonProcessingException e) { // TODO: use logger
             e.printStackTrace();
             return null; // TODO: return Optional

@@ -27,12 +27,12 @@ public class JwtTokenService {
     public String generateToken() {
 
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims);
+        PrivateKey signingKey = keyLoadService.getPrivateKeyFromResources();
+        return buildJwt(claims, signingKey);
     }
 
-    private String doGenerateToken(Map<String, Object> claims) {
+    private String buildJwt(Map<String, Object> claims, PrivateKey signingKey) {
 
-        PrivateKey signingKey = keyLoadService.getPrivateKey();
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuer(jwtIssuer)

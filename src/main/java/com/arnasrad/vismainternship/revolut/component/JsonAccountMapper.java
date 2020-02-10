@@ -9,13 +9,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class JsonStringConverter {
+public class JsonAccountMapper {
 
-    private JsonStringConverter() {
-        // singleton scope component
-    }
+    private JsonAccountMapper() {}
 
-    public static List<Account> getAccountList(String jsonString)
+    public List<Account> getAccountList(String jsonString)
             throws JsonProcessingException {
 
         ObjectMapper mapper = new ObjectMapper();

@@ -20,11 +20,7 @@ public class KeyLoadService {
     @Value("${resources.privatekey.path}")
     private String privateKeyPath;
 
-    /**
-     * Gets the private key from resources/static/certificates folder
-     * @return PrivateKey object
-     */
-    public PrivateKey getPrivateKey(){
+    public PrivateKey getPrivateKeyFromResources(){
 
         return generatePrivateKey(privateKeyPath);
     }
@@ -41,15 +37,19 @@ public class KeyLoadService {
 
             return keyFactory.generatePrivate(keySpec);
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException | URISyntaxException e) {
-            e.printStackTrace();
-            return null;
+            e.printStackTrace(); // TODO: use logger
+            return null; // TODO: return Optional
         }
     }
 
     private String loadPrivateKey(String fileName) throws IOException, URISyntaxException {
 
         URL keyUrl = getClass().getClassLoader().getResource(fileName);
-        return formatPrivateKey(keyUrl);
+        if (keyUrl != null) {
+            return formatPrivateKey(keyUrl);
+        } else {
+            return null; // TODO: return Optional
+        }
     }
 
     private String formatPrivateKey(URL keyUrl) throws URISyntaxException, IOException {
