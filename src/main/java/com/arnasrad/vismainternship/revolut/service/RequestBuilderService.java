@@ -36,9 +36,6 @@ public class RequestBuilderService {
     @Value("${authorization.headerType}")
     private String headerType;
 
-    @Autowired
-    private JwtTokenService jwtTokenService;
-
     public HttpEntity<String> getAuthorizedHttpEntity() {
 
         return new HttpEntity<>(getAuthorizedHttpHeaders());
