@@ -28,7 +28,7 @@ public class RestTemplateHeaderModifierInterceptor
 
         ClientHttpResponse response = execution.execute(request, body);
         if (response.getStatusCode() == HttpStatus.UNAUTHORIZED) {
-            request.getHeaders().set(headerName, headerType + " " + refreshTokenService.refreshToken());
+            request.getHeaders().set(headerName, headerType + " " + refreshTokenService.refreshAndGetAccessToken());
             return execution.execute(request, body);
         }
         return response;

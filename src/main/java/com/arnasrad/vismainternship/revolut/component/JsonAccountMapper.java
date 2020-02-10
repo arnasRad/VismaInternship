@@ -11,7 +11,9 @@ import java.util.List;
 @Component
 public class JsonAccountMapper {
 
-    private JsonAccountMapper() {}
+    private JsonAccountMapper() {
+
+    }
 
     public List<Account> getAccountList(String jsonString)
             throws JsonProcessingException {

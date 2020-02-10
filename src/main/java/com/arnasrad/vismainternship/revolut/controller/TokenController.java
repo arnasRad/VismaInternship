@@ -14,6 +14,6 @@ public class TokenController {
     @GetMapping("/refresh-access-token")
     public String getNewAccessToken() {
 
-        return refreshTokenService.refreshToken();
+        return refreshTokenService.refreshAndGetAccessToken();
     }
 }

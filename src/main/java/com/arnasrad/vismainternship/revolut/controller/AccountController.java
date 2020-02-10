@@ -5,6 +5,8 @@ import com.arnasrad.vismainternship.revolut.model.Account;
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
 import com.arnasrad.vismainternship.revolut.service.RequestBuilderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -35,6 +38,8 @@ public class AccountController {
     @Autowired
     private JsonAccountMapper jsonAccountMapper;
 
+    private final Logger logger = LoggerFactory.getLogger(AccountController.class);
+
     @GetMapping("/")
     public String mainPage() {
         return "Welcome to Visma Open Banking API!";
@@ -46,12 +51,14 @@ public class AccountController {
         HttpEntity<String> httpEntity = requestBuilderService.getAuthorizedHttpEntity();
         try {
             String jsonResponse = restTemplate.exchange(accountsUrl, HttpMethod.GET, httpEntity, String.class).getBody();
-            if (jsonResponse != null)
+            if (jsonResponse != null) {
                 return jsonAccountMapper.getAccountList(jsonResponse);
-            else
+            } else {
+                logger.warn("null response returned on GET revolut-accounts query");
                 return null; // TODO: return Optional
-        } catch (JsonProcessingException e) { // TODO: use logger
-            e.printStackTrace();
+            }
+        } catch (JsonProcessingException e) {
+            logger.error(Arrays.toString(e.getStackTrace()));
             return null; // TODO: return Optional
         }
     }
