@@ -1,17 +1,15 @@
 package com.arnasrad.vismainternship.revolut.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.arnasrad.vismainternship.revolut.component.JsonResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class RefreshTokenService {
@@ -25,26 +23,17 @@ public class RefreshTokenService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final Logger logger = LoggerFactory.getLogger(RefreshTokenService.class);
+    @Autowired
+    private JsonResponseMapper jsonResponseMapper;
 
     public String refreshAndGetAccessToken() {
 
-        String jsonResponse = restTemplate.exchange(refreshTokenUrl, HttpMethod.POST,
+        String jsonResponse = Optional.ofNullable(restTemplate.exchange(refreshTokenUrl, HttpMethod.POST,
                 requestBuilderService.getJwtHttpEntity(),
-                String.class).getBody();
+                String.class).getBody()
+        ).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad token refresh request"));
 
-        if (jsonResponse != null) {
-            // TODO: update access token property
-            try {
-                JsonNode parent = new ObjectMapper().readTree(jsonResponse);
-                return parent.get("access_token").asText();
-            } catch (JsonProcessingException e) {
-                logger.error(Arrays.toString(e.getStackTrace()));
-                return null; // TODO: return Optional
-            }
-        } else {
-            logger.warn("null response returned on refresh access token query");
-            return null; // TODO: return Optional
-        }
+        // TODO: update access token property
+        return jsonResponseMapper.getFieldFromResponse(jsonResponse, "access_token");
     }
 }

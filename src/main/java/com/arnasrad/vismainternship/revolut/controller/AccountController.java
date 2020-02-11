@@ -1,23 +1,21 @@
 package com.arnasrad.vismainternship.revolut.controller;
 
-import com.arnasrad.vismainternship.revolut.component.JsonAccountMapper;
+import com.arnasrad.vismainternship.revolut.component.JsonResponseMapper;
 import com.arnasrad.vismainternship.revolut.model.Account;
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
 import com.arnasrad.vismainternship.revolut.service.RequestBuilderService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -36,9 +34,7 @@ public class AccountController {
     private RequestBuilderService requestBuilderService;
 
     @Autowired
-    private JsonAccountMapper jsonAccountMapper;
-
-    private final Logger logger = LoggerFactory.getLogger(AccountController.class);
+    private JsonResponseMapper jsonResponseMapper;
 
     @GetMapping("/")
     public String mainPage() {
@@ -48,18 +44,10 @@ public class AccountController {
     @GetMapping("/revolut-accounts")
     public List<Account> getAccounts() {
 
-        HttpEntity<String> httpEntity = requestBuilderService.getAuthorizedHttpEntity();
-        try {
-            String jsonResponse = restTemplate.exchange(accountsUrl, HttpMethod.GET, httpEntity, String.class).getBody();
-            if (jsonResponse != null) {
-                return jsonAccountMapper.getAccountList(jsonResponse);
-            } else {
-                logger.warn("null response returned on GET revolut-accounts query");
-                return null; // TODO: return Optional
-            }
-        } catch (JsonProcessingException e) {
-            logger.error(Arrays.toString(e.getStackTrace()));
-            return null; // TODO: return Optional
-        }
+        String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsUrl, HttpMethod.GET,
+                requestBuilderService.getAuthorizedHttpEntity(), String.class).getBody())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad accounts request"));
+
+        return jsonResponseMapper.getAccountList(jsonResponse);
     }
 }
