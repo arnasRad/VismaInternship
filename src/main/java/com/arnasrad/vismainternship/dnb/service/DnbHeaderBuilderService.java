@@ -20,7 +20,7 @@ public class DnbHeaderBuilderService {
     private String apiKey;
 
     @Autowired
-    JwtToken jwtToken;
+    private JwtToken jwtToken;
 
     public HttpHeaders getAuthorizedHttpHeaders() {
 

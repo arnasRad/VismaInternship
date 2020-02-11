@@ -21,7 +21,7 @@ public class RestTemplateHeaderModifierInterceptor
     private String headerType;
 
     @Autowired
-    RefreshTokenService refreshTokenService;
+    private RefreshTokenService refreshTokenService;
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
