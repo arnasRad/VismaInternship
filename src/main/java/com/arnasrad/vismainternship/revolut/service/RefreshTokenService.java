@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.revolut.service;
 
 import com.arnasrad.vismainternship.revolut.component.AccessToken;
-import com.arnasrad.vismainternship.revolut.component.JsonResponseMapper;
+import com.arnasrad.vismainternship.revolut.component.RevolutJsonResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class RefreshTokenService {
 
-    @Value("${url.revolut.access.token}")
+    @Value("${revolut.url.access-token}")
     private String refreshTokenUrl;
 
     @Autowired
@@ -25,7 +25,7 @@ public class RefreshTokenService {
     private RestTemplate restTemplate;
 
     @Autowired
-    private JsonResponseMapper jsonResponseMapper;
+    private RevolutJsonResponseMapper revolutJsonResponseMapper;
 
     @Autowired
     private AccessToken accessToken;
@@ -37,7 +37,7 @@ public class RefreshTokenService {
                 String.class).getBody()
         ).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad token refresh request"));
 
-        String token = jsonResponseMapper.getFieldFromResponse(jsonResponse, "access_token");
+        String token = revolutJsonResponseMapper.getFieldFromResponse(jsonResponse, "access_token");
         accessToken.setToken(token);
         return token;
     }

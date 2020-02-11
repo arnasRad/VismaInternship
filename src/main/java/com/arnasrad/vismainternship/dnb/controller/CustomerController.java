@@ -4,13 +4,14 @@ import com.amazonaws.*;
 import com.amazonaws.http.AmazonHttpClient;
 import com.amazonaws.http.ExecutionContext;
 import com.amazonaws.http.HttpMethodName;
+import com.arnasrad.vismainternship.dnb.component.DnbJsonResponseMapper;
 import com.arnasrad.vismainternship.dnb.handlers.ResponseHandlerJSONArray;
 import com.arnasrad.vismainternship.dnb.handlers.ResponseHandlerJSONObject;
 import com.arnasrad.vismainternship.dnb.model.Customer;
 import com.arnasrad.vismainternship.dnb.model.CustomerInfo;
-import com.arnasrad.vismainternship.dnb.utils.Utils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -41,6 +43,20 @@ public class CustomerController {
     @Value("${dnb.apikey}")
     private String apiKey;
 
+    @Value("${dnb.jwtToken}")
+    private String jwtToken;
+
+    @Value("${dnb.url.access-token}")
+    private String accessTokenEndpoint;
+
+    @Value("${dnb.url.customers}")
+    private String customersEndpoint;
+
+    @Value("${dnb.url.customer-info}")
+    private String cusomerInfoEndpoint;
+
+    @Autowired
+    DnbJsonResponseMapper dnbJsonResponseMapper;
 
     private Request createRequest(final HttpMethodName httpMethodName, final String path) {
         final Request request = new DefaultRequest(awsService);
@@ -70,29 +86,32 @@ public class CustomerController {
     public String getApiToken() {
         final Request apiTokenRequest = createRequest(HttpMethodName.POST, "/tokens/v0");
         String content = "{\"ssn\": \"29105573083\"}";
-        apiTokenRequest.setContent(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))));
+        apiTokenRequest.setContent(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
 
-        final JSONObject apiTokenResponse = buildRequest(apiTokenRequest).execute(new ResponseHandlerJSONObject(false))
+        final JSONObject apiTokenResponse = buildRequest(apiTokenRequest)
+                .execute(new ResponseHandlerJSONObject(false))
                 .getAwsResponse();
         return (String) (apiTokenResponse.get("jwtToken"));
     }
 
     @GetMapping("/dnb/test-customers")
-    public List<Customer> getTestCustomers() throws IOException {
+    public List<Customer> getTestCustomers() {
         final Request customerRequest = createRequest(HttpMethodName.GET, "/test-customers/v0");
 
-        Response<JSONArray> response = buildRequest(customerRequest).execute(new ResponseHandlerJSONArray(false));
+        Response<JSONArray> response = buildRequest(customerRequest)
+                .execute(new ResponseHandlerJSONArray(false));
 
-        return Utils.getCustomerListFromJsonString(response.getAwsResponse().toString());
+        return dnbJsonResponseMapper.getCustomerListFromJsonString(response.getAwsResponse().toString());
     }
 
     @GetMapping("/dnb/customer-info")
-    public CustomerInfo getCustomerInfo(final String jwtToken) throws IOException {
+    public CustomerInfo getCustomerInfo() {
         final Request customerRequest = createRequest(HttpMethodName.GET, "/customers/v0/current");
         customerRequest.addHeader(jwtTokenHeader, jwtToken);
 
-        Response<JSONObject> response = buildRequest(customerRequest).execute(new ResponseHandlerJSONObject(false));
+        Response<JSONObject> response = buildRequest(customerRequest)
+                .execute(new ResponseHandlerJSONObject(false));
 
-        return Utils.getCustomerInfoFromJsonString(response.getAwsResponse().toString());
+        return dnbJsonResponseMapper.getCustomerInfoFromJsonString(response.getAwsResponse().toString());
     }
 }

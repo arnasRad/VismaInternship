@@ -1,9 +1,9 @@
-package com.arnasrad.vismainternship.revolut.component;
+package com.arnasrad.vismainternship.dnb.component;
 
-import com.arnasrad.vismainternship.revolut.model.Account;
+import com.arnasrad.vismainternship.dnb.model.Customer;
+import com.arnasrad.vismainternship.dnb.model.CustomerInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,21 +16,21 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class JsonResponseMapper {
+public class DnbJsonResponseMapper {
 
     @Value("${error.msg.json-mapper-error}")
     private String jsonResponseError;
 
-    private final Logger logger = LoggerFactory.getLogger(JsonResponseMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(DnbJsonResponseMapper.class);
 
-    private JsonResponseMapper() {
+    private DnbJsonResponseMapper() {
 
     }
 
-    public List<Account> getAccountList(String jsonString) {
+    public List<Customer> getCustomerListFromJsonString(String jsonString) {
 
         ObjectMapper mapper = new ObjectMapper();
-        JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, Account.class);
+        JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, Customer.class);
 
         try {
             return mapper.readValue(jsonString, type);
@@ -40,11 +40,12 @@ public class JsonResponseMapper {
         }
     }
 
-    public String getFieldFromResponse(String response, String field) {
+    public CustomerInfo getCustomerInfoFromJsonString(String jsonString) {
+
+        ObjectMapper mapper = new ObjectMapper();
 
         try {
-            JsonNode parent = (new ObjectMapper()).readTree(response);
-            return parent.get(field).asText();
+            return mapper.readValue(jsonString, CustomerInfo.class);
         } catch (JsonProcessingException e) {
             logger.error(Arrays.toString(e.getStackTrace()));
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, jsonResponseError);

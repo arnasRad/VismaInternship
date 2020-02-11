@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.revolut.controller;
 
-import com.arnasrad.vismainternship.revolut.component.JsonResponseMapper;
+import com.arnasrad.vismainternship.revolut.component.RevolutJsonResponseMapper;
 import com.arnasrad.vismainternship.revolut.model.Account;
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
 import com.arnasrad.vismainternship.revolut.service.RequestBuilderService;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequestMapping
 public class AccountController {
 
-    @Value("${url.revolut.accounts}")
+    @Value("${revolut.url.accounts}")
     private String accountsUrl;
 
     @Autowired
@@ -34,7 +34,7 @@ public class AccountController {
     private RequestBuilderService requestBuilderService;
 
     @Autowired
-    private JsonResponseMapper jsonResponseMapper;
+    private RevolutJsonResponseMapper revolutJsonResponseMapper;
 
     @GetMapping("/")
     public String mainPage() {
@@ -48,6 +48,6 @@ public class AccountController {
                 requestBuilderService.getAuthorizedHttpEntity(), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad accounts request"));
 
-        return jsonResponseMapper.getAccountList(jsonResponse);
+        return revolutJsonResponseMapper.getAccountList(jsonResponse);
     }
 }
