@@ -1,5 +1,7 @@
 package com.arnasrad.vismainternship.revolut.service;
 
+import com.arnasrad.vismainternship.revolut.component.AccessToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,9 +15,6 @@ public class RequestBuilderService {
 
     @Value("${revolut.sandbox.constant.grantType}")
     private String grantType;
-
-    @Value("${revolut.sandbox.constant.accessToken}")
-    private String accessToken;
 
     @Value("${revolut.sandbox.constant.jwtToken}")
     private String jwtToken;
@@ -34,6 +33,9 @@ public class RequestBuilderService {
 
     @Value("${authorization.headerType}")
     private String headerType;
+
+    @Autowired
+    AccessToken accessToken;
 
     public HttpEntity<String> getAuthorizedHttpEntity() {
 
@@ -62,10 +64,8 @@ public class RequestBuilderService {
     private HttpHeaders getAuthorizedHttpHeaders() {
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(headerName, headerType + " " + accessToken);
+        httpHeaders.add(headerName, headerType + " " + accessToken.getToken());
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        httpHeaders.remove(headerName);
-        httpHeaders.add(headerName, headerType + " " + accessToken);
         return httpHeaders;
     }
 

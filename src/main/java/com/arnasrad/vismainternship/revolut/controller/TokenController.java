@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.revolut.controller;
 
+import com.arnasrad.vismainternship.revolut.component.AccessToken;
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,9 @@ public class TokenController {
 
     @Autowired
     RefreshTokenService refreshTokenService;
+
+    @Autowired
+    AccessToken accessToken;
 
     @GetMapping("/refresh-access-token")
     public String getNewAccessToken() {
