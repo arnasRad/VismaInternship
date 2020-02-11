@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.utils;
+package com.arnasrad.vismainternship.component;
 
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;

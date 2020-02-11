@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.config;
 
-import com.arnasrad.vismainternship.utils.RestTemplateHeaderModifierInterceptor;
+import com.arnasrad.vismainternship.component.RestTemplateHeaderModifierInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestInterceptor;

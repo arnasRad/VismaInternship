@@ -1,117 +1,57 @@
 package com.arnasrad.vismainternship.dnb.controller;
 
-import com.amazonaws.*;
-import com.amazonaws.http.AmazonHttpClient;
-import com.amazonaws.http.ExecutionContext;
-import com.amazonaws.http.HttpMethodName;
 import com.arnasrad.vismainternship.dnb.component.DnbJsonResponseMapper;
-import com.arnasrad.vismainternship.dnb.handlers.ResponseHandlerJSONArray;
-import com.arnasrad.vismainternship.dnb.handlers.ResponseHandlerJSONObject;
 import com.arnasrad.vismainternship.dnb.model.Customer;
 import com.arnasrad.vismainternship.dnb.model.CustomerInfo;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.arnasrad.vismainternship.dnb.service.DnbRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.net.URI;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
 public class CustomerController {
 
-    @Value("${dnb.awsservice}")
-    private String awsService;
-
-    @Value("${dnb.openbanking.endpoint}")
-    private String openBankingEndpoint;
-
-    @Value("${dnb.api.keyHeader}")
-    private String apiKeyHeader;
-
-    @Value("${dnb.jwt.tokenHeader}")
-    private String jwtTokenHeader;
-
-    @Value("${dnb.apikey}")
-    private String apiKey;
-
-    @Value("${dnb.jwtToken}")
-    private String jwtToken;
-
-    @Value("${dnb.url.access-token}")
-    private String accessTokenEndpoint;
-
-    @Value("${dnb.url.customers}")
+    @Value("${dnb.endpoint.customers}")
     private String customersEndpoint;
 
-    @Value("${dnb.url.customer-info}")
-    private String cusomerInfoEndpoint;
+    @Value("${dnb.endpoint.customer-info}")
+    private String customerInfoEndpoint;
 
     @Autowired
-    DnbJsonResponseMapper dnbJsonResponseMapper;
+    private RestTemplate restTemplate;
 
-    private Request createRequest(final HttpMethodName httpMethodName, final String path) {
-        final Request request = new DefaultRequest(awsService);
-        request.setHttpMethod(httpMethodName);
-        request.setEndpoint(URI.create(openBankingEndpoint));
-        request.setResourcePath(path);
-        request.addHeader("Accept", "application/json");
-        request.addHeader("Content-type", "application/json");
-        request.addHeader(apiKeyHeader, apiKey);
-        return request;
-    }
+    @Autowired
+    private DnbRequestBuilderService dnbRequestBuilderService;
 
-    private AmazonHttpClient.RequestExecutionBuilder buildRequest(final Request request) {
-        try {
-            return new AmazonHttpClient(new ClientConfiguration())
-                    .requestExecutionBuilder()
-                    .executionContext(new ExecutionContext(true))
-                    .request(request);
-        } catch (AmazonServiceException exception) {
-            System.out.println("Unexpected status code in response: " + exception.getStatusCode());
-            System.out.println("Content: " + exception.getRawResponseContent());
-            throw new RuntimeException("Failed request. Aborting.");
-        }
-    }
-
-    @GetMapping("/dnb/api-token")
-    public String getApiToken() {
-        final Request apiTokenRequest = createRequest(HttpMethodName.POST, "/tokens/v0");
-        String content = "{\"ssn\": \"29105573083\"}";
-        apiTokenRequest.setContent(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
-
-        final JSONObject apiTokenResponse = buildRequest(apiTokenRequest)
-                .execute(new ResponseHandlerJSONObject(false))
-                .getAwsResponse();
-        return (String) (apiTokenResponse.get("jwtToken"));
-    }
+    @Autowired
+    private DnbJsonResponseMapper dnbJsonResponseMapper;
 
     @GetMapping("/dnb/test-customers")
     public List<Customer> getTestCustomers() {
-        final Request customerRequest = createRequest(HttpMethodName.GET, "/test-customers/v0");
 
-        Response<JSONArray> response = buildRequest(customerRequest)
-                .execute(new ResponseHandlerJSONArray(false));
+        String jsonResponse = Optional.ofNullable(restTemplate.exchange(customersEndpoint, HttpMethod.GET,
+                dnbRequestBuilderService.getRequest(), String.class).getBody())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customers request"));
 
-        return dnbJsonResponseMapper.getCustomerListFromJsonString(response.getAwsResponse().toString());
+        return dnbJsonResponseMapper.getCustomerListFromJsonString(jsonResponse);
     }
 
     @GetMapping("/dnb/customer-info")
     public CustomerInfo getCustomerInfo() {
-        final Request customerRequest = createRequest(HttpMethodName.GET, "/customers/v0/current");
-        customerRequest.addHeader(jwtTokenHeader, jwtToken);
+        String jsonResponse = Optional.ofNullable(restTemplate.exchange(customerInfoEndpoint, HttpMethod.GET,
+                dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customer-info request"));
 
-        Response<JSONObject> response = buildRequest(customerRequest)
-                .execute(new ResponseHandlerJSONObject(false));
-
-        return dnbJsonResponseMapper.getCustomerInfoFromJsonString(response.getAwsResponse().toString());
+        return dnbJsonResponseMapper.getCustomerInfoFromJsonString(jsonResponse);
     }
 }

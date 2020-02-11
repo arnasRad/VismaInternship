@@ -3,7 +3,7 @@ package com.arnasrad.vismainternship.revolut.controller;
 import com.arnasrad.vismainternship.revolut.component.RevolutJsonResponseMapper;
 import com.arnasrad.vismainternship.revolut.model.Account;
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
-import com.arnasrad.vismainternship.revolut.service.RequestBuilderService;
+import com.arnasrad.vismainternship.revolut.service.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -21,8 +21,8 @@ import java.util.Optional;
 @RequestMapping
 public class AccountController {
 
-    @Value("${revolut.url.accounts}")
-    private String accountsUrl;
+    @Value("${revolut.endpoint.accounts}")
+    private String accountsEndpoint;
 
     @Autowired
     private RefreshTokenService refreshTokenService;
@@ -31,7 +31,7 @@ public class AccountController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private RequestBuilderService requestBuilderService;
+    private RevolutRequestBuilderService revolutRequestBuilderService;
 
     @Autowired
     private RevolutJsonResponseMapper revolutJsonResponseMapper;
@@ -44,8 +44,8 @@ public class AccountController {
     @GetMapping("/revolut-accounts")
     public List<Account> getAccounts() {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsUrl, HttpMethod.GET,
-                requestBuilderService.getAuthorizedHttpEntity(), String.class).getBody())
+        String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
+                revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad accounts request"));
 
         return revolutJsonResponseMapper.getAccountList(jsonResponse);
