@@ -3,8 +3,9 @@ package com.arnasrad.vismainternship.dnb.controller;
 import com.arnasrad.vismainternship.dnb.component.DnbJsonResponseMapper;
 import com.arnasrad.vismainternship.dnb.model.Customer;
 import com.arnasrad.vismainternship.dnb.model.CustomerInfo;
-import com.arnasrad.vismainternship.dnb.service.DnbRequestBuilderService;
+import com.arnasrad.vismainternship.dnb.service.RequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,8 @@ public class CustomerController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private DnbRequestBuilderService dnbRequestBuilderService;
+    @Qualifier("dnb")
+    private RequestBuilderService requestBuilderService;
 
     @Autowired
     private DnbJsonResponseMapper dnbJsonResponseMapper;
@@ -40,7 +42,7 @@ public class CustomerController {
     public List<Customer> getTestCustomers() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(customersEndpoint, HttpMethod.GET,
-                dnbRequestBuilderService.getRequest(), String.class).getBody())
+                requestBuilderService.getRequest(), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customers request"));
 
         return dnbJsonResponseMapper.getCustomerListFromJsonString(jsonResponse);
@@ -49,7 +51,7 @@ public class CustomerController {
     @GetMapping("/dnb/customer-info")
     public CustomerInfo getCustomerInfo() {
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(customerInfoEndpoint, HttpMethod.GET,
-                dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                requestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customer-info request"));
 
         return dnbJsonResponseMapper.getCustomerInfoFromJsonString(jsonResponse);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DnbRequestBodyBuilderService {
 
-    @Value("${dnb.ssn}")
+    @Value("${dnb.openbanking.ssn}")
     private String ssn;
 
     public String getBodyForRequestWithSSN() {

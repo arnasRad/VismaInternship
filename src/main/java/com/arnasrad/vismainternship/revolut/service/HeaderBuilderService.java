@@ -7,8 +7,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-@Service
-public class RevolutHeaderBuilderService {
+@Service("revolut-request-header-builder")
+public class HeaderBuilderService {
 
     @Value("${authorization.headerName}")
     private String headerName;
@@ -17,7 +17,7 @@ public class RevolutHeaderBuilderService {
     private String headerType;
 
     @Autowired
-    AccessToken accessToken;
+    private AccessToken accessToken;
 
     public HttpHeaders getAuthorizedHttpHeaders() {
 

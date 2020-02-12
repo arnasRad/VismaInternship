@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-@Service
-public class RevolutRequestBodyBuilderService {
+@Service("revolut-request-body-builder")
+public class RequestBodyBuilderService {
 
     @Value("${revolut.sandbox.constant.grantType}")
     private String grantType;

@@ -1,10 +1,11 @@
 package com.arnasrad.vismainternship.revolut.controller;
 
-import com.arnasrad.vismainternship.revolut.component.RevolutJsonResponseMapper;
+import com.arnasrad.vismainternship.revolut.component.JsonResponseMapper;
 import com.arnasrad.vismainternship.revolut.model.Account;
 import com.arnasrad.vismainternship.revolut.service.RefreshTokenService;
-import com.arnasrad.vismainternship.revolut.service.RevolutRequestBuilderService;
+import com.arnasrad.vismainternship.revolut.service.RequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -31,23 +32,25 @@ public class AccountController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private RevolutRequestBuilderService revolutRequestBuilderService;
+    @Qualifier("revolut-request-builder")
+    private RequestBuilderService requestBuilderService;
 
     @Autowired
-    private RevolutJsonResponseMapper revolutJsonResponseMapper;
+    @Qualifier("revolut-mapper")
+    private JsonResponseMapper jsonResponseMapper;
 
     @GetMapping("/")
     public String mainPage() {
         return "Welcome to Visma Open Banking API!";
     }
 
-    @GetMapping("/revolut-accounts")
+    @GetMapping("/revolut/accounts")
     public List<Account> getAccounts() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
-                revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                requestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad accounts request"));
 
-        return revolutJsonResponseMapper.getAccountList(jsonResponse);
+        return jsonResponseMapper.getAccountList(jsonResponse);
     }
 }

@@ -14,15 +14,15 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
-public class RevolutJsonResponseMapper {
+@Component("revolut-mapper")
+public class JsonResponseMapper {
 
     @Value("${error.msg.json-mapper-error}")
     private String jsonResponseError;
 
-    private final Logger logger = LoggerFactory.getLogger(RevolutJsonResponseMapper.class);
+    private final Logger logger = LoggerFactory.getLogger(JsonResponseMapper.class);
 
-    private RevolutJsonResponseMapper() {
+    private JsonResponseMapper() {
 
     }
 

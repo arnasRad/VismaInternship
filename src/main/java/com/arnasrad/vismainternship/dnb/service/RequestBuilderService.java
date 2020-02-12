@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
-@Service
-public class DnbRequestBuilderService {
+@Service("dnb")
+public class RequestBuilderService {
 
     @Autowired
     private DnbHeaderBuilderService dnbHeaderBuilderService;

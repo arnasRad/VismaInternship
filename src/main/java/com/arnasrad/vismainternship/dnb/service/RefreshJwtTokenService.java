@@ -3,6 +3,7 @@ package com.arnasrad.vismainternship.dnb.service;
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.dnb.component.JwtToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public class RefreshJwtTokenService {
     private RestTemplate restTemplate;
 
     @Autowired
-    private DnbRequestBuilderService dnbRequestBuilderService;
+    @Qualifier("dnb")
+    private RequestBuilderService requestBuilderService;
 
     @Autowired
     private JsonMapper jsonMapper;
@@ -32,7 +34,7 @@ public class RefreshJwtTokenService {
     public String refreshAndGetJwtToken() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(accessTokenEndpoint,
-                dnbRequestBuilderService.getRequestWithSSN(), String.class).getBody())
+                requestBuilderService.getRequestWithSSN(), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customers request"));
 
         String token = jsonMapper.getFieldFromResponse(jsonResponse, "jwtToken");
