@@ -4,8 +4,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@Service
-public class DnbRequestBodyBuilderService {
+@Service("dnb-request-body-builder")
+public class RequestBodyBuilderService {
 
     @Value("${dnb.openbanking.ssn}")
     private String ssn;

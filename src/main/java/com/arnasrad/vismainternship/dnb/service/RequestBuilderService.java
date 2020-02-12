@@ -1,32 +1,35 @@
 package com.arnasrad.vismainternship.dnb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
-@Service("dnb")
+@Service("dnb-request-builder")
 public class RequestBuilderService {
 
     @Autowired
-    private DnbHeaderBuilderService dnbHeaderBuilderService;
+    @Qualifier("dnb-header-builder")
+    private HeaderBuilderService headerBuilderService;
 
     @Autowired
-    private DnbRequestBodyBuilderService dnbRequestBodyBuilderService;
+    @Qualifier("dnb-request-body-builder")
+    private RequestBodyBuilderService requestBodyBuilderService;
 
     public HttpEntity<String> getRequest() {
 
-        return new HttpEntity<>(dnbHeaderBuilderService.getHttpHeaders());
+        return new HttpEntity<>(headerBuilderService.getHttpHeaders());
     }
 
     public HttpEntity<String> getAuthorizedRequest() {
 
-        return new HttpEntity<>(dnbHeaderBuilderService.getAuthorizedHttpHeaders());
+        return new HttpEntity<>(headerBuilderService.getAuthorizedHttpHeaders());
     }
 
     public HttpEntity<String> getRequestWithSSN() {
 
-        return new HttpEntity<>(dnbRequestBodyBuilderService.getBodyForRequestWithSSN(),
-                dnbHeaderBuilderService.getHttpHeaders());
+        return new HttpEntity<>(requestBodyBuilderService.getBodyForRequestWithSSN(),
+                headerBuilderService.getHttpHeaders());
     }
 
 }

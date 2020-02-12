@@ -15,15 +15,15 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
-public class DnbJsonResponseMapper {
+@Component("dnb-json-response-mapper")
+public class JsonResponseMapper {
 
     @Value("${error.msg.json-mapper-error}")
     private String jsonResponseError;
 
-    private static final Logger logger = LoggerFactory.getLogger(DnbJsonResponseMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(JsonResponseMapper.class);
 
-    private DnbJsonResponseMapper() {
+    private JsonResponseMapper() {
 
     }
 

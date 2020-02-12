@@ -36,7 +36,7 @@ public class AccountController {
     private RequestBuilderService requestBuilderService;
 
     @Autowired
-    @Qualifier("revolut-mapper")
+    @Qualifier("revolut-json-revolut-mapper")
     private JsonResponseMapper jsonResponseMapper;
 
     @GetMapping("/")

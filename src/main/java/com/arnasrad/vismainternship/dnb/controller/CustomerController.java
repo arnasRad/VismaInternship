@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.dnb.controller;
 
-import com.arnasrad.vismainternship.dnb.component.DnbJsonResponseMapper;
+import com.arnasrad.vismainternship.dnb.component.JsonResponseMapper;
 import com.arnasrad.vismainternship.dnb.model.Customer;
 import com.arnasrad.vismainternship.dnb.model.CustomerInfo;
 import com.arnasrad.vismainternship.dnb.service.RequestBuilderService;
@@ -32,11 +32,12 @@ public class CustomerController {
     private RestTemplate restTemplate;
 
     @Autowired
-    @Qualifier("dnb")
+    @Qualifier("dnb-request-builder")
     private RequestBuilderService requestBuilderService;
 
     @Autowired
-    private DnbJsonResponseMapper dnbJsonResponseMapper;
+    @Qualifier("dnb-json-response-mapper")
+    private JsonResponseMapper jsonResponseMapper;
 
     @GetMapping("/dnb/test-customers")
     public List<Customer> getTestCustomers() {
@@ -45,7 +46,7 @@ public class CustomerController {
                 requestBuilderService.getRequest(), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customers request"));
 
-        return dnbJsonResponseMapper.getCustomerListFromJsonString(jsonResponse);
+        return jsonResponseMapper.getCustomerListFromJsonString(jsonResponse);
     }
 
     @GetMapping("/dnb/customer-info")
@@ -54,6 +55,6 @@ public class CustomerController {
                 requestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customer-info request"));
 
-        return dnbJsonResponseMapper.getCustomerInfoFromJsonString(jsonResponse);
+        return jsonResponseMapper.getCustomerInfoFromJsonString(jsonResponse);
     }
 }

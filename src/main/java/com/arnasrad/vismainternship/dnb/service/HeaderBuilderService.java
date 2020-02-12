@@ -7,8 +7,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-@Service
-public class DnbHeaderBuilderService {
+@Service("dnb-header-builder")
+public class HeaderBuilderService {
 
     @Value("${dnb.api.keyHeader}")
     private String apiKeyHeader;

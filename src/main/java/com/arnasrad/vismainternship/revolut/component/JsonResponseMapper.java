@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Arrays;
 import java.util.List;
 
-@Component("revolut-mapper")
+@Component("revolut-json-revolut-mapper")
 public class JsonResponseMapper {
 
     @Value("${error.msg.json-mapper-error}")

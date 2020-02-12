@@ -22,7 +22,7 @@ public class RefreshJwtTokenService {
     private RestTemplate restTemplate;
 
     @Autowired
-    @Qualifier("dnb")
+    @Qualifier("dnb-request-builder")
     private RequestBuilderService requestBuilderService;
 
     @Autowired
