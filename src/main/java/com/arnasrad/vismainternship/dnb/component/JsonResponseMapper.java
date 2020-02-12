@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.dnb.component;
 
-import com.arnasrad.vismainternship.dnb.model.Customer;
-import com.arnasrad.vismainternship.dnb.model.CustomerInfo;
+import com.arnasrad.vismainternship.dnb.openbanking.model.Customer;
+import com.arnasrad.vismainternship.dnb.openbanking.model.CustomerInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;

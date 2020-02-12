@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.dnb.controller;
 
-import com.arnasrad.vismainternship.dnb.service.RefreshJwtTokenService;
+import com.arnasrad.vismainternship.dnb.openbanking.service.RefreshJwtTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

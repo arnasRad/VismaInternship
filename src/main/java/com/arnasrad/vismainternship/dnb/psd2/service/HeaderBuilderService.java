@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.dnb.service;
+package com.arnasrad.vismainternship.dnb.psd2.service;
 
 import com.arnasrad.vismainternship.dnb.component.JwtToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-@Service("dnb-header-builder")
+@Service("dnb-psd2-header-builder")
 public class HeaderBuilderService {
 
     @Value("${dnb.api.keyHeader}")

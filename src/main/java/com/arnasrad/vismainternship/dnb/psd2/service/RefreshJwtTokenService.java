@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.dnb.service;
+package com.arnasrad.vismainternship.dnb.psd2.service;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.dnb.component.JwtToken;
@@ -15,14 +15,14 @@ import java.util.Optional;
 @Service
 public class RefreshJwtTokenService {
 
-    @Value("${dnb.endpoint.access-token}")
+    @Value("${dnb.openbanking.endpoint.access-token}")
     private String accessTokenEndpoint;
 
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
-    @Qualifier("dnb-request-builder")
+    @Qualifier("dnb-openbanking-request-builder")
     private RequestBuilderService requestBuilderService;
 
     @Autowired

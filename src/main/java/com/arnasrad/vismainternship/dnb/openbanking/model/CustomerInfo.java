@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.dnb.model;
+package com.arnasrad.vismainternship.dnb.openbanking.model;
 
 public class CustomerInfo {
 

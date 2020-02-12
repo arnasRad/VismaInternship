@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.dnb.controller;
 
 import com.arnasrad.vismainternship.dnb.component.JsonResponseMapper;
-import com.arnasrad.vismainternship.dnb.model.Customer;
-import com.arnasrad.vismainternship.dnb.model.CustomerInfo;
-import com.arnasrad.vismainternship.dnb.service.RequestBuilderService;
+import com.arnasrad.vismainternship.dnb.openbanking.model.Customer;
+import com.arnasrad.vismainternship.dnb.openbanking.model.CustomerInfo;
+import com.arnasrad.vismainternship.dnb.openbanking.service.RequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,17 +22,17 @@ import java.util.Optional;
 @RequestMapping
 public class CustomerController {
 
-    @Value("${dnb.endpoint.customers}")
+    @Value("${dnb.openbanking.endpoint.customers}")
     private String customersEndpoint;
 
-    @Value("${dnb.endpoint.customer-info}")
+    @Value("${dnb.openbanking.endpoint.customer-info}")
     private String customerInfoEndpoint;
 
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
-    @Qualifier("dnb-request-builder")
+    @Qualifier("dnb-openbanking-request-builder")
     private RequestBuilderService requestBuilderService;
 
     @Autowired
