@@ -1,6 +1,7 @@
 package com.arnasrad.vismainternship.interbankingapi.service;
 
 import com.arnasrad.vismainternship.interbankingapi.model.Account;
+import com.arnasrad.vismainternship.interbankingapi.model.Card;
 import com.arnasrad.vismainternship.interbankingapi.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -54,6 +55,21 @@ public class RequestMappingService {
                 customers.put(DNB_ID,
                         modelConverterService.convertFromDnbCustomerList(dnbRequestService.getCustomers()));
                 return customers;
+            default:
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong bank specified");
+        }
+    }
+
+    public Map<String, List<Card>> mapCardsRequest(String bank) {
+
+        Map<String, List<Card>> cards = new HashMap<>();
+        switch (bank) {
+            case REVOLUT_ID:
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Revolut has no Cards functionality");
+            case DNB_ID:
+                cards.put(DNB_ID,
+                        modelConverterService.convertFromDnbCardList(dnbRequestService.getCards()));
+                return cards;
             default:
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong bank specified");
         }
