@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.dnb.openbanking.model;
+package com.arnasrad.vismainternship.dnb.openbanking.model.customer;
 
 public class Address {
 

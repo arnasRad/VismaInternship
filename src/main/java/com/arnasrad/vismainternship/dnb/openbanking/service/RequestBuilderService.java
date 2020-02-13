@@ -21,15 +21,21 @@ public class RequestBuilderService {
         return new HttpEntity<>(headerBuilderService.getHttpHeaders());
     }
 
+    public HttpEntity<String> getRequest(String ssn) {
+
+        return new HttpEntity<>(requestBodyBuilderService.getBodyForRequestWithSSN(ssn),
+                headerBuilderService.getHttpHeaders());
+    }
+
     public HttpEntity<String> getAuthorizedRequest() {
 
         return new HttpEntity<>(headerBuilderService.getAuthorizedHttpHeaders());
     }
 
-    public HttpEntity<String> getRequestWithSSN() {
+    public HttpEntity<String> getAuthorizedRequest(String ssn) {
 
-        return new HttpEntity<>(requestBodyBuilderService.getBodyForRequestWithSSN(),
-                headerBuilderService.getHttpHeaders());
+        return new HttpEntity<>(requestBodyBuilderService.getBodyForRequestWithSSN(ssn),
+                headerBuilderService.getAuthorizedHttpHeaders());
     }
 
 

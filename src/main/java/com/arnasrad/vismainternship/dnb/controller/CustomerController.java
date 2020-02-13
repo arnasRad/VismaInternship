@@ -1,60 +1,37 @@
 package com.arnasrad.vismainternship.dnb.controller;
 
-import com.arnasrad.vismainternship.dnb.component.JsonResponseMapper;
-import com.arnasrad.vismainternship.dnb.openbanking.model.Customer;
-import com.arnasrad.vismainternship.dnb.openbanking.model.CustomerInfo;
-import com.arnasrad.vismainternship.dnb.openbanking.service.RequestBuilderService;
+import com.arnasrad.vismainternship.dnb.openbanking.model.customer.Customer;
+import com.arnasrad.vismainternship.dnb.openbanking.model.customer.CustomerInfo;
+import com.arnasrad.vismainternship.dnb.openbanking.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping
 public class CustomerController {
 
-    @Value("${dnb.openbanking.endpoint.customers}")
-    private String customersEndpoint;
-
-    @Value("${dnb.openbanking.endpoint.customer-info}")
-    private String customerInfoEndpoint;
-
     @Autowired
-    private RestTemplate restTemplate;
+    @Qualifier("dnb-request-service")
+    private RequestService requestService;
 
-    @Autowired
-    @Qualifier("dnb-openbanking-request-builder")
-    private RequestBuilderService requestBuilderService;
-
-    @Autowired
-    @Qualifier("dnb-json-response-mapper")
-    private JsonResponseMapper jsonResponseMapper;
-
-    @GetMapping("/dnb/test-customers")
+    @GetMapping("/dnb/customers")
     public List<Customer> getTestCustomers() {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(customersEndpoint, HttpMethod.GET,
-                requestBuilderService.getRequest(), String.class).getBody())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customers request"));
+        return requestService.getCustomers();
+    }
 
-        return jsonResponseMapper.getCustomerListFromJsonString(jsonResponse);
+    @GetMapping("/dnb/current-customer-info")
+    public CustomerInfo getCurrentCustomerInfo() {
+
+        return requestService.getCurrentCustomerInfo();
     }
 
     @GetMapping("/dnb/customer-info")
-    public CustomerInfo getCustomerInfo() {
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(customerInfoEndpoint, HttpMethod.GET,
-                requestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customer-info request"));
+    public CustomerInfo getCustomerInfo(String ssn) {
 
-        return jsonResponseMapper.getCustomerInfoFromJsonString(jsonResponse);
+        return requestService.getCustomerInfo(ssn);
     }
 }

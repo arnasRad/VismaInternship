@@ -11,7 +11,7 @@ public class TokenController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
-    @GetMapping("/revolut/refresh-access-token")
+    @GetMapping("/revolut/refresh-token")
     public String getNewAccessToken() {
 
         return refreshTokenService.refreshAndGetAccessToken();

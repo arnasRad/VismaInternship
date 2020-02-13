@@ -11,9 +11,9 @@ public class JwtTokenController {
     @Autowired
     private RefreshJwtTokenService refreshJwtTokenService;
 
-    @PostMapping("/dnb/api-token")
-    public String getApiToken() {
+    @PostMapping("/dnb/refresh-token")
+    public String getApiToken(String ssn) {
 
-        return refreshJwtTokenService.refreshAndGetJwtToken();
+        return refreshJwtTokenService.refreshAndGetJwtToken(ssn);
     }
 }

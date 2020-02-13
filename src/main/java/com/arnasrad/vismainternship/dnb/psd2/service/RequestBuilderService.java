@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 public class RequestBuilderService {
 
     @Autowired
-    @Qualifier("dnb-openbanking-header-builder")
+    @Qualifier("dnb-psd2-header-builder")
     private HeaderBuilderService headerBuilderService;
 
     @Autowired
-    @Qualifier("dnb-openbanking-request-body-builder")
+    @Qualifier("dnb-psd2-request-body-builder")
     private RequestBodyBuilderService requestBodyBuilderService;
 
     public HttpEntity<String> getRequest() {

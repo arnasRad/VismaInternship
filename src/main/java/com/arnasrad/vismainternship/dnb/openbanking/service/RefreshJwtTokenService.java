@@ -31,10 +31,10 @@ public class RefreshJwtTokenService {
     @Autowired
     private JwtToken jwtToken;
 
-    public String refreshAndGetJwtToken() {
+    public String refreshAndGetJwtToken(String ssn) {
 
         String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(accessTokenEndpoint,
-                requestBuilderService.getRequestWithSSN(), String.class).getBody())
+                requestBuilderService.getRequest(ssn), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customers request"));
 
         String token = jsonMapper.getFieldFromResponse(jsonResponse, "jwtToken");
