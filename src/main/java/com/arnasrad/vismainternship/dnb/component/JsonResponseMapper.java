@@ -18,7 +18,7 @@ import java.util.List;
 @Component("dnb-json-response-mapper")
 public class JsonResponseMapper {
 
-    @Value("${error.msg.json-mapper-error}")
+    @Value("${error.msg.json-mapper}")
     private String jsonResponseError;
 
     private static final Logger logger = LoggerFactory.getLogger(JsonResponseMapper.class);

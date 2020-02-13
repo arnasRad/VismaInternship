@@ -17,7 +17,7 @@ import java.util.List;
 @Component("revolut-json-revolut-mapper")
 public class JsonResponseMapper {
 
-    @Value("${error.msg.json-mapper-error}")
+    @Value("${error.msg.json-mapper}")
     private String jsonResponseError;
 
     private final Logger logger = LoggerFactory.getLogger(JsonResponseMapper.class);

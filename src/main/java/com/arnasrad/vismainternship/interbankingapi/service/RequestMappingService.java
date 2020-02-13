@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.interbankingapi.service;
 
 import com.arnasrad.vismainternship.interbankingapi.model.Account;
-import com.arnasrad.vismainternship.revolut.service.RequestService;
+import com.arnasrad.vismainternship.interbankingapi.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -15,23 +15,45 @@ import java.util.Map;
 @Service
 public class RequestMappingService {
 
-    @Autowired
-    @Qualifier("revolut-request-service")
-    private RequestService requestService;
+    private static final String REVOLUT_ID = "revolut";
+    private static final String DNB_ID = "dnb";
 
     @Autowired
-    ModelConverterService modelConverterService;
+    @Qualifier("revolut-request-service")
+    private com.arnasrad.vismainternship.revolut.service.RequestService revolutRequestService;
+
+    @Autowired
+    @Qualifier("dnb-request-service")
+    private com.arnasrad.vismainternship.dnb.openbanking.service.RequestService dnbRequestService;
+
+    @Autowired
+    private ModelConverterService modelConverterService;
 
     public Map<String, List<Account>> mapAccountsRequest(String bank) {
 
         Map<String, List<Account>> accounts = new HashMap<>();
         switch (bank) {
-            case "revolut":
-                accounts.put("revolut",
-                        modelConverterService.convertFromRevolutAccountList(requestService.getAccounts()));
+            case REVOLUT_ID:
+                accounts.put(REVOLUT_ID,
+                        modelConverterService.convertFromRevolutAccountList(revolutRequestService.getAccounts()));
                 return accounts;
-            case "dnb":
+            case DNB_ID:
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DNB has no Account functionality");
+            default:
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong bank specified");
+        }
+    }
+
+    public Map<String, List<Customer>> mapCustomersRequest(String bank) {
+
+        Map<String, List<Customer>> customers = new HashMap<>();
+        switch (bank) {
+            case REVOLUT_ID:
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Revolut has no Customer functionality");
+            case DNB_ID:
+                customers.put(DNB_ID,
+                        modelConverterService.convertFromDnbCustomerList(dnbRequestService.getCustomers()));
+                return customers;
             default:
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong bank specified");
         }

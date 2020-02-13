@@ -1,6 +1,7 @@
 package com.arnasrad.vismainternship.interbankingapi.service;
 
 import com.arnasrad.vismainternship.interbankingapi.model.Account;
+import com.arnasrad.vismainternship.interbankingapi.model.Customer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,5 +26,15 @@ public class ModelConverterService {
         accounts.forEach(account -> accountList.add(new Account(account.getId(), account.getName(), account.getBalance())));
 
         return accountList;
+    }
+
+    public List<Customer> convertFromDnbCustomerList(List<com.arnasrad.vismainternship.dnb.openbanking.model.customer.Customer> customers) {
+
+        List<Customer> customerList = new ArrayList<>();
+
+        customers.forEach(customer -> customerList.add(new Customer(customer.getCustomerName(), customer.getSsn())));
+
+        return customerList;
+
     }
 }

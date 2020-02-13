@@ -15,7 +15,7 @@ import java.util.Arrays;
 @Component
 public class JsonMapper {
 
-    @Value("${error.msg.json-mapper-error}")
+    @Value("${error.msg.json-mapper}")
     private String jsonResponseError;
 
     private final Logger logger = LoggerFactory.getLogger(JsonMapper.class);
