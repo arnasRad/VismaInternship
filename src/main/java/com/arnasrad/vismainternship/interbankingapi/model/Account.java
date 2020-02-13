@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.dnb.psd2.model;
+package com.arnasrad.vismainternship.interbankingapi.model;
 
 public class Account {
 

@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Configuration
 public class RestClientConfig {
@@ -37,5 +38,11 @@ public class RestClientConfig {
     public SimpleDateFormat simpleDateFormat(@Value("${dates.defaultFormat}") String defaultDateFormat) {
 
         return new SimpleDateFormat(defaultDateFormat);
+    }
+
+    @Bean
+    public Random random() {
+
+        return new Random();
     }
 }
