@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.revolut.controller;
 
+import com.arnasrad.vismainternship.revolut.model.payment.Payment;
 import com.arnasrad.vismainternship.revolut.model.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.revolut.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class PaymentController {
 
     @PostMapping(value="/revolut/create-payment", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)
-    public String createPayment(@RequestBody CreatePaymentRequestBody body) {
+    public Payment createPayment(@RequestBody CreatePaymentRequestBody body) {
 
         return requestService.createPayment(body);
     }

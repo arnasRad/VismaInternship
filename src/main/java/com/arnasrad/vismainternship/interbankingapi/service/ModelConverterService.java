@@ -3,6 +3,7 @@ package com.arnasrad.vismainternship.interbankingapi.service;
 import com.arnasrad.vismainternship.interbankingapi.model.Account;
 import com.arnasrad.vismainternship.interbankingapi.model.Card;
 import com.arnasrad.vismainternship.interbankingapi.model.Customer;
+import com.arnasrad.vismainternship.interbankingapi.model.Payment;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,5 +49,10 @@ public class ModelConverterService {
 
         return cardList;
 
+    }
+
+    public Payment convertFromRevolutPayment(com.arnasrad.vismainternship.revolut.model.payment.Payment payment) {
+
+        return new Payment(payment.getId(), payment.getState(), payment.getCompletedAt());
     }
 }

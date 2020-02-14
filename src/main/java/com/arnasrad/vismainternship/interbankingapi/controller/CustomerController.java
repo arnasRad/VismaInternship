@@ -22,7 +22,7 @@ public class CustomerController {
     @GetMapping("/interbanking/customers")
     public Map<String, List<Customer>> getCustomers(String bank) {
 
-        return requestMappingService.mapCustomersRequest(optionalValueProcessor.getOptionalRequestParameterValue(
+        return requestMappingService.mapCustomersRequest(optionalValueProcessor.getRequestParameterValue(
                 "bank", bank));
     }
 }

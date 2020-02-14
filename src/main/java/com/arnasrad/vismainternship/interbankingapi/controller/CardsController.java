@@ -22,7 +22,7 @@ public class CardsController {
     @GetMapping("/interbanking/cards")
     public Map<String, List<Card>> getCards(String bank) {
 
-        return requestMappingService.mapCardsRequest(optionalValueProcessor.getOptionalRequestParameterValue(
+        return requestMappingService.mapCardsRequest(optionalValueProcessor.getRequestParameterValue(
                 "bank", bank));
     }
 }

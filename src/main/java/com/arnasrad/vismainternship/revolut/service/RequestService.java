@@ -5,6 +5,7 @@ import com.arnasrad.vismainternship.revolut.model.account.Account;
 import com.arnasrad.vismainternship.revolut.model.account.AccountDetails;
 import com.arnasrad.vismainternship.revolut.model.counterparty.AddCounterparty;
 import com.arnasrad.vismainternship.revolut.model.counterparty.Counterparty;
+import com.arnasrad.vismainternship.revolut.model.payment.Payment;
 import com.arnasrad.vismainternship.revolut.model.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.revolut.model.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.revolut.model.requestbody.TransferRequestBody;
@@ -121,11 +122,13 @@ public class RequestService {
                         "transfer")));
     }
 
-    public String createPayment(CreatePaymentRequestBody body) {
+    public Payment createPayment(CreatePaymentRequestBody body) {
 
-        return Optional.ofNullable(restTemplate.postForEntity(paymentEndpoint,
+        String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(paymentEndpoint,
                 requestBuilderService.getPaymentRequest(body), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(badRequestMsg,
                         "payment")));
+
+        return jsonResponseMapper.getObjectFromString(jsonResponse, Payment.class);
     }
 }

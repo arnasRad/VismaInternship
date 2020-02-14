@@ -13,7 +13,7 @@ public class OptionalValueProcessor {
     @Value("${error.msg.invalid-parameters}")
     private String invalidParametersError;
 
-    public String getOptionalRequestParameterValue(String name, String value) {
+    public String getRequestParameterValue(String name, String value) {
 
         return Optional.ofNullable(value).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
                 String.format(invalidParametersError, name)));
