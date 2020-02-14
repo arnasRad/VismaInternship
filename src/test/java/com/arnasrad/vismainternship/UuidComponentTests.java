@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship;
 
-import com.arnasrad.vismainternship.dnb.psd2.service.UuidService;
+import com.arnasrad.vismainternship.service.dnb.psd2api.UuidService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

@@ -8,6 +8,10 @@ target/
 src/main/resources/application.properties
 src/main/resources/static/certificates/
 
+### Controllers ###
+/src/main/java/com/arnasrad/vismainternship/controller/dnb/
+/src/main/java/com/arnasrad/vismainternship/controller/revolut/
+
 ### STS ###
 .apt_generated
 .classpath
