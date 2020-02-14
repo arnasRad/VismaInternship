@@ -25,6 +25,6 @@ public class IdGenerator {
 
     private String generateRandomId(int length) {
 
-        return RandomStringUtils.random(length);
+        return RandomStringUtils.randomAlphanumeric(length);
     }
 }

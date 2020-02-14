@@ -1,9 +1,13 @@
 package com.arnasrad.vismainternship.revolut.service;
 
 import com.arnasrad.vismainternship.component.IdGenerator;
+import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.revolut.model.requestbody.CounterpartyRequestBody;
+import com.arnasrad.vismainternship.revolut.model.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.revolut.model.requestbody.TransferRequestBody;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,6 +34,11 @@ public class RequestBodyBuilderService {
 
     @Autowired
     private IdGenerator idGenerator;
+
+    @Autowired
+    private JsonMapper jsonMapper;
+
+    private final Logger logger = LoggerFactory.getLogger(RequestBodyBuilderService.class);
 
     public MultiValueMap<String, String> getJwtRequestBody() {
 
@@ -66,5 +75,10 @@ public class RequestBodyBuilderService {
         body.put("description", transferRequestBody.getDescription());
 
         return body.toString();
+    }
+    public String getPaymentRequestBody(CreatePaymentRequestBody createPaymentRequestBody) {
+
+        createPaymentRequestBody.setRequestId(idGenerator.generateRequestId());
+        return jsonMapper.getStringFromObject(createPaymentRequestBody);
     }
 }

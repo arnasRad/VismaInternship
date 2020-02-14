@@ -1,6 +1,7 @@
 package com.arnasrad.vismainternship.revolut.service;
 
 import com.arnasrad.vismainternship.revolut.model.requestbody.CounterpartyRequestBody;
+import com.arnasrad.vismainternship.revolut.model.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.revolut.model.requestbody.TransferRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -47,6 +48,13 @@ public class RequestBuilderService {
     public HttpEntity<String> getTransferRequest(TransferRequestBody body) {
 
         String requestBody = requestBodyBuilderService.getTransferRequestBody(body);
+        HttpHeaders headers = headerBuilderService.getAuthorizedJsonHeaders();
+        return new HttpEntity<>(requestBody, headers);
+    }
+
+    public HttpEntity<String> getPaymentRequest(CreatePaymentRequestBody body) {
+
+        String requestBody = requestBodyBuilderService.getPaymentRequestBody(body);
         HttpHeaders headers = headerBuilderService.getAuthorizedJsonHeaders();
         return new HttpEntity<>(requestBody, headers);
     }

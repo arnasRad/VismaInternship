@@ -6,7 +6,10 @@ import com.arnasrad.vismainternship.revolut.model.account.AccountDetails;
 import com.arnasrad.vismainternship.revolut.model.counterparty.AddCounterparty;
 import com.arnasrad.vismainternship.revolut.model.counterparty.Counterparty;
 import com.arnasrad.vismainternship.revolut.model.requestbody.CounterpartyRequestBody;
+import com.arnasrad.vismainternship.revolut.model.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.revolut.model.requestbody.TransferRequestBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +37,9 @@ public class RequestService {
     @Value("${revolut.endpoint.transfer}")
     private String transferEndpoint;
 
+    @Value("${revolut.endpoint.payment}")
+    private String paymentEndpoint;
+
     @Value("${error.msg.bad-request}")
     private String badRequestMsg;
 
@@ -50,6 +56,8 @@ public class RequestService {
     @Autowired
     @Qualifier("revolut-json-revolut-mapper")
     private JsonResponseMapper jsonResponseMapper;
+
+    private final Logger logger = LoggerFactory.getLogger(RequestService.class);
 
     public List<Account> getAccounts() {
 
@@ -111,5 +119,13 @@ public class RequestService {
                 requestBuilderService.getTransferRequest(body), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(badRequestMsg,
                         "transfer")));
+    }
+
+    public String createPayment(CreatePaymentRequestBody body) {
+
+        return Optional.ofNullable(restTemplate.postForEntity(paymentEndpoint,
+                requestBuilderService.getPaymentRequest(body), String.class).getBody())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(badRequestMsg,
+                        "payment")));
     }
 }
