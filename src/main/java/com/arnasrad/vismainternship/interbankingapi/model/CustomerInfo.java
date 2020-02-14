@@ -1,7 +1,9 @@
 package com.arnasrad.vismainternship.interbankingapi.model;
 
 import com.arnasrad.vismainternship.dnb.openbanking.model.customer.Address;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerInfo {
 
     private String firstName;

@@ -1,5 +1,8 @@
 package com.arnasrad.vismainternship.dnb.openbanking.model.card;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Card {
 
     private BlockingInfo blockingInfo;

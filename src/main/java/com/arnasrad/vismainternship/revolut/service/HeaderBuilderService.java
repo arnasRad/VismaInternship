@@ -7,6 +7,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 @Service("revolut-request-header-builder")
 public class HeaderBuilderService {
 
@@ -19,11 +21,20 @@ public class HeaderBuilderService {
     @Autowired
     private AccessToken accessToken;
 
-    public HttpHeaders getAuthorizedHttpHeaders() {
+    public HttpHeaders getAuthorizedHeaders() {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(headerName, headerType + " " + accessToken.getToken());
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        return httpHeaders;
+    }
+
+    public HttpHeaders getAuthorizedJsonHeaders() {
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(headerName, headerType + " " + accessToken.getToken());
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         return httpHeaders;
     }
 

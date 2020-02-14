@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Component("dnb-json-response-mapper")
@@ -35,7 +34,7 @@ public class JsonResponseMapper {
         try {
             return mapper.readValue(jsonString, type);
         } catch (JsonProcessingException e) {
-            logger.error(Arrays.toString(e.getStackTrace()));
+            logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, jsonResponseError);
         }
     }
@@ -47,7 +46,7 @@ public class JsonResponseMapper {
         try {
             return mapper.readValue(jsonString, CustomerInfo.class);
         } catch (JsonProcessingException e) {
-            logger.error(Arrays.toString(e.getStackTrace()));
+            logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, jsonResponseError);
         }
     }
@@ -60,7 +59,7 @@ public class JsonResponseMapper {
         try {
             return mapper.readValue(jsonString, type);
         } catch (JsonProcessingException e) {
-            logger.error(Arrays.toString(e.getStackTrace()));
+            logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, jsonResponseError);
         }
     }

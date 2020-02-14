@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 @Component
 public class Dates {
@@ -17,5 +18,12 @@ public class Dates {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, daysFromToday);
         return simpleDateFormat.format(calendar.getTime());
+    }
+
+    public Date getFutureDate(int daysFromToday) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, daysFromToday);
+        return calendar.getTime();
     }
 }

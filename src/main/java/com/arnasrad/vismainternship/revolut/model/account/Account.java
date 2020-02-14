@@ -1,9 +1,11 @@
-package com.arnasrad.vismainternship.revolut.model;
+package com.arnasrad.vismainternship.revolut.model.account;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Account {
 
     private String id;

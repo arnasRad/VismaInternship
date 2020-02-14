@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ModelConverterService {
 
-    public List<Account> convertFromRevolutAccountList(List<com.arnasrad.vismainternship.revolut.model.Account> accounts) {
+    public List<Account> convertFromRevolutAccountList(List<com.arnasrad.vismainternship.revolut.model.account.Account> accounts) {
 
         List<Account> accountList = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class ModelConverterService {
         List<Card> cardList = new ArrayList<>();
 
         cards.forEach(card -> cardList.add(new Card(card.getCustomerId(), card.getCardId(), card.getAccountNumber(),
-         card.getCreditBalance(), card.getDebitBalance(), card.getCardType(), card.getProductName())));
+                card.getCreditBalance(), card.getDebitBalance(), card.getCardType(), card.getProductName())));
 
         return cardList;
 

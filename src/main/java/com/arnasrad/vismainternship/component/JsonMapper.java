@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Arrays;
-
 @Component
 public class JsonMapper {
 
@@ -26,7 +24,7 @@ public class JsonMapper {
             JsonNode parent = (new ObjectMapper()).readTree(response);
             return parent.get(field).asText();
         } catch (JsonProcessingException e) {
-            logger.error(Arrays.toString(e.getStackTrace()));
+            logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, jsonResponseError);
         }
     }
