@@ -17,14 +17,24 @@ import java.util.List;
 public interface RequestService {
 
     List<Account> getAccounts();
+
     Account getAccount(String id);
+
     List<AccountDetails> getAccountDetails(String id);
+
     AddCounterparty addCounterparty(CounterpartyRequestBody body);
+
     List<Counterparty> getCounterparties();
+
     String createTransfer(TransferRequestBody body);
+
     Payment createPayment(CreatePaymentRequestBody body);
+
     List<Customer> getCustomers();
+
     CustomerInfo getCurrentCustomerInfo();
+
     CustomerInfo getCustomerInfo(String ssn);
+
     List<Card> getCards();
 }

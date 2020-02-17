@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.psd2api;
+package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 
 import com.arnasrad.vismainternship.component.dnb.JwtToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-@Service("dnb-psd2-header-builder")
-public class HeaderBuilderService {
+@Service()
+public class DnbHeaderBuilderService {
 
     @Value("${dnb.api.keyHeader}")
     private String apiKeyHeader;

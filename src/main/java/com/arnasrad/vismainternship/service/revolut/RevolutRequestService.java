@@ -13,8 +13,8 @@ import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyReques
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
 import com.arnasrad.vismainternship.service.RequestService;
+import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -51,13 +51,11 @@ public class RevolutRequestService implements RequestService {
     private RestTemplate restTemplate;
 
     @Autowired
-    @Qualifier("revolut-request-builder")
-    private RequestBuilderService requestBuilderService;
+    private RevolutRequestBuilderService revolutRequestBuilderService;
 
     @Autowired
-    @Qualifier("revolut-json-revolut-mapper")
     private JsonMapper jsonMapper;
-    
+
     @Autowired
     private ResponseStatusExceptionBuilderService exceptionBuilder;
 
@@ -65,7 +63,7 @@ public class RevolutRequestService implements RequestService {
     public List<Account> getAccounts() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
-                requestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-accounts"));
 
         return jsonMapper.getObjectListFromString(jsonResponse, Account.class);
@@ -76,7 +74,7 @@ public class RevolutRequestService implements RequestService {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsEndpoint.concat("/").concat(id),
                 HttpMethod.GET,
-                requestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-account"));
 
         return jsonMapper.getObjectFromString(jsonResponse, Account.class);
@@ -89,7 +87,7 @@ public class RevolutRequestService implements RequestService {
                 Optional.ofNullable(restTemplate.exchange(accountsEndpoint.concat("/").concat(id).concat("/bank" +
                                 "-details"),
                         HttpMethod.GET,
-                        requestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                        revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                         .orElseThrow(() -> exceptionBuilder.getException400("get-account-details"));
 
         return jsonMapper.getObjectListFromString(jsonResponse, AccountDetails.class);
@@ -99,7 +97,7 @@ public class RevolutRequestService implements RequestService {
     public AddCounterparty addCounterparty(CounterpartyRequestBody body) {
 
         String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(counterpartyEndpoint,
-                requestBuilderService.getCounterpartyRequest(body), String.class).getBody())
+                revolutRequestBuilderService.getCounterpartyRequest(body), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("add-counterparty"));
 
         return jsonMapper.getObjectFromString(jsonResponse, AddCounterparty.class);
@@ -109,7 +107,7 @@ public class RevolutRequestService implements RequestService {
     public List<Counterparty> getCounterparties() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(counterpartiesEndpoint, HttpMethod.GET,
-                requestBuilderService.getCounterpartiesRequest(), String.class).getBody())
+                revolutRequestBuilderService.getCounterpartiesRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-counterparties"));
 
         return jsonMapper.getObjectListFromString(jsonResponse, Counterparty.class);
@@ -119,7 +117,7 @@ public class RevolutRequestService implements RequestService {
     public String createTransfer(TransferRequestBody body) {
 
         return Optional.ofNullable(restTemplate.postForEntity(transferEndpoint,
-                requestBuilderService.getTransferRequest(body), String.class).getBody())
+                revolutRequestBuilderService.getTransferRequest(body), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("create-transfer"));
     }
 
@@ -127,7 +125,7 @@ public class RevolutRequestService implements RequestService {
     public Payment createPayment(CreatePaymentRequestBody body) {
 
         String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(paymentEndpoint,
-                requestBuilderService.getPaymentRequest(body), String.class).getBody())
+                revolutRequestBuilderService.getPaymentRequest(body), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("create-payment"));
 
         return jsonMapper.getObjectFromString(jsonResponse, Payment.class);

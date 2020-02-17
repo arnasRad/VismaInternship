@@ -4,58 +4,55 @@ import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyReques
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
-@Service("revolut-request-builder")
-public class RequestBuilderService {
+@Service
+public class RevolutRequestBuilderService {
 
     @Autowired
-    @Qualifier("revolut-request-header-builder")
-    private HeaderBuilderService headerBuilderService;
+    private RevolutHeaderBuilderService revolutHeaderBuilderService;
 
     @Autowired
-    @Qualifier("revolut-request-body-builder")
-    private RequestBodyBuilderService requestBodyBuilderService;
+    private RevolutRequestBodyBuilderService revolutRequestBodyBuilderService;
 
     public HttpEntity<String> getAuthorizedRequest() {
 
-        return new HttpEntity<>(headerBuilderService.getAuthorizedHeaders());
+        return new HttpEntity<>(revolutHeaderBuilderService.getAuthorizedHeaders());
     }
 
     public HttpEntity<MultiValueMap<String, String>> getJwtRequest() {
 
-        MultiValueMap<String, String> body = requestBodyBuilderService.getJwtRequestBody();
-        HttpHeaders headers = headerBuilderService.getHttpHeaders();
+        MultiValueMap<String, String> body = revolutRequestBodyBuilderService.getJwtRequestBody();
+        HttpHeaders headers = revolutHeaderBuilderService.getHttpHeaders();
         return new HttpEntity<>(body, headers);
     }
 
     public HttpEntity<String> getCounterpartyRequest(CounterpartyRequestBody body) {
 
-        String requestBody = requestBodyBuilderService.getCounterpartyRequestBody(body);
-        HttpHeaders headers = headerBuilderService.getAuthorizedJsonHeaders();
+        String requestBody = revolutRequestBodyBuilderService.getCounterpartyRequestBody(body);
+        HttpHeaders headers = revolutHeaderBuilderService.getAuthorizedJsonHeaders();
         return new HttpEntity<>(requestBody, headers);
     }
 
     public HttpEntity<String> getCounterpartiesRequest() {
 
-        return new HttpEntity<>(headerBuilderService.getAuthorizedHeaders());
+        return new HttpEntity<>(revolutHeaderBuilderService.getAuthorizedHeaders());
     }
 
     public HttpEntity<String> getTransferRequest(TransferRequestBody body) {
 
-        String requestBody = requestBodyBuilderService.getTransferRequestBody(body);
-        HttpHeaders headers = headerBuilderService.getAuthorizedJsonHeaders();
+        String requestBody = revolutRequestBodyBuilderService.getTransferRequestBody(body);
+        HttpHeaders headers = revolutHeaderBuilderService.getAuthorizedJsonHeaders();
         return new HttpEntity<>(requestBody, headers);
     }
 
     public HttpEntity<String> getPaymentRequest(CreatePaymentRequestBody body) {
 
-        String requestBody = requestBodyBuilderService.getPaymentRequestBody(body);
-        HttpHeaders headers = headerBuilderService.getAuthorizedJsonHeaders();
+        String requestBody = revolutRequestBodyBuilderService.getPaymentRequestBody(body);
+        HttpHeaders headers = revolutHeaderBuilderService.getAuthorizedJsonHeaders();
         return new HttpEntity<>(requestBody, headers);
     }
 }

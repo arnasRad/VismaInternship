@@ -1,7 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.psd2api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
@@ -9,27 +8,25 @@ import org.springframework.stereotype.Service;
 public class RequestBuilderService {
 
     @Autowired
-    @Qualifier("dnb-psd2-header-builder")
-    private HeaderBuilderService headerBuilderService;
+    private DnbPsd2HeaderBuilderService dnbPsd2HeaderBuilderService;
 
     @Autowired
-    @Qualifier("dnb-psd2-request-body-builder")
-    private RequestBodyBuilderService requestBodyBuilderService;
+    private DnbPsd2RequestBodyBuilderService dnbPsd2RequestBodyBuilderService;
 
     public HttpEntity<String> getRequest() {
 
-        return new HttpEntity<>(headerBuilderService.getHttpHeaders());
+        return new HttpEntity<>(dnbPsd2HeaderBuilderService.getHttpHeaders());
     }
 
     public HttpEntity<String> getAuthorizedRequest() {
 
-        return new HttpEntity<>(headerBuilderService.getAuthorizedHttpHeaders());
+        return new HttpEntity<>(dnbPsd2HeaderBuilderService.getAuthorizedHttpHeaders());
     }
 
     public HttpEntity<String> getRequestWithSSN() {
 
-        return new HttpEntity<>(requestBodyBuilderService.getBodyForRequestWithSSN(),
-                headerBuilderService.getHttpHeaders());
+        return new HttpEntity<>(dnbPsd2RequestBodyBuilderService.getBodyForRequestWithSSN(),
+                dnbPsd2HeaderBuilderService.getHttpHeaders());
     }
 
 

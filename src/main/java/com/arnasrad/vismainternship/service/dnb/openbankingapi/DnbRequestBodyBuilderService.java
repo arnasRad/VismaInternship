@@ -3,8 +3,8 @@ package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-@Service("dnb-openbanking-request-body-builder")
-public class RequestBodyBuilderService {
+@Service
+public class DnbRequestBodyBuilderService {
 
     public String getBodyForRequestWithSSN(String ssn) {
 

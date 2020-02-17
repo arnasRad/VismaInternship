@@ -8,7 +8,6 @@ import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentReque
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.DNBRequestService;
 import com.arnasrad.vismainternship.service.revolut.RevolutRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,11 +30,9 @@ public class RequestMappingService {
     private String wrongBankMsg;
 
     @Autowired
-    @Qualifier("revolut-request-service")
     private RevolutRequestService revolutRequestService;
 
     @Autowired
-    @Qualifier("dnb-request-service")
     private DNBRequestService dnbRequestService;
 
     @Autowired

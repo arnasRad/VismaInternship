@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
-@Service("revolut-request-header-builder")
-public class HeaderBuilderService {
+@Service
+public class RevolutHeaderBuilderService {
 
     @Value("${authorization.headerName}")
     private String headerName;

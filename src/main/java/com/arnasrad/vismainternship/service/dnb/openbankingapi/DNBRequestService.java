@@ -13,9 +13,8 @@ import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyReques
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
 import com.arnasrad.vismainternship.service.RequestService;
-import com.arnasrad.vismainternship.service.revolut.ResponseStatusExceptionBuilderService;
+import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -46,8 +45,7 @@ public class DNBRequestService implements RequestService {
     private RestTemplate restTemplate;
 
     @Autowired
-    @Qualifier("dnb-openbanking-request-builder")
-    private RequestBuilderService requestBuilderService;
+    private DnbRequestBuilderService dnbRequestBuilderService;
 
     @Autowired
     private JsonMapper jsonMapper;
@@ -59,7 +57,7 @@ public class DNBRequestService implements RequestService {
     public List<Customer> getCustomers() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(customersEndpoint, HttpMethod.GET,
-                requestBuilderService.getRequest(), String.class).getBody())
+                dnbRequestBuilderService.getRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-customers"));
 
         return jsonMapper.getObjectListFromString(jsonResponse, Customer.class);
@@ -69,7 +67,7 @@ public class DNBRequestService implements RequestService {
     public CustomerInfo getCurrentCustomerInfo() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(currentCustomerInfoEndpoint, HttpMethod.GET,
-                requestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-current-customer-info"));
 
         return jsonMapper.getObjectFromString(jsonResponse, CustomerInfo.class);
@@ -79,7 +77,7 @@ public class DNBRequestService implements RequestService {
     public CustomerInfo getCustomerInfo(String ssn) {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(customerInfoEndpoint + ssn, HttpMethod.GET,
-                requestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-customer-info"));
 
         return jsonMapper.getObjectFromString(jsonResponse, CustomerInfo.class);
@@ -88,7 +86,7 @@ public class DNBRequestService implements RequestService {
     @Override
     public List<Card> getCards() {
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(cardsEndpoint, HttpMethod.GET,
-                requestBuilderService.getAuthorizedRequest(), String.class).getBody())
+                dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-cards"));
 
         return jsonMapper.getObjectListFromString(jsonResponse, Card.class);
