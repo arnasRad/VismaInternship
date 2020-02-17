@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JwtTokenController {
 
+    private final RefreshJwtTokenService refreshJwtTokenService;
+
     @Autowired
-    private RefreshJwtTokenService refreshJwtTokenService;
+    public JwtTokenController(RefreshJwtTokenService refreshJwtTokenService) {
+        this.refreshJwtTokenService = refreshJwtTokenService;
+    }
 
     @PostMapping("/dnb/refresh-token")
     public String getApiToken(String ssn) {

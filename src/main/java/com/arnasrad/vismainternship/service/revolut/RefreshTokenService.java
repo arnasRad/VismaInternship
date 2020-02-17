@@ -18,17 +18,19 @@ public class RefreshTokenService {
     @Value("${revolut.endpoint.access-token}")
     private String refreshTokenEndpoint;
 
-    @Autowired
-    private RevolutRequestBuilderService revolutRequestBuilderService;
+    private final RevolutRequestBuilderService revolutRequestBuilderService;
+    private final RestTemplate restTemplate;
+    private final JsonMapper jsonMapper;
+    private final AccessToken accessToken;
 
     @Autowired
-    private RestTemplate restTemplate;
+    public RefreshTokenService(RevolutRequestBuilderService revolutRequestBuilderService, RestTemplate restTemplate, JsonMapper jsonMapper, AccessToken accessToken) {
 
-    @Autowired
-    private JsonMapper jsonMapper;
-
-    @Autowired
-    private AccessToken accessToken;
+        this.revolutRequestBuilderService = revolutRequestBuilderService;
+        this.restTemplate = restTemplate;
+        this.jsonMapper = jsonMapper;
+        this.accessToken = accessToken;
+    }
 
     public String refreshAndGetAccessToken() {
 

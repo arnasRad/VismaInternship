@@ -17,8 +17,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class OpenBankingAppTests {
 
+    private final MockMvc mvc;
+
     @Autowired
-    private MockMvc mvc;
+    public OpenBankingAppTests(MockMvc mvc) {
+        this.mvc = mvc;
+    }
 
     @Test
     void contextLoads() {

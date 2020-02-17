@@ -20,8 +20,13 @@ public class HelloCustomerControllerIT {
 
     private URL base;
 
+    private final TestRestTemplate template;
+
     @Autowired
-    private TestRestTemplate template;
+    public HelloCustomerControllerIT(TestRestTemplate template) {
+
+        this.template = template;
+    }
 
     @BeforeEach
     public void setup() throws Exception {

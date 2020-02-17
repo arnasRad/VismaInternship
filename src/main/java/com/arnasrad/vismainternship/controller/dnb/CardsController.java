@@ -11,8 +11,12 @@ import java.util.List;
 @RestController
 public class CardsController {
 
+    private final DNBRequestService DnbRequestService;
+
     @Autowired
-    private DNBRequestService DnbRequestService;
+    public CardsController(DNBRequestService dnbRequestService) {
+        DnbRequestService = dnbRequestService;
+    }
 
     @GetMapping("/dnb/cards")
     public List<Card> getCards() {

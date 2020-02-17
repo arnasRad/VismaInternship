@@ -19,8 +19,13 @@ public class DnbHeaderBuilderService {
     @Value("${dnb.apikey}")
     private String apiKey;
 
+    private final JwtToken jwtToken;
+
     @Autowired
-    private JwtToken jwtToken;
+    public DnbHeaderBuilderService(JwtToken jwtToken) {
+
+        this.jwtToken = jwtToken;
+    }
 
     public HttpHeaders getAuthorizedHttpHeaders() {
 

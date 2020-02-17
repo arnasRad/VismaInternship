@@ -9,8 +9,12 @@ import java.util.Random;
 @Component
 public class RandomNumberGenerator {
 
+    private final Random random;
+
     @Autowired
-    private Random random;
+    public RandomNumberGenerator(Random random) {
+        this.random = random;
+    }
 
     public int generateRandomIntInRange(int min, int max) {
 

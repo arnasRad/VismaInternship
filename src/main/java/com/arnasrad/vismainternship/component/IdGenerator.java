@@ -14,8 +14,12 @@ public class IdGenerator {
     @Value("${constant.request-id.max-length}")
     private int requestIdMaxLength;
 
+    private final RandomNumberGenerator numberGenerator;
+
     @Autowired
-    private RandomNumberGenerator numberGenerator;
+    public IdGenerator(RandomNumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
+    }
 
     public String generateRequestId() {
 

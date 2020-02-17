@@ -7,11 +7,15 @@ import org.springframework.stereotype.Service;
 @Service("dnb-psd2-request-builder")
 public class RequestBuilderService {
 
-    @Autowired
-    private DnbPsd2HeaderBuilderService dnbPsd2HeaderBuilderService;
+    private final DnbPsd2HeaderBuilderService dnbPsd2HeaderBuilderService;
+    private final DnbPsd2RequestBodyBuilderService dnbPsd2RequestBodyBuilderService;
 
     @Autowired
-    private DnbPsd2RequestBodyBuilderService dnbPsd2RequestBodyBuilderService;
+    public RequestBuilderService(DnbPsd2HeaderBuilderService dnbPsd2HeaderBuilderService, DnbPsd2RequestBodyBuilderService dnbPsd2RequestBodyBuilderService) {
+
+        this.dnbPsd2HeaderBuilderService = dnbPsd2HeaderBuilderService;
+        this.dnbPsd2RequestBodyBuilderService = dnbPsd2RequestBodyBuilderService;
+    }
 
     public HttpEntity<String> getRequest() {
 

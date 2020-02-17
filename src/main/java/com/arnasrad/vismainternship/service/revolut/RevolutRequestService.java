@@ -44,20 +44,21 @@ public class RevolutRequestService implements RequestService {
     @Value("${constant.revolut-id-uppercase}")
     private String revolutId;
 
-    @Autowired
-    private RefreshTokenService refreshTokenService;
+    private final RefreshTokenService refreshTokenService;
+    private final RestTemplate restTemplate;
+    private final RevolutRequestBuilderService revolutRequestBuilderService;
+    private final JsonMapper jsonMapper;
+    private final ResponseStatusExceptionBuilderService exceptionBuilder;
 
     @Autowired
-    private RestTemplate restTemplate;
+    public RevolutRequestService(RefreshTokenService refreshTokenService, RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, JsonMapper jsonMapper, ResponseStatusExceptionBuilderService exceptionBuilder) {
 
-    @Autowired
-    private RevolutRequestBuilderService revolutRequestBuilderService;
-
-    @Autowired
-    private JsonMapper jsonMapper;
-
-    @Autowired
-    private ResponseStatusExceptionBuilderService exceptionBuilder;
+        this.refreshTokenService = refreshTokenService;
+        this.restTemplate = restTemplate;
+        this.revolutRequestBuilderService = revolutRequestBuilderService;
+        this.jsonMapper = jsonMapper;
+        this.exceptionBuilder = exceptionBuilder;
+    }
 
     @Override
     public List<Account> getAccounts() {

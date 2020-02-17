@@ -6,11 +6,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConsentsService {
 
+    private final UuidService uuidService;
+
     @Autowired
-    UuidService uuidService;
+    public ConsentsService(UuidService uuidService) {
+        this.uuidService = uuidService;
+    }
 
     public String generateConsent() {
-
 
         return null;
     }

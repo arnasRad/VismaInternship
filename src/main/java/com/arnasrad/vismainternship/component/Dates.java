@@ -10,8 +10,12 @@ import java.util.Date;
 @Component
 public class Dates {
 
+    private final SimpleDateFormat simpleDateFormat;
+
     @Autowired
-    private SimpleDateFormat simpleDateFormat;
+    public Dates(SimpleDateFormat simpleDateFormat) {
+        this.simpleDateFormat = simpleDateFormat;
+    }
 
     public String getFutureDateString(int daysFromToday) {
 

@@ -12,8 +12,12 @@ import java.util.List;
 @RestController
 public class AccountController {
 
+    private final RevolutRequestService revolutRequestService;
+
     @Autowired
-    private RevolutRequestService revolutRequestService;
+    public AccountController(RevolutRequestService revolutRequestService) {
+        this.revolutRequestService = revolutRequestService;
+    }
 
     @GetMapping("/")
     public String mainPage() {

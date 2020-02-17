@@ -15,16 +15,15 @@ import java.util.List;
 @Component("revolut-json-revolut-mapper")
 public class JsonMapper {
 
-    @Autowired
-    private ObjectMapper mapper;
-
-    @Autowired
-    private ResponseStatusExceptionBuilderService exceptionBuilder;
+    private final ObjectMapper mapper;
+    private final ResponseStatusExceptionBuilderService exceptionBuilder;
 
     private final Logger logger = LoggerFactory.getLogger(JsonMapper.class);
 
-    private JsonMapper() {
-
+    @Autowired
+    public JsonMapper(ObjectMapper mapper, ResponseStatusExceptionBuilderService exceptionBuilder) {
+        this.mapper = mapper;
+        this.exceptionBuilder = exceptionBuilder;
     }
 
     public <T> T getObjectFromString(String jsonString, Class<T> type) {

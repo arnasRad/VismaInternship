@@ -41,17 +41,19 @@ public class DNBRequestService implements RequestService {
     @Value("${constant.dnb-id-uppercase}")
     private String dnbId;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+    private final DnbRequestBuilderService dnbRequestBuilderService;
+    private final JsonMapper jsonMapper;
+    private final ResponseStatusExceptionBuilderService exceptionBuilder;
 
     @Autowired
-    private DnbRequestBuilderService dnbRequestBuilderService;
+    public DNBRequestService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService, JsonMapper jsonMapper, ResponseStatusExceptionBuilderService exceptionBuilder) {
 
-    @Autowired
-    private JsonMapper jsonMapper;
-
-    @Autowired
-    private ResponseStatusExceptionBuilderService exceptionBuilder;
+        this.restTemplate = restTemplate;
+        this.dnbRequestBuilderService = dnbRequestBuilderService;
+        this.jsonMapper = jsonMapper;
+        this.exceptionBuilder = exceptionBuilder;
+    }
 
     @Override
     public List<Customer> getCustomers() {

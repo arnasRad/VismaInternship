@@ -16,11 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureMockMvc
 public class DateComponentTests {
 
-    @Autowired
-    private Dates dates;
+    private final Dates dates;
+    private final SimpleDateFormat simpleDateFormat;
 
     @Autowired
-    private SimpleDateFormat simpleDateFormat;
+    public DateComponentTests(Dates dates, SimpleDateFormat simpleDateFormat) {
+        this.dates = dates;
+        this.simpleDateFormat = simpleDateFormat;
+    }
 
     @Test
     public void whenGetFutureDate_thenReturnFutureDateString() {

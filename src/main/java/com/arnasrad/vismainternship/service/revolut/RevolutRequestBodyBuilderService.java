@@ -30,11 +30,14 @@ public class RevolutRequestBodyBuilderService {
     @Value("${revolut.sandbox.constant.clientAssertionType}")
     private String clientAssertionType;
 
-    @Autowired
-    private IdGenerator idGenerator;
+    private final IdGenerator idGenerator;
+    private final JsonMapper jsonMapper;
 
     @Autowired
-    private JsonMapper jsonMapper;
+    public RevolutRequestBodyBuilderService(IdGenerator idGenerator, JsonMapper jsonMapper) {
+        this.idGenerator = idGenerator;
+        this.jsonMapper = jsonMapper;
+    }
 
     public MultiValueMap<String, String> getJwtRequestBody() {
 

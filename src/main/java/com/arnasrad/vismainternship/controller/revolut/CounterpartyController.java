@@ -16,8 +16,12 @@ import java.util.List;
 @RestController
 public class CounterpartyController {
 
+    private final RevolutRequestService revolutRequestService;
+
     @Autowired
-    private RevolutRequestService revolutRequestService;
+    public CounterpartyController(RevolutRequestService revolutRequestService) {
+        this.revolutRequestService = revolutRequestService;
+    }
 
     @PostMapping(value = "/revolut/add-counterparty", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)

@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TransferController {
 
+    private final RevolutRequestService revolutRequestService;
+
     @Autowired
-    private RevolutRequestService revolutRequestService;
+    public TransferController(RevolutRequestService revolutRequestService) {
+
+        this.revolutRequestService = revolutRequestService;
+    }
 
     @PostMapping(value = "/revolut/transfer", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)

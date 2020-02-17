@@ -12,8 +12,12 @@ import java.util.List;
 @RestController
 public class CustomerController {
 
+    private final DNBRequestService DnbRequestService;
+
     @Autowired
-    private DNBRequestService DnbRequestService;
+    public CustomerController(DNBRequestService dnbRequestService) {
+        DnbRequestService = dnbRequestService;
+    }
 
     @GetMapping("/dnb/customers")
     public List<Customer> getTestCustomers() {

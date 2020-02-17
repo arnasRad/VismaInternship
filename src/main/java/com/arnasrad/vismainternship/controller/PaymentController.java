@@ -14,11 +14,15 @@ import java.util.Map;
 @RestController("interbanking-payment-controller")
 public class PaymentController {
 
-    @Autowired
-    private OptionalValueProcessor optionalValueProcessor;
+    private final OptionalValueProcessor optionalValueProcessor;
+    private final RequestMappingService requestMappingService;
 
     @Autowired
-    private RequestMappingService requestMappingService;
+    public PaymentController(OptionalValueProcessor optionalValueProcessor, RequestMappingService requestMappingService) {
+
+        this.optionalValueProcessor = optionalValueProcessor;
+        this.requestMappingService = requestMappingService;
+    }
 
     @PostMapping("/interbanking/create-payment")
     public Map<String, Payment> createPayment(@RequestBody CreatePaymentRequestBody body, String bank) {

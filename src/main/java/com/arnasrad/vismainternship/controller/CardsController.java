@@ -13,11 +13,14 @@ import java.util.Map;
 @RestController("interbanking-cards-controller")
 public class CardsController {
 
-    @Autowired
-    private OptionalValueProcessor optionalValueProcessor;
+    private final OptionalValueProcessor optionalValueProcessor;
+    private final RequestMappingService requestMappingService;
 
     @Autowired
-    private RequestMappingService requestMappingService;
+    public CardsController(OptionalValueProcessor optionalValueProcessor, RequestMappingService requestMappingService) {
+        this.optionalValueProcessor = optionalValueProcessor;
+        this.requestMappingService = requestMappingService;
+    }
 
     @GetMapping("/interbanking/cards")
     public Map<String, List<Card>> getCards(String bank) {

@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PaymentController {
 
+    private final RevolutRequestService revolutRequestService;
+
     @Autowired
-    private RevolutRequestService revolutRequestService;
+    public PaymentController(RevolutRequestService revolutRequestService) {
+        this.revolutRequestService = revolutRequestService;
+    }
 
     @PostMapping(value = "/revolut/create-payment", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)

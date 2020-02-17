@@ -12,11 +12,15 @@ import org.springframework.util.MultiValueMap;
 @Service
 public class RevolutRequestBuilderService {
 
-    @Autowired
-    private RevolutHeaderBuilderService revolutHeaderBuilderService;
+    private final RevolutHeaderBuilderService revolutHeaderBuilderService;
+    private final RevolutRequestBodyBuilderService revolutRequestBodyBuilderService;
 
     @Autowired
-    private RevolutRequestBodyBuilderService revolutRequestBodyBuilderService;
+    public RevolutRequestBuilderService(RevolutHeaderBuilderService revolutHeaderBuilderService, RevolutRequestBodyBuilderService revolutRequestBodyBuilderService) {
+
+        this.revolutHeaderBuilderService = revolutHeaderBuilderService;
+        this.revolutRequestBodyBuilderService = revolutRequestBodyBuilderService;
+    }
 
     public HttpEntity<String> getAuthorizedRequest() {
 

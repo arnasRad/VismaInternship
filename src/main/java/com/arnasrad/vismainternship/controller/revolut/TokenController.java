@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TokenController {
 
+    private final RefreshTokenService refreshTokenService;
+
     @Autowired
-    RefreshTokenService refreshTokenService;
+    public TokenController(RefreshTokenService refreshTokenService) {
+
+        this.refreshTokenService = refreshTokenService;
+    }
 
     @PostMapping("/revolut/refresh-token")
     public String getNewAccessToken() {

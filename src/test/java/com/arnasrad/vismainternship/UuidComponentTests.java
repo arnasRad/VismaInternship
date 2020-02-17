@@ -12,8 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 @AutoConfigureMockMvc
 public class UuidComponentTests {
 
+    private final UuidService uuidService;
+
     @Autowired
-    UuidService uuidService;
+    public UuidComponentTests(UuidService uuidService) {
+        this.uuidService = uuidService;
+    }
 
     @Test
     public void whenGet2UUIDs_thenUUIDsNotEqual() {

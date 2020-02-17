@@ -7,11 +7,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DnbRequestBuilderService {
 
-    @Autowired
-    private DnbHeaderBuilderService dnbHeaderBuilderService;
+    private final DnbHeaderBuilderService dnbHeaderBuilderService;
+    private final DnbRequestBodyBuilderService dnbRequestBodyBuilderService;
 
     @Autowired
-    private DnbRequestBodyBuilderService dnbRequestBodyBuilderService;
+    public DnbRequestBuilderService(DnbHeaderBuilderService dnbHeaderBuilderService, DnbRequestBodyBuilderService dnbRequestBodyBuilderService) {
+
+        this.dnbHeaderBuilderService = dnbHeaderBuilderService;
+        this.dnbRequestBodyBuilderService = dnbRequestBodyBuilderService;
+    }
 
     public HttpEntity<String> getRequest() {
 

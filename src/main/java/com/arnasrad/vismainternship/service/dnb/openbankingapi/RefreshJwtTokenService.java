@@ -17,17 +17,19 @@ public class RefreshJwtTokenService {
     @Value("${dnb.openbanking.endpoint.access-token}")
     private String accessTokenEndpoint;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+    private final DnbRequestBuilderService dnbRequestBuilderService;
+    private final JsonMapper jsonMapper;
+    private final JwtToken jwtToken;
 
     @Autowired
-    private DnbRequestBuilderService dnbRequestBuilderService;
+    public RefreshJwtTokenService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService, JsonMapper jsonMapper, JwtToken jwtToken) {
 
-    @Autowired
-    private JsonMapper jsonMapper;
-
-    @Autowired
-    private JwtToken jwtToken;
+        this.restTemplate = restTemplate;
+        this.dnbRequestBuilderService = dnbRequestBuilderService;
+        this.jsonMapper = jsonMapper;
+        this.jwtToken = jwtToken;
+    }
 
     public String refreshAndGetJwtToken(String ssn) {
 

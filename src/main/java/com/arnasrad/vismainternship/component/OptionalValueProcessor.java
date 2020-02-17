@@ -9,8 +9,12 @@ import java.util.Optional;
 @Component
 public class OptionalValueProcessor {
 
+    private final ResponseStatusExceptionBuilderService exceptionBuilder;
+
     @Autowired
-    ResponseStatusExceptionBuilderService exceptionBuilder;
+    public OptionalValueProcessor(ResponseStatusExceptionBuilderService exceptionBuilder) {
+        this.exceptionBuilder = exceptionBuilder;
+    }
 
     public String getRequestParameterValue(String name, String value) {
 

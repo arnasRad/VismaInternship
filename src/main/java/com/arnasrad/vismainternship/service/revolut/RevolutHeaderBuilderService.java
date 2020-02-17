@@ -18,8 +18,12 @@ public class RevolutHeaderBuilderService {
     @Value("${authorization.headerType}")
     private String headerType;
 
+    private final AccessToken accessToken;
+
     @Autowired
-    private AccessToken accessToken;
+    public RevolutHeaderBuilderService(AccessToken accessToken) {
+        this.accessToken = accessToken;
+    }
 
     public HttpHeaders getAuthorizedHeaders() {
 

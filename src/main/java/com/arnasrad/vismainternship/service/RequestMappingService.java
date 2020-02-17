@@ -29,14 +29,16 @@ public class RequestMappingService {
     @Value("${error.msg.wrong-bank}")
     private String wrongBankMsg;
 
-    @Autowired
-    private RevolutRequestService revolutRequestService;
+    private final RevolutRequestService revolutRequestService;
+    private final DNBRequestService dnbRequestService;
+    private final ModelConverterService modelConverterService;
 
     @Autowired
-    private DNBRequestService dnbRequestService;
-
-    @Autowired
-    private ModelConverterService modelConverterService;
+    public RequestMappingService(RevolutRequestService revolutRequestService, DNBRequestService dnbRequestService, ModelConverterService modelConverterService) {
+        this.revolutRequestService = revolutRequestService;
+        this.dnbRequestService = dnbRequestService;
+        this.modelConverterService = modelConverterService;
+    }
 
     public Map<String, List<Account>> mapAccountsRequest(String bank) {
 
