@@ -1,16 +1,12 @@
 package com.arnasrad.vismainternship.model.revolut.counterparty;
 
+import com.arnasrad.vismainternship.model.CounterpartyAccount;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CounterpartyAccount {
+public class RevolutCounterpartyAccount extends CounterpartyAccount {
 
-    private String id;
-    private String currency;
-    private String type;
-    @JsonProperty("account_no")
-    private String accountNo;
     private String iban;
     @JsonProperty("sort_no")
     private String sortCode;
@@ -20,51 +16,17 @@ public class CounterpartyAccount {
     @JsonProperty("recipient_charges")
     private String recipientCharges;
 
-    public CounterpartyAccount() {
+    public RevolutCounterpartyAccount() {
     }
 
-    public CounterpartyAccount(String id, String currency, String type, String accountNo, String iban, String sortCode, String routingNumber, String bic, String recipientCharges) {
-        this.id = id;
-        this.currency = currency;
-        this.type = type;
-        this.accountNo = accountNo;
+    public RevolutCounterpartyAccount(String id, String currency, String type, String accountNo, String iban, String sortCode, String routingNumber, String bic, String recipientCharges) {
+
+        super(id, currency, type, accountNo);
         this.iban = iban;
         this.sortCode = sortCode;
         this.routingNumber = routingNumber;
         this.bic = bic;
         this.recipientCharges = recipientCharges;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo;
     }
 
     public String getIban() {

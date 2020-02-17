@@ -5,10 +5,12 @@ import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBTransf
 import com.arnasrad.vismainternship.service.request.TransferService;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutTransferService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static com.arnasrad.vismainternship.enums.BankId.DNB_ID;
 import static com.arnasrad.vismainternship.enums.BankId.REVOLUT_ID;
 
+@Component
 public class TransferFactory {
 
     private final RevolutTransferService revolutTransferService;

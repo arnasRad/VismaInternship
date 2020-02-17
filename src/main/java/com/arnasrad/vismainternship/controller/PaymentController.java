@@ -27,7 +27,8 @@ public class PaymentController {
     @PostMapping("/interbanking/create-payment")
     public Map<String, Payment> createPayment(@RequestBody CreatePaymentRequestBody body, String bank) {
 
-        return requestMappingService.mapPaymentRequest(body, optionalValueProcessor.getRequestParameterValue(
-                "bank", bank));
+        return null;
+//        return requestMappingService.mapPaymentRequest(body, optionalValueProcessor.getRequestParameterValue(
+//                "bank", bank));
     }
 }

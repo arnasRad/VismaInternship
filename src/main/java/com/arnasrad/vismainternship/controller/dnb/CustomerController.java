@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.controller.dnb;
 
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.Customer;
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.CustomerInfo;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomer;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerInfo;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,19 +20,19 @@ public class CustomerController {
     }
 
     @GetMapping("/dnb/customers")
-    public List<Customer> getTestCustomers() {
+    public List<DNBCustomer> getTestCustomers() {
 
         return DnbCustomerService.getCustomers();
     }
 
     @GetMapping("/dnb/current-customer-info")
-    public CustomerInfo getCurrentCustomerInfo() {
+    public DNBCustomerInfo getCurrentCustomerInfo() {
 
         return DnbCustomerService.getCurrentCustomerInfo();
     }
 
     @GetMapping("/dnb/customer-info")
-    public CustomerInfo getCustomerInfo(String ssn) {
+    public DNBCustomerInfo getCustomerInfo(String ssn) {
 
         return DnbCustomerService.getCustomerInfo(ssn);
     }

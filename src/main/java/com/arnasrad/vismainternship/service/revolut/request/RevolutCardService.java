@@ -1,6 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.card.Card;
+import com.arnasrad.vismainternship.model.Card;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.card.DNBCard;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import com.arnasrad.vismainternship.service.request.CardService;
 import org.springframework.beans.factory.annotation.Autowired;

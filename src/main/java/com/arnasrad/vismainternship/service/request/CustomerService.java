@@ -1,13 +1,14 @@
 package com.arnasrad.vismainternship.service.request;
 
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.Customer;
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.CustomerInfo;
+
+import com.arnasrad.vismainternship.model.Customer;
+import com.arnasrad.vismainternship.model.CustomerInfo;
 
 import java.util.List;
 
 public interface CustomerService {
 
-    List<Customer> getCustomers();
+    List<? extends Customer> getCustomers();
 
     CustomerInfo getCurrentCustomerInfo();
 

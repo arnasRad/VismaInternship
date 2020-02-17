@@ -1,19 +1,15 @@
 package com.arnasrad.vismainternship.model.revolut.account;
 
+import com.arnasrad.vismainternship.model.AccountDetails;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AccountDetails {
+public class RevolutAccountDetails extends AccountDetails {
 
-    private String iban;
     private String bic;
     private Boolean pooled;
     private String uniqueReference;
-    private String[] schemas;
-
-    @JsonProperty("account_no")
-    private String accountNo;
 
     @JsonProperty("sort_code")
     private String sortCode;
@@ -25,36 +21,25 @@ public class AccountDetails {
     @JsonProperty("beneficiary_address")
     private BeneficiaryAddress beneficiaryAddress;
 
-    @JsonProperty("bank_country")
-    private String bankCountry;
-
     @JsonProperty("estimated_time")
     private EstimatedTime estimatedTime;
 
-    public AccountDetails() {
+    public RevolutAccountDetails() {
     }
 
-    public AccountDetails(String iban, String bic, Boolean pooled, String uniqueReference, String[] schemas, String accountNo, String sortCode, String routingNumber, String beneficiary, BeneficiaryAddress beneficiaryAddress, String bankCountry, EstimatedTime estimatedTime) {
-        this.iban = iban;
+    public RevolutAccountDetails(String iban, String[] schemas, String accountNo, String bankCountry, String bic,
+                                 Boolean pooled, String uniqueReference, String sortCode, String routingNumber,
+                                 String beneficiary, BeneficiaryAddress beneficiaryAddress, EstimatedTime estimatedTime) {
+
+        super(iban, schemas, accountNo, bankCountry);
         this.bic = bic;
         this.pooled = pooled;
         this.uniqueReference = uniqueReference;
-        this.schemas = schemas;
-        this.accountNo = accountNo;
         this.sortCode = sortCode;
         this.routingNumber = routingNumber;
         this.beneficiary = beneficiary;
         this.beneficiaryAddress = beneficiaryAddress;
-        this.bankCountry = bankCountry;
         this.estimatedTime = estimatedTime;
-    }
-
-    public String getIban() {
-        return iban;
-    }
-
-    public void setIban(String iban) {
-        this.iban = iban;
     }
 
     public String getBic() {
@@ -79,22 +64,6 @@ public class AccountDetails {
 
     public void setUniqueReference(String uniqueReference) {
         this.uniqueReference = uniqueReference;
-    }
-
-    public String[] getSchemas() {
-        return schemas;
-    }
-
-    public void setSchemas(String[] schemas) {
-        this.schemas = schemas;
-    }
-
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo;
     }
 
     public String getSortCode() {
@@ -127,14 +96,6 @@ public class AccountDetails {
 
     public void setBeneficiaryAddress(BeneficiaryAddress beneficiaryAddress) {
         this.beneficiaryAddress = beneficiaryAddress;
-    }
-
-    public String getBankCountry() {
-        return bankCountry;
-    }
-
-    public void setBankCountry(String bankCountry) {
-        this.bankCountry = bankCountry;
     }
 
     public EstimatedTime getEstimatedTime() {

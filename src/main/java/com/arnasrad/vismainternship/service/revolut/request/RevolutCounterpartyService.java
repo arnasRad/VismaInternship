@@ -1,8 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
-import com.arnasrad.vismainternship.model.revolut.counterparty.AddCounterparty;
-import com.arnasrad.vismainternship.model.revolut.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import com.arnasrad.vismainternship.service.request.CounterpartyService;
@@ -43,22 +42,22 @@ public class RevolutCounterpartyService implements CounterpartyService {
     }
 
     @Override
-    public AddCounterparty addCounterparty(CounterpartyRequestBody body) {
+    public RevolutCounterparty addCounterparty(CounterpartyRequestBody body) {
 
         String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(counterpartyEndpoint,
                 revolutRequestBuilderService.getCounterpartyRequest(body), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("add-counterparty"));
 
-        return jsonMapper.getObjectFromString(jsonResponse, AddCounterparty.class);
+        return jsonMapper.getObjectFromString(jsonResponse, RevolutCounterparty.class);
     }
 
     @Override
-    public List<Counterparty> getCounterparties() {
+    public List<RevolutCounterparty> getCounterparties() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(counterpartiesEndpoint, HttpMethod.GET,
                 revolutRequestBuilderService.getCounterpartiesRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-counterparties"));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, Counterparty.class);
+        return jsonMapper.getObjectListFromString(jsonResponse, RevolutCounterparty.class);
     }
 }

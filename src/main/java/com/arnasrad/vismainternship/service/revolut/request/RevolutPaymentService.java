@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
-import com.arnasrad.vismainternship.model.revolut.payment.Payment;
+import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import com.arnasrad.vismainternship.service.request.PaymentService;
@@ -34,12 +34,12 @@ public class RevolutPaymentService implements PaymentService {
     }
 
     @Override
-    public Payment createPayment(CreatePaymentRequestBody body) {
+    public RevolutPayment createPayment(CreatePaymentRequestBody body) {
 
         String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(paymentEndpoint,
                 revolutRequestBuilderService.getPaymentRequest(body), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("create-payment"));
 
-        return jsonMapper.getObjectFromString(jsonResponse, Payment.class);
+        return jsonMapper.getObjectFromString(jsonResponse, RevolutPayment.class);
     }
 }

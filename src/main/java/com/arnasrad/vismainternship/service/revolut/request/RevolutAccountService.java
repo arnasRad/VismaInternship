@@ -1,8 +1,10 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
-import com.arnasrad.vismainternship.model.revolut.account.Account;
-import com.arnasrad.vismainternship.model.revolut.account.AccountDetails;
+import com.arnasrad.vismainternship.model.Account;
+import com.arnasrad.vismainternship.model.AccountDetails;
+import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
+import com.arnasrad.vismainternship.model.revolut.account.RevolutAccountDetails;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import com.arnasrad.vismainternship.service.request.AccountService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
@@ -36,28 +38,28 @@ public class RevolutAccountService implements AccountService {
     }
 
     @Override
-    public List<Account> getAccounts() {
+    public List<RevolutAccount> getAccounts() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
                 revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-accounts"));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, Account.class);
+        return jsonMapper.getObjectListFromString(jsonResponse, RevolutAccount.class);
     }
 
     @Override
-    public Account getAccount(String id) {
+    public RevolutAccount getAccount(String id) {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsEndpoint.concat("/").concat(id),
                 HttpMethod.GET,
                 revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-account"));
 
-        return jsonMapper.getObjectFromString(jsonResponse, Account.class);
+        return jsonMapper.getObjectFromString(jsonResponse, RevolutAccount.class);
     }
 
     @Override
-    public List<AccountDetails> getAccountDetails(String id) {
+    public List<RevolutAccountDetails> getAccountDetails(String id) {
 
         String jsonResponse =
                 Optional.ofNullable(restTemplate.exchange(accountsEndpoint.concat("/").concat(id).concat("/bank" +
@@ -66,6 +68,6 @@ public class RevolutAccountService implements AccountService {
                         revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                         .orElseThrow(() -> exceptionBuilder.getException400("get-account-details"));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, AccountDetails.class);
+        return jsonMapper.getObjectListFromString(jsonResponse, RevolutAccountDetails.class);
     }
 }

@@ -1,8 +1,10 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.Customer;
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.CustomerInfo;
+import com.arnasrad.vismainternship.model.Customer;
+import com.arnasrad.vismainternship.model.CustomerInfo;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomer;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerInfo;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.request.CustomerService;
@@ -42,32 +44,32 @@ public class DNBCustomerService implements CustomerService {
     }
 
     @Override
-    public List<Customer> getCustomers() {
+    public List<DNBCustomer> getCustomers() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(customersEndpoint, HttpMethod.GET,
                 dnbRequestBuilderService.getRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-customers"));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, Customer.class);
+        return jsonMapper.getObjectListFromString(jsonResponse, DNBCustomer.class);
     }
 
     @Override
-    public CustomerInfo getCurrentCustomerInfo() {
+    public DNBCustomerInfo getCurrentCustomerInfo() {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(currentCustomerInfoEndpoint, HttpMethod.GET,
                 dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-current-customer-info"));
 
-        return jsonMapper.getObjectFromString(jsonResponse, CustomerInfo.class);
+        return jsonMapper.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
     }
 
     @Override
-    public CustomerInfo getCustomerInfo(String ssn) {
+    public DNBCustomerInfo getCustomerInfo(String ssn) {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(customerInfoEndpoint + ssn, HttpMethod.GET,
                 dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> exceptionBuilder.getException400("get-customer-info"));
 
-        return jsonMapper.getObjectFromString(jsonResponse, CustomerInfo.class);
+        return jsonMapper.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
     }
 }

@@ -1,7 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.revolut.counterparty.AddCounterparty;
-import com.arnasrad.vismainternship.model.revolut.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.Counterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import com.arnasrad.vismainternship.service.request.CounterpartyService;
@@ -26,13 +25,13 @@ public class DNBCounterpartyService implements CounterpartyService {
     }
 
     @Override
-    public AddCounterparty addCounterparty(CounterpartyRequestBody body) {
+    public Counterparty addCounterparty(CounterpartyRequestBody body) {
 
         throw exceptionBuilder.getNoFunctionalityException400(dnbId, "addCounterparty");
     }
 
     @Override
-    public List<Counterparty> getCounterparties() {
+    public List<? extends Counterparty> getCounterparties() {
 
         throw exceptionBuilder.getNoFunctionalityException400(dnbId, "getCounterparties");
     }

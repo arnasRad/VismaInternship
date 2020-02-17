@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller.dnb;
 
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.card.Card;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.card.DNBCard;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class CardsController {
     }
 
     @GetMapping("/dnb/cards")
-    public List<Card> getCards() {
+    public List<DNBCard> getCards() {
 
         return DnbCardService.getCards();
     }

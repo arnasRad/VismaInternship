@@ -1,16 +1,14 @@
 package com.arnasrad.vismainternship.model.revolut.account;
 
+import com.arnasrad.vismainternship.model.Account;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Account {
+public class RevolutAccount extends Account {
 
-    private String id;
-    private String name;
-    private Double balance;
     private String currency;
     private String state;
 
@@ -23,38 +21,17 @@ public class Account {
     @JsonProperty("updated_at")
     private Date updatedAt;
 
-    public Account() {
-
+    public RevolutAccount() {
     }
 
-    public Account(String id, String name, Double balance) {
-        this.id = id;
-        this.name = name;
-        this.balance = balance;
-    }
+    public RevolutAccount(String id, String name, Double balance, String currency, String state, Boolean isPublic, Date createdAt, Date updatedAt) {
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
+        super(id, name, balance);
+        this.currency = currency;
+        this.state = state;
+        this.isPublic = isPublic;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getCurrency() {

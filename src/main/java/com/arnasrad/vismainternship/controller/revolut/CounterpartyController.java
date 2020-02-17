@@ -1,7 +1,6 @@
 package com.arnasrad.vismainternship.controller.revolut;
 
-import com.arnasrad.vismainternship.model.revolut.counterparty.AddCounterparty;
-import com.arnasrad.vismainternship.model.revolut.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutCounterpartyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +25,13 @@ public class CounterpartyController {
 
     @PostMapping(value = "/revolut/add-counterparty", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)
-    public AddCounterparty addCounterparty(@RequestBody CounterpartyRequestBody body) {
+    public RevolutCounterparty addCounterparty(@RequestBody CounterpartyRequestBody body) {
 
         return revolutCounterpartyService.addCounterparty(body);
     }
 
     @GetMapping("/revolut/counterparties")
-    public List<Counterparty> getCounterparties() {
+    public List<RevolutCounterparty> getCounterparties() {
 
         return revolutCounterpartyService.getCounterparties();
     }

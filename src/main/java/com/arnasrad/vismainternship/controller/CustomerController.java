@@ -25,7 +25,8 @@ public class CustomerController {
     @GetMapping("/interbanking/customers")
     public Map<String, List<Customer>> getCustomers(String bank) {
 
-        return requestMappingService.mapCustomersRequest(optionalValueProcessor.getRequestParameterValue(
-                "bank", bank));
+        return null;
+//        return requestMappingService.mapCustomersRequest(optionalValueProcessor.getRequestParameterValue(
+//                "bank", bank));
     }
 }

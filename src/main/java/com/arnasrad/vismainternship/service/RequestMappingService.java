@@ -1,31 +1,10 @@
 package com.arnasrad.vismainternship.service;
 
-import com.arnasrad.vismainternship.model.Account;
-import com.arnasrad.vismainternship.model.Card;
-import com.arnasrad.vismainternship.model.Customer;
-import com.arnasrad.vismainternship.model.Payment;
-import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
-import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBAccountService;
-import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBCardService;
-import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBCustomerService;
-import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBPaymentService;
-import com.arnasrad.vismainternship.service.revolut.request.RevolutAccountService;
-import com.arnasrad.vismainternship.service.revolut.request.RevolutCardService;
-import com.arnasrad.vismainternship.service.revolut.request.RevolutCustomerService;
-import com.arnasrad.vismainternship.service.revolut.request.RevolutPaymentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class RequestMappingService {
-
+/*
     private static final String REVOLUT_ID = "revolut";
     private static final String DNB_ID = "dnb";
 
@@ -121,4 +100,5 @@ public class RequestMappingService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, wrongBankMsg);
         }
     }
+*/
 }

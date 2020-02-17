@@ -13,7 +13,7 @@ import java.net.URL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HelloCustomerControllerIT {
+public class HelloDNBCustomerControllerIT {
 
     @LocalServerPort
     private int port;
@@ -23,7 +23,7 @@ public class HelloCustomerControllerIT {
     private final TestRestTemplate template;
 
     @Autowired
-    public HelloCustomerControllerIT(TestRestTemplate template) {
+    public HelloDNBCustomerControllerIT(TestRestTemplate template) {
 
         this.template = template;
     }

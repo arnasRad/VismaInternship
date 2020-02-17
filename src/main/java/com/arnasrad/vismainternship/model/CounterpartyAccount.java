@@ -1,21 +1,23 @@
-package com.arnasrad.vismainternship.model.revolut.counterparty;
+package com.arnasrad.vismainternship.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class AddCounterpartyAccount {
+public class CounterpartyAccount {
 
     private String id;
     private String currency;
     private String type;
+    @JsonProperty("account_no")
+    private String accountNo;
 
-    public AddCounterpartyAccount() {
+    public CounterpartyAccount() {
     }
 
-    public AddCounterpartyAccount(String id, String currency, String type) {
+    public CounterpartyAccount(String id, String currency, String type, String accountNo) {
         this.id = id;
         this.currency = currency;
         this.type = type;
+        this.accountNo = accountNo;
     }
 
     public String getId() {
@@ -40,5 +42,13 @@ public class AddCounterpartyAccount {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
     }
 }

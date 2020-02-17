@@ -1,7 +1,9 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.Customer;
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.CustomerInfo;
+import com.arnasrad.vismainternship.model.Customer;
+import com.arnasrad.vismainternship.model.CustomerInfo;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomer;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerInfo;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import com.arnasrad.vismainternship.service.request.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

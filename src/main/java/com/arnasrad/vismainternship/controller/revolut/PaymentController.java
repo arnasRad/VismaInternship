@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller.revolut;
 
-import com.arnasrad.vismainternship.model.revolut.payment.Payment;
+import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class PaymentController {
 
     @PostMapping(value = "/revolut/create-payment", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)
-    public Payment createPayment(@RequestBody CreatePaymentRequestBody body) {
+    public RevolutPayment createPayment(@RequestBody CreatePaymentRequestBody body) {
 
         return revolutPaymentService.createPayment(body);
     }

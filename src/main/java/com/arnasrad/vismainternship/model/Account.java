@@ -9,6 +9,9 @@ public class Account {
     private String name;
     private Double balance;
 
+    public Account() {
+    }
+
     public Account(String id, String name, Double balance) {
         this.id = id;
         this.name = name;
