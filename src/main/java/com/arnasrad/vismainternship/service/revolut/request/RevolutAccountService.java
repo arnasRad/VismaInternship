@@ -1,8 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
-import com.arnasrad.vismainternship.model.Account;
-import com.arnasrad.vismainternship.model.AccountDetails;
 import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
 import com.arnasrad.vismainternship.model.revolut.account.RevolutAccountDetails;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;

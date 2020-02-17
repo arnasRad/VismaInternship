@@ -1,8 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
-import com.arnasrad.vismainternship.model.Customer;
-import com.arnasrad.vismainternship.model.CustomerInfo;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomer;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerInfo;
 import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;

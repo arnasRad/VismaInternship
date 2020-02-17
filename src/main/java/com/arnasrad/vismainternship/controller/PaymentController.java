@@ -3,32 +3,27 @@ package com.arnasrad.vismainternship.controller;
 import com.arnasrad.vismainternship.component.OptionalValueProcessor;
 import com.arnasrad.vismainternship.model.Payment;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
-import com.arnasrad.vismainternship.service.RequestMappingService;
+import com.arnasrad.vismainternship.service.factory.PaymentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController("interbanking-payment-controller")
 public class PaymentController {
 
     private final OptionalValueProcessor optionalValueProcessor;
-    private final RequestMappingService requestMappingService;
+    private final PaymentFactory paymentFactory;
 
     @Autowired
-    public PaymentController(OptionalValueProcessor optionalValueProcessor, RequestMappingService requestMappingService) {
-
+    public PaymentController(OptionalValueProcessor optionalValueProcessor, PaymentFactory paymentFactory) {
         this.optionalValueProcessor = optionalValueProcessor;
-        this.requestMappingService = requestMappingService;
+        this.paymentFactory = paymentFactory;
     }
 
     @PostMapping("/interbanking/create-payment")
-    public Map<String, Payment> createPayment(@RequestBody CreatePaymentRequestBody body, String bank) {
+    public Payment createPayment(@RequestBody CreatePaymentRequestBody body, String bank) {
 
-        return null;
-//        return requestMappingService.mapPaymentRequest(body, optionalValueProcessor.getRequestParameterValue(
-//                "bank", bank));
+        return paymentFactory.getService(optionalValueProcessor.getRequestParameterValue("bank", bank)).createPayment(body);
     }
 }
