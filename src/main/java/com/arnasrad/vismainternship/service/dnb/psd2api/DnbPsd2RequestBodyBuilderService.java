@@ -4,7 +4,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@Service("dnb-psd2-request-body-builder")
+@Service
 public class DnbPsd2RequestBodyBuilderService {
 
     @Value("${dnb.psd2.ssn1}")

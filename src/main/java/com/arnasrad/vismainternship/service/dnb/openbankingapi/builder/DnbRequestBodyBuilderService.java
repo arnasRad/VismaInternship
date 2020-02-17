@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.openbankingapi;
+package com.arnasrad.vismainternship.service.dnb.openbankingapi.builder;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;

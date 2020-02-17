@@ -2,6 +2,7 @@ package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.component.dnb.JwtToken;
+import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -33,9 +34,18 @@ public class RefreshJwtTokenService {
 
     public String refreshAndGetJwtToken(String ssn) {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(accessTokenEndpoint,
+        String jsonResponse = refreshJwtToken(ssn);
+        return setNewJwtToken(jsonResponse);
+    }
+
+    private String refreshJwtToken(String ssn) {
+
+        return Optional.ofNullable(restTemplate.postForEntity(accessTokenEndpoint,
                 dnbRequestBuilderService.getRequest(ssn), String.class).getBody())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customers request"));
+    }
+
+    private String setNewJwtToken(String jsonResponse) {
 
         String token = jsonMapper.getFieldFromResponse(jsonResponse, "jwtToken");
         jwtToken.setToken(token);

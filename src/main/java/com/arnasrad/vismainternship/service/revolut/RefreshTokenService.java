@@ -2,6 +2,7 @@ package com.arnasrad.vismainternship.service.revolut;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.component.revolut.AccessToken;
+import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;

@@ -2,7 +2,7 @@ package com.arnasrad.vismainternship.controller.revolut;
 
 import com.arnasrad.vismainternship.model.revolut.payment.Payment;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
-import com.arnasrad.vismainternship.service.revolut.RevolutRequestService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,17 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PaymentController {
 
-    private final RevolutRequestService revolutRequestService;
+    private final RevolutPaymentService revolutPaymentService;
 
     @Autowired
-    public PaymentController(RevolutRequestService revolutRequestService) {
-        this.revolutRequestService = revolutRequestService;
+    public PaymentController(RevolutPaymentService revolutPaymentService) {
+
+        this.revolutPaymentService = revolutPaymentService;
     }
 
     @PostMapping(value = "/revolut/create-payment", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)
     public Payment createPayment(@RequestBody CreatePaymentRequestBody body) {
 
-        return revolutRequestService.createPayment(body);
+        return revolutPaymentService.createPayment(body);
     }
 }

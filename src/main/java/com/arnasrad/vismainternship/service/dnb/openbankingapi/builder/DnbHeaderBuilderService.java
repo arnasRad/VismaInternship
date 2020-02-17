@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.openbankingapi;
+package com.arnasrad.vismainternship.service.dnb.openbankingapi.builder;
 
 import com.arnasrad.vismainternship.component.dnb.JwtToken;
 import org.springframework.beans.factory.annotation.Autowired;

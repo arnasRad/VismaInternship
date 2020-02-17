@@ -5,8 +5,14 @@ import com.arnasrad.vismainternship.model.Card;
 import com.arnasrad.vismainternship.model.Customer;
 import com.arnasrad.vismainternship.model.Payment;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
-import com.arnasrad.vismainternship.service.dnb.openbankingapi.DNBRequestService;
-import com.arnasrad.vismainternship.service.revolut.RevolutRequestService;
+import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBAccountService;
+import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBCardService;
+import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBCustomerService;
+import com.arnasrad.vismainternship.service.dnb.openbankingapi.request.DNBPaymentService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutAccountService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutCardService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutCustomerService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -28,15 +34,26 @@ public class RequestMappingService {
 
     @Value("${error.msg.wrong-bank}")
     private String wrongBankMsg;
-
-    private final RevolutRequestService revolutRequestService;
-    private final DNBRequestService dnbRequestService;
+    private final RevolutAccountService revolutAccountService;
+    private final DNBAccountService dnbAccountService;
+    private final RevolutCustomerService revolutCustomerService;
+    private final DNBCustomerService dnbCustomerService;
+    private final RevolutCardService revolutCardService;
+    private final DNBCardService dnbCardService;
+    private final RevolutPaymentService revolutPaymentService;
+    private final DNBPaymentService dnbPaymentService;
     private final ModelConverterService modelConverterService;
 
     @Autowired
-    public RequestMappingService(RevolutRequestService revolutRequestService, DNBRequestService dnbRequestService, ModelConverterService modelConverterService) {
-        this.revolutRequestService = revolutRequestService;
-        this.dnbRequestService = dnbRequestService;
+    public RequestMappingService(RevolutAccountService revolutAccountService, DNBAccountService dnbAccountService, RevolutCustomerService revolutCustomerService, DNBCustomerService dnbCustomerService, RevolutCardService revolutCardService, DNBCardService dnbCardService, RevolutPaymentService revolutPaymentService, DNBPaymentService dnbPaymentService, ModelConverterService modelConverterService) {
+        this.revolutAccountService = revolutAccountService;
+        this.dnbAccountService = dnbAccountService;
+        this.revolutCustomerService = revolutCustomerService;
+        this.dnbCustomerService = dnbCustomerService;
+        this.revolutCardService = revolutCardService;
+        this.dnbCardService = dnbCardService;
+        this.revolutPaymentService = revolutPaymentService;
+        this.dnbPaymentService = dnbPaymentService;
         this.modelConverterService = modelConverterService;
     }
 
@@ -46,7 +63,7 @@ public class RequestMappingService {
         switch (bank) {
             case REVOLUT_ID:
                 accounts.put(REVOLUT_ID,
-                        modelConverterService.convertFromRevolutAccountList(revolutRequestService.getAccounts()));
+                        modelConverterService.convertFromRevolutAccountList(revolutAccountService.getAccounts()));
                 return accounts;
             case DNB_ID:
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(noFunctionalityMsg, "DNB",
@@ -65,7 +82,7 @@ public class RequestMappingService {
                         "Customer"));
             case DNB_ID:
                 customers.put(DNB_ID,
-                        modelConverterService.convertFromDnbCustomerList(dnbRequestService.getCustomers()));
+                        modelConverterService.convertFromDnbCustomerList(dnbCustomerService.getCustomers()));
                 return customers;
             default:
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, wrongBankMsg);
@@ -81,7 +98,7 @@ public class RequestMappingService {
                         "Cards"));
             case DNB_ID:
                 cards.put(DNB_ID,
-                        modelConverterService.convertFromDnbCardList(dnbRequestService.getCards()));
+                        modelConverterService.convertFromDnbCardList(dnbCardService.getCards()));
                 return cards;
             default:
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, wrongBankMsg);
@@ -95,7 +112,7 @@ public class RequestMappingService {
         switch (bank) {
             case REVOLUT_ID:
                 payments.put(DNB_ID,
-                        modelConverterService.convertFromRevolutPayment(revolutRequestService.createPayment(body)));
+                        modelConverterService.convertFromRevolutPayment(revolutPaymentService.createPayment(body)));
                 return payments;
             case DNB_ID:
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(noFunctionalityMsg, "DNB",

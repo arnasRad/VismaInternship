@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.revolut;
+package com.arnasrad.vismainternship.service.revolut.builder;
 
 import com.arnasrad.vismainternship.component.revolut.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;

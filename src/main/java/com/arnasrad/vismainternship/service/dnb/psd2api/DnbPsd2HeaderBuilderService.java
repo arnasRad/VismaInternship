@@ -7,7 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-@Service("dnb-psd2-header-builder")
+@Service
 public class DnbPsd2HeaderBuilderService {
 
     @Value("${dnb.api.keyHeader}")

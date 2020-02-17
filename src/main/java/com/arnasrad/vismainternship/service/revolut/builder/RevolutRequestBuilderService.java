@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.revolut;
+package com.arnasrad.vismainternship.service.revolut.builder;
 
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;

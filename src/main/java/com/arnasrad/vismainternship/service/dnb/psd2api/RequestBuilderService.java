@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
-@Service("dnb-psd2-request-builder")
+@Service
 public class RequestBuilderService {
 
     private final DnbPsd2HeaderBuilderService dnbPsd2HeaderBuilderService;
