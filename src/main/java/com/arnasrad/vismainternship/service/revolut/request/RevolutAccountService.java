@@ -21,9 +21,6 @@ public class RevolutAccountService implements AccountService {
     @Value("${revolut.endpoint.accounts}")
     private String accountsEndpoint;
 
-    @Value("${constant.revolut-id-uppercase}")
-    private String revolutId;
-
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final JsonMapper jsonMapper;
