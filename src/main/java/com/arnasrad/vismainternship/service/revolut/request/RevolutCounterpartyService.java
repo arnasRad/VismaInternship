@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.BadRequestException;
@@ -28,14 +28,14 @@ public class RevolutCounterpartyService implements CounterpartyService {
 
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
-    private final JsonMapper jsonMapper;
+    private final JsonMapperService jsonMapperService;
 
     @Autowired
-    public RevolutCounterpartyService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, JsonMapper jsonMapper) {
+    public RevolutCounterpartyService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, JsonMapperService jsonMapperService) {
 
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
-        this.jsonMapper = jsonMapper;
+        this.jsonMapperService = jsonMapperService;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class RevolutCounterpartyService implements CounterpartyService {
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
                         "getCounterparty")));
 
-        return jsonMapper.getObjectFromString(jsonResponse, RevolutCounterparty.class);
+        return jsonMapperService.getObjectFromString(jsonResponse, RevolutCounterparty.class);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class RevolutCounterpartyService implements CounterpartyService {
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
                         "getCounterparties")));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, RevolutCounterparty.class);
+        return jsonMapperService.getObjectListFromString(jsonResponse, RevolutCounterparty.class);
     }
 
     @Override

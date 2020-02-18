@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.component;
+package com.arnasrad.vismainternship.service.mapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
@@ -14,14 +14,14 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Component("revolut-json-revolut-mapper")
-public class JsonMapper {
+public class JsonMapperService {
 
     private final ObjectMapper mapper;
 
-    private final Logger logger = LoggerFactory.getLogger(JsonMapper.class);
+    private final Logger logger = LoggerFactory.getLogger(JsonMapperService.class);
 
     @Autowired
-    public JsonMapper(ObjectMapper mapper) {
+    public JsonMapperService(ObjectMapper mapper) {
 
         this.mapper = mapper;
     }

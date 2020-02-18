@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.builder;
 
-import com.arnasrad.vismainternship.component.revolut.AccessToken;
+import com.arnasrad.vismainternship.token.RevolutAccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -18,17 +18,17 @@ public class RevolutHeaderBuilderService {
     @Value("${authorization.headerType}")
     private String headerType;
 
-    private final AccessToken accessToken;
+    private final RevolutAccessToken revolutAccessToken;
 
     @Autowired
-    public RevolutHeaderBuilderService(AccessToken accessToken) {
-        this.accessToken = accessToken;
+    public RevolutHeaderBuilderService(RevolutAccessToken revolutAccessToken) {
+        this.revolutAccessToken = revolutAccessToken;
     }
 
     public HttpHeaders getAuthorizedHeaders() {
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(headerName, headerType + " " + accessToken.getToken());
+        httpHeaders.add(headerName, headerType + " " + revolutAccessToken.getToken());
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         return httpHeaders;
     }
@@ -36,7 +36,7 @@ public class RevolutHeaderBuilderService {
     public HttpHeaders getAuthorizedJsonHeaders() {
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(headerName, headerType + " " + accessToken.getToken());
+        httpHeaders.add(headerName, headerType + " " + revolutAccessToken.getToken());
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         return httpHeaders;

@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.BadRequestException;
@@ -25,15 +25,15 @@ public class RevolutAccountService implements AccountService {
 
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
-    private final JsonMapper jsonMapper;
+    private final JsonMapperService jsonMapperService;
 
     @Autowired
     public RevolutAccountService(RestTemplate restTemplate,
-                                 RevolutRequestBuilderService revolutRequestBuilderService, JsonMapper jsonMapper) {
+                                 RevolutRequestBuilderService revolutRequestBuilderService, JsonMapperService jsonMapperService) {
 
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
-        this.jsonMapper = jsonMapper;
+        this.jsonMapperService = jsonMapperService;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RevolutAccountService implements AccountService {
                 revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getAccounts")));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, RevolutAccount.class);
+        return jsonMapperService.getObjectListFromString(jsonResponse, RevolutAccount.class);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class RevolutAccountService implements AccountService {
                 revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getAccount")));
 
-        return jsonMapper.getObjectFromString(jsonResponse, RevolutAccount.class);
+        return jsonMapperService.getObjectFromString(jsonResponse, RevolutAccount.class);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class RevolutAccountService implements AccountService {
                         .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
                                 "getAccountDetails")));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, RevolutAccountDetails.class);
+        return jsonMapperService.getObjectListFromString(jsonResponse, RevolutAccountDetails.class);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship;
 
-import com.arnasrad.vismainternship.component.Dates;
+import com.arnasrad.vismainternship.service.dates.DatesService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureMockMvc
 public class DateComponentTests {
 
-    private final Dates dates;
+    private final DatesService datesService;
     private final SimpleDateFormat simpleDateFormat;
 
     @Autowired
-    public DateComponentTests(Dates dates, SimpleDateFormat simpleDateFormat) {
-        this.dates = dates;
+    public DateComponentTests(DatesService datesService, SimpleDateFormat simpleDateFormat) {
+        this.datesService = datesService;
         this.simpleDateFormat = simpleDateFormat;
     }
 
@@ -32,7 +32,7 @@ public class DateComponentTests {
         calendar.add(Calendar.DAY_OF_YEAR, 5);
         String expectedFutureDate = simpleDateFormat.format(calendar.getTime());
 
-        String actualFutureDate = dates.getFutureDateString(5);
+        String actualFutureDate = datesService.getFutureDateString(5);
         assertEquals(expectedFutureDate, actualFutureDate);
     }
 

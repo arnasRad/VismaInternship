@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.psd2api;
 
-import com.arnasrad.vismainternship.component.dnb.JwtToken;
+import com.arnasrad.vismainternship.token.DnbJwtToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -19,17 +19,17 @@ public class DnbPsd2HeaderBuilderService {
     @Value("${dnb.apikey}")
     private String apiKey;
 
-    private final JwtToken jwtToken;
+    private final DnbJwtToken dnbJwtToken;
 
     @Autowired
-    public DnbPsd2HeaderBuilderService(JwtToken jwtToken) {
-        this.jwtToken = jwtToken;
+    public DnbPsd2HeaderBuilderService(DnbJwtToken dnbJwtToken) {
+        this.dnbJwtToken = dnbJwtToken;
     }
 
     public HttpHeaders getAuthorizedHttpHeaders() {
 
         HttpHeaders httpHeaders = getHttpHeaders();
-        httpHeaders.add(jwtTokenHeader, jwtToken.getToken());
+        httpHeaders.add(jwtTokenHeader, dnbJwtToken.getToken());
 
         return httpHeaders;
     }

@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.component;
+package com.arnasrad.vismainternship.service.dates;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,12 +8,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Component
-public class Dates {
+public class DatesService {
 
     private final SimpleDateFormat simpleDateFormat;
 
     @Autowired
-    public Dates(SimpleDateFormat simpleDateFormat) {
+    public DatesService(SimpleDateFormat simpleDateFormat) {
         this.simpleDateFormat = simpleDateFormat;
     }
 
@@ -22,13 +22,6 @@ public class Dates {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, daysFromToday);
         return simpleDateFormat.format(calendar.getTime());
-    }
-
-    public Date getFutureDate(int daysFromToday) {
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, daysFromToday);
-        return calendar.getTime();
     }
 
     public String getDateString(Date date) {

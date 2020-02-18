@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.component;
+package com.arnasrad.vismainternship.service.generator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,12 +7,12 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 
 @Component
-public class RandomNumberGenerator {
+public class RandomNumberGeneratorService {
 
     private final Random random;
 
     @Autowired
-    public RandomNumberGenerator(Random random) {
+    public RandomNumberGeneratorService(Random random) {
         this.random = random;
     }
 

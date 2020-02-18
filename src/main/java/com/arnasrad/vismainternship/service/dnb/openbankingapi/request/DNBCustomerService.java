@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomer;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerInfo;
@@ -31,15 +31,15 @@ public class DNBCustomerService implements CustomerService {
 
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
-    private final JsonMapper jsonMapper;
+    private final JsonMapperService jsonMapperService;
 
     @Autowired
     public DNBCustomerService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService,
-                              JsonMapper jsonMapper) {
+                              JsonMapperService jsonMapperService) {
 
         this.restTemplate = restTemplate;
         this.dnbRequestBuilderService = dnbRequestBuilderService;
-        this.jsonMapper = jsonMapper;
+        this.jsonMapperService = jsonMapperService;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class DNBCustomerService implements CustomerService {
                 dnbRequestBuilderService.getRequest(), String.class).getBody())
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getCustomers")));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, DNBCustomer.class);
+        return jsonMapperService.getObjectListFromString(jsonResponse, DNBCustomer.class);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class DNBCustomerService implements CustomerService {
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
                         "getCurrentCustomerInfo")));
 
-        return jsonMapper.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
+        return jsonMapperService.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class DNBCustomerService implements CustomerService {
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
                         "getCustomerInfo")));
 
-        return jsonMapper.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
+        return jsonMapperService.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
     }
 
     @Override

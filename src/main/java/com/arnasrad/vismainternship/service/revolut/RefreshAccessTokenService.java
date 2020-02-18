@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut;
 
-import com.arnasrad.vismainternship.component.JsonMapper;
-import com.arnasrad.vismainternship.component.revolut.AccessToken;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
+import com.arnasrad.vismainternship.token.RevolutAccessToken;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.BadRequestException;
@@ -23,17 +23,17 @@ public class RefreshAccessTokenService implements TokenService {
 
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final RestTemplate restTemplate;
-    private final JsonMapper jsonMapper;
-    private final AccessToken accessToken;
+    private final JsonMapperService jsonMapperService;
+    private final RevolutAccessToken revolutAccessToken;
 
     @Autowired
     public RefreshAccessTokenService(RevolutRequestBuilderService revolutRequestBuilderService,
-                                     RestTemplate restTemplate, JsonMapper jsonMapper, AccessToken accessToken) {
+                                     RestTemplate restTemplate, JsonMapperService jsonMapperService, RevolutAccessToken revolutAccessToken) {
 
         this.revolutRequestBuilderService = revolutRequestBuilderService;
         this.restTemplate = restTemplate;
-        this.jsonMapper = jsonMapper;
-        this.accessToken = accessToken;
+        this.jsonMapperService = jsonMapperService;
+        this.revolutAccessToken = revolutAccessToken;
     }
 
     @Override
@@ -52,8 +52,8 @@ public class RefreshAccessTokenService implements TokenService {
 
     private String setNewToken(String jsonResponse) {
 
-        String token = jsonMapper.getFieldFromResponse(jsonResponse, "access_token");
-        accessToken.setToken(token);
+        String token = jsonMapperService.getFieldFromResponse(jsonResponse, "access_token");
+        revolutAccessToken.setToken(token);
         return token;
     }
 

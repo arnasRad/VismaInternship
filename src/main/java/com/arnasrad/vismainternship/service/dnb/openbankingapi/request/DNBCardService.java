@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.card.DNBCard;
 import com.arnasrad.vismainternship.model.enums.BankId;
@@ -24,15 +24,15 @@ public class DNBCardService implements CardService {
 
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
-    private final JsonMapper jsonMapper;
+    private final JsonMapperService jsonMapperService;
 
     @Autowired
     public DNBCardService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService,
-                          JsonMapper jsonMapper) {
+                          JsonMapperService jsonMapperService) {
 
         this.restTemplate = restTemplate;
         this.dnbRequestBuilderService = dnbRequestBuilderService;
-        this.jsonMapper = jsonMapper;
+        this.jsonMapperService = jsonMapperService;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class DNBCardService implements CardService {
                 dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getCards")));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, DNBCard.class);
+        return jsonMapperService.getObjectListFromString(jsonResponse, DNBCard.class);
     }
 
     @Override

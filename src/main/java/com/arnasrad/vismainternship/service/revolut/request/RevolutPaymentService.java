@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.BadRequestException;
@@ -34,14 +34,14 @@ public class RevolutPaymentService implements PaymentService {
 
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
-    private final JsonMapper jsonMapper;
+    private final JsonMapperService jsonMapperService;
 
     @Autowired
-    public RevolutPaymentService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, JsonMapper jsonMapper) {
+    public RevolutPaymentService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, JsonMapperService jsonMapperService) {
 
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
-        this.jsonMapper = jsonMapper;
+        this.jsonMapperService = jsonMapperService;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class RevolutPaymentService implements PaymentService {
                 revolutRequestBuilderService.getPaymentRequest(body), String.class).getBody())
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "createPayment")));
 
-        return jsonMapper.getObjectFromString(jsonResponse, RevolutPayment.class);
+        return jsonMapperService.getObjectFromString(jsonResponse, RevolutPayment.class);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class RevolutPaymentService implements PaymentService {
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
                         "getTransaction")));
 
-        return jsonMapper.getObjectFromString(jsonResponse, RevolutTransaction.class);
+        return jsonMapperService.getObjectFromString(jsonResponse, RevolutTransaction.class);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class RevolutPaymentService implements PaymentService {
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
                         "getTransactions")));
 
-        return jsonMapper.getObjectListFromString(jsonResponse, RevolutTransaction.class);
+        return jsonMapperService.getObjectListFromString(jsonResponse, RevolutTransaction.class);
     }
 
     @Override

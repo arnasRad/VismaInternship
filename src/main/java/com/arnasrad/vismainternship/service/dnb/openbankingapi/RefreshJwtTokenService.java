@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 
-import com.arnasrad.vismainternship.component.JsonMapper;
-import com.arnasrad.vismainternship.component.dnb.JwtToken;
+import com.arnasrad.vismainternship.token.DnbJwtToken;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.BadRequestException;
@@ -22,16 +22,16 @@ public class RefreshJwtTokenService implements TokenService {
 
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
-    private final JsonMapper jsonMapper;
-    private final JwtToken jwtToken;
+    private final JsonMapperService jsonMapperService;
+    private final DnbJwtToken dnbJwtToken;
 
     @Autowired
-    public RefreshJwtTokenService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService, JsonMapper jsonMapper, JwtToken jwtToken) {
+    public RefreshJwtTokenService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService, JsonMapperService jsonMapperService, DnbJwtToken dnbJwtToken) {
 
         this.restTemplate = restTemplate;
         this.dnbRequestBuilderService = dnbRequestBuilderService;
-        this.jsonMapper = jsonMapper;
-        this.jwtToken = jwtToken;
+        this.jsonMapperService = jsonMapperService;
+        this.dnbJwtToken = dnbJwtToken;
     }
 
     @Override
@@ -50,8 +50,8 @@ public class RefreshJwtTokenService implements TokenService {
 
     private String setNewToken(String jsonResponse) {
 
-        String token = jsonMapper.getFieldFromResponse(jsonResponse, "jwtToken");
-        jwtToken.setToken(token);
+        String token = jsonMapperService.getFieldFromResponse(jsonResponse, "jwtToken");
+        dnbJwtToken.setToken(token);
         return token;
     }
 

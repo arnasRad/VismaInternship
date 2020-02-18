@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.component;
+package com.arnasrad.vismainternship.service.generator;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IdGenerator {
+public class IdGeneratorService {
 
     @Value("${constant.request-id.min-length}")
     private int requestIdMinLength;
@@ -14,10 +14,10 @@ public class IdGenerator {
     @Value("${constant.request-id.max-length}")
     private int requestIdMaxLength;
 
-    private final RandomNumberGenerator numberGenerator;
+    private final RandomNumberGeneratorService numberGenerator;
 
     @Autowired
-    public IdGenerator(RandomNumberGenerator numberGenerator) {
+    public IdGeneratorService(RandomNumberGeneratorService numberGenerator) {
         this.numberGenerator = numberGenerator;
     }
 

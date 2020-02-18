@@ -1,16 +1,16 @@
-package com.arnasrad.vismainternship.component.revolut;
+package com.arnasrad.vismainternship.token;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AccessToken {
+public class RevolutAccessToken {
 
     private String token;
 
     @Autowired
-    private AccessToken(@Value("${revolut.sandbox.constant.accesstoken}") final String accessToken) {
+    private RevolutAccessToken(@Value("${revolut.sandbox.constant.accesstoken}") final String accessToken) {
 
         this.token = accessToken;
     }

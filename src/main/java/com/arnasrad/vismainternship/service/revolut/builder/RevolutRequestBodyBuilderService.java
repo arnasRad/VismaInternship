@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.revolut.builder;
 
-import com.arnasrad.vismainternship.component.Dates;
-import com.arnasrad.vismainternship.component.IdGenerator;
-import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.service.dates.DatesService;
+import com.arnasrad.vismainternship.service.generator.IdGeneratorService;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
@@ -33,16 +33,16 @@ public class RevolutRequestBodyBuilderService {
     @Value("${revolut.sandbox.constant.clientAssertionType}")
     private String clientAssertionType;
 
-    private final IdGenerator idGenerator;
-    private final JsonMapper jsonMapper;
-    private final Dates dates;
+    private final IdGeneratorService idGeneratorService;
+    private final JsonMapperService jsonMapperService;
+    private final DatesService datesService;
 
     @Autowired
-    public RevolutRequestBodyBuilderService(IdGenerator idGenerator, JsonMapper jsonMapper, Dates dates) {
+    public RevolutRequestBodyBuilderService(IdGeneratorService idGeneratorService, JsonMapperService jsonMapperService, DatesService datesService) {
 
-        this.idGenerator = idGenerator;
-        this.jsonMapper = jsonMapper;
-        this.dates = dates;
+        this.idGeneratorService = idGeneratorService;
+        this.jsonMapperService = jsonMapperService;
+        this.datesService = datesService;
     }
 
     public MultiValueMap<String, String> getAccessTokenRequestParams() {
@@ -61,8 +61,8 @@ public class RevolutRequestBodyBuilderService {
                                                                       Integer count) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("counterparty", counterparty);
-        params.add("from", dates.getDateString(from));
-        params.add("to", dates.getDateString(to));
+        params.add("from", datesService.getDateString(from));
+        params.add("to", datesService.getDateString(to));
         params.add("count", String.valueOf(count));
 
         return params;
@@ -83,7 +83,7 @@ public class RevolutRequestBodyBuilderService {
     public String getTransferRequestBody(TransferRequestBody transferRequestBody) {
 
         JSONObject body = new JSONObject();
-        body.put("request_id", idGenerator.generateRequestId());
+        body.put("request_id", idGeneratorService.generateRequestId());
         body.put("source_account_id", transferRequestBody.getSourceAccountId());
         body.put("target_account_id", transferRequestBody.getTargetAccountId());
         body.put("amount", transferRequestBody.getAmount());
@@ -95,7 +95,7 @@ public class RevolutRequestBodyBuilderService {
 
     public String getPaymentRequestBody(CreatePaymentRequestBody createPaymentRequestBody) {
 
-        createPaymentRequestBody.setRequestId(idGenerator.generateRequestId());
-        return jsonMapper.getStringFromObject(createPaymentRequestBody);
+        createPaymentRequestBody.setRequestId(idGeneratorService.generateRequestId());
+        return jsonMapperService.getStringFromObject(createPaymentRequestBody);
     }
 }

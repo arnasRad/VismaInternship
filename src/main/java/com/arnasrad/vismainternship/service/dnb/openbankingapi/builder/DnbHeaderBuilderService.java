@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.builder;
 
-import com.arnasrad.vismainternship.component.dnb.JwtToken;
+import com.arnasrad.vismainternship.token.DnbJwtToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -19,18 +19,18 @@ public class DnbHeaderBuilderService {
     @Value("${dnb.apikey}")
     private String apiKey;
 
-    private final JwtToken jwtToken;
+    private final DnbJwtToken dnbJwtToken;
 
     @Autowired
-    public DnbHeaderBuilderService(JwtToken jwtToken) {
+    public DnbHeaderBuilderService(DnbJwtToken dnbJwtToken) {
 
-        this.jwtToken = jwtToken;
+        this.dnbJwtToken = dnbJwtToken;
     }
 
     public HttpHeaders getAuthorizedHttpHeaders() {
 
         HttpHeaders httpHeaders = getHttpHeaders();
-        httpHeaders.add(jwtTokenHeader, jwtToken.getToken());
+        httpHeaders.add(jwtTokenHeader, dnbJwtToken.getToken());
 
         return httpHeaders;
     }
