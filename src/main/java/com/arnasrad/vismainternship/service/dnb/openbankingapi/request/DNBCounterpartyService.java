@@ -1,11 +1,11 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.interbankingapi.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.CounterpartyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.arnasrad.vismainternship.service.request.CounterpartyService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,26 +13,23 @@ import java.util.List;
 @Service
 public class DNBCounterpartyService implements CounterpartyService {
 
-    @Value("${constant.dnb-id-uppercase}")
-    private String dnbId;
+    @Override
+    public Counterparty addCounterparty(CounterpartyRequestBody body) throws NoSuchFunctionalityException {
 
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
-
-    @Autowired
-    public DNBCounterpartyService(ResponseStatusExceptionBuilderService exceptionBuilder) {
-
-        this.exceptionBuilder = exceptionBuilder;
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "addCounterparty"));
     }
 
     @Override
-    public Counterparty addCounterparty(CounterpartyRequestBody body) {
+    public List<? extends Counterparty> getCounterparties() throws NoSuchFunctionalityException {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "addCounterparty");
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getCounterparties"));
     }
 
     @Override
-    public List<? extends Counterparty> getCounterparties() {
+    public String getBankId() {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "getCounterparties");
+        return BankId.DNB_ID.getBank();
     }
 }

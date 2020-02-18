@@ -1,10 +1,10 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.interbankingapi.card.Card;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.CardService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.card.Card;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
+import com.arnasrad.vismainternship.service.request.CardService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,20 +12,16 @@ import java.util.List;
 @Service
 public class RevolutCardService implements CardService {
 
-    @Value("${constant.revolut-id-uppercase}")
-    private String revolutId;
+    @Override
+    public List<Card> getCards() throws NoSuchFunctionalityException {
 
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
-
-    @Autowired
-    public RevolutCardService(ResponseStatusExceptionBuilderService exceptionBuilder) {
-
-        this.exceptionBuilder = exceptionBuilder;
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getCards"));
     }
 
     @Override
-    public List<Card> getCards() {
+    public String getBankId() {
 
-        throw exceptionBuilder.getNoFunctionalityException400(revolutId, "getCards");
+        return BankId.REVOLUT_ID.getBank();
     }
 }

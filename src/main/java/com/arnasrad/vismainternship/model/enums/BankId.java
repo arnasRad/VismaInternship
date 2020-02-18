@@ -1,10 +1,17 @@
 package com.arnasrad.vismainternship.model.enums;
 
-public class BankId {
+public enum BankId {
 
-    public static final String REVOLUT_ID = "revolut";
-    public static final String DNB_ID = "dnb";
+    REVOLUT_ID("revolut"),
+    DNB_ID("dnb");
 
-    private BankId() {
+    private String bank;
+
+    BankId(String bank) {
+        this.bank = bank;
+    }
+
+    public String getBank() {
+        return bank;
     }
 }

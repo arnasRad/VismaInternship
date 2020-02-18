@@ -1,10 +1,12 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
 import com.arnasrad.vismainternship.model.revolut.account.RevolutAccountDetails;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.AccountService;
+import com.arnasrad.vismainternship.service.request.AccountService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,48 +26,53 @@ public class RevolutAccountService implements AccountService {
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final JsonMapper jsonMapper;
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
 
     @Autowired
-    public RevolutAccountService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, JsonMapper jsonMapper, ResponseStatusExceptionBuilderService exceptionBuilder) {
+    public RevolutAccountService(RestTemplate restTemplate,
+                                 RevolutRequestBuilderService revolutRequestBuilderService, JsonMapper jsonMapper) {
 
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
         this.jsonMapper = jsonMapper;
-        this.exceptionBuilder = exceptionBuilder;
     }
 
     @Override
-    public List<RevolutAccount> getAccounts() {
+    public List<RevolutAccount> getAccounts() throws BadRequestException {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
                 revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> exceptionBuilder.getException400("get-accounts"));
+                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getAccounts")));
 
         return jsonMapper.getObjectListFromString(jsonResponse, RevolutAccount.class);
     }
 
     @Override
-    public RevolutAccount getAccount(String id) {
+    public RevolutAccount getAccount(String id) throws BadRequestException {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(accountsEndpoint.concat("/").concat(id),
                 HttpMethod.GET,
                 revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> exceptionBuilder.getException400("get-account"));
+                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getAccount")));
 
         return jsonMapper.getObjectFromString(jsonResponse, RevolutAccount.class);
     }
 
     @Override
-    public List<RevolutAccountDetails> getAccountDetails(String id) {
+    public List<RevolutAccountDetails> getAccountDetails(String id) throws BadRequestException {
 
         String jsonResponse =
-                Optional.ofNullable(restTemplate.exchange(accountsEndpoint.concat("/").concat(id).concat("/bank" +
-                                "-details"),
-                        HttpMethod.GET,
+                Optional.ofNullable(restTemplate.exchange(accountsEndpoint.concat("/")
+                        .concat(id).concat("/bank-details"), HttpMethod.GET,
                         revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                        .orElseThrow(() -> exceptionBuilder.getException400("get-account-details"));
+                        .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
+                                "getAccountDetails")));
 
         return jsonMapper.getObjectListFromString(jsonResponse, RevolutAccountDetails.class);
+    }
+
+    @Override
+    public String getBankId() {
+
+        return BankId.REVOLUT_ID.getBank();
     }
 }

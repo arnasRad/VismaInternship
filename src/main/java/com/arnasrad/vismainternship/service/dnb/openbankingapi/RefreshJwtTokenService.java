@@ -2,14 +2,15 @@ package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.component.dnb.JwtToken;
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.TokenService;
+import com.arnasrad.vismainternship.service.request.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -34,25 +35,29 @@ public class RefreshJwtTokenService implements TokenService {
     }
 
     @Override
-    public String refreshAndGetToken(String ssn) {
+    public String refreshAndGetToken(String ssn) throws BadRequestException {
 
         String jsonResponse = refreshToken(ssn);
         return setNewToken(jsonResponse);
     }
 
-    @Override
-    public String refreshToken(String ssn) {
+    private String refreshToken(String ssn) throws BadRequestException{
 
         return Optional.ofNullable(restTemplate.postForEntity(accessTokenEndpoint,
                 dnbRequestBuilderService.getRequest(ssn), String.class).getBody())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad customers request"));
+                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "refreshToken")));
     }
 
-    @Override
-    public String setNewToken(String jsonResponse) {
+    private String setNewToken(String jsonResponse) {
 
         String token = jsonMapper.getFieldFromResponse(jsonResponse, "jwtToken");
         jwtToken.setToken(token);
         return token;
+    }
+
+    @Override
+    public String getBankId() {
+
+        return BankId.DNB_ID.getBank();
     }
 }

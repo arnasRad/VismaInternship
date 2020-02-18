@@ -1,11 +1,11 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.interbankingapi.customer.Customer;
-import com.arnasrad.vismainternship.model.interbankingapi.customer.CustomerInfo;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.customer.Customer;
+import com.arnasrad.vismainternship.model.customer.CustomerInfo;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
+import com.arnasrad.vismainternship.service.request.CustomerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,32 +13,30 @@ import java.util.List;
 @Service
 public class RevolutCustomerService implements CustomerService {
 
-    @Value("${constant.revolut-id-uppercase}")
-    private String revolutId;
+    @Override
+    public List<Customer> getCustomers() throws NoSuchFunctionalityException {
 
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
-
-    @Autowired
-    public RevolutCustomerService(ResponseStatusExceptionBuilderService exceptionBuilder) {
-
-        this.exceptionBuilder = exceptionBuilder;
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getCustomers"));
     }
 
     @Override
-    public List<Customer> getCustomers() {
+    public CustomerInfo getCurrentCustomerInfo() throws NoSuchFunctionalityException {
 
-        throw exceptionBuilder.getNoFunctionalityException400(revolutId, "getCustomers");
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getCurrentCustomerInfo"));
     }
 
     @Override
-    public CustomerInfo getCurrentCustomerInfo() {
+    public CustomerInfo getCustomerInfo(String ssn) throws NoSuchFunctionalityException {
 
-        throw exceptionBuilder.getNoFunctionalityException400(revolutId, "getCurrentCustomerInfo");
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getCusomterInfo"));
     }
 
     @Override
-    public CustomerInfo getCustomerInfo(String ssn) {
+    public String getBankId() {
 
-        throw exceptionBuilder.getNoFunctionalityException400(revolutId, "getCustomerInfo");
+        return BankId.REVOLUT_ID.getBank();
     }
 }

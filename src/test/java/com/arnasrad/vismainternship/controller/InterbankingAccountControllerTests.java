@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.controller;
 
-import com.arnasrad.vismainternship.controller.interbankingapi.AccountController;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,29 +1,25 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.TransferService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.arnasrad.vismainternship.service.request.TransferService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DNBTransferService implements TransferService {
 
-    @Value("${constant.dnb-id-uppercase}")
-    private String dnbId;
+    @Override
+    public String createTransfer(TransferRequestBody body) throws NoSuchFunctionalityException {
 
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
-
-    @Autowired
-    public DNBTransferService(ResponseStatusExceptionBuilderService exceptionBuilder) {
-
-        this.exceptionBuilder = exceptionBuilder;
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "createTransfer"));
     }
 
     @Override
-    public String createTransfer(TransferRequestBody body) {
+    public String getBankId() {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "createTransfer");
+        return BankId.DNB_ID.getBank();
     }
 }

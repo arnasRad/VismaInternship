@@ -1,11 +1,13 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomer;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerInfo;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.CustomerService;
+import com.arnasrad.vismainternship.service.request.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -30,44 +32,51 @@ public class DNBCustomerService implements CustomerService {
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
     private final JsonMapper jsonMapper;
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
 
     @Autowired
-    public DNBCustomerService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService, JsonMapper jsonMapper, ResponseStatusExceptionBuilderService exceptionBuilder) {
+    public DNBCustomerService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService,
+                              JsonMapper jsonMapper) {
 
         this.restTemplate = restTemplate;
         this.dnbRequestBuilderService = dnbRequestBuilderService;
         this.jsonMapper = jsonMapper;
-        this.exceptionBuilder = exceptionBuilder;
     }
 
     @Override
-    public List<DNBCustomer> getCustomers() {
+    public List<DNBCustomer> getCustomers()  throws BadRequestException {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(customersEndpoint, HttpMethod.GET,
                 dnbRequestBuilderService.getRequest(), String.class).getBody())
-                .orElseThrow(() -> exceptionBuilder.getException400("get-customers"));
+                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getCustomers")));
 
         return jsonMapper.getObjectListFromString(jsonResponse, DNBCustomer.class);
     }
 
     @Override
-    public DNBCustomerInfo getCurrentCustomerInfo() {
+    public DNBCustomerInfo getCurrentCustomerInfo()  throws BadRequestException {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(currentCustomerInfoEndpoint, HttpMethod.GET,
                 dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> exceptionBuilder.getException400("get-current-customer-info"));
+                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
+                        "getCurrentCustomerInfo")));
 
         return jsonMapper.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
     }
 
     @Override
-    public DNBCustomerInfo getCustomerInfo(String ssn) {
+    public DNBCustomerInfo getCustomerInfo(String ssn)  throws BadRequestException {
 
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(customerInfoEndpoint + ssn, HttpMethod.GET,
                 dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> exceptionBuilder.getException400("get-customer-info"));
+                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
+                        "getCustomerInfo")));
 
         return jsonMapper.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
+    }
+
+    @Override
+    public String getBankId() {
+
+        return BankId.DNB_ID.getBank();
     }
 }

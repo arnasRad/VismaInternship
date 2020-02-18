@@ -2,15 +2,16 @@ package com.arnasrad.vismainternship.service.revolut;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.component.revolut.AccessToken;
-import com.arnasrad.vismainternship.service.interbankingapi.request.TokenService;
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.BadRequestException;
+import com.arnasrad.vismainternship.service.request.TokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -26,7 +27,8 @@ public class RefreshAccessTokenService implements TokenService {
     private final AccessToken accessToken;
 
     @Autowired
-    public RefreshAccessTokenService(RevolutRequestBuilderService revolutRequestBuilderService, RestTemplate restTemplate, JsonMapper jsonMapper, AccessToken accessToken) {
+    public RefreshAccessTokenService(RevolutRequestBuilderService revolutRequestBuilderService,
+                                     RestTemplate restTemplate, JsonMapper jsonMapper, AccessToken accessToken) {
 
         this.revolutRequestBuilderService = revolutRequestBuilderService;
         this.restTemplate = restTemplate;
@@ -35,25 +37,29 @@ public class RefreshAccessTokenService implements TokenService {
     }
 
     @Override
-    public String refreshAndGetToken(String ssn) {
+    public String refreshAndGetToken(String ssn) throws BadRequestException {
 
-        String jsonResponse = refreshToken(null);
+        String jsonResponse = refreshToken();
         return setNewToken(jsonResponse);
     }
 
-    @Override
-    public String refreshToken(String ssn) {
+    private String refreshToken() throws BadRequestException {
 
         return Optional.ofNullable(restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
                 revolutRequestBuilderService.getAccessTokenRequest(), String.class).getBody()
-        ).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad token refresh request"));
+        ).orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "refreshToken")));
     }
 
-    @Override
-    public String setNewToken(String jsonResponse) {
+    private String setNewToken(String jsonResponse) {
 
         String token = jsonMapper.getFieldFromResponse(jsonResponse, "access_token");
         accessToken.setToken(token);
         return token;
+    }
+
+    @Override
+    public String getBankId() {
+
+        return BankId.REVOLUT_ID.getBank();
     }
 }

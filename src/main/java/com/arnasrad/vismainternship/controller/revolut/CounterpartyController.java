@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.controller.revolut;
 
+import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutCounterpartyService;
@@ -15,24 +16,24 @@ import java.util.List;
 @RestController
 public class CounterpartyController {
 
-    private final RevolutCounterpartyService revolutCounterpartyService;
+    private final RevolutCounterpartyService counterpartyService;
 
     @Autowired
-    public CounterpartyController(RevolutCounterpartyService revolutCounterpartyService) {
+    public CounterpartyController(RevolutCounterpartyService counterpartyService) {
 
-        this.revolutCounterpartyService = revolutCounterpartyService;
+        this.counterpartyService = counterpartyService;
     }
 
     @PostMapping(value = "/revolut/add-counterparty", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)
-    public RevolutCounterparty addCounterparty(@RequestBody CounterpartyRequestBody body) {
+    public RevolutCounterparty addCounterparty(@RequestBody CounterpartyRequestBody body) throws BadRequestException {
 
-        return revolutCounterpartyService.addCounterparty(body);
+            return counterpartyService.addCounterparty(body);
     }
 
     @GetMapping("/revolut/counterparties")
-    public List<RevolutCounterparty> getCounterparties() {
+    public List<RevolutCounterparty> getCounterparties() throws BadRequestException {
 
-        return revolutCounterpartyService.getCounterparties();
+        return counterpartyService.getCounterparties();
     }
 }

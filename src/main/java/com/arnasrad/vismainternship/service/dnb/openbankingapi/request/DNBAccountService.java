@@ -1,11 +1,11 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.interbankingapi.account.Account;
-import com.arnasrad.vismainternship.model.interbankingapi.account.AccountDetails;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.account.Account;
+import com.arnasrad.vismainternship.model.account.AccountDetails;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
+import com.arnasrad.vismainternship.service.request.AccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,32 +13,30 @@ import java.util.List;
 @Service
 public class DNBAccountService implements AccountService {
 
-    @Value("${constant.dnb-id-uppercase}")
-    private String dnbId;
+    @Override
+    public List<Account> getAccounts() throws NoSuchFunctionalityException {
 
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
-
-    @Autowired
-    public DNBAccountService(ResponseStatusExceptionBuilderService exceptionBuilder) {
-
-        this.exceptionBuilder = exceptionBuilder;
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getAccounts"));
     }
 
     @Override
-    public List<Account> getAccounts() {
+    public Account getAccount(String id) throws NoSuchFunctionalityException {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "getAccounts");
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getAccount"));
     }
 
     @Override
-    public Account getAccount(String id) {
+    public List<AccountDetails> getAccountDetails(String id) throws NoSuchFunctionalityException {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "getAccount");
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getAccountDetails"));
     }
 
     @Override
-    public List<AccountDetails> getAccountDetails(String id) {
+    public String getBankId() {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "getAccountDetails");
+        return BankId.DNB_ID.getBank();
     }
 }

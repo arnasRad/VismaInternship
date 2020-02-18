@@ -1,10 +1,12 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
+import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.card.DNBCard;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.CardService;
+import com.arnasrad.vismainternship.service.request.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -23,23 +25,28 @@ public class DNBCardService implements CardService {
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
     private final JsonMapper jsonMapper;
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
 
     @Autowired
-    public DNBCardService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService, JsonMapper jsonMapper, ResponseStatusExceptionBuilderService exceptionBuilder) {
+    public DNBCardService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService,
+                          JsonMapper jsonMapper) {
 
         this.restTemplate = restTemplate;
         this.dnbRequestBuilderService = dnbRequestBuilderService;
         this.jsonMapper = jsonMapper;
-        this.exceptionBuilder = exceptionBuilder;
     }
 
     @Override
-    public List<DNBCard> getCards() {
+    public List<DNBCard> getCards() throws BadRequestException {
         String jsonResponse = Optional.ofNullable(restTemplate.exchange(cardsEndpoint, HttpMethod.GET,
                 dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> exceptionBuilder.getException400("get-cards"));
+                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getCards")));
 
         return jsonMapper.getObjectListFromString(jsonResponse, DNBCard.class);
+    }
+
+    @Override
+    public String getBankId() {
+
+        return BankId.DNB_ID.getBank();
     }
 }

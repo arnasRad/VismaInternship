@@ -1,8 +1,10 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.TransferService;
+import com.arnasrad.vismainternship.service.request.TransferService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,26 +19,27 @@ public class RevolutTransferService implements TransferService {
     @Value("${revolut.endpoint.transfer}")
     private String transferEndpoint;
 
-    @Value("${constant.revolut-id-uppercase}")
-    private String revolutId;
-
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
 
     @Autowired
-    public RevolutTransferService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, ResponseStatusExceptionBuilderService exceptionBuilder) {
+    public RevolutTransferService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService) {
 
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
-        this.exceptionBuilder = exceptionBuilder;
     }
 
     @Override
-    public String createTransfer(TransferRequestBody body) {
+    public String createTransfer(TransferRequestBody body) throws BadRequestException {
 
         return Optional.ofNullable(restTemplate.postForEntity(transferEndpoint,
                 revolutRequestBuilderService.getTransferRequest(body), String.class).getBody())
-                .orElseThrow(() -> exceptionBuilder.getException400("create-transfer"));
+                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "createTransfer")));
+    }
+
+    @Override
+    public String getBankId() {
+
+        return BankId.REVOLUT_ID.getBank();
     }
 }

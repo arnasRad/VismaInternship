@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.model.revolut.counterparty;
 
-import com.arnasrad.vismainternship.model.interbankingapi.counterparty.Counterparty;
-import com.arnasrad.vismainternship.model.interbankingapi.counterparty.CounterpartyAccount;
+import com.arnasrad.vismainternship.model.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.counterparty.CounterpartyAccount;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

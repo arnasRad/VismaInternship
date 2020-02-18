@@ -1,12 +1,12 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.interbankingapi.payment.Payment;
-import com.arnasrad.vismainternship.model.interbankingapi.payment.Transaction;
+import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
+import com.arnasrad.vismainternship.model.payment.Payment;
+import com.arnasrad.vismainternship.model.payment.Transaction;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
-import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.interbankingapi.request.PaymentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.arnasrad.vismainternship.service.request.PaymentService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,32 +15,31 @@ import java.util.List;
 @Service
 public class DNBPaymentService implements PaymentService {
 
-    @Value("${constant.dnb-id-uppercase}")
-    private String dnbId;
+    @Override
+    public Payment createPayment(CreatePaymentRequestBody body) throws NoSuchFunctionalityException {
 
-    private final ResponseStatusExceptionBuilderService exceptionBuilder;
-
-    @Autowired
-    public DNBPaymentService(ResponseStatusExceptionBuilderService exceptionBuilder) {
-
-        this.exceptionBuilder = exceptionBuilder;
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "createPayment"));
     }
 
     @Override
-    public Payment createPayment(CreatePaymentRequestBody body) {
+    public Transaction getTransaction(String id) throws NoSuchFunctionalityException {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "createPayment");
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getTransaction"));
     }
 
     @Override
-    public Transaction getTransaction(String id) {
+    public List<? extends Transaction> getTransactions(String counterparty, Date from, Date to, Integer count)
+            throws NoSuchFunctionalityException {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "getTransaction");
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "getTransactions"));
     }
 
     @Override
-    public List<? extends Transaction> getTransactions(String counterparty, Date from, Date to, Integer count) {
+    public String getBankId() {
 
-        throw exceptionBuilder.getNoFunctionalityException400(dnbId, "getTransactions");
+        return BankId.DNB_ID.getBank();
     }
 }

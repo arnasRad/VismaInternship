@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.model.revolut.payment;
 
-import com.arnasrad.vismainternship.model.interbankingapi.payment.Transaction;
-import com.arnasrad.vismainternship.model.interbankingapi.payment.TransactionCard;
+import com.arnasrad.vismainternship.model.payment.Transaction;
+import com.arnasrad.vismainternship.model.payment.TransactionCard;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
