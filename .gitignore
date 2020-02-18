@@ -7,6 +7,7 @@ target/
 ### Properties ###
 src/main/resources/application.properties
 src/main/resources/static/certificates/
+!src/main/resources/app.properties
 
 ### Controllers ###
 /src/main/java/com/arnasrad/vismainternship/controller/dnb/
