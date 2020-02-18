@@ -3,6 +3,7 @@ package com.arnasrad.vismainternship.controller;
 import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.TokenServiceFactory;
+import com.arnasrad.vismainternship.service.request.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +21,10 @@ public class TokenController {
     }
 
     @PostMapping("/interbanking/refresh-token")
-    public String refreshToken(@RequestParam String bank, @RequestParam(defaultValue = "") String ssn) throws BadRequestException, NoSuchFunctionalityException {
+    public String refreshToken(@RequestParam String bank, @RequestParam(defaultValue = "") String ssn)
+            throws BadRequestException, NoSuchFunctionalityException {
 
-        return tokenServiceFactory.getService(bank).refreshAndGetToken(ssn);
+        TokenService service = tokenServiceFactory.getService(bank);
+        return service.refreshAndGetToken(ssn);
     }
 }

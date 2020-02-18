@@ -4,6 +4,7 @@ import com.arnasrad.vismainternship.model.account.Account;
 import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.AccountServiceFactory;
+import com.arnasrad.vismainternship.service.request.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +24,10 @@ public class AccountController {
     }
 
     @GetMapping("/interbanking/accounts")
-    public List<? extends Account> getAccounts(@RequestParam String bank) throws BadRequestException, NoSuchFunctionalityException {
+    public List<? extends Account> getAccounts(@RequestParam String bank)
+            throws BadRequestException, NoSuchFunctionalityException {
 
-        return accountServiceFactory.getService(bank).getAccounts();
+        AccountService service = accountServiceFactory.getService(bank);
+        return service.getAccounts();
     }
 }

@@ -29,14 +29,16 @@ public class PaymentController {
     public Payment createPayment(@RequestBody CreatePaymentRequestBody body, @RequestParam String bank)
             throws BadRequestException, NoSuchFunctionalityException {
 
-        return paymentServiceFactory.getService(bank).createPayment(body);
+        PaymentService service = paymentServiceFactory.getService(bank);
+        return service.createPayment(body);
     }
 
     @GetMapping("/interbanking/transaction")
     public Transaction getTransaction(@RequestParam String bank, @RequestParam String id)
             throws BadRequestException, NoSuchFunctionalityException {
 
-        return paymentServiceFactory.getService(bank).getTransaction(id);
+        PaymentService service = paymentServiceFactory.getService(bank);
+        return service.getTransaction(id);
     }
 
     @GetMapping("/interbanking/transactions")
