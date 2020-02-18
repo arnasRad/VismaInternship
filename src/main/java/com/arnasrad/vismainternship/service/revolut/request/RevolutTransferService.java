@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
-import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.request.TransferService;
+import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
+import com.arnasrad.vismainternship.service.interbankingapi.request.TransferService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

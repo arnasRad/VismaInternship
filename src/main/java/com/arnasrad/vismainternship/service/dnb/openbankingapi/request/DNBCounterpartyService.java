@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.Counterparty;
+import com.arnasrad.vismainternship.model.interbankingapi.counterparty.Counterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
-import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.request.CounterpartyService;
+import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
+import com.arnasrad.vismainternship.service.interbankingapi.request.CounterpartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

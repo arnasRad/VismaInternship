@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.Card;
-import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.request.CardService;
+import com.arnasrad.vismainternship.model.interbankingapi.card.Card;
+import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
+import com.arnasrad.vismainternship.service.interbankingapi.request.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

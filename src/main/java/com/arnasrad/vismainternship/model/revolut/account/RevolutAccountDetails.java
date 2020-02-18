@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.model.revolut.account;
 
-import com.arnasrad.vismainternship.model.AccountDetails;
+import com.arnasrad.vismainternship.model.interbankingapi.account.AccountDetails;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

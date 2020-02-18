@@ -30,4 +30,9 @@ public class Dates {
         calendar.add(Calendar.DAY_OF_YEAR, daysFromToday);
         return calendar.getTime();
     }
+
+    public String getDateString(Date date) {
+
+        return simpleDateFormat.format(date);
+    }
 }

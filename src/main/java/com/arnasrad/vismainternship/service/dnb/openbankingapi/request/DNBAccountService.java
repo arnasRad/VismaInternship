@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.Account;
-import com.arnasrad.vismainternship.model.AccountDetails;
-import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
-import com.arnasrad.vismainternship.service.request.AccountService;
+import com.arnasrad.vismainternship.model.interbankingapi.account.Account;
+import com.arnasrad.vismainternship.model.interbankingapi.account.AccountDetails;
+import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
+import com.arnasrad.vismainternship.service.interbankingapi.request.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

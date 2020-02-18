@@ -3,7 +3,7 @@ package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.component.dnb.JwtToken;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
-import com.arnasrad.vismainternship.service.request.TokenService;
+import com.arnasrad.vismainternship.service.interbankingapi.request.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

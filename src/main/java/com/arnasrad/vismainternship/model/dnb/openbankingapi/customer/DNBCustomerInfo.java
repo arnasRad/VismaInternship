@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.model.dnb.openbankingapi.customer;
 
-import com.arnasrad.vismainternship.model.CustomerInfo;
+import com.arnasrad.vismainternship.model.interbankingapi.customer.CustomerInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

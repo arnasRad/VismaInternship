@@ -2,7 +2,7 @@ package com.arnasrad.vismainternship.service.revolut;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.component.revolut.AccessToken;
-import com.arnasrad.vismainternship.service.request.TokenService;
+import com.arnasrad.vismainternship.service.interbankingapi.request.TokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,7 +45,7 @@ public class RefreshAccessTokenService implements TokenService {
     public String refreshToken(String ssn) {
 
         return Optional.ofNullable(restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
-                revolutRequestBuilderService.getJwtRequest(), String.class).getBody()
+                revolutRequestBuilderService.getAccessTokenRequest(), String.class).getBody()
         ).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad token refresh request"));
     }
 

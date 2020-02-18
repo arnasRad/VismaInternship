@@ -2,9 +2,9 @@ package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.card.DNBCard;
-import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
-import com.arnasrad.vismainternship.service.request.CardService;
+import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
+import com.arnasrad.vismainternship.service.interbankingapi.request.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;

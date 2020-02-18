@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.builder;
 
+import com.arnasrad.vismainternship.component.Dates;
 import com.arnasrad.vismainternship.component.IdGenerator;
 import com.arnasrad.vismainternship.component.JsonMapper;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+
+import java.util.Date;
 
 @Service
 public class RevolutRequestBodyBuilderService {
@@ -32,23 +35,37 @@ public class RevolutRequestBodyBuilderService {
 
     private final IdGenerator idGenerator;
     private final JsonMapper jsonMapper;
+    private final Dates dates;
 
     @Autowired
-    public RevolutRequestBodyBuilderService(IdGenerator idGenerator, JsonMapper jsonMapper) {
+    public RevolutRequestBodyBuilderService(IdGenerator idGenerator, JsonMapper jsonMapper, Dates dates) {
+
         this.idGenerator = idGenerator;
         this.jsonMapper = jsonMapper;
+        this.dates = dates;
     }
 
-    public MultiValueMap<String, String> getJwtRequestBody() {
+    public MultiValueMap<String, String> getAccessTokenRequestParams() {
 
-        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-        body.add("grant_type", grantType);
-        body.add("refresh_token", refreshTokenConstant);
-        body.add("client_id", clientId);
-        body.add("client_assertion_type", clientAssertionType);
-        body.add("client_assertion", jwtToken);
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("grant_type", grantType);
+        params.add("refresh_token", refreshTokenConstant);
+        params.add("client_id", clientId);
+        params.add("client_assertion_type", clientAssertionType);
+        params.add("client_assertion", jwtToken);
 
-        return body;
+        return params;
+    }
+
+    public MultiValueMap<String, String> getTransactionsRequestParams(String counterparty, Date from, Date to,
+                                                                      Integer count) {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("counterparty", counterparty);
+        params.add("from", dates.getDateString(from));
+        params.add("to", dates.getDateString(to));
+        params.add("count", String.valueOf(count));
+
+        return params;
     }
 
     public String getCounterpartyRequestBody(CounterpartyRequestBody counterpartyBody) {

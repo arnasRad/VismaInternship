@@ -9,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
+import java.util.Date;
+
 @Service
 public class RevolutRequestBuilderService {
 
@@ -27,10 +29,19 @@ public class RevolutRequestBuilderService {
         return new HttpEntity<>(revolutHeaderBuilderService.getAuthorizedHeaders());
     }
 
-    public HttpEntity<MultiValueMap<String, String>> getJwtRequest() {
+    public HttpEntity<MultiValueMap<String, String>> getAccessTokenRequest() {
 
-        MultiValueMap<String, String> body = revolutRequestBodyBuilderService.getJwtRequestBody();
+        MultiValueMap<String, String> body = revolutRequestBodyBuilderService.getAccessTokenRequestParams();
         HttpHeaders headers = revolutHeaderBuilderService.getHttpHeaders();
+        return new HttpEntity<>(body, headers);
+    }
+
+    public HttpEntity<MultiValueMap<String, String>> getTransactionsRequest(String counterparty, Date from, Date to,
+                                                                            Integer count) {
+
+        MultiValueMap<String, String> body =
+                revolutRequestBodyBuilderService.getTransactionsRequestParams(counterparty, from, to, count);
+        HttpHeaders headers = revolutHeaderBuilderService.getAuthorizedHeaders();
         return new HttpEntity<>(body, headers);
     }
 

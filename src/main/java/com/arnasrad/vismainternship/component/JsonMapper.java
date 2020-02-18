@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.component;
 
-import com.arnasrad.vismainternship.service.ResponseStatusExceptionBuilderService;
+import com.arnasrad.vismainternship.service.interbankingapi.ResponseStatusExceptionBuilderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
