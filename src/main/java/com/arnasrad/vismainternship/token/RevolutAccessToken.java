@@ -10,7 +10,7 @@ public class RevolutAccessToken {
     private String token;
 
     @Autowired
-    private RevolutAccessToken(@Value("${revolut.sandbox.constant.accesstoken}") final String accessToken) {
+    private RevolutAccessToken(@Value("${revolut.sandbox.constant.accessToken}") final String accessToken) {
 
         this.token = accessToken;
     }

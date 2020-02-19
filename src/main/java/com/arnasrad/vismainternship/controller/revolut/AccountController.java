@@ -22,11 +22,6 @@ public class AccountController {
         this.revolutAccountService = revolutAccountService;
     }
 
-    @GetMapping("/")
-    public String mainPage() {
-        return "Welcome to Visma Open Banking API!";
-    }
-
     @GetMapping("/revolut/accounts")
     public List<? extends Account> getAccounts() throws BadRequestException {
 
