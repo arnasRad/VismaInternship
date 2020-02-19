@@ -15,6 +15,8 @@ public class AccountDetails {
     private String accountNo;
 
     private String iban;
+
+    // TODO: @ElementCollection
     private String[] schemas;
 
     @JsonProperty("bank_country")

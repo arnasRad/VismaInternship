@@ -13,11 +13,11 @@ public class DNBCustomerInfo extends CustomerInfo {
     public DNBCustomerInfo() {
     }
 
-    public DNBCustomerInfo(String customerId, String firstName, String lastName, Address address, String phone,
+    public DNBCustomerInfo(String customerId, String firstName, String lastName, DNBCustomerAddress DNBCustomerAddress, String phone,
                            String email, String countryOfBirth, String customerType, Citizenship[] citizenship,
                            CountryTax[] countryTax) {
 
-        super(customerId, firstName, lastName, address, phone, email, countryOfBirth);
+        super(customerId, firstName, lastName, DNBCustomerAddress, phone, email, countryOfBirth);
         this.customerType = customerType;
         this.citizenship = citizenship;
         this.countryTax = countryTax;

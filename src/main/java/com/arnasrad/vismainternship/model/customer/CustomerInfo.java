@@ -1,10 +1,12 @@
 package com.arnasrad.vismainternship.model.customer;
 
-import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.Address;
+import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerAddress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -14,6 +16,7 @@ public class CustomerInfo {
     private String customerId;
     private String firstName;
     private String lastName;
+    @ManyToOne
     private Address address;
     private String phone;
     private String email;
@@ -22,7 +25,7 @@ public class CustomerInfo {
     public CustomerInfo() {
     }
 
-    public CustomerInfo(String customerId, String firstName, String lastName, Address address, String phone,
+    public CustomerInfo(String customerId, String firstName, String lastName, DNBCustomerAddress address, String phone,
                         String email, String countryOfBirth) {
 
         this.customerId = customerId;

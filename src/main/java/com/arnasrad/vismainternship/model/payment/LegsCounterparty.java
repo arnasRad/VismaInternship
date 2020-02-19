@@ -3,10 +3,12 @@ package com.arnasrad.vismainternship.model.payment;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
+@Embeddable
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LegsCounterparty {
 
