@@ -2,9 +2,14 @@ package com.arnasrad.vismainternship.model.account;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Account {
 
+    @Id
     private String id;
     private String name;
     private Double balance;
@@ -40,5 +45,14 @@ public class Account {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }

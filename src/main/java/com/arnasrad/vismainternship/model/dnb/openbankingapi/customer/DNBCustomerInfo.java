@@ -8,20 +8,18 @@ public class DNBCustomerInfo extends CustomerInfo {
 
     private String customerType;
     private Citizenship[] citizenship;
-    private String customerId;
     private CountryTax[] countryTax;
 
     public DNBCustomerInfo() {
     }
 
-    public DNBCustomerInfo(String firstName, String lastName, Address address, String phone, String email,
-                           String countryOfBirth, String customerType, Citizenship[] citizenship, String customerId,
+    public DNBCustomerInfo(String customerId, String firstName, String lastName, Address address, String phone,
+                           String email, String countryOfBirth, String customerType, Citizenship[] citizenship,
                            CountryTax[] countryTax) {
 
-        super(firstName, lastName, address, phone, email, countryOfBirth);
+        super(customerId, firstName, lastName, address, phone, email, countryOfBirth);
         this.customerType = customerType;
         this.citizenship = citizenship;
-        this.customerId = customerId;
         this.countryTax = countryTax;
     }
 
@@ -39,14 +37,6 @@ public class DNBCustomerInfo extends CustomerInfo {
 
     public void setCitizenship(Citizenship[] citizenship) {
         this.citizenship = citizenship;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
     }
 
     public CountryTax[] getCountryTax() {

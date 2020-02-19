@@ -3,9 +3,14 @@ package com.arnasrad.vismainternship.model.payment;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LegsCounterparty {
 
+    @Id
     private String id;
     @JsonProperty("account_id")
     private String accountId;

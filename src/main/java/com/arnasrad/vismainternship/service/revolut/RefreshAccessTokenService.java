@@ -1,12 +1,12 @@
 package com.arnasrad.vismainternship.service.revolut;
 
-import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
-import com.arnasrad.vismainternship.token.RevolutAccessToken;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.BadRequestException;
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.TokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
+import com.arnasrad.vismainternship.token.RevolutAccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;

@@ -2,11 +2,16 @@ package com.arnasrad.vismainternship.model.customer;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Customer {
 
-    private String customerName;
+    @Id
     private String ssn;
+    private String customerName;
 
     public Customer() {
     }

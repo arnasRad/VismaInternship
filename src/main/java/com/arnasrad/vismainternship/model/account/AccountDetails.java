@@ -3,14 +3,19 @@ package com.arnasrad.vismainternship.model.account;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountDetails {
 
-    private String iban;
-    private String[] schemas;
-
+    @Id
     @JsonProperty("account_no")
     private String accountNo;
+
+    private String iban;
+    private String[] schemas;
 
     @JsonProperty("bank_country")
     private String bankCountry;

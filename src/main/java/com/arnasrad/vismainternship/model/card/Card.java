@@ -2,11 +2,16 @@ package com.arnasrad.vismainternship.model.card;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Card {
 
-    private String customerId;
+    @Id
     private String cardId;
+    private String customerId;
     private String accountNumber;
     private String creditBalance;
     private String debitBalance;

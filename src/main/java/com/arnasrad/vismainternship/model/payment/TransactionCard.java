@@ -3,9 +3,18 @@ package com.arnasrad.vismainternship.model.payment;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransactionCard {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     @JsonProperty("card_number")
     private String cardNumber;
     @JsonProperty("first_name")
@@ -18,10 +27,19 @@ public class TransactionCard {
     }
 
     public TransactionCard(String cardNumber, String firstName, String lastName, String phone) {
+
         this.cardNumber = cardNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCardNumber() {
