@@ -3,7 +3,10 @@ package com.arnasrad.vismainternship.model.payment;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -17,10 +20,7 @@ public class TransactionLegs {
     @JsonProperty("account_id")
     private String accountId;
 
-//    @AttributeOverride(name = "id", column = @Column(name = "counterparty_id"))
-//    @AttributeOverride(name = "accountNo", column = @Column(name = "counterparty_account_no"))
-//    @AttributeOverride(name = "type", column = @Column(name = "counterparty_type"))
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private LegsCounterparty counterparty;
     private String description;
     private Double balance;

@@ -7,6 +7,9 @@ import com.arnasrad.vismainternship.model.payment.Transaction;
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutTransaction;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
+import com.arnasrad.vismainternship.persistence.payment.PaymentRepository;
+import com.arnasrad.vismainternship.persistence.payment.TransactionLegsRepository;
+import com.arnasrad.vismainternship.persistence.payment.TransactionRepository;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.PaymentService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
@@ -35,13 +38,20 @@ public class RevolutPaymentService implements PaymentService {
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final JsonMapperService jsonMapperService;
+    private final PaymentRepository paymentRepository;
+    private final TransactionRepository transactionRepository;
 
     @Autowired
-    public RevolutPaymentService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, JsonMapperService jsonMapperService) {
+    public RevolutPaymentService(RestTemplate restTemplate,
+                                 RevolutRequestBuilderService revolutRequestBuilderService,
+                                 JsonMapperService jsonMapperService, PaymentRepository paymentRepository,
+                                 TransactionRepository transactionRepository) {
 
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
         this.jsonMapperService = jsonMapperService;
+        this.paymentRepository = paymentRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     @Override
@@ -51,7 +61,12 @@ public class RevolutPaymentService implements PaymentService {
                 revolutRequestBuilderService.getPaymentRequest(body), String.class).getBody())
                 .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "createPayment")));
 
-        return jsonMapperService.getObjectFromString(jsonResponse, RevolutPayment.class);
+        RevolutPayment payment = jsonMapperService.getObjectFromString(jsonResponse, RevolutPayment.class);
+        RevolutTransaction transaction = (RevolutTransaction) getTransaction(payment.getId());
+
+        paymentRepository.save(payment);
+        transactionRepository.save(transaction);
+        return payment;
     }
 
     @Override

@@ -4,8 +4,10 @@ import com.arnasrad.vismainternship.model.payment.Payment;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutPayment extends Payment {
 

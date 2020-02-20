@@ -59,6 +59,7 @@ public class RevolutRequestBodyBuilderService {
 
     public MultiValueMap<String, String> getTransactionsRequestParams(String counterparty, Date from, Date to,
                                                                       Integer count) {
+
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("counterparty", counterparty);
         params.add("from", datesService.getDateString(from));

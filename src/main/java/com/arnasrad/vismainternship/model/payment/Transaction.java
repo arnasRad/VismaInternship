@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
 
+//@MappedSuperclass
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Transaction {

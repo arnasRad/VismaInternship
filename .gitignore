@@ -4,6 +4,9 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+### Database ###
+/data/
+
 ### Properties ###
 src/main/resources/application.properties
 src/main/resources/static/certificates/
