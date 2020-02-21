@@ -1,8 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
@@ -10,12 +8,13 @@ import com.arnasrad.vismainternship.service.request.CounterpartyService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RevolutCounterpartyService implements CounterpartyService {
@@ -39,23 +38,27 @@ public class RevolutCounterpartyService implements CounterpartyService {
     }
 
     @Override
-    public RevolutCounterparty addCounterparty(CounterpartyRequestBody body) throws BadRequestException {
+    public RevolutCounterparty addCounterparty(CounterpartyRequestBody body) {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(counterpartyEndpoint,
-                revolutRequestBuilderService.getCounterpartyRequest(body), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
-                        "getCounterparty")));
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getCounterpartyRequest(body);
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(counterpartyEndpoint,
+                authorizedHttpEntity, String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectFromString(jsonResponse, RevolutCounterparty.class);
     }
 
     @Override
-    public List<RevolutCounterparty> getCounterparties() throws BadRequestException {
+    public List<RevolutCounterparty> getCounterparties() {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(counterpartiesEndpoint, HttpMethod.GET,
-                revolutRequestBuilderService.getCounterpartiesRequest(), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
-                        "getCounterparties")));
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getCounterpartiesRequest();
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(counterpartiesEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectListFromString(jsonResponse, RevolutCounterparty.class);
     }

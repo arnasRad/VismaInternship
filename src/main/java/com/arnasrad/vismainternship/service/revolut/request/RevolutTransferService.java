@@ -1,17 +1,15 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
 import com.arnasrad.vismainternship.service.request.TransferService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Optional;
 
 @Service
 public class RevolutTransferService implements TransferService {
@@ -30,11 +28,14 @@ public class RevolutTransferService implements TransferService {
     }
 
     @Override
-    public String createTransfer(TransferRequestBody body) throws BadRequestException {
+    public String createTransfer(TransferRequestBody body) {
 
-        return Optional.ofNullable(restTemplate.postForEntity(transferEndpoint,
-                revolutRequestBuilderService.getTransferRequest(body), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "createTransfer")));
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getTransferRequest(body);
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(transferEndpoint, authorizedHttpEntity,
+                String.class);
+
+        return responseEntity.getBody();
     }
 
     @Override

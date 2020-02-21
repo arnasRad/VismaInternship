@@ -1,20 +1,19 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.card.DNBCard;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DNBCardService implements CardService {
@@ -36,10 +35,14 @@ public class DNBCardService implements CardService {
     }
 
     @Override
-    public List<DNBCard> getCards() throws BadRequestException {
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(cardsEndpoint, HttpMethod.GET,
-                dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getCards")));
+    public List<DNBCard> getCards() {
+
+        HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(cardsEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectListFromString(jsonResponse, DNBCard.class);
     }

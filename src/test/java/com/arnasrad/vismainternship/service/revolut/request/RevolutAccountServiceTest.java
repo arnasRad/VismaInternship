@@ -1,39 +1,36 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
-import org.junit.jupiter.api.BeforeAll;
+import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class RevolutAccountServiceTest {
 
-    @Value("${revolut.endpoint.accounts}")
     private String accountsEndpoint;
-
-    private final JsonMapperService jsonMapperService;
-
-    @Autowired
-    public RevolutAccountServiceTest(JsonMapperService jsonMapperService) {
-        this.jsonMapperService = jsonMapperService;
-    }
 
     @InjectMocks
     private RevolutAccountService revolutAccountService;
@@ -42,49 +39,90 @@ class RevolutAccountServiceTest {
     private RestTemplate restTemplate;
 
     @Mock
-    Date date;
+    private RevolutRequestBuilderService revolutRequestBuilderService;
 
-    @BeforeAll
-    static void setup() {
+    @Mock
+    private JsonMapperService jsonMapperService;
+
+    @Mock
+    private HttpEntity<String> stringHttpEntityMock;
+
+    @Mock
+    private ResponseEntity<String> stringResponseEntityMock;
+
+    @BeforeEach
+    void init() {
+
         MockitoAnnotations.initMocks(RevolutAccountServiceTest.class);
+        this.accountsEndpoint = "https://sandbox-b2b.revolut.com/api/1.0/accounts";
+        this.revolutAccountService.setAccountsEndpoint(accountsEndpoint);
     }
 
     @Test
-    public void whenResponseReturnsAccountListJsonString_thengetAccountsReturnsListOfAccounts() throws BadRequestException {
+    public void whenAllMethodsExecutesOnce_thenGetAccountsReturnsListOfAccounts()
+            {
 
         String testAccounts = getTestAccountsString();
 
-//        when(restTemplate.exchange(
-//                eq(accountsEndpoint),
-//                eq(HttpMethod.GET), any(HttpEntity.class), eq(String.class)).getBody()).thenReturn(testAccounts);
+        when(revolutRequestBuilderService.getAuthorizedRequest()).thenReturn(stringHttpEntityMock);
 
-        when(restTemplate.exchange(
-                accountsEndpoint,
-                HttpMethod.GET, mock(HttpEntity.class), String.class).getBody()).thenReturn(testAccounts);
+        when(restTemplate.exchange(accountsEndpoint, HttpMethod.GET, stringHttpEntityMock,
+                String.class)).thenReturn(stringResponseEntityMock);
 
-        List<RevolutAccount> expectedAccounts = getTestAccounts();
+        when(stringResponseEntityMock.getBody()).thenReturn(testAccounts);
+
+        when(jsonMapperService.getObjectListFromString(testAccounts, RevolutAccount.class))
+                .thenReturn(Arrays.asList(mock(RevolutAccount.class), mock(RevolutAccount.class)));
+
         List<RevolutAccount> actualAccounts = revolutAccountService.getAccounts();
 
-        assertEquals(expectedAccounts, actualAccounts);
+        verify(revolutRequestBuilderService, times(1)).getAuthorizedRequest();
+        verify(restTemplate, times(1)).exchange(accountsEndpoint, HttpMethod.GET, stringHttpEntityMock,
+                String.class);
+        verify(stringResponseEntityMock, times(1)).getBody();
+        verify(jsonMapperService, times(1)).getObjectListFromString(testAccounts, RevolutAccount.class);
+
+        assertNotEquals(0, actualAccounts.size());
     }
 
-//    private List<RevolutAccount> getTestAccounts() {
-//
-//        List<RevolutAccount> accountList = new ArrayList<>();
-//
-//        for(int i = 0; i < 10; ++i) {
-//
-//            accountList.add(mock(RevolutAccount.class));
-////            accountList.add(new RevolutAccount(anyString(), anyString(), anyDouble(), anyString(),
-////                    anyString(), anyBoolean(), any(Date.class), any(Date.class)));
-//        }
-//
-//        return accountList;
-//    }
+    @Test
+    public void whenResponseReturnsAccountListJsonString_thenGetAccountsReturnsListOfAccounts() throws ParseException {
 
-    private List<RevolutAccount> getTestAccounts() {
+        String testAccounts = getTestAccountsString();
+        List<RevolutAccount> testAccountList = getTestAccounts();
 
-        return jsonMapperService.getObjectListFromString(getTestAccountsString(), RevolutAccount.class);
+        when(revolutRequestBuilderService.getAuthorizedRequest()).thenReturn(stringHttpEntityMock);
+
+        when(restTemplate.exchange(accountsEndpoint, HttpMethod.GET, stringHttpEntityMock,
+                String.class)).thenReturn(stringResponseEntityMock);
+
+        when(stringResponseEntityMock.getBody()).thenReturn(testAccounts);
+
+        when(jsonMapperService.getObjectListFromString(testAccounts, RevolutAccount.class)).thenReturn(testAccountList);
+
+        List<RevolutAccount> expectedAccounts = new ArrayList<>(testAccountList);
+        List<RevolutAccount> actualAccounts = revolutAccountService.getAccounts();
+
+        assertThat(actualAccounts, is(expectedAccounts));
+    }
+
+    private List<RevolutAccount> getTestAccounts() throws ParseException {
+
+        StdDateFormat formatter = new StdDateFormat().withColonInTimeZone(true);
+        List<RevolutAccount> accountList = new ArrayList<>();
+
+        accountList.add(new RevolutAccount("5f47cde3-05fa-44b1-959a-2c60447a3094", "Main", 28577.39, "GBP", "active",
+                true, formatter.parse("2020-02-04T09:19:23.465+00:00"), formatter.parse("2020-02-18T06:14:04.640+00:00")));
+        accountList.add(new RevolutAccount("65462d79-2613-4f5e-97fd-7c7d1572d4bf", "Business trips", 14700.0, "USD",
+                "active", true, formatter.parse("2020-02-04T09:19:23.465+00:00"), formatter.parse("2020-02-04T09:19" +
+                ":23.549+00:00")));
+        accountList.add(new RevolutAccount("8bed66e7-db72-4096-be39-58460375171a", "Payments", 5300.0, "AUD",
+                "active", false, formatter.parse("2020-02-04T09:19:23.540+00:00"), formatter.parse("2020-02-04T09:19:23.540+00:00")));
+        accountList.add(new RevolutAccount("14949f04-d50a-437f-ac41-a1cc45bbf721",  "European suppliers", 3445.0,
+                "EUR", "active",  true, formatter.parse("2020-02-04T09:19:23.465+00:00"), formatter.parse("2020-02" +
+                "-04T09:23:50.927+00:00")));
+
+        return accountList;
     }
 
     private String getTestAccountsString() {
@@ -132,6 +170,4 @@ class RevolutAccountServiceTest {
                 "    }\n" +
                 "]";
     }
-
-//    private class RestTemplateExchangeMatcher implements ArgumentMatcher<>
 }

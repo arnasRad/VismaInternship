@@ -1,18 +1,16 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 
-import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.TokenService;
 import com.arnasrad.vismainternship.token.DnbJwtToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Optional;
 
 @Service
 public class RefreshJwtTokenService implements TokenService {
@@ -35,20 +33,23 @@ public class RefreshJwtTokenService implements TokenService {
     }
 
     @Override
-    public String refreshAndGetToken(String ssn) throws BadRequestException {
+    public String refreshAndGetToken(String ssn) {
 
-        String jsonResponse = refreshToken(ssn);
-        return setNewToken(jsonResponse);
+        String jsonResponse = getRefreshTokenJsonResponse(ssn);
+        return refreshToken(jsonResponse);
     }
 
-    private String refreshToken(String ssn) throws BadRequestException{
+    private String getRefreshTokenJsonResponse(String ssn){
 
-        return Optional.ofNullable(restTemplate.postForEntity(accessTokenEndpoint,
-                dnbRequestBuilderService.getRequest(ssn), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "refreshToken")));
+        HttpEntity<String> httpEntity = dnbRequestBuilderService.getRequest(ssn);
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(accessTokenEndpoint, httpEntity,
+                String.class);
+
+        return responseEntity.getBody();
     }
 
-    private String setNewToken(String jsonResponse) {
+    private String refreshToken(String jsonResponse) {
 
         String token = jsonMapperService.getFieldFromResponse(jsonResponse, "jwtToken");
         dnbJwtToken.setToken(token);

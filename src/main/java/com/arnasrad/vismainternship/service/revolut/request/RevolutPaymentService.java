@@ -1,27 +1,26 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.model.payment.Transaction;
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutTransaction;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.persistence.payment.PaymentRepository;
-import com.arnasrad.vismainternship.persistence.payment.TransactionLegsRepository;
 import com.arnasrad.vismainternship.persistence.payment.TransactionRepository;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.PaymentService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RevolutPaymentService implements PaymentService {
@@ -55,11 +54,14 @@ public class RevolutPaymentService implements PaymentService {
     }
 
     @Override
-    public RevolutPayment createPayment(CreatePaymentRequestBody body) throws BadRequestException {
+    public RevolutPayment createPayment(CreatePaymentRequestBody body) {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.postForEntity(paymentEndpoint,
-                revolutRequestBuilderService.getPaymentRequest(body), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "createPayment")));
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getPaymentRequest(body);
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(paymentEndpoint, authorizedHttpEntity,
+                String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         RevolutPayment payment = jsonMapperService.getObjectFromString(jsonResponse, RevolutPayment.class);
         RevolutTransaction transaction = (RevolutTransaction) getTransaction(payment.getId());
@@ -70,23 +72,28 @@ public class RevolutPaymentService implements PaymentService {
     }
 
     @Override
-    public Transaction getTransaction(String id) throws BadRequestException {
+    public Transaction getTransaction(String id) {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(transactionEndpoint.concat(id),
-                HttpMethod.GET, revolutRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
-                        "getTransaction")));
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(transactionEndpoint.concat(id), HttpMethod.GET
+                , authorizedHttpEntity, String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectFromString(jsonResponse, RevolutTransaction.class);
     }
 
     @Override
-    public List<? extends Transaction> getTransactions(String counterparty, Date from, Date to, Integer count) throws BadRequestException {
+    public List<? extends Transaction> getTransactions(String counterparty, Date from, Date to, Integer count) {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(transactionsEndpoint, HttpMethod.GET,
-                revolutRequestBuilderService.getTransactionsRequest(counterparty, from, to, count), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
-                        "getTransactions")));
+        HttpEntity<MultiValueMap<String, String>> authorizedHttpEntity =
+                revolutRequestBuilderService.getTransactionsRequest(counterparty, from, to, count);
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(transactionsEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectListFromString(jsonResponse, RevolutTransaction.class);
     }

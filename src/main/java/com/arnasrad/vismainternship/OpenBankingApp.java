@@ -23,6 +23,7 @@ public class OpenBankingApp {
     @Bean
     public CommandLineRunner demo(AccountRepository repository) {
         return (args) -> {
+            // TODO: move to integration test
             // save a few Accounts
             repository.save(new Account("123", "Bauer", 10.01));
             repository.save(new Account("1234", "O'Brian", 10.02));

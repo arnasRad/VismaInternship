@@ -1,19 +1,18 @@
 package com.arnasrad.vismainternship.service.revolut;
 
-import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.TokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import com.arnasrad.vismainternship.token.RevolutAccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Optional;
 
 @Service
 public class RefreshAccessTokenService implements TokenService {
@@ -37,17 +36,20 @@ public class RefreshAccessTokenService implements TokenService {
     }
 
     @Override
-    public String refreshAndGetToken(String ssn) throws BadRequestException {
+    public String refreshAndGetToken(String ssn) {
 
         String jsonResponse = refreshToken();
         return setNewToken(jsonResponse);
     }
 
-    private String refreshToken() throws BadRequestException {
+    private String refreshToken() {
 
-        return Optional.ofNullable(restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
-                revolutRequestBuilderService.getAccessTokenRequest(), String.class).getBody()
-        ).orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "refreshToken")));
+        HttpEntity<MultiValueMap<String, String>> httpEntity = revolutRequestBuilderService.getAccessTokenRequest();
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST, httpEntity
+                , String.class);
+
+        return responseEntity.getBody();
     }
 
     private String setNewToken(String jsonResponse) {

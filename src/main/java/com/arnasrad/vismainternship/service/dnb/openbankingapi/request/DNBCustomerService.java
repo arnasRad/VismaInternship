@@ -1,21 +1,20 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomer;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerInfo;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DNBCustomerService implements CustomerService {
@@ -43,33 +42,40 @@ public class DNBCustomerService implements CustomerService {
     }
 
     @Override
-    public List<DNBCustomer> getCustomers()  throws BadRequestException {
+    public List<DNBCustomer> getCustomers()  {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(customersEndpoint, HttpMethod.GET,
-                dnbRequestBuilderService.getRequest(), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST, "getCustomers")));
+        HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getRequest();
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(customersEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectListFromString(jsonResponse, DNBCustomer.class);
     }
 
     @Override
-    public DNBCustomerInfo getCurrentCustomerInfo()  throws BadRequestException {
+    public DNBCustomerInfo getCurrentCustomerInfo()  {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(currentCustomerInfoEndpoint, HttpMethod.GET,
-                dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
-                        "getCurrentCustomerInfo")));
+        HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(currentCustomerInfoEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
     }
 
     @Override
-    public DNBCustomerInfo getCustomerInfo(String ssn)  throws BadRequestException {
+    public DNBCustomerInfo getCustomerInfo(String ssn)  {
 
-        String jsonResponse = Optional.ofNullable(restTemplate.exchange(customerInfoEndpoint + ssn, HttpMethod.GET,
-                dnbRequestBuilderService.getAuthorizedRequest(), String.class).getBody())
-                .orElseThrow(() -> new BadRequestException(String.format(ErrorMessages.BAD_REQUEST,
-                        "getCustomerInfo")));
+        HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(customerInfoEndpoint.concat(ssn), HttpMethod.GET,
+                authorizedHttpEntity, String.class);
+
+        String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
     }
