@@ -1,21 +1,22 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
+import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class DNBCustomerServiceTest {
 
-    @Value("${dnb.openbanking.endpoint.customers}")
     private String customersEndpoint;
-
-    @Value("${dnb.openbanking.endpoint.customer-info}")
     private String customerInfoEndpoint;
-
-    @Value("${dnb.openbanking.endpoint.current-customer-info}")
     private String currentCustomerInfoEndpoint;
 
     @InjectMocks
@@ -23,5 +24,29 @@ class DNBCustomerServiceTest {
 
     @Mock
     private RestTemplate restTemplate;
+
+    @Mock
+    private RevolutRequestBuilderService revolutRequestBuilderService;
+
+    @Mock
+    private JsonMapperService jsonMapperService;
+
+    @Mock
+    private HttpEntity<String> stringHttpEntityMock;
+
+    @Mock
+    private ResponseEntity<String> stringResponseEntityMock;
+
+    @BeforeEach
+    void init() {
+
+        MockitoAnnotations.initMocks(DNBCustomerServiceTest.class);
+        this.customersEndpoint = "https://developer-api-testmode.dnb.no/test-customers/v0";
+        this.customerInfoEndpoint = "https://developer-api-testmode.dnb.no/customers/v0/current";
+        this.currentCustomerInfoEndpoint = "https://developer-api-testmode.dnb.no/customers/v0/";
+        this.dnbCustomerService.setCustomersEndpoint(customersEndpoint);
+        this.dnbCustomerService.setCustomerInfoEndpoint(customerInfoEndpoint);
+        this.dnbCustomerService.setCurrentCustomerInfoEndpoint(currentCustomerInfoEndpoint);
+    }
 
 }

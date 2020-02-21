@@ -1,15 +1,20 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
+import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
+import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class DNBCardServiceTest {
 
-    @Value("${dnb.openbanking.endpoint.cards}")
     private String cardsEndpoint;
 
     @InjectMocks
@@ -17,5 +22,25 @@ class DNBCardServiceTest {
 
     @Mock
     private RestTemplate restTemplate;
+
+    @Mock
+    private RevolutRequestBuilderService revolutRequestBuilderService;
+
+    @Mock
+    private JsonMapperService jsonMapperService;
+
+    @Mock
+    private HttpEntity<String> stringHttpEntityMock;
+
+    @Mock
+    private ResponseEntity<String> stringResponseEntityMock;
+
+    @BeforeEach
+    void init() {
+
+        MockitoAnnotations.initMocks(DNBCardServiceTest.class);
+        this.cardsEndpoint = "https://developer-api-testmode.dnb.no/cards/v0/";
+        this.dnbCardService.setCardsEndpoint(cardsEndpoint);
+    }
 
 }

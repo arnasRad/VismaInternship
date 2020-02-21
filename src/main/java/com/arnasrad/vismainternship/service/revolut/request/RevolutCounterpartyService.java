@@ -63,6 +63,14 @@ public class RevolutCounterpartyService implements CounterpartyService {
         return jsonMapperService.getObjectListFromString(jsonResponse, RevolutCounterparty.class);
     }
 
+    public void setCounterpartyEndpoint(String counterpartyEndpoint) {
+        this.counterpartyEndpoint = counterpartyEndpoint;
+    }
+
+    public void setCounterpartiesEndpoint(String counterpartiesEndpoint) {
+        this.counterpartiesEndpoint = counterpartiesEndpoint;
+    }
+
     @Override
     public String getBankId() {
 

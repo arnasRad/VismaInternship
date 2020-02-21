@@ -59,6 +59,10 @@ public class RefreshAccessTokenService implements TokenService {
         return token;
     }
 
+    public void setRefreshTokenEndpoint(String refreshTokenEndpoint) {
+        this.refreshTokenEndpoint = refreshTokenEndpoint;
+    }
+
     @Override
     public String getBankId() {
 

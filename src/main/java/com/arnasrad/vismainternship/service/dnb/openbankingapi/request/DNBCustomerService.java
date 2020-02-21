@@ -80,6 +80,18 @@ public class DNBCustomerService implements CustomerService {
         return jsonMapperService.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
     }
 
+    public void setCustomersEndpoint(String customersEndpoint) {
+        this.customersEndpoint = customersEndpoint;
+    }
+
+    public void setCurrentCustomerInfoEndpoint(String currentCustomerInfoEndpoint) {
+        this.currentCustomerInfoEndpoint = currentCustomerInfoEndpoint;
+    }
+
+    public void setCustomerInfoEndpoint(String customerInfoEndpoint) {
+        this.customerInfoEndpoint = customerInfoEndpoint;
+    }
+
     @Override
     public String getBankId() {
 

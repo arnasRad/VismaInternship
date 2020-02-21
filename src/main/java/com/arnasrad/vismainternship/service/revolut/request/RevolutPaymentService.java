@@ -98,6 +98,18 @@ public class RevolutPaymentService implements PaymentService {
         return jsonMapperService.getObjectListFromString(jsonResponse, RevolutTransaction.class);
     }
 
+    public void setPaymentEndpoint(String paymentEndpoint) {
+        this.paymentEndpoint = paymentEndpoint;
+    }
+
+    public void setTransactionEndpoint(String transactionEndpoint) {
+        this.transactionEndpoint = transactionEndpoint;
+    }
+
+    public void setTransactionsEndpoint(String transactionsEndpoint) {
+        this.transactionsEndpoint = transactionsEndpoint;
+    }
+
     @Override
     public String getBankId() {
 

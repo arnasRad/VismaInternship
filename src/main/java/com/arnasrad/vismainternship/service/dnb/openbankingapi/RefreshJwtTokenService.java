@@ -56,6 +56,10 @@ public class RefreshJwtTokenService implements TokenService {
         return token;
     }
 
+    public void setAccessTokenEndpoint(String accessTokenEndpoint) {
+        this.accessTokenEndpoint = accessTokenEndpoint;
+    }
+
     @Override
     public String getBankId() {
 

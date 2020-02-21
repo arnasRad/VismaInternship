@@ -47,6 +47,10 @@ public class DNBCardService implements CardService {
         return jsonMapperService.getObjectListFromString(jsonResponse, DNBCard.class);
     }
 
+    public void setCardsEndpoint(String cardsEndpoint) {
+        this.cardsEndpoint = cardsEndpoint;
+    }
+
     @Override
     public String getBankId() {
 

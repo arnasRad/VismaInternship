@@ -38,6 +38,10 @@ public class RevolutTransferService implements TransferService {
         return responseEntity.getBody();
     }
 
+    public void setTransferEndpoint(String transferEndpoint) {
+        this.transferEndpoint = transferEndpoint;
+    }
+
     @Override
     public String getBankId() {
 
