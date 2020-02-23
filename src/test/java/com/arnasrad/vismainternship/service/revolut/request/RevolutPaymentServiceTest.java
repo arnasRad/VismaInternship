@@ -3,6 +3,7 @@ package com.arnasrad.vismainternship.service.revolut.request;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -12,6 +13,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RevolutPaymentServiceTest {

@@ -19,14 +19,13 @@ public class RevolutCounterpartyAccount extends CounterpartyAccount {
     public RevolutCounterpartyAccount() {
     }
 
-    public RevolutCounterpartyAccount(String id, String currency, String type, String accountNo, String iban, String sortCode, String routingNumber, String bic, String recipientCharges) {
-
+    public RevolutCounterpartyAccount(String id, String currency, String type, String accountNo) {
         super(id, currency, type, accountNo);
-        this.iban = iban;
-        this.sortCode = sortCode;
-        this.routingNumber = routingNumber;
-        this.bic = bic;
-        this.recipientCharges = recipientCharges;
+    }
+
+    public RevolutCounterpartyAccount(String id, String currency, String type) {
+
+        super(id, currency, type);
     }
 
     public String getIban() {

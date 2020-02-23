@@ -3,8 +3,8 @@ package com.arnasrad.vismainternship.service.revolut.request;
 import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
-import com.arnasrad.vismainternship.service.revolut.testdata.RevolutTestData;
-import com.fasterxml.jackson.databind.util.StdDateFormat;
+import com.arnasrad.vismainternship.service.revolut.testdata.RevolutObjectTestData;
+import com.arnasrad.vismainternship.service.revolut.testdata.RevolutStringTestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -59,10 +59,9 @@ class RevolutAccountServiceTest {
     }
 
     @Test
-    public void whenAllMethodsExecutesOnce_thenGetAccountsReturnsListOfAccounts()
-            {
+    public void whenAllMethodsExecutesOnce_thenGetAccountsReturnsListOfAccounts() {
 
-        String testAccounts = RevolutTestData.getTestAccountsString();
+        String testAccounts = RevolutStringTestData.getAccountsString();
 
         when(revolutRequestBuilderService.getAuthorizedRequest()).thenReturn(stringHttpEntityMock);
 
@@ -86,10 +85,10 @@ class RevolutAccountServiceTest {
     }
 
     @Test
-    public void whenResponseReturnsAccountListJsonString_thenGetAccountsReturnsListOfAccounts() throws ParseException {
+    public void whenResponseReturnsAccountListJsonString_thenGetAccountsReturnsListOfAccounts() {
 
-        String testAccounts = RevolutTestData.getTestAccountsString();
-        List<RevolutAccount> testAccountList = RevolutTestData.getTestAccounts();
+        String testAccounts = RevolutStringTestData.getAccountsString();
+        List<RevolutAccount> testAccountList = RevolutObjectTestData.getTestAccounts();
 
         when(revolutRequestBuilderService.getAuthorizedRequest()).thenReturn(stringHttpEntityMock);
 

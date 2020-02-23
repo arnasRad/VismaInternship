@@ -15,6 +15,12 @@ public class CounterpartyAccount {
     public CounterpartyAccount() {
     }
 
+    public CounterpartyAccount(String id, String currency, String type) {
+        this.id = id;
+        this.currency = currency;
+        this.type = type;
+    }
+
     public CounterpartyAccount(String id, String currency, String type, String accountNo) {
         this.id = id;
         this.currency = currency;
