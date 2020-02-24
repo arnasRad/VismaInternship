@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutPayment extends Payment {
-
     @JsonProperty("reason_code")
     private String reasonCode;
     @JsonProperty("created_at")
@@ -20,7 +19,6 @@ public class RevolutPayment extends Payment {
     }
 
     public RevolutPayment(String id, String state, Date completedAt, String reasonCode, Date createdAt) {
-
         super(id, state, completedAt);
         this.reasonCode = reasonCode;
         this.createdAt = createdAt;

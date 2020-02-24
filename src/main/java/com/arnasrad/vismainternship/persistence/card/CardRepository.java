@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.persistence.card;
 
 import com.arnasrad.vismainternship.model.card.Card;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource(collectionResourceRel = "cards", path = "cards")
-public interface CardRepository extends PagingAndSortingRepository<Card, String> {
+@Repository
+public interface CardRepository extends JpaRepository<Card, String> {
 }

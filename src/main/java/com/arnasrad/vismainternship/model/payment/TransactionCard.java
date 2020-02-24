@@ -25,7 +25,6 @@ public class TransactionCard {
     }
 
     public TransactionCard(String cardNumber, String firstName, String lastName, String phone) {
-
         this.cardNumber = cardNumber;
         this.firstName = firstName;
         this.lastName = lastName;

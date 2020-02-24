@@ -1,10 +1,9 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.revolut.requestbody.TransferRequestBody;
 import com.arnasrad.vismainternship.service.request.TransferService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +19,15 @@ public class RevolutTransferService implements TransferService {
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
 
-    @Autowired
     public RevolutTransferService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService) {
-
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
     }
 
     @Override
-    public String createTransfer(TransferRequestBody body) {
-
-        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getTransferRequest(body);
+    public String createTransfer(String body) {
+        JSONObject jsonObject = new JSONObject(body);
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedJsonRequestWithBody(jsonObject);
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(transferEndpoint, authorizedHttpEntity,
                 String.class);
@@ -44,7 +41,6 @@ public class RevolutTransferService implements TransferService {
 
     @Override
     public String getBankId() {
-
         return BankId.REVOLUT_ID.getBank();
     }
 }

@@ -2,12 +2,11 @@ package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
-import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
-import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.CounterpartyService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -30,45 +29,36 @@ public class RevolutCounterpartyService implements CounterpartyService {
 
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
-    private final JsonMapperService jsonMapperService;
 
-    @Autowired
-    public RevolutCounterpartyService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, JsonMapperService jsonMapperService) {
-
+    public RevolutCounterpartyService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService) {
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
-        this.jsonMapperService = jsonMapperService;
     }
 
     @Override
-    public RevolutCounterparty addCounterparty(CounterpartyRequestBody body) {
+    public RevolutCounterparty addCounterparty(String body) {
+        JSONObject jsonObject = new JSONObject(body);
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedJsonRequestWithBody(jsonObject);
 
-        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getCounterpartyRequest(body);
+        ResponseEntity<RevolutCounterparty> responseEntity = restTemplate.postForEntity(counterpartyEndpoint,
+                authorizedHttpEntity, RevolutCounterparty.class);
 
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(counterpartyEndpoint,
-                authorizedHttpEntity, String.class);
-
-        String jsonResponse = responseEntity.getBody();
-
-        return jsonMapperService.getObjectFromString(jsonResponse, RevolutCounterparty.class);
+        return responseEntity.getBody();
     }
 
     @Override
     public List<RevolutCounterparty> getCounterparties() {
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
-        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getCounterpartiesRequest();
+        ResponseEntity<List<RevolutCounterparty>> responseEntity = restTemplate.exchange(counterpartiesEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, new ParameterizedTypeReference<List<RevolutCounterparty>>() {
+                });
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(counterpartiesEndpoint, HttpMethod.GET,
-                authorizedHttpEntity, String.class);
-
-        String jsonResponse = responseEntity.getBody();
-
-        return jsonMapperService.getObjectListFromString(jsonResponse, RevolutCounterparty.class);
+        return responseEntity.getBody();
     }
 
     @Override
     public String deleteCounterparty(String id) {
-
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
         ResponseEntity<String> response = restTemplate.exchange(deleteCounterpartyEndpoint.concat("/").concat(id),
@@ -87,7 +77,6 @@ public class RevolutCounterpartyService implements CounterpartyService {
 
     @Override
     public String getBankId() {
-
         return BankId.REVOLUT_ID.getBank();
     }
 }

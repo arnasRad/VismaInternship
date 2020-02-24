@@ -2,7 +2,6 @@ package com.arnasrad.vismainternship.service.dates;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,25 +18,21 @@ public class DatesService {
 
     private static final Logger logger = LoggerFactory.getLogger(DatesService.class);
 
-    @Autowired
     public DatesService(SimpleDateFormat simpleDateFormat) {
         this.simpleDateFormat = simpleDateFormat;
     }
 
     public String getFutureDateString(int daysFromToday) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, daysFromToday);
         return simpleDateFormat.format(calendar.getTime());
     }
 
     public String getDateString(Date date) {
-
         return simpleDateFormat.format(date);
     }
 
     public Date getDate(String date) {
-
         try {
             return simpleDateFormat.parse(date);
         } catch (ParseException e) {

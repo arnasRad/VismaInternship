@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.token;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +8,6 @@ public class DnbJwtToken {
 
     private String token;
 
-    @Autowired
     private DnbJwtToken(@Value("${dnb.jwtToken}") final String jwtToken) {
 
         this.token = jwtToken;

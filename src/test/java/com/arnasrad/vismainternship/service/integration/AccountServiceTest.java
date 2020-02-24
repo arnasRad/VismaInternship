@@ -25,16 +25,14 @@ public class AccountServiceTest {
 
     @Autowired
     public AccountServiceTest(AccountRepository repository) {
-
         this.repository = repository;
     }
 
     @Test
     public void whenSaving5Accounts_then5AccountsAreInDB() {
-
         List<Account> expectedAccounts = ObjectTestData.getTestAccounts();
 
-        for(Account account : expectedAccounts) {
+        for (Account account : expectedAccounts) {
 
             repository.save(account);
         }
@@ -48,7 +46,6 @@ public class AccountServiceTest {
 
     @Test
     public void whenSearchingForAnExistingAccountById_thenAccountIsFound() {
-
         repository.save(new Account("123", "Bauer", 10.01));
         repository.save(new Account("1234", "O'Brian", 10.02));
         repository.save(new Account("1235", "Bauer", 10.03));
@@ -61,7 +58,6 @@ public class AccountServiceTest {
 
     @Test
     public void whenSearchingForAnExistingAccountByName_thenAccountIsFound() {
-
         repository.save(new Account("123", "Bauer", 10.01));
         repository.save(new Account("1234", "O'Brian", 10.02));
         repository.save(new Account("1235", "Bauer", 10.03));

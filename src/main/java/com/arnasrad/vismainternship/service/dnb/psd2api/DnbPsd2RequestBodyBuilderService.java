@@ -11,7 +11,6 @@ public class DnbPsd2RequestBodyBuilderService {
     private String ssn;
 
     public String getBodyForRequestWithSSN() {
-
         JSONObject body = new JSONObject();
         body.put("ssn", ssn);
 

@@ -16,20 +16,6 @@ class DNBPaymentServiceTest {
 
     @Test
     public void whenCreatePaymentCalled_thenNoSuchFunctionalityExceptionThrown() {
-
         assertThrows(NoSuchFunctionalityException.class, () -> dnbPaymentService.createPayment(null));
-    }
-
-    @Test
-    public void whenGetTransactionsCalled_thenNoSuchFunctionalityExceptionThrown() {
-
-        assertThrows(NoSuchFunctionalityException.class, () ->
-                dnbPaymentService.getTransactions(null, null, null, null));
-    }
-
-    @Test
-    public void whenGetTransactionCalled_thenNoSuchFunctionalityExceptionThrown() {
-
-        assertThrows(NoSuchFunctionalityException.class, () -> dnbPaymentService.getTransaction(null));
     }
 }

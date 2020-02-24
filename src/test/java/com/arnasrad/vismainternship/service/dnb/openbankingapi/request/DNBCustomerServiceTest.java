@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,9 +26,6 @@ class DNBCustomerServiceTest {
 
     @Mock
     private RevolutRequestBuilderService revolutRequestBuilderService;
-
-    @Mock
-    private JsonMapperService jsonMapperService;
 
     @Mock
     private HttpEntity<String> stringHttpEntityMock;

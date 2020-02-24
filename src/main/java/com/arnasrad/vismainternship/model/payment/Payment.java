@@ -13,7 +13,6 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Payment {
-
     @Id
     private String id;
     private String state;

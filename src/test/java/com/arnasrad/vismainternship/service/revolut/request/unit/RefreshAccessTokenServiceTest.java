@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.service.revolut.request.unit;
 
-import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.revolut.RefreshAccessTokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +28,6 @@ class RefreshAccessTokenServiceTest {
     private RevolutRequestBuilderService revolutRequestBuilderService;
 
     @Mock
-    private JsonMapperService jsonMapperService;
-
-    @Mock
     private HttpEntity<String> stringHttpEntityMock;
 
     @Mock
@@ -39,7 +35,6 @@ class RefreshAccessTokenServiceTest {
 
     @BeforeEach
     void init() {
-
         MockitoAnnotations.initMocks(RefreshAccessTokenServiceTest.class);
         this.tokenEndpoint = "https://sandbox-b2b.revolut.com/api/1.0/auth/token";
         this.refreshAccessTokenService.setRefreshTokenEndpoint(tokenEndpoint);

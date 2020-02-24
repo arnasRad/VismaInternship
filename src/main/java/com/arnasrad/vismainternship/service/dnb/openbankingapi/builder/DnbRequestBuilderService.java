@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.builder;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
@@ -8,35 +8,25 @@ import org.springframework.stereotype.Service;
 public class DnbRequestBuilderService {
 
     private final DnbHeaderBuilderService dnbHeaderBuilderService;
-    private final DnbRequestBodyBuilderService dnbRequestBodyBuilderService;
 
-    @Autowired
-    public DnbRequestBuilderService(DnbHeaderBuilderService dnbHeaderBuilderService, DnbRequestBodyBuilderService dnbRequestBodyBuilderService) {
-
+    public DnbRequestBuilderService(DnbHeaderBuilderService dnbHeaderBuilderService) {
         this.dnbHeaderBuilderService = dnbHeaderBuilderService;
-        this.dnbRequestBodyBuilderService = dnbRequestBodyBuilderService;
     }
 
     public HttpEntity<String> getRequest() {
-
         return new HttpEntity<>(dnbHeaderBuilderService.getHttpHeaders());
     }
 
-    public HttpEntity<String> getRequest(String ssn) {
-
-        return new HttpEntity<>(dnbRequestBodyBuilderService.getBodyForRequestWithSSN(ssn),
-                dnbHeaderBuilderService.getHttpHeaders());
+    public HttpEntity<String> getRequest(JSONObject ssn) {
+        return new HttpEntity<>(ssn.toString(), dnbHeaderBuilderService.getHttpHeaders());
     }
 
     public HttpEntity<String> getAuthorizedRequest() {
-
         return new HttpEntity<>(dnbHeaderBuilderService.getAuthorizedHttpHeaders());
     }
 
-    public HttpEntity<String> getAuthorizedRequest(String ssn) {
-
-        return new HttpEntity<>(dnbRequestBodyBuilderService.getBodyForRequestWithSSN(ssn),
-                dnbHeaderBuilderService.getAuthorizedHttpHeaders());
+    public HttpEntity<String> getAuthorizedRequest(JSONObject ssn) {
+        return new HttpEntity<>(ssn.toString(), dnbHeaderBuilderService.getAuthorizedHttpHeaders());
     }
 
 

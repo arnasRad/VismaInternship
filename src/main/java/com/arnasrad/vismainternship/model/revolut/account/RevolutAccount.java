@@ -8,7 +8,6 @@ import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutAccount extends Account {
-
     private String currency;
     private String state;
 
@@ -25,7 +24,6 @@ public class RevolutAccount extends Account {
     }
 
     public RevolutAccount(String id, String name, Double balance, String currency, String state, Boolean isPublic, Date createdAt, Date updatedAt) {
-
         super(id, name, balance);
         this.currency = currency;
         this.state = state;

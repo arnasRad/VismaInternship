@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.persistence.payment;
 
 import com.arnasrad.vismainternship.model.payment.TransactionLegs;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource(collectionResourceRel = "transaction-legs", path = "transaction-legs")
-public interface TransactionLegsRepository extends PagingAndSortingRepository<TransactionLegs, String> {
+@Repository
+public interface TransactionLegsRepository extends JpaRepository<TransactionLegs, String> {
 }

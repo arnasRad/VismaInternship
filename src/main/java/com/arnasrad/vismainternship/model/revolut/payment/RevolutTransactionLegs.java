@@ -26,7 +26,6 @@ public class RevolutTransactionLegs extends TransactionLegs {
     public RevolutTransactionLegs(String id, Double amount, String currency, String accountId,
                                   LegsCounterparty counterparty, String description, Double balance,
                                   Double billAmount, String billCurrency, RevolutTransaction revolutTransaction) {
-
         super(id, amount, currency, accountId, counterparty, description, balance);
         this.billAmount = billAmount;
         this.billCurrency = billCurrency;
@@ -46,7 +45,6 @@ public class RevolutTransactionLegs extends TransactionLegs {
     }
 
     public void setBillCurrency(String billCurrency) {
-
         this.billCurrency = billCurrency;
     }
 

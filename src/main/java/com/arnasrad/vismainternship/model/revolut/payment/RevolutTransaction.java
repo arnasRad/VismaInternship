@@ -28,7 +28,7 @@ public class RevolutTransaction extends Transaction {
     private String relatedTransactionId;
     @ManyToOne
     private Merchant merchant;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "revolutTransaction")
+    //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "revolutTransaction")
     @OneToMany(cascade = CascadeType.ALL)
     @JsonProperty("legs")
     private List<RevolutTransactionLegs> revolutTransactionLegs;

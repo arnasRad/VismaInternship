@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.persistence.payment;
 
 import com.arnasrad.vismainternship.model.payment.Payment;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource(collectionResourceRel = "payments", path = "payments")
-public interface PaymentRepository extends PagingAndSortingRepository<Payment, String> {
+@Repository
+public interface PaymentRepository extends JpaRepository<Payment, String> {
 }

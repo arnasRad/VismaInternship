@@ -16,7 +16,6 @@ class DNBTransferServiceTest {
 
     @Test
     public void whenCreateTransferCalled_thenNoSuchFunctionalityExceptionThrown() {
-
         assertThrows(NoSuchFunctionalityException.class, () -> dnbTransferService.createTransfer(null));
     }
 

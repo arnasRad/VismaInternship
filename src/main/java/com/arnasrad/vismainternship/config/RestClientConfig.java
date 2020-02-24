@@ -17,25 +17,21 @@ public class RestClientConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-
         return new RestTemplate();
     }
 
     @Bean
     public SimpleDateFormat simpleDateFormat(@Value("${dates.defaultFormat}") String defaultDateFormat) {
-
         return new SimpleDateFormat(defaultDateFormat);
     }
 
     @Bean
     public Random random() {
-
         return new Random();
     }
 
     @Bean
     public ObjectMapper mapper() {
-
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT, true);

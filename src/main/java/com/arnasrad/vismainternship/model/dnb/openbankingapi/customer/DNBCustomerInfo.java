@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DNBCustomerInfo extends CustomerInfo {
-
     private String customerType;
     private Citizenship[] citizenship;
     private CountryTax[] countryTax;
@@ -13,11 +12,10 @@ public class DNBCustomerInfo extends CustomerInfo {
     public DNBCustomerInfo() {
     }
 
-    public DNBCustomerInfo(String customerId, String firstName, String lastName, DNBCustomerAddress DNBCustomerAddress, String phone,
+    public DNBCustomerInfo(String customerId, String firstName, String lastName, DNBCustomerAddress dnbCustomerAddress, String phone,
                            String email, String countryOfBirth, String customerType, Citizenship[] citizenship,
                            CountryTax[] countryTax) {
-
-        super(customerId, firstName, lastName, DNBCustomerAddress, phone, email, countryOfBirth);
+        super(customerId, firstName, lastName, dnbCustomerAddress, phone, email, countryOfBirth);
         this.customerType = customerType;
         this.citizenship = citizenship;
         this.countryTax = countryTax;

@@ -4,10 +4,9 @@ import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustome
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerInfo;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
-import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -30,54 +29,41 @@ public class DNBCustomerService implements CustomerService {
 
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
-    private final JsonMapperService jsonMapperService;
 
-    @Autowired
-    public DNBCustomerService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService,
-                              JsonMapperService jsonMapperService) {
-
+    public DNBCustomerService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService) {
         this.restTemplate = restTemplate;
         this.dnbRequestBuilderService = dnbRequestBuilderService;
-        this.jsonMapperService = jsonMapperService;
     }
 
     @Override
-    public List<DNBCustomer> getCustomers()  {
-
+    public List<DNBCustomer> getCustomers() {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getRequest();
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(customersEndpoint, HttpMethod.GET,
-                authorizedHttpEntity, String.class);
+        ResponseEntity<List<DNBCustomer>> responseEntity = restTemplate.exchange(customersEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, new ParameterizedTypeReference<List<DNBCustomer>>() {
+                });
 
-        String jsonResponse = responseEntity.getBody();
-
-        return jsonMapperService.getObjectListFromString(jsonResponse, DNBCustomer.class);
+        return responseEntity.getBody();
     }
 
     @Override
-    public DNBCustomerInfo getCurrentCustomerInfo()  {
-
+    public DNBCustomerInfo getCurrentCustomerInfo() {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(currentCustomerInfoEndpoint, HttpMethod.GET,
-                authorizedHttpEntity, String.class);
+        ResponseEntity<DNBCustomerInfo> responseEntity = restTemplate.exchange(currentCustomerInfoEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, DNBCustomerInfo.class);
 
-        String jsonResponse = responseEntity.getBody();
-
-        return jsonMapperService.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
+        return responseEntity.getBody();
     }
 
     @Override
-    public DNBCustomerInfo getCustomerInfo(String ssn)  {
-
+    public DNBCustomerInfo getCustomerInfo(String ssn) {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(customerInfoEndpoint.concat(ssn), HttpMethod.GET,
-                authorizedHttpEntity, String.class);
+        ResponseEntity<DNBCustomerInfo> responseEntity = restTemplate.exchange(customerInfoEndpoint.concat(ssn), HttpMethod.GET,
+                authorizedHttpEntity, DNBCustomerInfo.class);
 
-        String jsonResponse = responseEntity.getBody();
-
-        return jsonMapperService.getObjectFromString(jsonResponse, DNBCustomerInfo.class);
+        return responseEntity.getBody();
     }
 
     public void setCustomersEndpoint(String customersEndpoint) {
@@ -94,7 +80,6 @@ public class DNBCustomerService implements CustomerService {
 
     @Override
     public String getBankId() {
-
         return BankId.DNB_ID.getBank();
     }
 }

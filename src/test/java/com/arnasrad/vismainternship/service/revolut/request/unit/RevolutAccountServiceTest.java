@@ -1,7 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request.unit;
 
 import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
-import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutAccountService;
 import com.arnasrad.vismainternship.service.revolut.testdata.RevolutObjectTestData;
@@ -19,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -40,9 +38,6 @@ class RevolutAccountServiceTest {
 
     @Mock
     private RevolutRequestBuilderService revolutRequestBuilderService;
-
-    @Mock
-    private JsonMapperService jsonMapperService;
 
     @Mock
     private HttpEntity<String> stringHttpEntityMock;
@@ -70,16 +65,12 @@ class RevolutAccountServiceTest {
 
         when(stringResponseEntityMock.getBody()).thenReturn(testAccounts);
 
-        when(jsonMapperService.getObjectListFromString(testAccounts, RevolutAccount.class))
-                .thenReturn(Arrays.asList(mock(RevolutAccount.class), mock(RevolutAccount.class)));
-
         List<RevolutAccount> actualAccounts = revolutAccountService.getAccounts();
 
         verify(revolutRequestBuilderService, times(1)).getAuthorizedRequest();
         verify(restTemplate, times(1)).exchange(accountsEndpoint, HttpMethod.GET, stringHttpEntityMock,
                 String.class);
         verify(stringResponseEntityMock, times(1)).getBody();
-        verify(jsonMapperService, times(1)).getObjectListFromString(testAccounts, RevolutAccount.class);
 
         assertNotEquals(0, actualAccounts.size());
     }
@@ -96,8 +87,6 @@ class RevolutAccountServiceTest {
                 String.class)).thenReturn(stringResponseEntityMock);
 
         when(stringResponseEntityMock.getBody()).thenReturn(testAccounts);
-
-        when(jsonMapperService.getObjectListFromString(testAccounts, RevolutAccount.class)).thenReturn(testAccountList);
 
         List<RevolutAccount> expectedAccounts = new ArrayList<>(testAccountList);
         List<RevolutAccount> actualAccounts = revolutAccountService.getAccounts();

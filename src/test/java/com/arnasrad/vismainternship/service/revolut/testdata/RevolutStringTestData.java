@@ -184,9 +184,9 @@ public class RevolutStringTestData {
                 "    \"created_at\": \"2020-02-21T14:55:01.197+00:00\"" +
                 "}";
     }
-    
+
     public static String getTransactionListString() {
-        
+
         return "[" +
                 "    {" +
                 "        \"id\": \"6197e9be-672a-43d2-a2a4-e75f33849f11\"," +
@@ -286,7 +286,7 @@ public class RevolutStringTestData {
                 "    }" +
                 "]";
     }
-    
+
     public static String getTransactionString() {
         return "{" +
                 "    \"id\": \"1198f556-f6f4-44c5-a9d4-a15a40ef5234\"," +

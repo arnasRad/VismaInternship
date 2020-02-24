@@ -14,14 +14,12 @@ public class RevolutCardService implements CardService {
 
     @Override
     public List<Card> getCards() throws NoSuchFunctionalityException {
-
         throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
                 "getCards"));
     }
 
     @Override
     public String getBankId() {
-
         return BankId.REVOLUT_ID.getBank();
     }
 }

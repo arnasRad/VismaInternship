@@ -5,7 +5,6 @@ import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
 import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutTransaction;
-import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 
 import java.util.List;
 
@@ -24,11 +23,11 @@ public class RevolutObjectTestData {
                 RevolutCounterparty.class);
     }
 
-    public static CounterpartyRequestBody getTestCounterpartyRequestBody() {
-
-        return mapper.getObjectFromString(RevolutStringTestData.getAddCounterpartyRequestBodyString(),
-                CounterpartyRequestBody.class);
-    }
+//    public static JSONObject getTestCounterpartyRequestBody() {
+//
+//        return mapper.getObjectFromString(RevolutStringTestData.getAddCounterpartyRequestBodyString(),
+//                CounterpartyRequestBody.class);
+//    }
 
     public static List<RevolutCounterparty> getTestCounterpartyList() {
 

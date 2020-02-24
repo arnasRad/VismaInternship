@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.persistence.customer;
 
 import com.arnasrad.vismainternship.model.customer.Customer;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource(collectionResourceRel = "customers", path = "customers")
-public interface CustomerRepository extends PagingAndSortingRepository<Customer, String> {
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, String> {
 }
