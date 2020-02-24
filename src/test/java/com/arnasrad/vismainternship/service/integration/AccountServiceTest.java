@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -49,7 +47,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void whenSearchingForAnExistingAccountById_thenAccountIsFound() throws Exception {
+    public void whenSearchingForAnExistingAccountById_thenAccountIsFound() {
 
         repository.save(new Account("123", "Bauer", 10.01));
         repository.save(new Account("1234", "O'Brian", 10.02));

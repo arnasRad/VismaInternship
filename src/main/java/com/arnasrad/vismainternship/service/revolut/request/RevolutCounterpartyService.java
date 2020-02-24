@@ -1,7 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;

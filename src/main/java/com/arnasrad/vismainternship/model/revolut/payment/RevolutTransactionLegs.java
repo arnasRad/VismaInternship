@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -19,7 +18,6 @@ public class RevolutTransactionLegs extends TransactionLegs {
     private String billCurrency;
 
     @ManyToOne
-    @JoinColumn(name = "revolutTransactionId")
     private RevolutTransaction revolutTransaction;
 
     public RevolutTransactionLegs() {

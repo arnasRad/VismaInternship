@@ -1,7 +1,5 @@
 package com.arnasrad.vismainternship.controller.revolut;
 
-import com.arnasrad.vismainternship.model.exception.BadRequestException;
-import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutCounterpartyService;

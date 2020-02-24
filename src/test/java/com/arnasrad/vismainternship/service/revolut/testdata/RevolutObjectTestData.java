@@ -6,7 +6,6 @@ import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterpar
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutTransaction;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
-import com.fasterxml.jackson.databind.util.StdDateFormat;
 
 import java.util.List;
 

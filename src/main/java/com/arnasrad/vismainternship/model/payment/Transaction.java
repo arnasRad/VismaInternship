@@ -5,10 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.Date;
 
-//@MappedSuperclass
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Transaction {
 

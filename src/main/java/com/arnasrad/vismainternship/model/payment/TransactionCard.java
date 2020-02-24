@@ -3,12 +3,10 @@ package com.arnasrad.vismainternship.model.payment;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransactionCard {
 

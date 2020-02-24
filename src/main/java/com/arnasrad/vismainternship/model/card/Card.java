@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Card {
 

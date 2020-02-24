@@ -34,7 +34,7 @@ public class PaymentController {
     }
 
     @GetMapping("/interbanking/transaction")
-    public Transaction getTransaction(@RequestParam String bank, @RequestParam String id)
+    public Transaction getTransactions(@RequestParam String bank, @RequestParam String id)
             throws BadRequestException, NoSuchFunctionalityException {
 
         PaymentService service = paymentServiceFactory.getService(bank);
@@ -42,11 +42,11 @@ public class PaymentController {
     }
 
     @GetMapping("/interbanking/transactions")
-    public List<? extends Transaction> getTransaction(@RequestParam String bank,
-              @RequestParam(required = false) String counterparty,
-              @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
-              @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date to,
-              @RequestParam(required = false) Integer count) throws BadRequestException, NoSuchFunctionalityException {
+    public List<? extends Transaction> getTransactions(@RequestParam String bank,
+                                                       @RequestParam(required = false) String counterparty,
+                                                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
+                                                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date to,
+                                                       @RequestParam(required = false) Integer count) throws BadRequestException, NoSuchFunctionalityException {
 
         PaymentService service = paymentServiceFactory.getService(bank);
         return service.getTransactions(counterparty, from, to, count);

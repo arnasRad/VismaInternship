@@ -3,11 +3,10 @@ package com.arnasrad.vismainternship.model.customer;
 import com.arnasrad.vismainternship.model.dnb.openbankingapi.customer.DNBCustomerAddress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerInfo {
 

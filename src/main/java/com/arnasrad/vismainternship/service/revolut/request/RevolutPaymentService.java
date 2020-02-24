@@ -6,6 +6,7 @@ import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.model.revolut.payment.RevolutTransaction;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CreatePaymentRequestBody;
 import com.arnasrad.vismainternship.persistence.payment.PaymentRepository;
+import com.arnasrad.vismainternship.persistence.payment.TransactionLegsRepository;
 import com.arnasrad.vismainternship.persistence.payment.TransactionRepository;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.request.PaymentService;
@@ -44,7 +45,8 @@ public class RevolutPaymentService implements PaymentService {
     public RevolutPaymentService(RestTemplate restTemplate,
                                  RevolutRequestBuilderService revolutRequestBuilderService,
                                  JsonMapperService jsonMapperService, PaymentRepository paymentRepository,
-                                 TransactionRepository transactionRepository) {
+                                 TransactionRepository transactionRepository,
+                                 TransactionLegsRepository transactionLegsRepository) {
 
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;

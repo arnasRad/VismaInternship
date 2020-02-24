@@ -28,9 +28,10 @@ public class RevolutTransaction extends Transaction {
     private String relatedTransactionId;
     @ManyToOne
     private Merchant merchant;
-    // TODO: legs not shown when fetching from DB
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "revolutTransaction")
-    private List<RevolutTransactionLegs> legs;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "revolutTransaction")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonProperty("legs")
+    private List<RevolutTransactionLegs> revolutTransactionLegs;
     @ManyToOne
     private TransactionCard card;
 
@@ -40,7 +41,7 @@ public class RevolutTransaction extends Transaction {
     public RevolutTransaction(String id, String type, String state, Date createdAt, Date completedAt,
                               String reference, String requestId, String reasonCode, Date updatedAt,
                               Date scheduledFor, String relatedTransactionId, Merchant merchant,
-                              List<RevolutTransactionLegs> legs, TransactionCard card) {
+                              List<RevolutTransactionLegs> revolutTransactionLegs, TransactionCard card) {
 
         super(id, type, state, createdAt, completedAt, reference);
         this.requestId = requestId;
@@ -49,7 +50,7 @@ public class RevolutTransaction extends Transaction {
         this.scheduledFor = scheduledFor;
         this.relatedTransactionId = relatedTransactionId;
         this.merchant = merchant;
-        this.legs = legs;
+        this.revolutTransactionLegs = revolutTransactionLegs;
         this.card = card;
     }
 
@@ -101,12 +102,12 @@ public class RevolutTransaction extends Transaction {
         this.merchant = merchant;
     }
 
-    public List<RevolutTransactionLegs> getLegs() {
-        return legs;
+    public List<RevolutTransactionLegs> getRevolutTransactionLegs() {
+        return revolutTransactionLegs;
     }
 
-    public void setLegs(List<RevolutTransactionLegs> legs) {
-        this.legs = legs;
+    public void setRevolutTransactionLegs(List<RevolutTransactionLegs> revolutTransactionLegs) {
+        this.revolutTransactionLegs = revolutTransactionLegs;
     }
 
     public TransactionCard getCard() {
