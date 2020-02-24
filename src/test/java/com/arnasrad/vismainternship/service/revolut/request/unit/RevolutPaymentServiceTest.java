@@ -1,7 +1,8 @@
-package com.arnasrad.vismainternship.service.revolut.request;
+package com.arnasrad.vismainternship.service.revolut.request.unit;
 
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutPaymentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,15 +16,16 @@ import org.springframework.web.client.RestTemplate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class RevolutTransferServiceTest {
+class RevolutPaymentServiceTest {
 
-    private String transferEndpoint;
+    private String paymentEndpoint;
+    private String transactionEndpoint;
+    private String transactionsEndpoint;
 
     @InjectMocks
-    private RevolutTransferService revolutTransferService;
+    private RevolutPaymentService revolutPaymentService;
 
     @Mock
     private RestTemplate restTemplate;
@@ -43,9 +45,13 @@ class RevolutTransferServiceTest {
     @BeforeEach
     void init() {
 
-        MockitoAnnotations.initMocks(RevolutTransferServiceTest.class);
-        this.transferEndpoint = "https://sandbox-b2b.revolut.com/api/1.0/transfer";
-        this.revolutTransferService.setTransferEndpoint(transferEndpoint);
+        MockitoAnnotations.initMocks(RevolutPaymentServiceTest.class);
+        this.paymentEndpoint = "https://sandbox-b2b.revolut.com/api/1.0/pay";
+        this.transactionEndpoint = "https://sandbox-b2b.revolut.com/api/1.0/transaction/";
+        this.transactionsEndpoint = "https://sandbox-b2b.revolut.com/api/1.0/transactions";
+        this.revolutPaymentService.setPaymentEndpoint(paymentEndpoint);
+        this.revolutPaymentService.setTransactionEndpoint(transactionEndpoint);
+        this.revolutPaymentService.setTransactionsEndpoint(transactionsEndpoint);
     }
 
 }

@@ -1,12 +1,13 @@
-package com.arnasrad.vismainternship.service.revolut.request;
+package com.arnasrad.vismainternship.service.revolut.request.unit;
 
-import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
 import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
-import com.arnasrad.vismainternship.model.revolut.payment.RevolutTransaction;
+import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutCounterpartyService;
 import com.arnasrad.vismainternship.service.revolut.testdata.RevolutObjectTestData;
 import com.arnasrad.vismainternship.service.revolut.testdata.RevolutStringTestData;
+import org.json.JSONException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,11 +20,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -114,5 +113,22 @@ class RevolutCounterpartyServiceTest {
     }
 
     @Test
-    public void whenRepsonseReturns
+    public void whenResponseReturnsCounterparty_thenAddCounterpartyReturnsAddedCounterparty() throws JSONException {
+
+        CounterpartyRequestBody requestBody = RevolutObjectTestData.getTestCounterpartyRequestBody();
+        String testCounterpartyString = RevolutStringTestData.getCounterpartyString();
+        RevolutCounterparty testCounterparty = RevolutObjectTestData.getTestCounterparty();
+
+        when(revolutRequestBuilderService.getCounterpartyRequest(requestBody)).thenReturn(stringHttpEntityMock);
+
+        when(restTemplate.postForEntity(counterpartyEndpoint, stringHttpEntityMock, String.class)).thenReturn(stringResponseEntityMock);
+
+        when(stringResponseEntityMock.getBody()).thenReturn(testCounterpartyString);
+
+        when(jsonMapperService.getObjectFromString(testCounterpartyString, RevolutCounterparty.class)).thenReturn(testCounterparty);
+
+        RevolutCounterparty actualCounterparty = revolutCounterpartyService.addCounterparty(requestBody);
+
+        assertThat(actualCounterparty, is(testCounterparty));
+    }
 }

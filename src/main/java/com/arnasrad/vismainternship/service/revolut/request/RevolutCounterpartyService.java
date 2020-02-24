@@ -1,6 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.model.enums.BankId;
+import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.model.revolut.requestbody.CounterpartyRequestBody;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
@@ -24,6 +25,9 @@ public class RevolutCounterpartyService implements CounterpartyService {
 
     @Value("${revolut.endpoint.counterparties}")
     private String counterpartiesEndpoint;
+
+    @Value("${revolut.endpoint.delete-counterparty}")
+    private String deleteCounterpartyEndpoint;
 
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
@@ -61,6 +65,17 @@ public class RevolutCounterpartyService implements CounterpartyService {
         String jsonResponse = responseEntity.getBody();
 
         return jsonMapperService.getObjectListFromString(jsonResponse, RevolutCounterparty.class);
+    }
+
+    @Override
+    public String deleteCounterparty(String id) {
+
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
+
+        ResponseEntity<String> response = restTemplate.exchange(deleteCounterpartyEndpoint.concat("/").concat(id),
+                HttpMethod.DELETE, authorizedHttpEntity, String.class);
+
+        return response.getBody();
     }
 
     public void setCounterpartyEndpoint(String counterpartyEndpoint) {

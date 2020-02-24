@@ -79,6 +79,15 @@ public class RevolutStringTestData {
                 "}";
     }
 
+    public static String getAddCounterpartyRequestBodyString() {
+
+        return "{" +
+                "\"profile_type\":\"personal\"," +
+                "\"name\":\"John Smith\"," +
+                "\"phone\":\"+4412345678908\"" +
+                "}";
+    }
+
     public static String getCounterpartyListString() {
 
         return "[" +

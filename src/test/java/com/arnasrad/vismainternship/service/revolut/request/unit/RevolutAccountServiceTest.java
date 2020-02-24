@@ -1,8 +1,9 @@
-package com.arnasrad.vismainternship.service.revolut.request;
+package com.arnasrad.vismainternship.service.revolut.request.unit;
 
 import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
 import com.arnasrad.vismainternship.service.mapping.JsonMapperService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutAccountService;
 import com.arnasrad.vismainternship.service.revolut.testdata.RevolutObjectTestData;
 import com.arnasrad.vismainternship.service.revolut.testdata.RevolutStringTestData;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

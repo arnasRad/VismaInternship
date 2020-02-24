@@ -28,6 +28,13 @@ public class DNBCounterpartyService implements CounterpartyService {
     }
 
     @Override
+    public String deleteCounterparty(String id) throws NoSuchFunctionalityException {
+
+        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
+                "deleteCounterparty"));
+    }
+
+    @Override
     public String getBankId() {
 
         return BankId.DNB_ID.getBank();

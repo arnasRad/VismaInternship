@@ -1,6 +1,7 @@
-package com.arnasrad.vismainternship.service.revolut.request;
+package com.arnasrad.vismainternship.service.revolut.request.unit;
 
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutCardService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

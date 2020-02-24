@@ -13,5 +13,7 @@ public interface CounterpartyService {
 
     List<? extends Counterparty> getCounterparties() throws NoSuchFunctionalityException, BadRequestException;
 
+    String deleteCounterparty(String id) throws NoSuchFunctionalityException;
+
     String getBankId();
 }
