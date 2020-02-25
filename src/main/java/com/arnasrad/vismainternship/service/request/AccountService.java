@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.request;
 
-import com.arnasrad.vismainternship.model.account.Account;
-import com.arnasrad.vismainternship.model.account.AccountDetails;
+import com.arnasrad.vismainternship.model.entity.account.Account;
+import com.arnasrad.vismainternship.model.entity.account.AccountDetails;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 
 import java.util.List;

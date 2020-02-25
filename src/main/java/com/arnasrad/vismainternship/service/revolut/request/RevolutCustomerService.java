@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
-import com.arnasrad.vismainternship.model.customer.Customer;
-import com.arnasrad.vismainternship.model.customer.CustomerInfo;
+import com.arnasrad.vismainternship.model.entity.customer.Customer;
+import com.arnasrad.vismainternship.model.entity.customer.CustomerInfo;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.request.CustomerService;

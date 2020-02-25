@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.testdata;
 
-import com.arnasrad.vismainternship.model.account.Account;
+import com.arnasrad.vismainternship.model.entity.account.Account;
 
 import java.util.ArrayList;
 import java.util.List;

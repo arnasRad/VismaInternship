@@ -1,10 +1,10 @@
 package com.arnasrad.vismainternship.service.revolut.testdata;
 
 import com.arnasrad.vismainternship.mapping.JsonMapper;
-import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
-import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
-import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
-import com.arnasrad.vismainternship.model.revolut.payment.RevolutTransaction;
+import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccount;
+import com.arnasrad.vismainternship.model.entity.revolut.counterparty.RevolutCounterparty;
+import com.arnasrad.vismainternship.model.entity.revolut.payment.RevolutPayment;
+import com.arnasrad.vismainternship.model.entity.revolut.transaction.RevolutTransaction;
 
 import java.util.List;
 

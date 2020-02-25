@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller;
 
-import com.arnasrad.vismainternship.model.card.Card;
+import com.arnasrad.vismainternship.model.entity.card.Card;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.CardServiceFactory;
 import com.arnasrad.vismainternship.service.request.CardService;

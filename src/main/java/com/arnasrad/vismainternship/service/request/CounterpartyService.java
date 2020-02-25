@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.request;
 
-import com.arnasrad.vismainternship.model.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.entity.counterparty.Counterparty;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.persistence.payment;
 
-import com.arnasrad.vismainternship.model.payment.Transaction;
+import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

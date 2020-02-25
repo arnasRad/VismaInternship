@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut;
 
+import com.arnasrad.vismainternship.model.entity.token.RevolutToken;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.token.RevolutToken;
 import com.arnasrad.vismainternship.service.request.TokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import com.arnasrad.vismainternship.token.RevolutAccessToken;

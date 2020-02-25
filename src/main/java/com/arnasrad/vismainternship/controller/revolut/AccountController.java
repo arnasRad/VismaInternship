@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.controller.revolut;
 
-import com.arnasrad.vismainternship.model.account.Account;
-import com.arnasrad.vismainternship.model.revolut.account.RevolutAccount;
-import com.arnasrad.vismainternship.model.revolut.account.RevolutAccountDetails;
+import com.arnasrad.vismainternship.model.entity.account.Account;
+import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccount;
+import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccountDetails;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutAccountService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

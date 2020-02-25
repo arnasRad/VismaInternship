@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.request;
 
 
-import com.arnasrad.vismainternship.model.customer.Customer;
-import com.arnasrad.vismainternship.model.customer.CustomerInfo;
+import com.arnasrad.vismainternship.model.entity.customer.Customer;
+import com.arnasrad.vismainternship.model.entity.customer.CustomerInfo;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 
 import java.util.List;

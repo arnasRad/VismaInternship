@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
-import com.arnasrad.vismainternship.model.card.Card;
+import com.arnasrad.vismainternship.model.entity.card.Card;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.request.CardService;

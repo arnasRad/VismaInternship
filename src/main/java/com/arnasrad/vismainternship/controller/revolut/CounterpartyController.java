@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller.revolut;
 
-import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
+import com.arnasrad.vismainternship.model.entity.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutCounterpartyService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

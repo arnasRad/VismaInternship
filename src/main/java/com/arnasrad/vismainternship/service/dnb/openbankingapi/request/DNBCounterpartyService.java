@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
-import com.arnasrad.vismainternship.model.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.entity.counterparty.Counterparty;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.request.CounterpartyService;

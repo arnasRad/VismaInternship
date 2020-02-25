@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.request;
 
-import com.arnasrad.vismainternship.model.card.Card;
+import com.arnasrad.vismainternship.model.entity.card.Card;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 
 import java.util.List;

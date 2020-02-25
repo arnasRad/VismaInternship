@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.request;
 
+import com.arnasrad.vismainternship.model.entity.payment.Payment;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
-import com.arnasrad.vismainternship.model.payment.Payment;
 
 public interface PaymentService {
 

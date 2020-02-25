@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.request;
 
+import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
-import com.arnasrad.vismainternship.model.payment.Transaction;
 
 import java.util.Date;
 import java.util.List;

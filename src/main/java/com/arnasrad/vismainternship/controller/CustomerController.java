@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller;
 
-import com.arnasrad.vismainternship.model.customer.Customer;
+import com.arnasrad.vismainternship.model.entity.customer.Customer;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.CustomerServiceFactory;
 import com.arnasrad.vismainternship.service.request.CustomerService;

@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 
+import com.arnasrad.vismainternship.model.entity.token.DNBToken;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.token.DNBToken;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.request.TokenService;
 import com.arnasrad.vismainternship.token.DnbJwtToken;

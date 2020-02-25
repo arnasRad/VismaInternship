@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.controller;
 
+import com.arnasrad.vismainternship.model.entity.payment.Payment;
+import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
-import com.arnasrad.vismainternship.model.payment.Payment;
-import com.arnasrad.vismainternship.model.payment.Transaction;
 import com.arnasrad.vismainternship.service.factory.PaymentServiceFactory;
 import com.arnasrad.vismainternship.service.factory.TransactionServiceFactory;
 import com.arnasrad.vismainternship.service.request.PaymentService;

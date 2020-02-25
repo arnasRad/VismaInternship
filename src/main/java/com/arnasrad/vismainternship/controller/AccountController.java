@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller;
 
-import com.arnasrad.vismainternship.model.account.Account;
+import com.arnasrad.vismainternship.model.entity.account.Account;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.AccountServiceFactory;
 import com.arnasrad.vismainternship.service.request.AccountService;

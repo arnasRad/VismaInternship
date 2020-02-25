@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request.unit;
 
-import com.arnasrad.vismainternship.model.revolut.counterparty.RevolutCounterparty;
+import com.arnasrad.vismainternship.model.entity.revolut.counterparty.RevolutCounterparty;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutCounterpartyService;
 import com.arnasrad.vismainternship.service.revolut.testdata.RevolutObjectTestData;

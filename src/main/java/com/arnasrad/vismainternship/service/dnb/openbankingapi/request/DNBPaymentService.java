@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
+import com.arnasrad.vismainternship.model.entity.payment.Payment;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
-import com.arnasrad.vismainternship.model.payment.Payment;
 import com.arnasrad.vismainternship.service.request.PaymentService;
 import org.springframework.stereotype.Service;
 

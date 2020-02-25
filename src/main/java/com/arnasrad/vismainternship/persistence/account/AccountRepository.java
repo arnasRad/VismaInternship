@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.persistence.account;
 
-import com.arnasrad.vismainternship.model.account.Account;
+import com.arnasrad.vismainternship.model.entity.account.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

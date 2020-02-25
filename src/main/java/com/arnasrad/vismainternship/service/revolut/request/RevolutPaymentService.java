@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
+import com.arnasrad.vismainternship.model.entity.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.model.enums.BankId;
-import com.arnasrad.vismainternship.model.revolut.payment.RevolutPayment;
 import com.arnasrad.vismainternship.persistence.payment.PaymentRepository;
 import com.arnasrad.vismainternship.service.request.PaymentService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
