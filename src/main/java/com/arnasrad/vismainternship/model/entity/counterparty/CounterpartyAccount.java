@@ -13,6 +13,8 @@ public class CounterpartyAccount {
     private String currency;
     private String type;
     private String accountNo;
+    @ManyToOne
+    private Counterparty counterparty;
 
     public CounterpartyAccount() {
     }

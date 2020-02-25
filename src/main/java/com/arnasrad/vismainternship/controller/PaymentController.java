@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.controller;
 
-import com.arnasrad.vismainternship.model.entity.payment.Payment;
-import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentDTO;
+import com.arnasrad.vismainternship.model.dto.transaction.TransactionDTO;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.PaymentServiceFactory;
 import com.arnasrad.vismainternship.service.factory.TransactionServiceFactory;
@@ -26,21 +26,21 @@ public class PaymentController {
     }
 
     @PostMapping("/interbanking/create-payment")
-    public Payment createPayment(@RequestBody String body, @RequestParam String bank)
+    public PaymentDTO createPayment(@RequestBody String body, @RequestParam String bank)
             throws NoSuchFunctionalityException {
         PaymentService service = paymentServiceFactory.getService(bank);
         return service.createPayment(body);
     }
 
     @GetMapping("/interbanking/transaction")
-    public Transaction getTransactions(@RequestParam String bank, @RequestParam String id)
+    public TransactionDTO getTransactions(@RequestParam String bank, @RequestParam String id)
             throws NoSuchFunctionalityException {
         TransactionService service = transactionServiceFactory.getService(bank);
         return service.getTransaction(id);
     }
 
     @GetMapping("/interbanking/transactions")
-    public List<? extends Transaction> getTransactions(@RequestParam String bank,
+    public List<? extends TransactionDTO> getTransactions(@RequestParam String bank,
                                                        @RequestParam(required = false) String counterparty,
                                                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
                                                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date to,

@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.card.DNBCard;
+import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DNBCardDTO;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.request.CardService;
@@ -28,11 +28,11 @@ public class DNBCardService implements CardService {
     }
 
     @Override
-    public List<DNBCard> getCards() {
+    public List<DNBCardDTO> getCards() {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<List<DNBCard>> responseEntity = restTemplate.exchange(cardsEndpoint, HttpMethod.GET,
-                authorizedHttpEntity, new ParameterizedTypeReference<List<DNBCard>>() {
+        ResponseEntity<List<DNBCardDTO>> responseEntity = restTemplate.exchange(cardsEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, new ParameterizedTypeReference<List<DNBCardDTO>>() {
                 });
 
         return responseEntity.getBody();

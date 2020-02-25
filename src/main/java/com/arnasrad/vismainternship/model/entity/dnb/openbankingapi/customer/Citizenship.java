@@ -1,9 +1,6 @@
 package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Citizenship {
@@ -12,6 +9,8 @@ public class Citizenship {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String countryOfCitizenship;
+    @ManyToOne
+    private DNBCustomerInfo dnbCustomerInfo;
 
     public Citizenship() {
     }

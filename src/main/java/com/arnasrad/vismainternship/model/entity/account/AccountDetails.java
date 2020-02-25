@@ -12,6 +12,7 @@ public class AccountDetails {
     private Long id;
     private String accountNo;
     private String iban;
+    @ElementCollection
     private List<String> schemas;
     private String bankCountry;
 

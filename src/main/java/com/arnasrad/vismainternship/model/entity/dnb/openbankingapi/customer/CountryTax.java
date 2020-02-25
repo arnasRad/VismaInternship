@@ -1,9 +1,6 @@
 package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class CountryTax {
@@ -13,6 +10,8 @@ public class CountryTax {
     private Long id;
     private String taxLiabilityCountry;
     private String taxIdentificationNumber;
+    @ManyToOne
+    private DNBCustomerInfo dnbCustomerInfo;
 
     public CountryTax() {
     }

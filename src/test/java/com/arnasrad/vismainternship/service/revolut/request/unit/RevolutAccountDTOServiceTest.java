@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request.unit;
 
-import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccount;
+import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDTO;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutAccountService;
 import com.arnasrad.vismainternship.service.revolut.testdata.RevolutObjectTestData;
@@ -65,7 +65,7 @@ class RevolutAccountDTOServiceTest {
 
         when(stringResponseEntityMock.getBody()).thenReturn(testAccounts);
 
-        List<RevolutAccount> actualAccounts = revolutAccountService.getAccounts();
+        List<RevolutAccountDTO> actualAccounts = revolutAccountService.getAccounts();
 
         verify(revolutRequestBuilderService, times(1)).getAuthorizedRequest();
         verify(restTemplate, times(1)).exchange(accountsEndpoint, HttpMethod.GET, stringHttpEntityMock,
@@ -79,7 +79,7 @@ class RevolutAccountDTOServiceTest {
     public void whenResponseReturnsAccountListJsonString_thenGetAccountsReturnsListOfAccounts() {
 
         String testAccounts = RevolutStringTestData.getAccountsString();
-        List<RevolutAccount> testAccountList = RevolutObjectTestData.getTestAccounts();
+        List<RevolutAccountDTO> testAccountList = RevolutObjectTestData.getTestAccounts();
 
         when(revolutRequestBuilderService.getAuthorizedRequest()).thenReturn(stringHttpEntityMock);
 
@@ -88,8 +88,8 @@ class RevolutAccountDTOServiceTest {
 
         when(stringResponseEntityMock.getBody()).thenReturn(testAccounts);
 
-        List<RevolutAccount> expectedAccounts = new ArrayList<>(testAccountList);
-        List<RevolutAccount> actualAccounts = revolutAccountService.getAccounts();
+        List<RevolutAccountDTO> expectedAccounts = new ArrayList<>(testAccountList);
+        List<RevolutAccountDTO> actualAccounts = revolutAccountService.getAccounts();
 
         assertThat(actualAccounts, is(expectedAccounts));
     }

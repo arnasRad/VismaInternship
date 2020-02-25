@@ -1,15 +1,15 @@
 package com.arnasrad.vismainternship.service.request;
 
-import com.arnasrad.vismainternship.model.entity.counterparty.Counterparty;
+import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyDTO;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 
 import java.util.List;
 
 public interface CounterpartyService {
 
-    Counterparty addCounterparty(String body) throws NoSuchFunctionalityException;
+    CounterpartyDTO addCounterparty(String body) throws NoSuchFunctionalityException;
 
-    List<? extends Counterparty> getCounterparties() throws NoSuchFunctionalityException;
+    List<? extends CounterpartyDTO> getCounterparties() throws NoSuchFunctionalityException;
 
     String deleteCounterparty(String id) throws NoSuchFunctionalityException;
 

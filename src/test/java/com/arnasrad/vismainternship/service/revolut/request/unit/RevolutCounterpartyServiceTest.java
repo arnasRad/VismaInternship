@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request.unit;
 
-import com.arnasrad.vismainternship.model.entity.revolut.counterparty.RevolutCounterparty;
+import com.arnasrad.vismainternship.model.dto.revolut.counterparty.RevolutCounterpartyDTO;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutCounterpartyService;
 import com.arnasrad.vismainternship.service.revolut.testdata.RevolutObjectTestData;
@@ -64,7 +64,7 @@ class RevolutCounterpartyServiceTest {
 
         when(stringResponseEntityMock.getBody()).thenReturn(testCounterpartiesString);
 
-        List<RevolutCounterparty> actualCounterparties = revolutCounterpartyService.getCounterparties();
+        List<RevolutCounterpartyDTO> actualCounterparties = revolutCounterpartyService.getCounterparties();
 
         verify(restTemplate, times(1)).exchange(counterpartiesEndpoint, HttpMethod.GET, stringHttpEntityMock,
                 String.class);
@@ -76,15 +76,15 @@ class RevolutCounterpartyServiceTest {
     @Test
     public void whenResponseReturnsCounterpartyListJsonString_thenGetCounterpartiesReturnsListOfCounterparties() {
         String testCounterpartiesString = RevolutStringTestData.getCounterpartyListString();
-        List<RevolutCounterparty> testCounterpartyList = RevolutObjectTestData.getTestCounterpartyList();
+        List<RevolutCounterpartyDTO> testCounterpartyList = RevolutObjectTestData.getTestCounterpartyList();
 
         when(restTemplate.exchange(counterpartiesEndpoint, HttpMethod.GET, stringHttpEntityMock,
                 String.class)).thenReturn(stringResponseEntityMock);
 
         when(stringResponseEntityMock.getBody()).thenReturn(testCounterpartiesString);
 
-        List<RevolutCounterparty> expectedCounterparties = new ArrayList<>(testCounterpartyList);
-        List<RevolutCounterparty> actualCounterparties = revolutCounterpartyService.getCounterparties();
+        List<RevolutCounterpartyDTO> expectedCounterparties = new ArrayList<>(testCounterpartyList);
+        List<RevolutCounterpartyDTO> actualCounterparties = revolutCounterpartyService.getCounterparties();
 
         assertThat(actualCounterparties, is(expectedCounterparties));
     }

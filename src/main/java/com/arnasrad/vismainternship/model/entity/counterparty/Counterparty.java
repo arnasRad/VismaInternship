@@ -15,6 +15,7 @@ public class Counterparty {
     private String country;
     private String name;
     private String phone;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CounterpartyAccount> accounts;
 
     public Counterparty() {

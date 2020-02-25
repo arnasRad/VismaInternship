@@ -3,6 +3,7 @@ package com.arnasrad.vismainternship.model.entity.revolut.account;
 import com.arnasrad.vismainternship.model.entity.account.AccountDetails;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,9 @@ public class RevolutAccountDetails extends AccountDetails {
     private String sortCode;
     private String routingNumber;
     private String beneficiary;
+    @ManyToOne
     private BeneficiaryAddress beneficiaryAddress;
-
+    @ManyToOne
     private EstimatedTime estimatedTime;
 
     public RevolutAccountDetails() {

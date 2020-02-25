@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut;
 
-import com.arnasrad.vismainternship.model.entity.token.RevolutToken;
+import com.arnasrad.vismainternship.model.dto.token.RevolutTokenDTO;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.request.TokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
@@ -30,20 +30,20 @@ public class RefreshAccessTokenService implements TokenService {
 
     @Override
     public String refreshAndGetToken(String ssn) {
-        RevolutToken token = refreshToken();
+        RevolutTokenDTO token = refreshToken();
         return setNewToken(token);
     }
 
-    private RevolutToken refreshToken() {
+    private RevolutTokenDTO refreshToken() {
         HttpEntity<MultiValueMap<String, String>> httpEntity = revolutRequestBuilderService.getAccessTokenRequest();
 
-        ResponseEntity<RevolutToken> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
-                httpEntity, RevolutToken.class);
+        ResponseEntity<RevolutTokenDTO> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
+                httpEntity, RevolutTokenDTO.class);
 
         return responseEntity.getBody();
     }
 
-    private String setNewToken(RevolutToken revolutToken) {
+    private String setNewToken(RevolutTokenDTO revolutToken) {
         String token = revolutToken.getAccessToken();
         revolutAccessToken.setToken(token);
         return token;

@@ -2,13 +2,17 @@ package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
 
 import com.arnasrad.vismainternship.model.entity.customer.CustomerInfo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
 public class DNBCustomerInfo extends CustomerInfo {
     private String customerType;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Citizenship> citizenship;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CountryTax> countryTax;
 
     public DNBCustomerInfo() {

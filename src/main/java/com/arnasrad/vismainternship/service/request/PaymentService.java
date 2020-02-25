@@ -1,11 +1,11 @@
 package com.arnasrad.vismainternship.service.request;
 
-import com.arnasrad.vismainternship.model.entity.payment.Payment;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentDTO;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 
 public interface PaymentService {
 
-    Payment createPayment(String body) throws NoSuchFunctionalityException;
+    PaymentDTO createPayment(String body) throws NoSuchFunctionalityException;
 
     String getBankId();
 }

@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 
-import com.arnasrad.vismainternship.model.entity.token.DNBToken;
+import com.arnasrad.vismainternship.model.dto.token.DNBTokenDTO;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.request.TokenService;
@@ -33,20 +33,20 @@ public class RefreshJwtTokenService implements TokenService {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ssn", ssn);
 
-        DNBToken jsonResponse = getRefreshTokenJsonResponse(jsonObject);
+        DNBTokenDTO jsonResponse = getRefreshTokenJsonResponse(jsonObject);
         return refreshToken(jsonResponse);
     }
 
-    private DNBToken getRefreshTokenJsonResponse(JSONObject ssn) {
+    private DNBTokenDTO getRefreshTokenJsonResponse(JSONObject ssn) {
         HttpEntity<String> httpEntity = dnbRequestBuilderService.getRequest(ssn);
 
-        ResponseEntity<DNBToken> responseEntity = restTemplate.postForEntity(accessTokenEndpoint, httpEntity,
-                DNBToken.class);
+        ResponseEntity<DNBTokenDTO> responseEntity = restTemplate.postForEntity(accessTokenEndpoint, httpEntity,
+                DNBTokenDTO.class);
 
         return responseEntity.getBody();
     }
 
-    private String refreshToken(DNBToken dnbToken) {
+    private String refreshToken(DNBTokenDTO dnbToken) {
         String token = dnbToken.getJwtToken();
         dnbJwtToken.setToken(token);
         return token;

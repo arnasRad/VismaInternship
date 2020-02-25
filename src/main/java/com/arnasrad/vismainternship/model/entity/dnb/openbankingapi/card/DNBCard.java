@@ -3,10 +3,12 @@ package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.card;
 import com.arnasrad.vismainternship.model.entity.card.Card;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class DNBCard extends Card {
 
+    @ManyToOne
     private BlockingInfo blockingInfo;
     private String created;
     private String lastChanged;

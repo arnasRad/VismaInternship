@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.controller.revolut;
 
-import com.arnasrad.vismainternship.model.entity.account.Account;
-import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccount;
-import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccountDetails;
+import com.arnasrad.vismainternship.model.dto.account.AccountDTO;
+import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDTO;
+import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDetailsDTO;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutAccountService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,17 +20,17 @@ public class AccountController {
     }
 
     @GetMapping("/revolut/accounts")
-    public List<RevolutAccount> getAccounts() {
+    public List<RevolutAccountDTO> getAccounts() {
         return revolutAccountService.getAccounts();
     }
 
     @GetMapping("/revolut/account")
-    public Account getAccountById(@RequestParam String id) {
+    public AccountDTO getAccountById(@RequestParam String id) {
         return revolutAccountService.getAccount(id);
     }
 
     @GetMapping("/revolut/account-details")
-    public List<RevolutAccountDetails> getAccountDetails(@RequestParam String id) {
+    public List<RevolutAccountDetailsDTO> getAccountDetails(@RequestParam String id) {
         return revolutAccountService.getAccountDetails(id);
     }
 }

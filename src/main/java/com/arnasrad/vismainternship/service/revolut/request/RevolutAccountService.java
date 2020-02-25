@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccount;
-import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccountDetails;
+import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDTO;
+import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDetailsDTO;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.request.AccountService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
@@ -30,34 +30,34 @@ public class RevolutAccountService implements AccountService {
     }
 
     @Override
-    public List<RevolutAccount> getAccounts() {
+    public List<RevolutAccountDTO> getAccounts() {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<List<RevolutAccount>> responseEntity = restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
-                authorizedHttpEntity, new ParameterizedTypeReference<List<RevolutAccount>>() {
+        ResponseEntity<List<RevolutAccountDTO>> responseEntity = restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, new ParameterizedTypeReference<List<RevolutAccountDTO>>() {
                 });
 
         return responseEntity.getBody();
     }
 
     @Override
-    public RevolutAccount getAccount(String id) {
+    public RevolutAccountDTO getAccount(String id) {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<RevolutAccount> responseEntity = restTemplate.exchange(accountsEndpoint.concat("/").concat(id),
-                HttpMethod.GET, authorizedHttpEntity, RevolutAccount.class);
+        ResponseEntity<RevolutAccountDTO> responseEntity = restTemplate.exchange(accountsEndpoint.concat("/").concat(id),
+                HttpMethod.GET, authorizedHttpEntity, RevolutAccountDTO.class);
 
         return responseEntity.getBody();
     }
 
     @Override
-    public List<RevolutAccountDetails> getAccountDetails(String id) {
+    public List<RevolutAccountDetailsDTO> getAccountDetails(String id) {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<List<RevolutAccountDetails>> responseEntity = restTemplate.exchange(accountsEndpoint.concat("/")
-                        .concat(id).concat("/bank-details"), HttpMethod.GET, authorizedHttpEntity,
-                new ParameterizedTypeReference<List<RevolutAccountDetails>>() {
-                });
+        ResponseEntity<List<RevolutAccountDetailsDTO>> responseEntity =
+                restTemplate.exchange(accountsEndpoint.concat("/").concat(id).concat("/bank-details"),
+                         HttpMethod.GET, authorizedHttpEntity,
+                        new ParameterizedTypeReference<List<RevolutAccountDetailsDTO>>() {});
 
         return responseEntity.getBody();
     }

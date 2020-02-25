@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.entity.revolut.payment.RevolutPayment;
+import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.persistence.payment.PaymentRepository;
 import com.arnasrad.vismainternship.service.request.PaymentService;
@@ -33,16 +33,16 @@ public class RevolutPaymentService implements PaymentService {
     }
 
     @Override
-    public RevolutPayment createPayment(String body) {
+    public RevolutPaymentDTO createPayment(String body) {
         JSONObject jsonObject = new JSONObject(body);
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getPaymentRequest(jsonObject);
 
-        ResponseEntity<RevolutPayment> responseEntity = restTemplate.postForEntity(paymentEndpoint, authorizedHttpEntity,
-                RevolutPayment.class);
+        ResponseEntity<RevolutPaymentDTO> responseEntity = restTemplate.postForEntity(paymentEndpoint,
+                authorizedHttpEntity, RevolutPaymentDTO.class);
 
-        RevolutPayment payment = responseEntity.getBody();
-        paymentRepository.save(payment);
-        revolutTransactionService.saveTransaction(payment.getPaymentId());
+        RevolutPaymentDTO payment = responseEntity.getBody();
+//        paymentRepository.save(payment);
+//        revolutTransactionService.saveTransaction(payment.getPaymentId());
 
         return payment;
     }
