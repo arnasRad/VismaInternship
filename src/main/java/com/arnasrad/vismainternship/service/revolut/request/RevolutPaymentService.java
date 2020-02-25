@@ -15,13 +15,12 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class RevolutPaymentService implements PaymentService {
 
-    @Value("${revolut.endpoint.payment}")
-    private String paymentEndpoint;
-
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final RevolutTransactionService revolutTransactionService;
     private final PaymentRepository paymentRepository;
+    @Value("${revolut.endpoint.payment}")
+    private String paymentEndpoint;
 
     public RevolutPaymentService(RestTemplate restTemplate,
                                  RevolutRequestBuilderService revolutRequestBuilderService,
@@ -43,7 +42,7 @@ public class RevolutPaymentService implements PaymentService {
 
         RevolutPayment payment = responseEntity.getBody();
         paymentRepository.save(payment);
-        revolutTransactionService.saveTransaction(payment.getId());
+        revolutTransactionService.saveTransaction(payment.getPaymentId());
 
         return payment;
     }

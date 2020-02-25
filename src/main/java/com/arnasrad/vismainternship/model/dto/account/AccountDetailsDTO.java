@@ -3,23 +3,22 @@ package com.arnasrad.vismainternship.model.dto.account;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountDetailsDTO {
 
     @JsonProperty("account_no")
     private String accountNo;
-
     private String iban;
-
-    private String[] schemas;
-
+    private List<String> schemas;
     @JsonProperty("bank_country")
     private String bankCountry;
 
     public AccountDetailsDTO() {
     }
 
-    public AccountDetailsDTO(String iban, String[] schemas, String accountNo, String bankCountry) {
+    public AccountDetailsDTO(String iban, List<String> schemas, String accountNo, String bankCountry) {
         this.iban = iban;
         this.schemas = schemas;
         this.accountNo = accountNo;
@@ -34,11 +33,11 @@ public class AccountDetailsDTO {
         this.iban = iban;
     }
 
-    public String[] getSchemas() {
+    public List<String> getSchemas() {
         return schemas;
     }
 
-    public void setSchemas(String[] schemas) {
+    public void setSchemas(List<String> schemas) {
         this.schemas = schemas;
     }
 

@@ -1,47 +1,43 @@
 package com.arnasrad.vismainternship.model.entity.counterparty;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CounterpartyAccount {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String counterpartyAccountId;
     private String currency;
     private String type;
-    @JsonProperty("account_no")
     private String accountNo;
 
     public CounterpartyAccount() {
     }
 
-    public CounterpartyAccount(String id, String currency, String type) {
-        this.id = id;
-        this.currency = currency;
-        this.type = type;
-    }
-
-    public CounterpartyAccount(String id, String currency, String type, String accountNo) {
-        this.id = id;
+    public CounterpartyAccount(String counterpartyAccountId, String currency, String type, String accountNo) {
+        this.counterpartyAccountId = counterpartyAccountId;
         this.currency = currency;
         this.type = type;
         this.accountNo = accountNo;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCounterpartyAccountId() {
+        return counterpartyAccountId;
+    }
+
+    public void setCounterpartyAccountId(String counterpartyAccountId) {
+        this.counterpartyAccountId = counterpartyAccountId;
     }
 
     public String getCurrency() {

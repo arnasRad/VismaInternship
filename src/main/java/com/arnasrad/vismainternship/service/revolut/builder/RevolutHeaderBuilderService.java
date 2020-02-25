@@ -11,13 +11,11 @@ import java.util.Collections;
 @Service
 public class RevolutHeaderBuilderService {
 
+    private final RevolutAccessToken revolutAccessToken;
     @Value("${authorization.headerName}")
     private String headerName;
-
     @Value("${authorization.headerType}")
     private String headerType;
-
-    private final RevolutAccessToken revolutAccessToken;
 
     public RevolutHeaderBuilderService(RevolutAccessToken revolutAccessToken) {
         this.revolutAccessToken = revolutAccessToken;

@@ -15,12 +15,6 @@ public class CounterpartyAccountDTO {
     public CounterpartyAccountDTO() {
     }
 
-    public CounterpartyAccountDTO(String id, String currency, String type) {
-        this.id = id;
-        this.currency = currency;
-        this.type = type;
-    }
-
     public CounterpartyAccountDTO(String id, String currency, String type, String accountNo) {
         this.id = id;
         this.currency = currency;

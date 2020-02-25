@@ -11,21 +11,17 @@ import java.util.Date;
 @Service
 public class RevolutRequestParameterService {
 
+    private final DatesService datesService;
     @Value("${revolut.sandbox.constant.grantType}")
     private String grantType;
-
     @Value("${revolut.sandbox.constant.jwtToken}")
     private String jwtToken;
-
     @Value("${revolut.sandbox.constant.refreshToken}")
     private String refreshTokenConstant;
-
     @Value("${revolut.sandbox.constant.clientId}")
     private String clientId;
-
     @Value("${revolut.sandbox.constant.clientAssertionType}")
     private String clientAssertionType;
-    private final DatesService datesService;
 
     public RevolutRequestParameterService(DatesService datesService) {
         this.datesService = datesService;

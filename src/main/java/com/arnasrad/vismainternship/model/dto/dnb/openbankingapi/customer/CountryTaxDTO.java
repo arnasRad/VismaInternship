@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CountryTaxDTO {
+
     private String taxLiabilityCountry;
     private String taxIdentificationNumber;
 

@@ -15,12 +15,11 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class RefreshJwtTokenService implements TokenService {
 
-    @Value("${dnb.openbanking.endpoint.access-token}")
-    private String accessTokenEndpoint;
-
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
     private final DnbJwtToken dnbJwtToken;
+    @Value("${dnb.openbanking.endpoint.access-token}")
+    private String accessTokenEndpoint;
 
     public RefreshJwtTokenService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService,
                                   DnbJwtToken dnbJwtToken) {

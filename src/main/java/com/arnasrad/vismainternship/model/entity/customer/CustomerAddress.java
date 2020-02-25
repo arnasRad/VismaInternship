@@ -4,18 +4,18 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Address {
+public class CustomerAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String postalCode;
     private String addressLine1;
 
-    public Address() {
+    public CustomerAddress() {
     }
 
-    public Address(String postalCode, String addressLine1) {
+    public CustomerAddress(String postalCode, String addressLine1) {
         this.postalCode = postalCode;
         this.addressLine1 = addressLine1;
     }

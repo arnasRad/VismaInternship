@@ -2,8 +2,6 @@ package com.arnasrad.vismainternship.model.entity.revolut.transaction;
 
 import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import com.arnasrad.vismainternship.model.entity.transaction.TransactionCard;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,24 +11,16 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutTransaction extends Transaction {
 
-    @JsonProperty("request_id")
     private String requestId;
-    @JsonProperty("reason_code")
     private String reasonCode;
-    @JsonProperty("updated_at")
     private Date updatedAt;
-    @JsonProperty("scheduled_for")
     private Date scheduledFor;
-    @JsonProperty("related_transaction_id")
     private String relatedTransactionId;
     @ManyToOne
     private Merchant merchant;
-    //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "revolutTransaction")
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonProperty("legs")
     private List<RevolutTransactionLegs> revolutTransactionLegs;
     @ManyToOne
     private TransactionCard card;

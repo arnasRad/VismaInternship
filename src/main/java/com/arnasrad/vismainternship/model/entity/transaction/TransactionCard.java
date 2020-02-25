@@ -1,23 +1,16 @@
 package com.arnasrad.vismainternship.model.entity.transaction;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransactionCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @JsonProperty("card_number")
+    private Long id;
     private String cardNumber;
-    @JsonProperty("first_name")
     private String firstName;
-    @JsonProperty("last_name")
     private String lastName;
     private String phone;
 

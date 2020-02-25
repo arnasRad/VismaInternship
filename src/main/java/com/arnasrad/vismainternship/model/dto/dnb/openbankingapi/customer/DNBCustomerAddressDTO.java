@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DNBCustomerAddressDTO extends CustomerAddressDTO {
+
     private String postalAddressCountry;
     private String postalCodeName;
     private String addressLine2;

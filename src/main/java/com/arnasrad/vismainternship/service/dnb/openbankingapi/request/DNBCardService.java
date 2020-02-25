@@ -17,11 +17,10 @@ import java.util.List;
 @Service
 public class DNBCardService implements CardService {
 
-    @Value("${dnb.openbanking.endpoint.cards}")
-    private String cardsEndpoint;
-
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
+    @Value("${dnb.openbanking.endpoint.cards}")
+    private String cardsEndpoint;
 
     public DNBCardService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService) {
         this.restTemplate = restTemplate;

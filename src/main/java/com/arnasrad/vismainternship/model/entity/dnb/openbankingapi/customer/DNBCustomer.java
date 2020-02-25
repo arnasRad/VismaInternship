@@ -1,9 +1,10 @@
 package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
 
 import com.arnasrad.vismainternship.model.entity.customer.Customer;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+import javax.persistence.Entity;
+
+@Entity
 public class DNBCustomer extends Customer {
 
     public DNBCustomer() {

@@ -1,9 +1,16 @@
 package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Entity
 public class CountryTax {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String taxLiabilityCountry;
     private String taxIdentificationNumber;
 
@@ -13,6 +20,14 @@ public class CountryTax {
     public CountryTax(String taxLiabilityCountry, String taxIdentificationNumber) {
         this.taxLiabilityCountry = taxLiabilityCountry;
         this.taxIdentificationNumber = taxIdentificationNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTaxLiabilityCountry() {

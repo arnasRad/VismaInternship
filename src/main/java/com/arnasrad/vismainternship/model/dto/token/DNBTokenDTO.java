@@ -5,6 +5,14 @@ public class DNBTokenDTO {
     private String customerPublicId;
     private String jwtToken;
 
+    public DNBTokenDTO() {
+    }
+
+    public DNBTokenDTO(String customerPublicId, String jwtToken) {
+        this.customerPublicId = customerPublicId;
+        this.jwtToken = jwtToken;
+    }
+
     public String getCustomerPublicId() {
         return customerPublicId;
     }

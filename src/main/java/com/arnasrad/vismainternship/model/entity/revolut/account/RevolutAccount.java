@@ -1,23 +1,17 @@
 package com.arnasrad.vismainternship.model.entity.revolut.account;
 
 import com.arnasrad.vismainternship.model.entity.account.Account;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Entity
 public class RevolutAccount extends Account {
+
     private String currency;
     private String state;
-
-    @JsonProperty("public")
     private Boolean isPublic;
-
-    @JsonProperty("created_at")
     private Date createdAt;
-
-    @JsonProperty("updated_at")
     private Date updatedAt;
 
     public RevolutAccount() {

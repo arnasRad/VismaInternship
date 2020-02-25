@@ -1,18 +1,14 @@
 package com.arnasrad.vismainternship.model.entity.customer;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String ssn;
     private String customerName;
 
@@ -22,6 +18,14 @@ public class Customer {
     public Customer(String customerName, String ssn) {
         this.customerName = customerName;
         this.ssn = ssn;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCustomerName() {

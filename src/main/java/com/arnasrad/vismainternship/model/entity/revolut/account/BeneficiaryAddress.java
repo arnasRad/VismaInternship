@@ -1,17 +1,18 @@
 package com.arnasrad.vismainternship.model.entity.revolut.account;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Entity
 public class BeneficiaryAddress {
 
-    @JsonProperty("street_line1")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String streetLine1;
-
-    @JsonProperty("street_line1")
     private String streetLine2;
-
     private String region;
     private String city;
     private String country;
@@ -27,6 +28,14 @@ public class BeneficiaryAddress {
         this.city = city;
         this.country = country;
         this.postcode = postcode;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStreetLine1() {

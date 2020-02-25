@@ -3,27 +3,29 @@ package com.arnasrad.vismainternship.model.dto.counterparty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CounterpartyDTO {
 
     private String id;
-
     @JsonProperty("country")
     private String country;
-
     private String name;
     private String phone;
-    private CounterpartyAccountDTO[] accounts;
+    private List<CounterpartyAccountDTO> accounts;
 
     public CounterpartyDTO() {
     }
 
-    public CounterpartyDTO(String country, String id, String name, String phone, CounterpartyAccountDTO[] accounts) {
+    public CounterpartyDTO(String country, String id, String name, String phone,
+                           List<? extends CounterpartyAccountDTO> accounts) {
         this.country = country;
         this.id = id;
         this.name = name;
         this.phone = phone;
-        this.accounts = accounts;
+        this.accounts = new ArrayList<>(accounts);
     }
 
     public String getCountry() {
@@ -58,11 +60,11 @@ public class CounterpartyDTO {
         this.phone = phone;
     }
 
-    public CounterpartyAccountDTO[] getAccounts() {
+    public List<CounterpartyAccountDTO> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(CounterpartyAccountDTO[] accounts) {
+    public void setAccounts(List<CounterpartyAccountDTO> accounts) {
         this.accounts = accounts;
     }
 }

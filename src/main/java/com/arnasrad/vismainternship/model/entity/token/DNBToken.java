@@ -8,9 +8,17 @@ public class DNBToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String customerPublicId;
     private String jwtToken;
+
+    public DNBToken() {
+    }
+
+    public DNBToken(String customerPublicId, String jwtToken) {
+        this.customerPublicId = customerPublicId;
+        this.jwtToken = jwtToken;
+    }
 
     public long getId() {
         return id;

@@ -1,22 +1,20 @@
 package com.arnasrad.vismainternship.model.dto.revolut.account;
 
-import com.arnasrad.vismainternship.model.dto.dnb.psd2api.AccountDTO;
+import com.arnasrad.vismainternship.model.dto.dnb.psd2api.DNBAccountDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RevolutAccountDTO extends AccountDTO {
+public class RevolutAccountDTO extends DNBAccountDTO {
+
     private String currency;
     private String state;
-
     @JsonProperty("public")
     private Boolean isPublic;
-
     @JsonProperty("created_at")
     private Date createdAt;
-
     @JsonProperty("updated_at")
     private Date updatedAt;
 

@@ -15,12 +15,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class RefreshAccessTokenService implements TokenService {
-    @Value("${revolut.endpoint.access-token}")
-    private String refreshTokenEndpoint;
-
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final RestTemplate restTemplate;
     private final RevolutAccessToken revolutAccessToken;
+    @Value("${revolut.endpoint.access-token}")
+    private String refreshTokenEndpoint;
 
     public RefreshAccessTokenService(RevolutRequestBuilderService revolutRequestBuilderService,
                                      RestTemplate restTemplate, RevolutAccessToken revolutAccessToken) {

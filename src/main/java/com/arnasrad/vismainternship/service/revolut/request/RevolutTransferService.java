@@ -13,11 +13,10 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class RevolutTransferService implements TransferService {
 
-    @Value("${revolut.endpoint.transfer}")
-    private String transferEndpoint;
-
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
+    @Value("${revolut.endpoint.transfer}")
+    private String transferEndpoint;
 
     public RevolutTransferService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService) {
         this.restTemplate = restTemplate;

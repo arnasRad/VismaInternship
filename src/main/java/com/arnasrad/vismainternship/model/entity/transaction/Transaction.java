@@ -1,34 +1,27 @@
 package com.arnasrad.vismainternship.model.entity.transaction;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Transaction {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String transactionId;
     private String type;
     private String state;
-    @JsonProperty("created_at")
     private Date createdAt;
-    @JsonProperty("completed_at")
     private Date completedAt;
     private String reference;
 
     public Transaction() {
     }
 
-    public Transaction(String id, String type, String state, Date createdAt, Date completedAt, String reference) {
-        this.id = id;
+    public Transaction(String transactionId, String type, String state, Date createdAt, Date completedAt, String reference) {
+        this.transactionId = transactionId;
         this.type = type;
         this.state = state;
         this.createdAt = createdAt;
@@ -36,12 +29,20 @@ public class Transaction {
         this.reference = reference;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     public String getType() {

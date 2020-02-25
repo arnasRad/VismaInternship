@@ -1,39 +1,41 @@
 package com.arnasrad.vismainternship.model.entity.transaction;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LegsCounterparty {
 
     @Id
-    private String id;
-    @JsonProperty("account_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String legsCounterpartyId;
     private String accountId;
     private String type;
 
     public LegsCounterparty() {
     }
 
-    public LegsCounterparty(String id, String accountId, String type) {
-        this.id = id;
+    public LegsCounterparty(String legsCounterpartyId, String accountId, String type) {
+        this.legsCounterpartyId = legsCounterpartyId;
         this.accountId = accountId;
         this.type = type;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLegsCounterpartyId() {
+        return legsCounterpartyId;
+    }
+
+    public void setLegsCounterpartyId(String legsCounterpartyId) {
+        this.legsCounterpartyId = legsCounterpartyId;
     }
 
     public String getAccountId() {

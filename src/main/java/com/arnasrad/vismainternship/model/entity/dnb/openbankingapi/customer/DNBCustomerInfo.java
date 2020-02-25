@@ -1,21 +1,23 @@
 package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
 
 import com.arnasrad.vismainternship.model.entity.customer.CustomerInfo;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+import javax.persistence.Entity;
+import java.util.List;
+
+@Entity
 public class DNBCustomerInfo extends CustomerInfo {
     private String customerType;
-    private Citizenship[] citizenship;
-    private CountryTax[] countryTax;
+    private List<Citizenship> citizenship;
+    private List<CountryTax> countryTax;
 
     public DNBCustomerInfo() {
     }
 
-    public DNBCustomerInfo(String customerId, String firstName, String lastName, DNBCustomerAddress dnbCustomerAddress, String phone,
-                           String email, String countryOfBirth, String customerType, Citizenship[] citizenship,
-                           CountryTax[] countryTax) {
-        super(customerId, firstName, lastName, dnbCustomerAddress, phone, email, countryOfBirth);
+    public DNBCustomerInfo(String customerId, String firstName, String lastName, DNBCustomerAddress address,
+                           String phone, String email, String countryOfBirth, String customerType,
+                           List<Citizenship> citizenship, List<CountryTax> countryTax) {
+        super(customerId, firstName, lastName, address, phone, email, countryOfBirth);
         this.customerType = customerType;
         this.citizenship = citizenship;
         this.countryTax = countryTax;
@@ -29,19 +31,19 @@ public class DNBCustomerInfo extends CustomerInfo {
         this.customerType = customerType;
     }
 
-    public Citizenship[] getCitizenship() {
+    public List<Citizenship> getCitizenship() {
         return citizenship;
     }
 
-    public void setCitizenship(Citizenship[] citizenship) {
+    public void setCitizenship(List<Citizenship> citizenship) {
         this.citizenship = citizenship;
     }
 
-    public CountryTax[] getCountryTax() {
+    public List<CountryTax> getCountryTax() {
         return countryTax;
     }
 
-    public void setCountryTax(CountryTax[] countryTax) {
+    public void setCountryTax(List<CountryTax> countryTax) {
         this.countryTax = countryTax;
     }
 }

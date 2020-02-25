@@ -1,9 +1,10 @@
 package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.card;
 
 import com.arnasrad.vismainternship.model.entity.card.Card;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+import javax.persistence.Entity;
+
+@Entity
 public class DNBCard extends Card {
 
     private BlockingInfo blockingInfo;

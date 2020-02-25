@@ -10,6 +10,15 @@ public class RevolutTokenDTO {
     @JsonProperty("expires_id")
     private int expiresId;
 
+    public RevolutTokenDTO() {
+    }
+
+    public RevolutTokenDTO(String accessToken, String tokenType, int expiresId) {
+        this.accessToken = accessToken;
+        this.tokenType = tokenType;
+        this.expiresId = expiresId;
+    }
+
     public String getAccessToken() {
         return accessToken;
     }

@@ -8,10 +8,8 @@ public class BeneficiaryAddressDTO {
 
     @JsonProperty("street_line1")
     private String streetLine1;
-
     @JsonProperty("street_line1")
     private String streetLine2;
-
     private String region;
     private String city;
     private String country;

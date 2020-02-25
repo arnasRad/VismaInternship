@@ -2,7 +2,7 @@ package com.arnasrad.vismainternship.model.dto.customer;
 
 public class CustomerAddressDTO {
 
-    private long id;
+    private Long id;
     private String postalCode;
     private String addressLine1;
 

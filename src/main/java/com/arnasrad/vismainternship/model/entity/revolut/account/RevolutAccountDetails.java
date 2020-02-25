@@ -1,33 +1,27 @@
 package com.arnasrad.vismainternship.model.entity.revolut.account;
 
 import com.arnasrad.vismainternship.model.entity.account.AccountDetails;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+import javax.persistence.Entity;
+import java.util.List;
+
+@Entity
 public class RevolutAccountDetails extends AccountDetails {
 
     private String bic;
     private Boolean pooled;
     private String uniqueReference;
-
-    @JsonProperty("sort_code")
     private String sortCode;
-
-    @JsonProperty("routing_number")
     private String routingNumber;
-
     private String beneficiary;
-    @JsonProperty("beneficiary_address")
     private BeneficiaryAddress beneficiaryAddress;
 
-    @JsonProperty("estimated_time")
     private EstimatedTime estimatedTime;
 
     public RevolutAccountDetails() {
     }
 
-    public RevolutAccountDetails(String iban, String[] schemas, String accountNo, String bankCountry, String bic,
+    public RevolutAccountDetails(String iban, List<String> schemas, String accountNo, String bankCountry, String bic,
                                  Boolean pooled, String uniqueReference, String sortCode, String routingNumber,
                                  String beneficiary, BeneficiaryAddress beneficiaryAddress, EstimatedTime estimatedTime) {
 

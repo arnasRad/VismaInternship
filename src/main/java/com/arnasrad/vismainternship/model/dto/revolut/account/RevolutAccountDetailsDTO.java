@@ -4,6 +4,8 @@ import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutAccountDetailsDTO extends AccountDetailsDTO {
 
@@ -27,7 +29,7 @@ public class RevolutAccountDetailsDTO extends AccountDetailsDTO {
     public RevolutAccountDetailsDTO() {
     }
 
-    public RevolutAccountDetailsDTO(String iban, String[] schemas, String accountNo, String bankCountry, String bic,
+    public RevolutAccountDetailsDTO(String iban, List<String> schemas, String accountNo, String bankCountry, String bic,
                                     Boolean pooled, String uniqueReference, String sortCode, String routingNumber,
                                     String beneficiary, BeneficiaryAddressDTO beneficiaryAddress,
                                     EstimatedTimeDTO estimatedTime) {

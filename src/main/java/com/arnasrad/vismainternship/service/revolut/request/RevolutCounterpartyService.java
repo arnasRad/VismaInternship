@@ -18,17 +18,14 @@ import java.util.List;
 @Service
 public class RevolutCounterpartyService implements CounterpartyService {
 
-    @Value("${revolut.endpoint.counterparty}")
-    private String counterpartyEndpoint;
-
-    @Value("${revolut.endpoint.counterparties}")
-    private String counterpartiesEndpoint;
-
-    @Value("${revolut.endpoint.delete-counterparty}")
-    private String deleteCounterpartyEndpoint;
-
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
+    @Value("${revolut.endpoint.counterparty}")
+    private String counterpartyEndpoint;
+    @Value("${revolut.endpoint.counterparties}")
+    private String counterpartiesEndpoint;
+    @Value("${revolut.endpoint.delete-counterparty}")
+    private String deleteCounterpartyEndpoint;
 
     public RevolutCounterpartyService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService) {
         this.restTemplate = restTemplate;

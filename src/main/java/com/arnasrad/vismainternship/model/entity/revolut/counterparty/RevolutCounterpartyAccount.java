@@ -1,31 +1,30 @@
 package com.arnasrad.vismainternship.model.entity.revolut.counterparty;
 
 import com.arnasrad.vismainternship.model.entity.counterparty.CounterpartyAccount;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+import javax.persistence.Entity;
+
+@Entity
 public class RevolutCounterpartyAccount extends CounterpartyAccount {
 
     private String iban;
-    @JsonProperty("sort_no")
     private String sortCode;
-    @JsonProperty("routing_number")
     private String routingNumber;
     private String bic;
-    @JsonProperty("recipient_charges")
     private String recipientCharges;
 
     public RevolutCounterpartyAccount() {
     }
 
-    public RevolutCounterpartyAccount(String id, String currency, String type, String accountNo) {
-        super(id, currency, type, accountNo);
-    }
-
-    public RevolutCounterpartyAccount(String id, String currency, String type) {
-
-        super(id, currency, type);
+    public RevolutCounterpartyAccount(String counterpartyAccountId, String currency, String type,
+                                      String accountNo, String iban, String sortCode, String routingNumber,
+                                      String bic, String recipientCharges) {
+        super(counterpartyAccountId, currency, type, accountNo);
+        this.iban = iban;
+        this.sortCode = sortCode;
+        this.routingNumber = routingNumber;
+        this.bic = bic;
+        this.recipientCharges = recipientCharges;
     }
 
     public String getIban() {

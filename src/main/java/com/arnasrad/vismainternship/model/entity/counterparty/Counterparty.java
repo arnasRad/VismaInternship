@@ -1,37 +1,40 @@
 package com.arnasrad.vismainternship.model.entity.counterparty;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Counterparty {
 
     @Id
-    private String id;
-
-    @JsonProperty("country")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String counterpartyId;
     private String country;
-
     private String name;
     private String phone;
-    private CounterpartyAccount[] accounts;
+    private List<CounterpartyAccount> accounts;
 
     public Counterparty() {
     }
 
-    public Counterparty(String country, String id, String name, String phone, CounterpartyAccount[] accounts) {
+    public Counterparty(String country, String counterpartyId, String name, String phone,
+                        List<? extends CounterpartyAccount> accounts) {
         this.country = country;
-        this.id = id;
+        this.counterpartyId = counterpartyId;
         this.name = name;
         this.phone = phone;
-        this.accounts = accounts;
+        this.accounts = new ArrayList<>(accounts);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCountry() {
@@ -42,12 +45,12 @@ public class Counterparty {
         this.country = country;
     }
 
-    public String getId() {
-        return id;
+    public String getCounterpartyId() {
+        return counterpartyId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCounterpartyId(String counterpartyId) {
+        this.counterpartyId = counterpartyId;
     }
 
     public String getName() {
@@ -66,11 +69,11 @@ public class Counterparty {
         this.phone = phone;
     }
 
-    public CounterpartyAccount[] getAccounts() {
+    public List<CounterpartyAccount> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(CounterpartyAccount[] accounts) {
+    public void setAccounts(List<CounterpartyAccount> accounts) {
         this.accounts = accounts;
     }
 }

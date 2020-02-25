@@ -1,18 +1,14 @@
 package com.arnasrad.vismainternship.model.entity.card;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Card {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String cardId;
     private String customerId;
     private String accountNumber;
@@ -32,6 +28,14 @@ public class Card {
         this.debitBalance = debitBalance;
         this.cardType = cardType;
         this.productName = productName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCustomerId() {

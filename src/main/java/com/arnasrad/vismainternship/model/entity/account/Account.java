@@ -1,37 +1,41 @@
 package com.arnasrad.vismainternship.model.entity.account;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Account {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String accountId;
     private String name;
     private Double balance;
 
     public Account() {
     }
 
-    public Account(String id, String name, Double balance) {
-        this.id = id;
+    public Account(String accountId, String name, Double balance) {
+        this.accountId = accountId;
         this.name = name;
         this.balance = balance;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getName() {
@@ -53,7 +57,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "id='" + id + '\'' +
+                "id='" + accountId + '\'' +
                 ", name='" + name + '\'' +
                 ", balance=" + balance +
                 '}';

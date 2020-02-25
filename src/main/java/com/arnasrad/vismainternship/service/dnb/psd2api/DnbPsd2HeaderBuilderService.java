@@ -9,16 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DnbPsd2HeaderBuilderService {
 
+    private final DnbJwtToken dnbJwtToken;
     @Value("${dnb.api.keyHeader}")
     private String apiKeyHeader;
-
     @Value("${dnb.jwt.tokenHeader}")
     private String jwtTokenHeader;
-
     @Value("${dnb.apikey}")
     private String apiKey;
-
-    private final DnbJwtToken dnbJwtToken;
 
     public DnbPsd2HeaderBuilderService(DnbJwtToken dnbJwtToken) {
         this.dnbJwtToken = dnbJwtToken;

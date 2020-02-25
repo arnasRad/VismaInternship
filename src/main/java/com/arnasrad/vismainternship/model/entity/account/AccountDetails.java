@@ -1,37 +1,36 @@
 package com.arnasrad.vismainternship.model.entity.account;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountDetails {
 
     @Id
-    @JsonProperty("account_no")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String accountNo;
-
     private String iban;
-
-    private String[] schemas;
-
-    @JsonProperty("bank_country")
+    private List<String> schemas;
     private String bankCountry;
 
     public AccountDetails() {
     }
 
-    public AccountDetails(String iban, String[] schemas, String accountNo, String bankCountry) {
+    public AccountDetails(String iban, List<String> schemas, String accountNo, String bankCountry) {
         this.iban = iban;
         this.schemas = schemas;
         this.accountNo = accountNo;
         this.bankCountry = bankCountry;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getIban() {
@@ -42,11 +41,11 @@ public class AccountDetails {
         this.iban = iban;
     }
 
-    public String[] getSchemas() {
+    public List<String> getSchemas() {
         return schemas;
     }
 
-    public void setSchemas(String[] schemas) {
+    public void setSchemas(List<String> schemas) {
         this.schemas = schemas;
     }
 

@@ -2,21 +2,15 @@ package com.arnasrad.vismainternship.model.entity.revolut.transaction;
 
 import com.arnasrad.vismainternship.model.entity.transaction.LegsCounterparty;
 import com.arnasrad.vismainternship.model.entity.transaction.TransactionLegs;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutTransactionLegs extends TransactionLegs {
 
-    @JsonProperty("bill_amount")
     private Double billAmount;
-    @JsonProperty("bill_currency")
     private String billCurrency;
-
     @ManyToOne
     private RevolutTransaction revolutTransaction;
 

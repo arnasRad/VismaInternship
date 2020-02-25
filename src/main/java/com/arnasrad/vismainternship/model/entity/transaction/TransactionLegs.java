@@ -1,23 +1,18 @@
 package com.arnasrad.vismainternship.model.entity.transaction;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransactionLegs {
 
     @Id
-    @JsonProperty("leg_id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String transactionLegsId;
     private Double amount;
     private String currency;
-    @JsonProperty("account_id")
     private String accountId;
-
     @ManyToOne(cascade = CascadeType.ALL)
     private LegsCounterparty counterparty;
     private String description;
@@ -26,8 +21,8 @@ public class TransactionLegs {
     public TransactionLegs() {
     }
 
-    public TransactionLegs(String id, Double amount, String currency, String accountId, LegsCounterparty counterparty, String description, Double balance) {
-        this.id = id;
+    public TransactionLegs(String transactionLegsId, Double amount, String currency, String accountId, LegsCounterparty counterparty, String description, Double balance) {
+        this.transactionLegsId = transactionLegsId;
         this.amount = amount;
         this.currency = currency;
         this.accountId = accountId;
@@ -36,12 +31,20 @@ public class TransactionLegs {
         this.balance = balance;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTransactionLegsId() {
+        return transactionLegsId;
+    }
+
+    public void setTransactionLegsId(String transactionLegsId) {
+        this.transactionLegsId = transactionLegsId;
     }
 
     public Double getAmount() {

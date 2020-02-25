@@ -8,6 +8,7 @@ import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutPaymentDTO extends PaymentDTO {
+
     @JsonProperty("reason_code")
     private String reasonCode;
     @JsonProperty("created_at")

@@ -1,10 +1,16 @@
 package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.card;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Entity
 public class BlockingInfo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private boolean unblockAllowed;
     private String performedBy;
     private String timestamp;
@@ -18,6 +24,14 @@ public class BlockingInfo {
         this.performedBy = performedBy;
         this.timestamp = timestamp;
         this.blockAllowed = blockAllowed;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public boolean isUnblockAllowed() {

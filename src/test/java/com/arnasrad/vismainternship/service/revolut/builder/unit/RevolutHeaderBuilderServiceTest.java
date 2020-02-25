@@ -17,11 +17,10 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class RevolutHeaderBuilderServiceTest {
 
-    @InjectMocks
-    private RevolutHeaderBuilderService revolutHeaderBuilderService;
-
     @Mock
     RevolutAccessToken revolutAccessToken;
+    @InjectMocks
+    private RevolutHeaderBuilderService revolutHeaderBuilderService;
 
     @BeforeEach
     void init() {

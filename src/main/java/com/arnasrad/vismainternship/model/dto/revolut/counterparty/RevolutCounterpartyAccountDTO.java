@@ -19,13 +19,14 @@ public class RevolutCounterpartyAccountDTO extends CounterpartyAccountDTO {
     public RevolutCounterpartyAccountDTO() {
     }
 
-    public RevolutCounterpartyAccountDTO(String id, String currency, String type, String accountNo) {
+    public RevolutCounterpartyAccountDTO(String id, String currency, String type, String accountNo, String iban,
+                                         String sortCode, String routingNumber, String bic, String recipientCharges) {
         super(id, currency, type, accountNo);
-    }
-
-    public RevolutCounterpartyAccountDTO(String id, String currency, String type) {
-
-        super(id, currency, type);
+        this.iban = iban;
+        this.sortCode = sortCode;
+        this.routingNumber = routingNumber;
+        this.bic = bic;
+        this.recipientCharges = recipientCharges;
     }
 
     public String getIban() {

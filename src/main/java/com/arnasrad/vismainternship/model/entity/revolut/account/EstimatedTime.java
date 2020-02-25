@@ -1,10 +1,16 @@
 package com.arnasrad.vismainternship.model.entity.revolut.account;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Entity
 public class EstimatedTime {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String unit;
     private Double min;
     private Double max;
@@ -16,6 +22,14 @@ public class EstimatedTime {
         this.unit = unit;
         this.min = min;
         this.max = max;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUnit() {

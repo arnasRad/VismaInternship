@@ -1,10 +1,11 @@
 package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
 
-import com.arnasrad.vismainternship.model.entity.customer.Address;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.arnasrad.vismainternship.model.entity.customer.CustomerAddress;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class DNBCustomerAddress extends Address {
+import javax.persistence.Entity;
+
+@Entity
+public class DNBCustomerAddress extends CustomerAddress {
     private String postalAddressCountry;
     private String postalCodeName;
     private String addressLine2;

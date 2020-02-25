@@ -1,16 +1,16 @@
 package com.arnasrad.vismainternship.model.dto.dnb.psd2api;
 
-public class AccountDTO {
+public class DNBAccountDTO {
 
     private String id;
     private String name;
     private Double balance;
 
-    public AccountDTO() {
+    public DNBAccountDTO() {
 
     }
 
-    public AccountDTO(String id, String name, Double balance) {
+    public DNBAccountDTO(String id, String name, Double balance) {
         this.id = id;
         this.name = name;
         this.balance = balance;

@@ -1,7 +1,5 @@
 package com.arnasrad.vismainternship.model.entity.token;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,13 +8,20 @@ public class RevolutToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @JsonProperty("access_token")
+    private Long id;
     private String accessToken;
-    @JsonProperty("token_type")
     private String tokenType;
-    @JsonProperty("expires_id")
     private int expiresId;
+
+    public RevolutToken() {
+    }
+
+    public RevolutToken(String accessToken, String tokenType, int expiresId) {
+        this.id = id;
+        this.accessToken = accessToken;
+        this.tokenType = tokenType;
+        this.expiresId = expiresId;
+    }
 
     public long getId() {
         return id;

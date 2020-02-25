@@ -1,39 +1,42 @@
 package com.arnasrad.vismainternship.model.entity.payment;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Payment {
+
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String paymentId;
     private String state;
-    @JsonProperty("completed_at")
     private Date completedAt;
 
     public Payment() {
     }
 
-    public Payment(String id, String state, Date completedAt) {
-        this.id = id;
+    public Payment(String paymentId, String state, Date completedAt) {
+        this.paymentId = paymentId;
         this.state = state;
         this.completedAt = completedAt;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
     public String getState() {

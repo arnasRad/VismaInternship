@@ -18,17 +18,14 @@ import java.util.List;
 @Service
 public class DNBCustomerService implements CustomerService {
 
-    @Value("${dnb.openbanking.endpoint.customers}")
-    private String customersEndpoint;
-
-    @Value("${dnb.openbanking.endpoint.current-customer-info}")
-    private String currentCustomerInfoEndpoint;
-
-    @Value("${dnb.openbanking.endpoint.customer-info}")
-    private String customerInfoEndpoint;
-
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
+    @Value("${dnb.openbanking.endpoint.customers}")
+    private String customersEndpoint;
+    @Value("${dnb.openbanking.endpoint.current-customer-info}")
+    private String currentCustomerInfoEndpoint;
+    @Value("${dnb.openbanking.endpoint.customer-info}")
+    private String customerInfoEndpoint;
 
     public DNBCustomerService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService) {
         this.restTemplate = restTemplate;

@@ -14,9 +14,8 @@ import java.util.Date;
 @Component
 public class DatesService {
 
-    private final SimpleDateFormat simpleDateFormat;
-
     private static final Logger logger = LoggerFactory.getLogger(DatesService.class);
+    private final SimpleDateFormat simpleDateFormat;
 
     public DatesService(SimpleDateFormat simpleDateFormat) {
         this.simpleDateFormat = simpleDateFormat;
