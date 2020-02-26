@@ -12,18 +12,16 @@ public class RevolutTransactionLegsDTO extends TransactionLegsDTO {
     private Double billAmount;
     @JsonProperty("bill_currency")
     private String billCurrency;
-    private RevolutTransactionDTO revolutTransaction;
 
     public RevolutTransactionLegsDTO() {
     }
 
     public RevolutTransactionLegsDTO(String id, Double amount, String currency, String accountId,
                                      LegsCounterpartyDTO counterparty, String description, Double balance,
-                                     Double billAmount, String billCurrency, RevolutTransactionDTO revolutTransaction) {
+                                     Double billAmount, String billCurrency) {
         super(id, amount, currency, accountId, counterparty, description, balance);
         this.billAmount = billAmount;
         this.billCurrency = billCurrency;
-        this.revolutTransaction = revolutTransaction;
     }
 
     public Double getBillAmount() {
@@ -40,13 +38,5 @@ public class RevolutTransactionLegsDTO extends TransactionLegsDTO {
 
     public void setBillCurrency(String billCurrency) {
         this.billCurrency = billCurrency;
-    }
-
-    public RevolutTransactionDTO getRevolutTransaction() {
-        return revolutTransaction;
-    }
-
-    public void setRevolutTransaction(RevolutTransactionDTO revolutTransaction) {
-        this.revolutTransaction = revolutTransaction;
     }
 }

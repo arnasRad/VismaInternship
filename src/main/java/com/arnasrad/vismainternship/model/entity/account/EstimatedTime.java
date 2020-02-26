@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.model.entity.revolut.account;
+package com.arnasrad.vismainternship.model.entity.account;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class EstimatedTime {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String unit;
     private Double min;

@@ -3,11 +3,10 @@ package com.arnasrad.vismainternship.model.entity.counterparty;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class CounterpartyAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String counterpartyAccountId;
     private String currency;
@@ -15,15 +14,25 @@ public class CounterpartyAccount {
     private String accountNo;
     @ManyToOne
     private Counterparty counterparty;
+    private String iban;
+    private String sortCode;
+    private String routingNumber;
+    private String bic;
+    private String recipientCharges;
 
     public CounterpartyAccount() {
     }
 
-    public CounterpartyAccount(String counterpartyAccountId, String currency, String type, String accountNo) {
+    public CounterpartyAccount(String counterpartyAccountId, String currency, String type, String accountNo, String iban, String sortCode, String routingNumber, String bic, String recipientCharges) {
         this.counterpartyAccountId = counterpartyAccountId;
         this.currency = currency;
         this.type = type;
         this.accountNo = accountNo;
+        this.iban = iban;
+        this.sortCode = sortCode;
+        this.routingNumber = routingNumber;
+        this.bic = bic;
+        this.recipientCharges = recipientCharges;
     }
 
     public Long getId() {
@@ -64,5 +73,53 @@ public class CounterpartyAccount {
 
     public void setAccountNo(String accountNo) {
         this.accountNo = accountNo;
+    }
+
+    public Counterparty getCounterparty() {
+        return counterparty;
+    }
+
+    public void setCounterparty(Counterparty counterparty) {
+        this.counterparty = counterparty;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public String getSortCode() {
+        return sortCode;
+    }
+
+    public void setSortCode(String sortCode) {
+        this.sortCode = sortCode;
+    }
+
+    public String getRoutingNumber() {
+        return routingNumber;
+    }
+
+    public void setRoutingNumber(String routingNumber) {
+        this.routingNumber = routingNumber;
+    }
+
+    public String getBic() {
+        return bic;
+    }
+
+    public void setBic(String bic) {
+        this.bic = bic;
+    }
+
+    public String getRecipientCharges() {
+        return recipientCharges;
+    }
+
+    public void setRecipientCharges(String recipientCharges) {
+        this.recipientCharges = recipientCharges;
     }
 }

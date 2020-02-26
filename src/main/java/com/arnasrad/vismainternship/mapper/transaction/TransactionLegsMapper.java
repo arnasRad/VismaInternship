@@ -4,8 +4,9 @@ import com.arnasrad.vismainternship.model.dto.transaction.LegsCounterpartyDTO;
 import com.arnasrad.vismainternship.model.dto.transaction.TransactionLegsDTO;
 import com.arnasrad.vismainternship.model.entity.transaction.LegsCounterparty;
 import com.arnasrad.vismainternship.model.entity.transaction.TransactionLegs;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class TransactionLegsMapper {
 
     private final LegsCounterpartyMapper legsCounterpartyMapper;
@@ -25,6 +26,6 @@ public class TransactionLegsMapper {
         LegsCounterparty legsCounterparty = legsCounterpartyMapper.mapToEntity(dto.getCounterparty());
 
         return new TransactionLegs(dto.getId(), dto.getAmount(), dto.getCurrency(), dto.getAccountId(),
-                legsCounterparty, dto.getDescription(), dto.getBalance());
+                legsCounterparty, dto.getDescription(), dto.getBalance(), null, null);
     }
 }

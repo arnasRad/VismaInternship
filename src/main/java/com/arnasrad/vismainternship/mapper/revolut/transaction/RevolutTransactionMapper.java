@@ -1,18 +1,18 @@
 package com.arnasrad.vismainternship.mapper.revolut.transaction;
 
-import com.arnasrad.vismainternship.mapper.transaction.TransactionCardMapper;
 import com.arnasrad.vismainternship.model.dto.revolut.transaction.MerchantDTO;
 import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionDTO;
 import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionLegsDTO;
-import com.arnasrad.vismainternship.model.dto.transaction.TransactionCardDTO;
-import com.arnasrad.vismainternship.model.entity.revolut.transaction.Merchant;
-import com.arnasrad.vismainternship.model.entity.revolut.transaction.RevolutTransaction;
-import com.arnasrad.vismainternship.model.entity.revolut.transaction.RevolutTransactionLegs;
+import com.arnasrad.vismainternship.model.dto.revolut.transaction.TransactionCardDTO;
+import com.arnasrad.vismainternship.model.entity.transaction.Merchant;
+import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import com.arnasrad.vismainternship.model.entity.transaction.TransactionCard;
+import com.arnasrad.vismainternship.model.entity.transaction.TransactionLegs;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class RevolutTransactionMapper {
 
     private final MerchantMapper merchantMapper;
@@ -25,10 +25,10 @@ public class RevolutTransactionMapper {
         this.transactionCardMapper = transactionCardMapper;
     }
 
-    public RevolutTransactionDTO mapToDTO(RevolutTransaction entity) {
+    public RevolutTransactionDTO mapToDTO(Transaction entity) {
         MerchantDTO merchantDTO = merchantMapper.mapToDTO(entity.getMerchant());
         List<RevolutTransactionLegsDTO> revolutTransactionLegsDTOList =
-                revolutTransactionLegsMapper.mapToDTOArray(entity.getRevolutTransactionLegs());
+                revolutTransactionLegsMapper.mapToDTOArray(entity.getTransactionLegs());
         TransactionCardDTO transactionCardDTO = transactionCardMapper.mapToDTO(entity.getCard());
 
         return new RevolutTransactionDTO(entity.getRequestId(), entity.getType(), entity.getState(),
@@ -37,13 +37,13 @@ public class RevolutTransactionMapper {
                 entity.getRelatedTransactionId(), merchantDTO, revolutTransactionLegsDTOList, transactionCardDTO);
     }
 
-    public RevolutTransaction mapToEntity(RevolutTransactionDTO dto) {
+    public Transaction mapToEntity(RevolutTransactionDTO dto) {
         Merchant merchant = merchantMapper.mapToEntity(dto.getMerchant());
-        List<RevolutTransactionLegs> revolutTransactionLegs =
+        List<TransactionLegs> revolutTransactionLegs =
                 revolutTransactionLegsMapper.mapToEntityList(dto.getRevolutTransactionLegs());
         TransactionCard transactionCard = transactionCardMapper.mapToEntity(dto.getCard());
 
-        return new RevolutTransaction(dto.getRequestId(), dto.getType(), dto.getState(), dto.getCreatedAt(),
+        return new Transaction(dto.getRequestId(), dto.getType(), dto.getState(), dto.getCreatedAt(),
                 dto.getCompletedAt(), dto.getReference(), dto.getRequestId(), dto.getReasonCode(),
                 dto.getUpdatedAt(), dto.getScheduledFor(), dto.getRelatedTransactionId(), merchant,
                 revolutTransactionLegs, transactionCard);

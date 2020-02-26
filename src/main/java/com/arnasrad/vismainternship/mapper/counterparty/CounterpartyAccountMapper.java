@@ -2,10 +2,12 @@ package com.arnasrad.vismainternship.mapper.counterparty;
 
 import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyAccountDTO;
 import com.arnasrad.vismainternship.model.entity.counterparty.CounterpartyAccount;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CounterpartyAccountMapper {
 
     public CounterpartyAccountDTO mapToDTO(CounterpartyAccount entity) {
@@ -14,7 +16,8 @@ public class CounterpartyAccountMapper {
     }
 
     public CounterpartyAccount mapToEntity(CounterpartyAccountDTO dto) {
-        return new CounterpartyAccount(dto.getId(), dto.getCurrency(), dto.getType(), dto.getAccountNo());
+        return new CounterpartyAccount(dto.getId(), dto.getCurrency(), dto.getType(), dto.getAccountNo(), null, null,
+                null, null, null);
     }
 
     public List<CounterpartyAccountDTO> mapToDTOArray(List<CounterpartyAccount> counterpartyAccounts) {

@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
+package com.arnasrad.vismainternship.model.entity.customer;
 
 import javax.persistence.*;
 
@@ -6,11 +6,11 @@ import javax.persistence.*;
 public class Citizenship {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String countryOfCitizenship;
     @ManyToOne
-    private DNBCustomerInfo dnbCustomerInfo;
+    private CustomerInfo customerInfo;
 
     public Citizenship() {
     }
@@ -33,5 +33,13 @@ public class Citizenship {
 
     public void setCountryOfCitizenship(String countryOfCitizenship) {
         this.countryOfCitizenship = countryOfCitizenship;
+    }
+
+    public CustomerInfo getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public void setCustomerInfo(CustomerInfo customerInfo) {
+        this.customerInfo = customerInfo;
     }
 }

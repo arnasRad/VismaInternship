@@ -3,11 +3,10 @@ package com.arnasrad.vismainternship.model.entity.card;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Card {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cardId;
     private String customerId;
@@ -16,18 +15,33 @@ public class Card {
     private String debitBalance;
     private String cardType;
     private String productName;
+    @ManyToOne
+    private BlockingInfo blockingInfo;
+    private String created;
+    private String lastChanged;
+    private String maskedCardNumber;
+    private String cardHolderName;
+    private String cardStatus;
 
     public Card() {
     }
 
-    public Card(String customerId, String cardId, String accountNumber, String creditBalance, String debitBalance, String cardType, String productName) {
-        this.customerId = customerId;
+    public Card(String cardId, String customerId, String accountNumber, String creditBalance, String debitBalance,
+                String cardType, String productName, BlockingInfo blockingInfo, String created, String lastChanged,
+                String maskedCardNumber, String cardHolderName, String cardStatus) {
         this.cardId = cardId;
+        this.customerId = customerId;
         this.accountNumber = accountNumber;
         this.creditBalance = creditBalance;
         this.debitBalance = debitBalance;
         this.cardType = cardType;
         this.productName = productName;
+        this.blockingInfo = blockingInfo;
+        this.created = created;
+        this.lastChanged = lastChanged;
+        this.maskedCardNumber = maskedCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.cardStatus = cardStatus;
     }
 
     public Long getId() {
@@ -38,20 +52,20 @@ public class Card {
         this.id = id;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
     public String getCardId() {
         return cardId;
     }
 
     public void setCardId(String cardId) {
         this.cardId = cardId;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getAccountNumber() {
@@ -92,5 +106,53 @@ public class Card {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public BlockingInfo getBlockingInfo() {
+        return blockingInfo;
+    }
+
+    public void setBlockingInfo(BlockingInfo blockingInfo) {
+        this.blockingInfo = blockingInfo;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getLastChanged() {
+        return lastChanged;
+    }
+
+    public void setLastChanged(String lastChanged) {
+        this.lastChanged = lastChanged;
+    }
+
+    public String getMaskedCardNumber() {
+        return maskedCardNumber;
+    }
+
+    public void setMaskedCardNumber(String maskedCardNumber) {
+        this.maskedCardNumber = maskedCardNumber;
+    }
+
+    public String getCardHolderName() {
+        return cardHolderName;
+    }
+
+    public void setCardHolderName(String cardHolderName) {
+        this.cardHolderName = cardHolderName;
+    }
+
+    public String getCardStatus() {
+        return cardStatus;
+    }
+
+    public void setCardStatus(String cardStatus) {
+        this.cardStatus = cardStatus;
     }
 }

@@ -2,7 +2,9 @@ package com.arnasrad.vismainternship.mapper.customer;
 
 import com.arnasrad.vismainternship.model.dto.customer.CustomerDTO;
 import com.arnasrad.vismainternship.model.entity.customer.Customer;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CustomerMapper {
 
     public CustomerDTO mapToDTO(Customer entity) {

@@ -1,15 +1,14 @@
 package com.arnasrad.vismainternship.model.entity.counterparty;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Counterparty {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String counterpartyId;
     private String country;
@@ -17,17 +16,24 @@ public class Counterparty {
     private String phone;
     @OneToMany(cascade = CascadeType.ALL)
     private List<CounterpartyAccount> accounts;
+    private String profileType;
+    private String state;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Counterparty() {
     }
 
-    public Counterparty(String country, String counterpartyId, String name, String phone,
-                        List<? extends CounterpartyAccount> accounts) {
-        this.country = country;
+    public Counterparty(String counterpartyId, String country, String name, String phone, List<CounterpartyAccount> accounts, String profileType, String state, Date createdAt, Date updatedAt) {
         this.counterpartyId = counterpartyId;
+        this.country = country;
         this.name = name;
         this.phone = phone;
-        this.accounts = new ArrayList<>(accounts);
+        this.accounts = accounts;
+        this.profileType = profileType;
+        this.state = state;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Long getId() {
@@ -38,20 +44,20 @@ public class Counterparty {
         this.id = id;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getCounterpartyId() {
         return counterpartyId;
     }
 
     public void setCounterpartyId(String counterpartyId) {
         this.counterpartyId = counterpartyId;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getName() {
@@ -76,5 +82,37 @@ public class Counterparty {
 
     public void setAccounts(List<CounterpartyAccount> accounts) {
         this.accounts = accounts;
+    }
+
+    public String getProfileType() {
+        return profileType;
+    }
+
+    public void setProfileType(String profileType) {
+        this.profileType = profileType;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

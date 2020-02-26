@@ -4,7 +4,9 @@ import com.arnasrad.vismainternship.model.dto.customer.CustomerAddressDTO;
 import com.arnasrad.vismainternship.model.dto.customer.CustomerInfoDTO;
 import com.arnasrad.vismainternship.model.entity.customer.CustomerAddress;
 import com.arnasrad.vismainternship.model.entity.customer.CustomerInfo;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CustomerInfoMapper {
 
     private final CustomerAddressMapper customerAddressMapper;
@@ -24,6 +26,6 @@ public class CustomerInfoMapper {
         CustomerAddress customerAddress = customerAddressMapper.mapToEntity(dto.getAddress());
 
         return new CustomerInfo(dto.getCustomerId(), dto.getFirstName(), dto.getLastName(), customerAddress,
-                dto.getPhone(), dto.getEmail(), dto.getCountryOfBirth());
+                dto.getPhone(), dto.getEmail(), dto.getCountryOfBirth(), null, null, null);
     }
 }

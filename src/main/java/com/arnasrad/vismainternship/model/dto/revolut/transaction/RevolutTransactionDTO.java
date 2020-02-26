@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.model.dto.revolut.transaction;
 
-import com.arnasrad.vismainternship.model.dto.transaction.TransactionCardDTO;
 import com.arnasrad.vismainternship.model.dto.transaction.TransactionDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

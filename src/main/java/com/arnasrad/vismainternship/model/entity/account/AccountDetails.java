@@ -4,26 +4,45 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class AccountDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String accountNo;
     private String iban;
     @ElementCollection
     private List<String> schemas;
     private String bankCountry;
+    private String bic;
+    private Boolean pooled;
+    private String uniqueReference;
+    private String sortCode;
+    private String routingNumber;
+    private String beneficiary;
+    @ManyToOne
+    private BeneficiaryAddress beneficiaryAddress;
+    @ManyToOne
+    private EstimatedTime estimatedTime;
 
     public AccountDetails() {
     }
 
-    public AccountDetails(String iban, List<String> schemas, String accountNo, String bankCountry) {
+    public AccountDetails(String accountNo, String iban, List<String> schemas, String bankCountry, String bic,
+                          Boolean pooled, String uniqueReference, String sortCode, String routingNumber,
+                          String beneficiary, BeneficiaryAddress beneficiaryAddress, EstimatedTime estimatedTime) {
+        this.accountNo = accountNo;
         this.iban = iban;
         this.schemas = schemas;
-        this.accountNo = accountNo;
         this.bankCountry = bankCountry;
+        this.bic = bic;
+        this.pooled = pooled;
+        this.uniqueReference = uniqueReference;
+        this.sortCode = sortCode;
+        this.routingNumber = routingNumber;
+        this.beneficiary = beneficiary;
+        this.beneficiaryAddress = beneficiaryAddress;
+        this.estimatedTime = estimatedTime;
     }
 
     public Long getId() {
@@ -32,6 +51,14 @@ public class AccountDetails {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
     }
 
     public String getIban() {
@@ -50,19 +77,75 @@ public class AccountDetails {
         this.schemas = schemas;
     }
 
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo;
-    }
-
     public String getBankCountry() {
         return bankCountry;
     }
 
     public void setBankCountry(String bankCountry) {
         this.bankCountry = bankCountry;
+    }
+
+    public String getBic() {
+        return bic;
+    }
+
+    public void setBic(String bic) {
+        this.bic = bic;
+    }
+
+    public Boolean getPooled() {
+        return pooled;
+    }
+
+    public void setPooled(Boolean pooled) {
+        this.pooled = pooled;
+    }
+
+    public String getUniqueReference() {
+        return uniqueReference;
+    }
+
+    public void setUniqueReference(String uniqueReference) {
+        this.uniqueReference = uniqueReference;
+    }
+
+    public String getSortCode() {
+        return sortCode;
+    }
+
+    public void setSortCode(String sortCode) {
+        this.sortCode = sortCode;
+    }
+
+    public String getRoutingNumber() {
+        return routingNumber;
+    }
+
+    public void setRoutingNumber(String routingNumber) {
+        this.routingNumber = routingNumber;
+    }
+
+    public String getBeneficiary() {
+        return beneficiary;
+    }
+
+    public void setBeneficiary(String beneficiary) {
+        this.beneficiary = beneficiary;
+    }
+
+    public BeneficiaryAddress getBeneficiaryAddress() {
+        return beneficiaryAddress;
+    }
+
+    public void setBeneficiaryAddress(BeneficiaryAddress beneficiaryAddress) {
+        this.beneficiaryAddress = beneficiaryAddress;
+    }
+
+    public EstimatedTime getEstimatedTime() {
+        return estimatedTime;
+    }
+
+    public void setEstimatedTime(EstimatedTime estimatedTime) {
+        this.estimatedTime = estimatedTime;
     }
 }

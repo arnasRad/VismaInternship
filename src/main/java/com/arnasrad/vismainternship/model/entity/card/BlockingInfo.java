@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.card;
+package com.arnasrad.vismainternship.model.entity.card;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class BlockingInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean unblockAllowed;
     private String performedBy;

@@ -3,11 +3,10 @@ package com.arnasrad.vismainternship.model.entity.transaction;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class LegsCounterparty {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String legsCounterpartyId;
     private String accountId;

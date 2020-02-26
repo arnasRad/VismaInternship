@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.model.dto.transaction;
+package com.arnasrad.vismainternship.model.dto.revolut.transaction;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

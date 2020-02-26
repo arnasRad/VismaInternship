@@ -3,11 +3,10 @@ package com.arnasrad.vismainternship.model.entity.customer;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String ssn;
     private String customerName;
@@ -15,9 +14,9 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String customerName, String ssn) {
-        this.customerName = customerName;
+    public Customer(String ssn, String customerName) {
         this.ssn = ssn;
+        this.customerName = customerName;
     }
 
     public Long getId() {
@@ -28,19 +27,19 @@ public class Customer {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
     public String getSsn() {
         return ssn;
     }
 
     public void setSsn(String ssn) {
         this.ssn = ssn;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }

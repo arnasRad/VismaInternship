@@ -2,7 +2,9 @@ package com.arnasrad.vismainternship.mapper.account;
 
 import com.arnasrad.vismainternship.model.dto.account.AccountDTO;
 import com.arnasrad.vismainternship.model.entity.account.Account;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AccountMapper {
 
     public AccountDTO mapToDTO(Account entity) {
@@ -10,6 +12,6 @@ public class AccountMapper {
     }
 
     public Account mapToEntity(AccountDTO dto) {
-        return new Account(dto.getId(), dto.getName(), dto.getBalance());
+        return new Account(dto.getId(), dto.getName(), dto.getBalance(), null, null, null, null, null);
     }
 }

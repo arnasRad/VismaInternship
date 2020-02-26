@@ -2,7 +2,6 @@ package com.arnasrad.vismainternship.model.dto.customer;
 
 public class CustomerAddressDTO {
 
-    private Long id;
     private String postalCode;
     private String addressLine1;
 
@@ -12,14 +11,6 @@ public class CustomerAddressDTO {
     public CustomerAddressDTO(String postalCode, String addressLine1) {
         this.postalCode = postalCode;
         this.addressLine1 = addressLine1;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getPostalCode() {

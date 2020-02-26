@@ -1,6 +1,8 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
+import com.arnasrad.vismainternship.mapper.revolut.payment.RevolutPaymentMapper;
 import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
+import com.arnasrad.vismainternship.model.entity.payment.Payment;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.persistence.payment.PaymentRepository;
 import com.arnasrad.vismainternship.service.request.PaymentService;
@@ -19,17 +21,19 @@ public class RevolutPaymentService implements PaymentService {
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final RevolutTransactionService revolutTransactionService;
     private final PaymentRepository paymentRepository;
+    private final RevolutPaymentMapper revolutPaymentMapper;
     @Value("${revolut.endpoint.payment}")
     private String paymentEndpoint;
 
     public RevolutPaymentService(RestTemplate restTemplate,
                                  RevolutRequestBuilderService revolutRequestBuilderService,
                                  RevolutTransactionService revolutTransactionService,
-                                 PaymentRepository paymentRepository) {
+                                 PaymentRepository paymentRepository, RevolutPaymentMapper revolutPaymentMapper) {
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
         this.revolutTransactionService = revolutTransactionService;
         this.paymentRepository = paymentRepository;
+        this.revolutPaymentMapper = revolutPaymentMapper;
     }
 
     @Override
@@ -41,8 +45,9 @@ public class RevolutPaymentService implements PaymentService {
                 authorizedHttpEntity, RevolutPaymentDTO.class);
 
         RevolutPaymentDTO payment = responseEntity.getBody();
-//        paymentRepository.save(payment);
-//        revolutTransactionService.saveTransaction(payment.getPaymentId());
+        Payment revolutPayment = revolutPaymentMapper.mapToEntity(payment);
+        paymentRepository.save(revolutPayment);
+        revolutTransactionService.saveTransaction(payment.getId());
 
         return payment;
     }

@@ -2,8 +2,9 @@ package com.arnasrad.vismainternship.mapper.transaction;
 
 import com.arnasrad.vismainternship.model.dto.transaction.LegsCounterpartyDTO;
 import com.arnasrad.vismainternship.model.entity.transaction.LegsCounterparty;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class LegsCounterpartyMapper {
 
     public LegsCounterpartyDTO mapToDTO(LegsCounterparty entity) {

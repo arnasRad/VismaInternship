@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MerchantDTO {
 
-    private long id;
     private String name;
     private String city;
     @JsonProperty("category_code")
@@ -21,14 +20,6 @@ public class MerchantDTO {
         this.city = city;
         this.categoryCode = categoryCode;
         this.country = country;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

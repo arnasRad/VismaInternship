@@ -46,11 +46,11 @@ public class AccountDTOServiceTest {
 
     @Test
     public void whenSearchingForAnExistingAccountById_thenAccountIsFound() {
-        repository.save(new Account("123", "Bauer", 10.01));
-        repository.save(new Account("1234", "O'Brian", 10.02));
-        repository.save(new Account("1235", "Bauer", 10.03));
-        repository.save(new Account("1236", "Palmer", 10.04));
-        repository.save(new Account("1237", "Dessler", 10.05));
+        repository.save(new Account("123", "Bauer", 10.01, null, null, null, null, null));
+        repository.save(new Account("1234", "O'Brian", 10.02, null, null, null, null, null));
+        repository.save(new Account("1235", "Bauer", 10.03, null, null, null, null, null));
+        repository.save(new Account("1236", "Palmer", 10.04, null, null, null, null, null));
+        repository.save(new Account("1237", "Dessler", 10.05, null, null, null, null, null));
 
         Optional<Account> account = repository.findById("123");
         assertDoesNotThrow(account::get);
@@ -58,11 +58,11 @@ public class AccountDTOServiceTest {
 
     @Test
     public void whenSearchingForAnExistingAccountByName_thenAccountIsFound() {
-        repository.save(new Account("123", "Bauer", 10.01));
-        repository.save(new Account("1234", "O'Brian", 10.02));
-        repository.save(new Account("1235", "Bauer", 10.03));
-        repository.save(new Account("1236", "Palmer", 10.04));
-        repository.save(new Account("1237", "Dessler", 10.05));
+        repository.save(new Account("123", "Bauer", 10.01, null, null, null, null, null));
+        repository.save(new Account("1234", "O'Brian", 10.02, null, null, null, null, null));
+        repository.save(new Account("1235", "Bauer", 10.03, null, null, null, null, null));
+        repository.save(new Account("1236", "Palmer", 10.04, null, null, null, null, null));
+        repository.save(new Account("1237", "Dessler", 10.05, null, null, null, null, null));
 
         List<Account> accounts = repository.findByName("Bauer");
         assertNotEquals(0, accounts.size());

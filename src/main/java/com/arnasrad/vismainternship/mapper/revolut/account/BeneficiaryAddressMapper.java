@@ -1,8 +1,10 @@
 package com.arnasrad.vismainternship.mapper.revolut.account;
 
 import com.arnasrad.vismainternship.model.dto.revolut.account.BeneficiaryAddressDTO;
-import com.arnasrad.vismainternship.model.entity.revolut.account.BeneficiaryAddress;
+import com.arnasrad.vismainternship.model.entity.account.BeneficiaryAddress;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BeneficiaryAddressMapper {
 
     public BeneficiaryAddressDTO mapToDTO(BeneficiaryAddress entity) {

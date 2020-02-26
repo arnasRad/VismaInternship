@@ -4,22 +4,25 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String paymentId;
     private String state;
+    private String reasonCode;
+    private Date createdAt;
     private Date completedAt;
 
     public Payment() {
     }
 
-    public Payment(String paymentId, String state, Date completedAt) {
+    public Payment(String paymentId, String state, String reasonCode, Date createdAt, Date completedAt) {
         this.paymentId = paymentId;
         this.state = state;
+        this.reasonCode = reasonCode;
+        this.createdAt = createdAt;
         this.completedAt = completedAt;
     }
 
@@ -45,6 +48,22 @@ public class Payment {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getReasonCode() {
+        return reasonCode;
+    }
+
+    public void setReasonCode(String reasonCode) {
+        this.reasonCode = reasonCode;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getCompletedAt() {

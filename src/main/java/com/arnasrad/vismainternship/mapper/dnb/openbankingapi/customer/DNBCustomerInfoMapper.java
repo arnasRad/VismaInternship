@@ -4,13 +4,15 @@ import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.Citize
 import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.CountryTaxDTO;
 import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DNBCustomerAddressDTO;
 import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DNBCustomerInfoDTO;
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer.Citizenship;
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer.CountryTax;
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer.DNBCustomerAddress;
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer.DNBCustomerInfo;
+import com.arnasrad.vismainternship.model.entity.customer.Citizenship;
+import com.arnasrad.vismainternship.model.entity.customer.CountryTax;
+import com.arnasrad.vismainternship.model.entity.customer.CustomerAddress;
+import com.arnasrad.vismainternship.model.entity.customer.CustomerInfo;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DNBCustomerInfoMapper {
     
     private final DNBCustomerAddressMapper dnbCustomerAddressMapper;
@@ -24,9 +26,9 @@ public class DNBCustomerInfoMapper {
         this.countryTaxMapper = countryTaxMapper;
     }
 
-    public DNBCustomerInfoDTO mapToDTO(DNBCustomerInfo entity) {
+    public DNBCustomerInfoDTO mapToDTO(CustomerInfo entity) {
         DNBCustomerAddressDTO dnbCustomerAddressDTO =
-                dnbCustomerAddressMapper.mapToDTO((DNBCustomerAddress) entity.getAddress());
+                dnbCustomerAddressMapper.mapToDTO(entity.getAddress());
         List<CitizenshipDTO> citizenshipDTOS = citizenshipMapper.mapToDTOArray(entity.getCitizenship());
         List<CountryTaxDTO> countryTaxDTOS = countryTaxMapper.mapToDTOArray(entity.getCountryTax());
         
@@ -35,14 +37,14 @@ public class DNBCustomerInfoMapper {
                 entity.getCustomerType(), citizenshipDTOS, countryTaxDTOS);
     }
 
-    public DNBCustomerInfo mapToEntity(DNBCustomerInfoDTO dto) {
-        DNBCustomerAddress dnbCustomerAddress =
+    public CustomerInfo mapToEntity(DNBCustomerInfoDTO dto) {
+        CustomerAddress customerAddress =
                 dnbCustomerAddressMapper.mapToEntity((DNBCustomerAddressDTO) dto.getAddress());
         List<Citizenship> citizenships = citizenshipMapper.mapToEntityList(dto.getCitizenship());
         List<CountryTax> countryTaxes = countryTaxMapper.mapToEntityList(dto.getCountryTax());
 
-        return new DNBCustomerInfo(dto.getCustomerId(), dto.getFirstName(), dto.getLastName(),
-                dnbCustomerAddress, dto.getPhone(), dto.getEmail(), dto.getCountryOfBirth(),
+        return new CustomerInfo(dto.getCustomerId(), dto.getFirstName(), dto.getLastName(),
+                customerAddress, dto.getPhone(), dto.getEmail(), dto.getCountryOfBirth(),
                 dto.getCustomerType(), citizenships, countryTaxes);
     }
 }

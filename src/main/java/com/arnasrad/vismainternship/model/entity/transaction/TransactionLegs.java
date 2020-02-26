@@ -3,11 +3,10 @@ package com.arnasrad.vismainternship.model.entity.transaction;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class TransactionLegs {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String transactionLegsId;
     private Double amount;
@@ -17,11 +16,17 @@ public class TransactionLegs {
     private LegsCounterparty counterparty;
     private String description;
     private Double balance;
+    private Double billAmount;
+    private String billCurrency;
+    @ManyToOne
+    private Transaction transaction;
 
     public TransactionLegs() {
     }
 
-    public TransactionLegs(String transactionLegsId, Double amount, String currency, String accountId, LegsCounterparty counterparty, String description, Double balance) {
+    public TransactionLegs(String transactionLegsId, Double amount, String currency, String accountId,
+                           LegsCounterparty counterparty, String description, Double balance, Double billAmount,
+                           String billCurrency) {
         this.transactionLegsId = transactionLegsId;
         this.amount = amount;
         this.currency = currency;
@@ -29,6 +34,8 @@ public class TransactionLegs {
         this.counterparty = counterparty;
         this.description = description;
         this.balance = balance;
+        this.billAmount = billAmount;
+        this.billCurrency = billCurrency;
     }
 
     public Long getId() {
@@ -93,5 +100,29 @@ public class TransactionLegs {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public Double getBillAmount() {
+        return billAmount;
+    }
+
+    public void setBillAmount(Double billAmount) {
+        this.billAmount = billAmount;
+    }
+
+    public String getBillCurrency() {
+        return billCurrency;
+    }
+
+    public void setBillCurrency(String billCurrency) {
+        this.billCurrency = billCurrency;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
     }
 }

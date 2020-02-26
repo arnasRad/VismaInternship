@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer;
+package com.arnasrad.vismainternship.model.entity.customer;
 
 import javax.persistence.*;
 
@@ -6,12 +6,12 @@ import javax.persistence.*;
 public class CountryTax {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String taxLiabilityCountry;
     private String taxIdentificationNumber;
     @ManyToOne
-    private DNBCustomerInfo dnbCustomerInfo;
+    private CustomerInfo customerInfo;
 
     public CountryTax() {
     }
@@ -43,5 +43,13 @@ public class CountryTax {
 
     public void setTaxIdentificationNumber(String taxIdentificationNumber) {
         this.taxIdentificationNumber = taxIdentificationNumber;
+    }
+
+    public CustomerInfo getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public void setCustomerInfo(CustomerInfo customerInfo) {
+        this.customerInfo = customerInfo;
     }
 }

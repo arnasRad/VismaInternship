@@ -3,13 +3,15 @@ package com.arnasrad.vismainternship.mapper.revolut.account;
 import com.arnasrad.vismainternship.model.dto.revolut.account.BeneficiaryAddressDTO;
 import com.arnasrad.vismainternship.model.dto.revolut.account.EstimatedTimeDTO;
 import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDetailsDTO;
-import com.arnasrad.vismainternship.model.entity.revolut.account.BeneficiaryAddress;
-import com.arnasrad.vismainternship.model.entity.revolut.account.EstimatedTime;
-import com.arnasrad.vismainternship.model.entity.revolut.account.RevolutAccountDetails;
+import com.arnasrad.vismainternship.model.entity.account.AccountDetails;
+import com.arnasrad.vismainternship.model.entity.account.BeneficiaryAddress;
+import com.arnasrad.vismainternship.model.entity.account.EstimatedTime;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 
+@Component
 public class RevolutAccountDetailsMapper {
     
     private final BeneficiaryAddressMapper beneficiaryAddressMapper;
@@ -20,7 +22,7 @@ public class RevolutAccountDetailsMapper {
         this.estimatedTimeMapper = estimatedTimeMapper;
     }
 
-    public RevolutAccountDetailsDTO mapToDTO(RevolutAccountDetails entity) {
+    public RevolutAccountDetailsDTO mapToDTO(AccountDetails entity) {
         List<String> schemas = entity.getSchemas();
         BeneficiaryAddressDTO beneficiaryAddressDTO = beneficiaryAddressMapper.mapToDTO(entity.getBeneficiaryAddress());
         EstimatedTimeDTO estimatedTimeDTO = estimatedTimeMapper.mapToDTO(entity.getEstimatedTime());
@@ -30,13 +32,13 @@ public class RevolutAccountDetailsMapper {
                 entity.getRoutingNumber(), entity.getBeneficiary(), beneficiaryAddressDTO, estimatedTimeDTO);
     }
 
-    public RevolutAccountDetails mapToEntity(RevolutAccountDetailsDTO dto) {
+    public AccountDetails mapToEntity(RevolutAccountDetailsDTO dto) {
         List<String> schemas = dto.getSchemas();
         BeneficiaryAddress beneficiaryAddress = beneficiaryAddressMapper.mapToEntity(dto.getBeneficiaryAddress());
         EstimatedTime estimatedTime = estimatedTimeMapper.mapToEntity(dto.getEstimatedTime());
         
-        return new RevolutAccountDetails(dto.getIban(), schemas, dto.getAccountNo(), dto.getBankCountry()
-                , dto.getBic(), dto.getPooled(), dto.getUniqueReference(), dto.getSortCode(),
-                dto.getRoutingNumber(), dto.getBeneficiary(), beneficiaryAddress, estimatedTime);
+        return new AccountDetails(dto.getAccountNo(), dto.getIban(), schemas, dto.getBankCountry(),
+                dto.getBic(), dto.getPooled(), dto.getUniqueReference(), dto.getSortCode(), dto.getRoutingNumber(),
+                dto.getBeneficiary(), beneficiaryAddress, estimatedTime);
     }
 }

@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.model.entity.revolut.account;
+package com.arnasrad.vismainternship.model.entity.account;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class BeneficiaryAddress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String streetLine1;
     private String streetLine2;
@@ -21,7 +21,8 @@ public class BeneficiaryAddress {
     public BeneficiaryAddress() {
     }
 
-    public BeneficiaryAddress(String streetLine1, String streetLine2, String region, String city, String country, String postcode) {
+    public BeneficiaryAddress(String streetLine1, String streetLine2, String region, String city,
+                              String country, String postcode) {
         this.streetLine1 = streetLine1;
         this.streetLine2 = streetLine2;
         this.region = region;

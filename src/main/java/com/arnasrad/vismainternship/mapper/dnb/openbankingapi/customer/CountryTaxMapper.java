@@ -1,11 +1,13 @@
 package com.arnasrad.vismainternship.mapper.dnb.openbankingapi.customer;
 
 import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.CountryTaxDTO;
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer.CountryTax;
+import com.arnasrad.vismainternship.model.entity.customer.CountryTax;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CountryTaxMapper {
 
     public CountryTaxDTO mapToDTO(CountryTax entity) {

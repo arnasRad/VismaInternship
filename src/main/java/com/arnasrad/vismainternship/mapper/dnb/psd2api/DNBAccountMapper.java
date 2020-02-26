@@ -1,15 +1,17 @@
 package com.arnasrad.vismainternship.mapper.dnb.psd2api;
 
 import com.arnasrad.vismainternship.model.dto.dnb.psd2api.DNBAccountDTO;
-import com.arnasrad.vismainternship.model.entity.dnb.psd2api.DNBAccount;
+import com.arnasrad.vismainternship.model.entity.account.Account;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DNBAccountMapper {
 
-    public DNBAccountDTO mapToDTO(DNBAccount entity) {
+    public DNBAccountDTO mapToDTO(Account entity) {
         return new DNBAccountDTO(entity.getAccountId(), entity.getName(), entity.getBalance());
     }
 
-    public DNBAccount mapToEntity(DNBAccountDTO dto) {
-        return new DNBAccount(dto.getId(), dto.getName(), dto.getBalance());
+    public Account mapToEntity(DNBAccountDTO dto) {
+        return new Account(dto.getId(), dto.getName(), dto.getBalance(), null, null, null, null, null);
     }
 }

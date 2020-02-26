@@ -2,9 +2,11 @@ package com.arnasrad.vismainternship.mapper.dnb.openbankingapi.card;
 
 import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.BlockingInfoDTO;
 import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DNBCardDTO;
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.card.BlockingInfo;
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.card.DNBCard;
+import com.arnasrad.vismainternship.model.entity.card.BlockingInfo;
+import com.arnasrad.vismainternship.model.entity.card.Card;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DNBCardMapper {
 
     private final BlockingInfoMapper blockingInfoMapper;
@@ -13,7 +15,7 @@ public class DNBCardMapper {
         this.blockingInfoMapper = blockingInfoMapper;
     }
     
-    public DNBCardDTO mapToDTO(DNBCard entity) {
+    public DNBCardDTO mapToDTO(Card entity) {
         BlockingInfoDTO blockingInfoDTO = blockingInfoMapper.mapToDTO(entity.getBlockingInfo());
         
         return new DNBCardDTO(entity.getCustomerId(), entity.getCardId(), entity.getAccountNumber(),
@@ -22,10 +24,10 @@ public class DNBCardMapper {
                 entity.getCardHolderName(), entity.getCardStatus());
     }
 
-    public DNBCard mapToEntity(DNBCardDTO dto) {
+    public Card mapToEntity(DNBCardDTO dto) {
         BlockingInfo blockingInfo = blockingInfoMapper.mapToEntity(dto.getBlockingInfo());
 
-        return new DNBCard(dto.getCustomerId(), dto.getCardId(), dto.getAccountNumber(),
+        return new Card(dto.getCustomerId(), dto.getCardId(), dto.getAccountNumber(),
                 dto.getCreditBalance(), dto.getDebitBalance(), dto.getCardType(), dto.getProductName(),
                 blockingInfo, dto.getCreated(), dto.getLastChanged(), dto.getMaskedCardNumber(),
                 dto.getCardHolderName(), dto.getCardStatus());

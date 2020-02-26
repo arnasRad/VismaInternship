@@ -1,11 +1,13 @@
 package com.arnasrad.vismainternship.mapper.dnb.openbankingapi.customer;
 
 import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.CitizenshipDTO;
-import com.arnasrad.vismainternship.model.entity.dnb.openbankingapi.customer.Citizenship;
+import com.arnasrad.vismainternship.model.entity.customer.Citizenship;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CitizenshipMapper {
 
     public CitizenshipDTO mapToDTO(Citizenship entity) {

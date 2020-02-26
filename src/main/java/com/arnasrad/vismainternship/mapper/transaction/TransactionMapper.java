@@ -2,8 +2,9 @@ package com.arnasrad.vismainternship.mapper.transaction;
 
 import com.arnasrad.vismainternship.model.dto.transaction.TransactionDTO;
 import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class TransactionMapper {
 
     public TransactionDTO mapToDTO(Transaction entity) {
@@ -13,6 +14,6 @@ public class TransactionMapper {
 
     public Transaction mapToEntity(TransactionDTO dto) {
         return new Transaction(dto.getId(), dto.getType(), dto.getState(), dto.getCreatedAt(), dto.getCompletedAt(),
-                dto.getReference());
+                dto.getReference(), null, null, null, null, null, null, null, null);
     }
 }
