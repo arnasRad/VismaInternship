@@ -1,28 +1,21 @@
 package com.arnasrad.vismainternship.controller;
 
 import com.arnasrad.vismainternship.model.dto.payment.PaymentDTO;
-import com.arnasrad.vismainternship.model.dto.transaction.TransactionDTO;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.PaymentServiceFactory;
-import com.arnasrad.vismainternship.service.factory.TransactionServiceFactory;
 import com.arnasrad.vismainternship.service.request.PaymentService;
-import com.arnasrad.vismainternship.service.request.TransactionService;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController("interbanking-payment-controller")
 public class PaymentController {
 
     private final PaymentServiceFactory paymentServiceFactory;
-    private final TransactionServiceFactory transactionServiceFactory;
 
-    public PaymentController(PaymentServiceFactory paymentServiceFactory,
-                             TransactionServiceFactory transactionServiceFactory) {
+    public PaymentController(PaymentServiceFactory paymentServiceFactory) {
         this.paymentServiceFactory = paymentServiceFactory;
-        this.transactionServiceFactory = transactionServiceFactory;
     }
 
     @PostMapping("/interbanking/create-payment")
@@ -30,22 +23,5 @@ public class PaymentController {
             throws NoSuchFunctionalityException {
         PaymentService service = paymentServiceFactory.getService(bank);
         return service.createPayment(body);
-    }
-
-    @GetMapping("/interbanking/transaction")
-    public TransactionDTO getTransactions(@RequestParam String bank, @RequestParam String id)
-            throws NoSuchFunctionalityException {
-        TransactionService service = transactionServiceFactory.getService(bank);
-        return service.getTransaction(id);
-    }
-
-    @GetMapping("/interbanking/transactions")
-    public List<? extends TransactionDTO> getTransactions(@RequestParam String bank,
-                                                       @RequestParam(required = false) String counterparty,
-                                                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
-                                                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date to,
-                                                       @RequestParam(required = false) Integer count) throws NoSuchFunctionalityException {
-        TransactionService service = transactionServiceFactory.getService(bank);
-        return service.getTransactions(counterparty, from, to, count);
     }
 }

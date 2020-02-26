@@ -6,17 +6,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Service
 public class RevolutRequestBuilderService {
     private final RevolutHeaderBuilderService revolutHeaderBuilderService;
-    private final RevolutRequestParameterService revolutRequestParameterService;
+    private final RevolutRequestBodyService revolutRequestBodyService;
 
-    public RevolutRequestBuilderService(RevolutHeaderBuilderService revolutHeaderBuilderService, RevolutRequestParameterService revolutRequestParameterService) {
+    public RevolutRequestBuilderService(RevolutHeaderBuilderService revolutHeaderBuilderService, RevolutRequestBodyService revolutRequestBodyService) {
         this.revolutHeaderBuilderService = revolutHeaderBuilderService;
-        this.revolutRequestParameterService = revolutRequestParameterService;
+        this.revolutRequestBodyService = revolutRequestBodyService;
     }
 
     public HttpEntity<String> getAuthorizedRequest() {
@@ -30,23 +29,13 @@ public class RevolutRequestBuilderService {
     }
 
     public HttpEntity<MultiValueMap<String, String>> getAccessTokenRequest() {
-        MultiValueMap<String, String> body = revolutRequestParameterService.getAccessTokenRequestParams();
+        MultiValueMap<String, String> body = revolutRequestBodyService.getAccessTokenRequestParams();
         HttpHeaders headers = revolutHeaderBuilderService.getHttpHeaders();
-        return new HttpEntity<>(body, headers);
-    }
-
-    public HttpEntity<MultiValueMap<String, String>> getTransactionsRequest(String counterparty, Date from, Date to,
-                                                                            Integer count) {
-        MultiValueMap<String, String> body =
-                revolutRequestParameterService.getTransactionsRequestParams(counterparty, from, to, count);
-        HttpHeaders headers = revolutHeaderBuilderService.getAuthorizedHeaders();
         return new HttpEntity<>(body, headers);
     }
 
     public HttpEntity<String> getPaymentRequest(JSONObject body) {
         body.put("request_id", UUID.randomUUID());
-        String jsonBody = body.toString();
-        HttpHeaders headers = revolutHeaderBuilderService.getAuthorizedJsonHeaders();
-        return new HttpEntity<>(jsonBody, headers);
+        return getAuthorizedJsonRequestWithBody(body);
     }
 }
