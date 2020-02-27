@@ -1,6 +1,8 @@
 package com.arnasrad.vismainternship.service.jms;
 
 import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
+import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
+import com.arnasrad.vismainternship.model.enums.MessageState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;
@@ -13,10 +15,12 @@ import java.util.UUID;
 public class PaymentProducer {
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentProducer.class);
+    private final PaymentMessageState paymentMessageState;
     private final JmsTemplate jmsTemplate;
     private final Queue paymentQueue;
 
-    public PaymentProducer(JmsTemplate jmsTemplate, Queue paymentQueue) {
+    public PaymentProducer(PaymentMessageState paymentMessageState, JmsTemplate jmsTemplate, Queue paymentQueue) {
+        this.paymentMessageState = paymentMessageState;
         this.jmsTemplate = jmsTemplate;
         this.paymentQueue = paymentQueue;
     }
@@ -24,7 +28,11 @@ public class PaymentProducer {
     public void send(String bank, PaymentRequestDTO body) {
         body.setBankId(bank);
         body.setRequestId(UUID.randomUUID().toString());
+        PaymentRequest paymentRequest = paymentMessageState.mapDTOAndSave(body, MessageState.ACCEPTED.getState());
+        logger.info("Payment request accepted");
+
         jmsTemplate.convertAndSend(paymentQueue, body);
-        logger.info("Payment request to bank '{}' sent ", bank);
+        paymentMessageState.update(paymentRequest, MessageState.IN_QUEUE.getState());
+        logger.info("Payment request in queue");
     }
 }
