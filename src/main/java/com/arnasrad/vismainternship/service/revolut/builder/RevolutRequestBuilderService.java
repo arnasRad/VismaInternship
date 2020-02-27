@@ -1,12 +1,11 @@
 package com.arnasrad.vismainternship.service.revolut.builder;
 
+import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
-
-import java.util.UUID;
 
 @Service
 public class RevolutRequestBuilderService {
@@ -34,8 +33,19 @@ public class RevolutRequestBuilderService {
         return new HttpEntity<>(body, headers);
     }
 
-    public HttpEntity<String> getPaymentRequest(JSONObject body) {
-        body.put("request_id", UUID.randomUUID());
-        return getAuthorizedJsonRequestWithBody(body);
+    public HttpEntity<String> getPaymentRequest(PaymentRequestDTO body) {
+        JSONObject receiverJson = new JSONObject();
+        receiverJson.put("counterparty_id", body.getReceiver().getCounterpartyId());
+        receiverJson.put("account_id", body.getReceiver().getAccountId());
+
+        JSONObject paymentRequestJson = new JSONObject();
+        paymentRequestJson.put("request_id", body.getRequestId());
+        paymentRequestJson.put("account_id", body.getAccountId());
+        paymentRequestJson.put("receiver", receiverJson);
+        paymentRequestJson.put("amount", body.getAmount());
+        paymentRequestJson.put("currency", body.getCurrency());
+        paymentRequestJson.put("reference", body.getReference());
+
+        return getAuthorizedJsonRequestWithBody(paymentRequestJson);
     }
 }

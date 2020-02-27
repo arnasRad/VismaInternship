@@ -1,13 +1,13 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.mapper.revolut.payment.RevolutPaymentMapper;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
 import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
 import com.arnasrad.vismainternship.model.entity.payment.Payment;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.persistence.payment.PaymentRepository;
 import com.arnasrad.vismainternship.service.request.PaymentService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +37,8 @@ public class RevolutPaymentService implements PaymentService {
     }
 
     @Override
-    public RevolutPaymentDTO createPayment(String body) {
-        JSONObject jsonObject = new JSONObject(body);
-        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getPaymentRequest(jsonObject);
+    public RevolutPaymentDTO createPayment(PaymentRequestDTO body) {
+        HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getPaymentRequest(body);
 
         ResponseEntity<RevolutPaymentDTO> responseEntity = restTemplate.postForEntity(paymentEndpoint,
                 authorizedHttpEntity, RevolutPaymentDTO.class);

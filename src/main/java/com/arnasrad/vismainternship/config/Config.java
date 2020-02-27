@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.jms.Queue;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Configuration
 public class Config {
@@ -17,20 +19,29 @@ public class Config {
     @Value("${activemq.broker-url}")
     private String brokerUrl;
 
+    @Value("${jms.queues.payment}")
+    private String paymentQueueString;
+
+    @Bean
+    public String paymentQueueName() {
+        return paymentQueueString;
+    }
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
     @Bean
-    Queue transactionQueue() {
-        return new ActiveMQQueue("queues.payment");
+    public Queue paymentQueue() {
+        return new ActiveMQQueue(paymentQueueString);
     }
 
     @Bean
     public ActiveMQConnectionFactory activeMQConnectionFactory() {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
         factory.setBrokerURL(brokerUrl);
+        factory.setTrustedPackages(new ArrayList<>(Arrays.asList("com.arnasrad.vismainternship.model.dto.payment")));
         return factory;
     }
 

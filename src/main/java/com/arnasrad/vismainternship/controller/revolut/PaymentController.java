@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.controller.revolut;
 
+import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
 import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
 import com.arnasrad.vismainternship.service.revolut.request.RevolutPaymentService;
 import org.springframework.http.MediaType;
@@ -18,7 +19,7 @@ public class PaymentController {
 
     @PostMapping(value = "/revolut/create-payment", consumes = MediaType.APPLICATION_JSON_VALUE, produces =
             MediaType.APPLICATION_JSON_VALUE)
-    public RevolutPaymentDTO createPayment(@RequestBody String body) {
+    public RevolutPaymentDTO createPayment(@RequestBody PaymentRequestDTO body) {
         return revolutPaymentService.createPayment(body);
     }
 }
