@@ -6,7 +6,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 @Service
-public class RevolutRequestBodyService {
+public class RevolutRequestBodyBuilderService {
 
     @Value("${revolut.sandbox.constant.grantType}")
     private String grantType;

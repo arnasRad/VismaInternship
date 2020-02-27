@@ -7,23 +7,21 @@ import com.arnasrad.vismainternship.service.testdata.ObjectTestData;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-@SpringBootTest
+@DataJpaTest
 public class AccountDTOServiceTest {
 
     private static final Logger logger = LoggerFactory.getLogger(OpenBankingApp.class);
 
     private final AccountRepository repository;
 
-    @Autowired
     public AccountDTOServiceTest(AccountRepository repository) {
         this.repository = repository;
     }
@@ -33,7 +31,6 @@ public class AccountDTOServiceTest {
         List<Account> expectedAccounts = ObjectTestData.getTestAccounts();
 
         for (Account account : expectedAccounts) {
-
             repository.save(account);
         }
 
@@ -45,15 +42,22 @@ public class AccountDTOServiceTest {
     }
 
     @Test
-    public void whenSearchingForAnExistingAccountById_thenAccountIsFound() {
+    public void whenSearchingForASavedAccountByAccountId_thenAccountIsFound() {
         repository.save(new Account("123", "Bauer", 10.01, null, null, null, null, null));
-        repository.save(new Account("1234", "O'Brian", 10.02, null, null, null, null, null));
-        repository.save(new Account("1235", "Bauer", 10.03, null, null, null, null, null));
-        repository.save(new Account("1236", "Palmer", 10.04, null, null, null, null, null));
-        repository.save(new Account("1237", "Dessler", 10.05, null, null, null, null, null));
 
-        Optional<Account> account = repository.findById("123");
-        assertDoesNotThrow(account::get);
+        List<Account> accounts = repository.findByAccountId("123");
+        assertEquals(1, accounts.size());
+
+        Account account = accounts.get(0);
+        assertEquals("123", account.getName());
+    }
+
+    @Test
+    public void whenSearchingForASavedAccountByWrongAccountId_thenNoAccountIsFound() {
+        repository.save(new Account("123", "Bauer", 10.01, null, null, null, null, null));
+
+        List<Account> accounts = repository.findByAccountId("1234");
+        assertEquals(0, accounts.size());
     }
 
     @Test

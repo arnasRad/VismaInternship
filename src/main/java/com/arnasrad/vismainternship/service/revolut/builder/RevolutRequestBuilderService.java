@@ -11,11 +11,11 @@ import java.util.UUID;
 @Service
 public class RevolutRequestBuilderService {
     private final RevolutHeaderBuilderService revolutHeaderBuilderService;
-    private final RevolutRequestBodyService revolutRequestBodyService;
+    private final RevolutRequestBodyBuilderService revolutRequestBodyBuilderService;
 
-    public RevolutRequestBuilderService(RevolutHeaderBuilderService revolutHeaderBuilderService, RevolutRequestBodyService revolutRequestBodyService) {
+    public RevolutRequestBuilderService(RevolutHeaderBuilderService revolutHeaderBuilderService, RevolutRequestBodyBuilderService revolutRequestBodyBuilderService) {
         this.revolutHeaderBuilderService = revolutHeaderBuilderService;
-        this.revolutRequestBodyService = revolutRequestBodyService;
+        this.revolutRequestBodyBuilderService = revolutRequestBodyBuilderService;
     }
 
     public HttpEntity<String> getAuthorizedRequest() {
@@ -29,7 +29,7 @@ public class RevolutRequestBuilderService {
     }
 
     public HttpEntity<MultiValueMap<String, String>> getAccessTokenRequest() {
-        MultiValueMap<String, String> body = revolutRequestBodyService.getAccessTokenRequestParams();
+        MultiValueMap<String, String> body = revolutRequestBodyBuilderService.getAccessTokenRequestParams();
         HttpHeaders headers = revolutHeaderBuilderService.getHttpHeaders();
         return new HttpEntity<>(body, headers);
     }

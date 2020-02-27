@@ -6,6 +6,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class RevolutRequestURLBuilderService {
@@ -20,13 +21,16 @@ public class RevolutRequestURLBuilderService {
 
     public String getTransactionsURI(String counterparty, Date from, Date to, Integer count) {
 
-        String fromString = simpleDateFormat.format(from);
-        String toString = simpleDateFormat.format(to);
+        Optional<String> fromString = Optional.ofNullable(from).map(simpleDateFormat::format);
+        Optional<String> toString = Optional.ofNullable(to).map(simpleDateFormat::format);
 
-        return UriComponentsBuilder.fromHttpUrl(transactionsEndpoint)
-                .queryParam("counterparty", counterparty)
-                .queryParam("from", fromString)
-                .queryParam("to", toString)
-                .queryParam("count", count).toUriString();
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(transactionsEndpoint);
+
+        Optional.ofNullable(counterparty).ifPresent(c -> builder.queryParam("counterparty", c));
+        fromString.ifPresent(date -> builder.queryParam("from", date));
+        toString.ifPresent(date -> builder.queryParam("to", date));
+        Optional.ofNullable(count).ifPresent(c -> builder.queryParam("count", String.valueOf(c)));
+
+        return builder.toUriString();
     }
 }
