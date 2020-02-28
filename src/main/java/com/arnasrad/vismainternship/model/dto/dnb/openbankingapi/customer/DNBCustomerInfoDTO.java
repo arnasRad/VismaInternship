@@ -15,16 +15,6 @@ public class DNBCustomerInfoDTO extends CustomerInfoDTO {
     public DNBCustomerInfoDTO() {
     }
 
-    public DNBCustomerInfoDTO(String customerId, String firstName, String lastName,
-                              DNBCustomerAddressDTO dnbCustomerAddress, String phone, String email,
-                              String countryOfBirth, String customerType, List<CitizenshipDTO> citizenship,
-                              List<CountryTaxDTO> countryTax) {
-        super(customerId, firstName, lastName, dnbCustomerAddress, phone, email, countryOfBirth);
-        this.customerType = customerType;
-        this.citizenship = citizenship;
-        this.countryTax = countryTax;
-    }
-
     public String getCustomerType() {
         return customerType;
     }

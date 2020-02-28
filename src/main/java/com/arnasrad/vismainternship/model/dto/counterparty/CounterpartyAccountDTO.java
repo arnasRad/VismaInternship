@@ -11,15 +11,16 @@ public class CounterpartyAccountDTO {
     private String type;
     @JsonProperty("account_no")
     private String accountNo;
+    private String iban;
+    @JsonProperty("sort_no")
+    private String sortCode;
+    @JsonProperty("routing_number")
+    private String routingNumber;
+    private String bic;
+    @JsonProperty("recipient_charges")
+    private String recipientCharges;
 
     public CounterpartyAccountDTO() {
-    }
-
-    public CounterpartyAccountDTO(String id, String currency, String type, String accountNo) {
-        this.id = id;
-        this.currency = currency;
-        this.type = type;
-        this.accountNo = accountNo;
     }
 
     public String getId() {
@@ -52,5 +53,45 @@ public class CounterpartyAccountDTO {
 
     public void setAccountNo(String accountNo) {
         this.accountNo = accountNo;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public String getSortCode() {
+        return sortCode;
+    }
+
+    public void setSortCode(String sortCode) {
+        this.sortCode = sortCode;
+    }
+
+    public String getRoutingNumber() {
+        return routingNumber;
+    }
+
+    public void setRoutingNumber(String routingNumber) {
+        this.routingNumber = routingNumber;
+    }
+
+    public String getBic() {
+        return bic;
+    }
+
+    public void setBic(String bic) {
+        this.bic = bic;
+    }
+
+    public String getRecipientCharges() {
+        return recipientCharges;
+    }
+
+    public void setRecipientCharges(String recipientCharges) {
+        this.recipientCharges = recipientCharges;
     }
 }

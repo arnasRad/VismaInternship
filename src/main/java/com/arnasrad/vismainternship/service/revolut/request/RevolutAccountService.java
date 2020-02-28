@@ -56,8 +56,9 @@ public class RevolutAccountService implements AccountService {
 
         ResponseEntity<List<RevolutAccountDetailsDTO>> responseEntity =
                 restTemplate.exchange(accountsEndpoint.concat("/").concat(id).concat("/bank-details"),
-                         HttpMethod.GET, authorizedHttpEntity,
-                        new ParameterizedTypeReference<List<RevolutAccountDetailsDTO>>() {});
+                        HttpMethod.GET, authorizedHttpEntity,
+                        new ParameterizedTypeReference<List<RevolutAccountDetailsDTO>>() {
+                        });
 
         return responseEntity.getBody();
     }

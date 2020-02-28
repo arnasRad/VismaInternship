@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.mapper.revolut.payment.RevolutPaymentMapper;
 import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
 import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
 import com.arnasrad.vismainternship.model.entity.payment.Payment;

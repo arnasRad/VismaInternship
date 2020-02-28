@@ -24,24 +24,8 @@ public class Account {
     public Account() {
     }
 
-    public Account(String accountId, String name, Double balance, String currency, String state, Boolean isPublic,
-                   Date createdAt, Date updatedAt) {
-        this.accountId = accountId;
-        this.name = name;
-        this.balance = balance;
-        this.currency = currency;
-        this.state = state;
-        this.isPublic = isPublic;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getAccountId() {

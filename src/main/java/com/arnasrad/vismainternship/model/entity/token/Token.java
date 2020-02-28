@@ -1,16 +1,13 @@
 package com.arnasrad.vismainternship.model.entity.token;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Token {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String clientId;
     private String token;
     private String tokenType;
     private Integer expiresId;
@@ -19,19 +16,20 @@ public class Token {
     public Token() {
     }
 
-    public Token(String token, String tokenType, Integer expiresId, String customerPublicId) {
+    public Token(String clientId, String token, String tokenType, Integer expiresId, String customerPublicId) {
+        this.clientId = clientId;
         this.token = token;
         this.tokenType = tokenType;
         this.expiresId = expiresId;
         this.customerPublicId = customerPublicId;
     }
 
-    public Long getId() {
-        return id;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public String getToken() {
@@ -52,6 +50,10 @@ public class Token {
 
     public int getExpiresId() {
         return expiresId;
+    }
+
+    public void setExpiresId(Integer expiresId) {
+        this.expiresId = expiresId;
     }
 
     public void setExpiresId(int expiresId) {

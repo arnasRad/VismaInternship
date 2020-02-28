@@ -28,7 +28,7 @@ public class PaymentProducer {
     public void send(String bank, PaymentRequestDTO body) {
         body.setBankId(bank);
         body.setRequestId(UUID.randomUUID().toString());
-        PaymentRequest paymentRequest = paymentMessageState.mapDTOAndSave(body, MessageState.ACCEPTED.getState());
+        PaymentRequest paymentRequest = paymentMessageState.mapAndSave(body, MessageState.ACCEPTED.getState());
         logger.info("Payment request accepted");
 
         jmsTemplate.convertAndSend(paymentQueue, body);

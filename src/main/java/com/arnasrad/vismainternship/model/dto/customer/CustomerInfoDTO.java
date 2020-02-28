@@ -16,17 +16,6 @@ public class CustomerInfoDTO {
     public CustomerInfoDTO() {
     }
 
-    public CustomerInfoDTO(String customerId, String firstName, String lastName, CustomerAddressDTO address, String phone,
-                           String email, String countryOfBirth) {
-        this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.countryOfBirth = countryOfBirth;
-    }
-
     public String getCustomerId() {
         return customerId;
     }

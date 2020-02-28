@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.mapper.payment;
+package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
 import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;

@@ -21,16 +21,6 @@ public class RevolutAccountDTO extends AccountDTO {
     public RevolutAccountDTO() {
     }
 
-    public RevolutAccountDTO(String id, String name, Double balance, String currency, String state, Boolean isPublic,
-                             Date createdAt, Date updatedAt) {
-        super(id, name, balance);
-        this.currency = currency;
-        this.state = state;
-        this.isPublic = isPublic;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
     public String getCurrency() {
         return currency;
     }

@@ -49,7 +49,8 @@ public class RevolutCounterpartyService implements CounterpartyService {
 
         ResponseEntity<List<RevolutCounterpartyDTO>> responseEntity = restTemplate.exchange(counterpartiesEndpoint,
                 HttpMethod.GET, authorizedHttpEntity,
-                new ParameterizedTypeReference<List<RevolutCounterpartyDTO>>() {});
+                new ParameterizedTypeReference<List<RevolutCounterpartyDTO>>() {
+                });
 
         return responseEntity.getBody();
     }

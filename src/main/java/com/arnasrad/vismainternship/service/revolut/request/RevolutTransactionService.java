@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.mapper.revolut.transaction.RevolutTransactionMapper;
 import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionDTO;
 import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import com.arnasrad.vismainternship.model.enums.BankId;
@@ -64,7 +63,6 @@ public class RevolutTransactionService implements TransactionService {
 
         return responseEntity.getBody();
     }
-
 
 
     @Override
