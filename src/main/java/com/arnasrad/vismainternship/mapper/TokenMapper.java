@@ -27,9 +27,7 @@ public class TokenMapper {
         return revolutTokenDTO;
     }
 
-    public Token mapToTokenEntity(DNBTokenDTO dto) {
-        Token token = new Token();
-
+    public Token mapToTokenEntity(Token token, DNBTokenDTO dto) {
         token.setClientId(dto.getClientId());
         token.setToken(dto.getJwtToken());
         token.setCustomerPublicId(dto.getCustomerPublicId());
@@ -37,9 +35,7 @@ public class TokenMapper {
         return token;
     }
 
-    public Token mapToTokenEntity(RevolutTokenDTO dto) {
-        Token token = new Token();
-
+    public Token mapToTokenEntity(Token token, RevolutTokenDTO dto) {
         token.setClientId(dto.getClientId());
         token.setToken(dto.getAccessToken());
         token.setTokenType(dto.getTokenType());

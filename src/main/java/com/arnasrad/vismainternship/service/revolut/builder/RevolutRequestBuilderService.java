@@ -27,8 +27,8 @@ public class RevolutRequestBuilderService {
         return new HttpEntity<>(jsonBody, headers);
     }
 
-    public HttpEntity<MultiValueMap<String, String>> getAccessTokenRequest() {
-        MultiValueMap<String, String> body = revolutRequestBodyBuilderService.getAccessTokenRequestParams();
+    public HttpEntity<MultiValueMap<String, String>> getTokenRequest() {
+        MultiValueMap<String, String> body = revolutRequestBodyBuilderService.getTokenRequestParams();
         HttpHeaders headers = revolutHeaderBuilderService.getHttpHeaders();
         return new HttpEntity<>(body, headers);
     }

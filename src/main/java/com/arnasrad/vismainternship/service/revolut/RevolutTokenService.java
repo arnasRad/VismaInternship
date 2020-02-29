@@ -15,20 +15,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
-
 @Service
-public class RefreshAccessTokenService implements TokenService {
+public class RevolutTokenService implements TokenService {
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final RestTemplate restTemplate;
     private final TokenRepository tokenRepository;
     private final TokenMapper tokenMapper;
-    @Value("${revolut.endpoint.access-token}")
+    @Value("${revolut.endpoint.refresh-token}")
     private String refreshTokenEndpoint;
+    @Value("${revolut.sandbox.constant.clientId}")
+    private String clientId;
 
-    public RefreshAccessTokenService(RevolutRequestBuilderService revolutRequestBuilderService,
-                                     RestTemplate restTemplate, TokenRepository tokenRepository,
-                                     TokenMapper tokenMapper) {
+    public RevolutTokenService(RevolutRequestBuilderService revolutRequestBuilderService,
+                               RestTemplate restTemplate, TokenRepository tokenRepository,
+                               TokenMapper tokenMapper) {
         this.revolutRequestBuilderService = revolutRequestBuilderService;
         this.restTemplate = restTemplate;
         this.tokenRepository = tokenRepository;
@@ -37,39 +37,29 @@ public class RefreshAccessTokenService implements TokenService {
 
     @Override
     public void refresh() {
-        HttpEntity<MultiValueMap<String, String>> httpEntity = revolutRequestBuilderService.getAccessTokenRequest();
+        HttpEntity<MultiValueMap<String, String>> httpEntity = revolutRequestBuilderService.getTokenRequest();
 
         ResponseEntity<RevolutTokenDTO> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
                 httpEntity, RevolutTokenDTO.class);
 
         RevolutTokenDTO newToken = responseEntity.getBody();
         save(newToken);
-        tokenRepository.save()
     }
 
     @Override
-    public String get(String userId) {
-        return null;
+    public String get() {
+        Token token = tokenRepository.findById(this.clientId)
+                .orElse(new Token());
+
+        return token.getToken();
     }
 
-    @Override
-    public String refreshAndGetToken(String ssn) {
-        RevolutTokenDTO token = refreshToken();
-        return setNewToken(token);
-    }
+    private void save(RevolutTokenDTO revolutToken) {
+        Token token = tokenRepository.findById(revolutToken.getClientId())
+                .orElse(new Token());
 
-    private RevolutTokenDTO refreshToken() {
-    }
-
-    private String save(RevolutTokenDTO revolutToken) {
-        Optional<Token> token = tokenRepository.findById(revolutToken.getClientId());
-        if (token.isPresent()) {
-            token.
-        } else {
-
-        }
-        revolutAccessToken.setToken(token);
-        return token;
+        token = tokenMapper.mapToTokenEntity(token, revolutToken);
+        tokenRepository.save(token);
     }
 
     public void setRefreshTokenEndpoint(String refreshTokenEndpoint) {

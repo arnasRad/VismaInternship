@@ -19,7 +19,7 @@ public class RevolutRequestBodyBuilderService {
     @Value("${revolut.sandbox.constant.clientAssertionType}")
     private String clientAssertionType;
 
-    public MultiValueMap<String, String> getAccessTokenRequestParams() {
+    public MultiValueMap<String, String> getTokenRequestParams() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", grantType);
         params.add("refresh_token", refreshTokenConstant);

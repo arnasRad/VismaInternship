@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.builder;
 
-import com.arnasrad.vismainternship.token.RevolutAccessToken;
+import com.arnasrad.vismainternship.service.revolut.RevolutTokenService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,35 +11,35 @@ import java.util.Collections;
 @Service
 public class RevolutHeaderBuilderService {
 
-    private final RevolutAccessToken revolutAccessToken;
+    private final RevolutTokenService revolutTokenService;
     @Value("${authorization.headerName}")
     private String headerName;
     @Value("${authorization.headerType}")
     private String headerType;
 
-    public RevolutHeaderBuilderService(RevolutAccessToken revolutAccessToken) {
-        this.revolutAccessToken = revolutAccessToken;
-    }
-
-    public HttpHeaders getAuthorizedHeaders() {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(headerName, headerType + " " + revolutAccessToken.getToken());
-        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        return httpHeaders;
-    }
-
-    public HttpHeaders getAuthorizedJsonHeaders() {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(headerName, headerType + " " + revolutAccessToken.getToken());
-        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        return httpHeaders;
+    public RevolutHeaderBuilderService(RevolutTokenService revolutTokenService) {
+        this.revolutTokenService = revolutTokenService;
     }
 
     public HttpHeaders getHttpHeaders() {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
+        return httpHeaders;
+    }
+
+    public HttpHeaders getAuthorizedHeaders() {
+        String token = revolutTokenService.get();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(headerName, headerType.concat(" ").concat(token));
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        return httpHeaders;
+    }
+
+    public HttpHeaders getAuthorizedJsonHeaders() {
+        HttpHeaders httpHeaders = getAuthorizedHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         return httpHeaders;
     }
 

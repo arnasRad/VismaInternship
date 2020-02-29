@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
+import com.arnasrad.vismainternship.mapper.TransactionMapper;
 import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionDTO;
 import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import com.arnasrad.vismainternship.model.enums.BankId;
@@ -25,14 +26,14 @@ public class RevolutTransactionService implements TransactionService {
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final RevolutRequestURLBuilderService revolutRequestURLBuilderService;
     private final TransactionRepository transactionRepository;
-    private final RevolutTransactionMapper revolutTransactionMapper;
+    private final TransactionMapper revolutTransactionMapper;
     @Value("${revolut.endpoint.transaction}")
     private String transactionEndpoint;
 
     public RevolutTransactionService(RestTemplate restTemplate,
                                      RevolutRequestBuilderService revolutRequestBuilderService,
                                      TransactionRepository transactionRepository,
-                                     RevolutTransactionMapper revolutTransactionMapper,
+                                     TransactionMapper revolutTransactionMapper,
                                      RevolutRequestURLBuilderService revolutRequestURLBuilderService) {
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
@@ -72,7 +73,7 @@ public class RevolutTransactionService implements TransactionService {
 
     public void saveTransaction(String id) {
         RevolutTransactionDTO transaction = getTransaction(id);
-        Transaction revolutTransaction = revolutTransactionMapper.mapToEntity(transaction);
+        Transaction revolutTransaction = revolutTransactionMapper.mapToTransactionEntity(transaction);
         transactionRepository.save(revolutTransaction);
     }
 

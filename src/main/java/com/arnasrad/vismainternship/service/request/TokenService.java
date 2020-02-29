@@ -4,7 +4,7 @@ public interface TokenService {
 
     void refresh();
 
-    String get(String userId);
+    String get();
 
     String getBankId();
 }

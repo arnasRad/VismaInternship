@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.psd2api;
 
-import com.arnasrad.vismainternship.token.DnbJwtToken;
+import com.arnasrad.vismainternship.service.dnb.DnbTokenService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DnbPsd2HeaderBuilderService {
 
-    private final DnbJwtToken dnbJwtToken;
+    private final DnbTokenService dnbTokenService;
     @Value("${dnb.api.keyHeader}")
     private String apiKeyHeader;
     @Value("${dnb.jwt.tokenHeader}")
@@ -17,13 +17,15 @@ public class DnbPsd2HeaderBuilderService {
     @Value("${dnb.apikey}")
     private String apiKey;
 
-    public DnbPsd2HeaderBuilderService(DnbJwtToken dnbJwtToken) {
-        this.dnbJwtToken = dnbJwtToken;
+    public DnbPsd2HeaderBuilderService(DnbTokenService dnbTokenService) {
+        this.dnbTokenService = dnbTokenService;
     }
 
     public HttpHeaders getAuthorizedHttpHeaders() {
+        String token = dnbTokenService.get();
+
         HttpHeaders httpHeaders = getHttpHeaders();
-        httpHeaders.add(jwtTokenHeader, dnbJwtToken.getToken());
+        httpHeaders.add(jwtTokenHeader, token);
 
         return httpHeaders;
     }

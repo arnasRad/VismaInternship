@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
+import com.arnasrad.vismainternship.mapper.PaymentMapper;
 import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
 import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
 import com.arnasrad.vismainternship.model.entity.payment.Payment;
@@ -20,14 +21,14 @@ public class RevolutPaymentService implements PaymentService {
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final RevolutTransactionService revolutTransactionService;
     private final PaymentRepository paymentRepository;
-    private final RevolutPaymentMapper revolutPaymentMapper;
+    private final PaymentMapper revolutPaymentMapper;
     @Value("${revolut.endpoint.payment}")
     private String paymentEndpoint;
 
     public RevolutPaymentService(RestTemplate restTemplate,
                                  RevolutRequestBuilderService revolutRequestBuilderService,
                                  RevolutTransactionService revolutTransactionService,
-                                 PaymentRepository paymentRepository, RevolutPaymentMapper revolutPaymentMapper) {
+                                 PaymentRepository paymentRepository, PaymentMapper revolutPaymentMapper) {
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
         this.revolutTransactionService = revolutTransactionService;
@@ -43,7 +44,7 @@ public class RevolutPaymentService implements PaymentService {
                 authorizedHttpEntity, RevolutPaymentDTO.class);
 
         RevolutPaymentDTO payment = responseEntity.getBody();
-        Payment revolutPayment = revolutPaymentMapper.mapToEntity(payment);
+        Payment revolutPayment = revolutPaymentMapper.mapToPaymentEntity(payment);
         paymentRepository.save(revolutPayment);
         revolutTransactionService.saveTransaction(payment.getId());
 

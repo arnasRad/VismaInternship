@@ -20,6 +20,8 @@ public class TokenController {
     public String refreshToken(@RequestParam String bank, @RequestParam(defaultValue = "") String ssn)
             throws NoSuchFunctionalityException {
         TokenService service = tokenServiceFactory.getService(bank);
-        return service.refreshAndGetToken(ssn);
+        service.refresh();
+
+        return "DNB Access Token Refreshed";
     }
 }

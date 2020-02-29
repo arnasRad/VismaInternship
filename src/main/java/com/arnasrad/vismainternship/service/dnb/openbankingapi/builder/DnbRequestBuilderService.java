@@ -1,11 +1,15 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.builder;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DnbRequestBuilderService {
+
+    @Value("${dnb.openbanking.ssn}")
+    private String ssn;
 
     private final DnbHeaderBuilderService dnbHeaderBuilderService;
 
@@ -14,19 +18,12 @@ public class DnbRequestBuilderService {
     }
 
     public HttpEntity<String> getRequest() {
-        return new HttpEntity<>(dnbHeaderBuilderService.getHttpHeaders());
-    }
-
-    public HttpEntity<String> getRequest(JSONObject ssn) {
-        return new HttpEntity<>(ssn.toString(), dnbHeaderBuilderService.getHttpHeaders());
+        JSONObject body = new JSONObject(ssn);
+        return new HttpEntity<>(body.toString(), dnbHeaderBuilderService.getHttpHeaders());
     }
 
     public HttpEntity<String> getAuthorizedRequest() {
         return new HttpEntity<>(dnbHeaderBuilderService.getAuthorizedHttpHeaders());
-    }
-
-    public HttpEntity<String> getAuthorizedRequest(JSONObject ssn) {
-        return new HttpEntity<>(ssn.toString(), dnbHeaderBuilderService.getAuthorizedHttpHeaders());
     }
 
 

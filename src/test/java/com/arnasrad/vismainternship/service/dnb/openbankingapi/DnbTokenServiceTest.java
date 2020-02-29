@@ -1,6 +1,6 @@
-package com.arnasrad.vismainternship.service.revolut.request.unit;
+package com.arnasrad.vismainternship.service.dnb.openbankingapi;
 
-import com.arnasrad.vismainternship.service.revolut.RefreshAccessTokenService;
+import com.arnasrad.vismainternship.service.dnb.DnbTokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,14 +12,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-
 @ExtendWith(MockitoExtension.class)
-class RefreshAccessTokenServiceTest {
+class DnbTokenServiceTest {
 
     private String tokenEndpoint;
 
     @InjectMocks
-    private RefreshAccessTokenService refreshAccessTokenService;
+    private DnbTokenService dnbTokenService;
 
     @Mock
     private RestTemplate restTemplate;
@@ -35,9 +34,10 @@ class RefreshAccessTokenServiceTest {
 
     @BeforeEach
     void init() {
-        MockitoAnnotations.initMocks(RefreshAccessTokenServiceTest.class);
-        this.tokenEndpoint = "https://sandbox-b2b.revolut.com/api/1.0/auth/token";
-        this.refreshAccessTokenService.setRefreshTokenEndpoint(tokenEndpoint);
+
+        MockitoAnnotations.initMocks(DnbTokenServiceTest.class);
+        this.tokenEndpoint = "https://developer-api-testmode.dnb.no/tokens/v0";
+        this.dnbTokenService.setRefreshTokenEndpoint(tokenEndpoint);
     }
 
 }
