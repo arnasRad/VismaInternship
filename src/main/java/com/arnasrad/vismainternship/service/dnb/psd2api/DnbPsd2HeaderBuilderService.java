@@ -1,5 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb.psd2api;
 
+import com.arnasrad.vismainternship.model.entity.token.Token;
+import com.arnasrad.vismainternship.persistence.token.TokenRepository;
 import com.arnasrad.vismainternship.service.dnb.DnbTokenService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -9,23 +11,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class DnbPsd2HeaderBuilderService {
 
-    private final DnbTokenService dnbTokenService;
+    private final TokenRepository tokenRepository;
     @Value("${dnb.api.keyHeader}")
     private String apiKeyHeader;
     @Value("${dnb.jwt.tokenHeader}")
     private String jwtTokenHeader;
     @Value("${dnb.apikey}")
     private String apiKey;
+    @Value("${dnb.openbanking.ssn}")
+    private String ssn;
 
-    public DnbPsd2HeaderBuilderService(DnbTokenService dnbTokenService) {
-        this.dnbTokenService = dnbTokenService;
+    public DnbPsd2HeaderBuilderService(TokenRepository tokenRepository) {
+        this.tokenRepository = tokenRepository;
     }
 
     public HttpHeaders getAuthorizedHttpHeaders() {
-        String token = dnbTokenService.get();
+        Token token = tokenRepository.findById(ssn)
+                .orElse(new Token());
+
+        String tokenString = token.getToken();
 
         HttpHeaders httpHeaders = getHttpHeaders();
-        httpHeaders.add(jwtTokenHeader, token);
+        httpHeaders.add(jwtTokenHeader, tokenString);
 
         return httpHeaders;
     }

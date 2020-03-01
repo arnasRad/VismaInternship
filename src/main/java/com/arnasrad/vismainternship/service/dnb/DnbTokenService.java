@@ -42,15 +42,8 @@ public class DnbTokenService implements TokenService {
                 httpEntity, DNBTokenDTO.class);
 
         DNBTokenDTO newToken = responseEntity.getBody();
+        newToken.setClientId(ssn);
         save(newToken);
-    }
-
-    @Override
-    public String get() {
-        Token token = tokenRepository.findById(ssn)
-                .orElse(new Token());
-
-        return token.getToken();
     }
 
     private void save(DNBTokenDTO dnbTokenDTO) {

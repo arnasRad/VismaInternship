@@ -1,5 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.builder;
 
+import com.arnasrad.vismainternship.model.entity.token.Token;
+import com.arnasrad.vismainternship.persistence.token.TokenRepository;
 import com.arnasrad.vismainternship.service.revolut.RevolutTokenService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -11,14 +13,16 @@ import java.util.Collections;
 @Service
 public class RevolutHeaderBuilderService {
 
-    private final RevolutTokenService revolutTokenService;
+    private TokenRepository tokenRepository;
     @Value("${authorization.headerName}")
     private String headerName;
     @Value("${authorization.headerType}")
     private String headerType;
+    @Value("${revolut.sandbox.constant.clientId}")
+    private String clientId;
 
-    public RevolutHeaderBuilderService(RevolutTokenService revolutTokenService) {
-        this.revolutTokenService = revolutTokenService;
+    public RevolutHeaderBuilderService(TokenRepository tokenRepository) {
+        this.tokenRepository = tokenRepository;
     }
 
     public HttpHeaders getHttpHeaders() {
@@ -29,10 +33,13 @@ public class RevolutHeaderBuilderService {
     }
 
     public HttpHeaders getAuthorizedHeaders() {
-        String token = revolutTokenService.get();
+        Token token = tokenRepository.findById(clientId)
+                .orElse(new Token());
+
+        String tokenString = token.getToken();
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(headerName, headerType.concat(" ").concat(token));
+        httpHeaders.add(headerName, headerType.concat(" ").concat(tokenString));
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         return httpHeaders;
     }

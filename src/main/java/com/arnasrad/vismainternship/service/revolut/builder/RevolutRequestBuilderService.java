@@ -12,7 +12,8 @@ public class RevolutRequestBuilderService {
     private final RevolutHeaderBuilderService revolutHeaderBuilderService;
     private final RevolutRequestBodyBuilderService revolutRequestBodyBuilderService;
 
-    public RevolutRequestBuilderService(RevolutHeaderBuilderService revolutHeaderBuilderService, RevolutRequestBodyBuilderService revolutRequestBodyBuilderService) {
+    public RevolutRequestBuilderService(RevolutHeaderBuilderService revolutHeaderBuilderService,
+                                        RevolutRequestBodyBuilderService revolutRequestBodyBuilderService) {
         this.revolutHeaderBuilderService = revolutHeaderBuilderService;
         this.revolutRequestBodyBuilderService = revolutRequestBodyBuilderService;
     }

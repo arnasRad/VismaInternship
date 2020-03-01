@@ -22,6 +22,6 @@ public class TokenController {
         TokenService service = tokenServiceFactory.getService(bank);
         service.refresh();
 
-        return "DNB Access Token Refreshed";
+        return "Access Token Refreshed";
     }
 }

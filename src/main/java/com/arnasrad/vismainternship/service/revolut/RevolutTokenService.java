@@ -43,15 +43,8 @@ public class RevolutTokenService implements TokenService {
                 httpEntity, RevolutTokenDTO.class);
 
         RevolutTokenDTO newToken = responseEntity.getBody();
+        newToken.setClientId(clientId);
         save(newToken);
-    }
-
-    @Override
-    public String get() {
-        Token token = tokenRepository.findById(this.clientId)
-                .orElse(new Token());
-
-        return token.getToken();
     }
 
     private void save(RevolutTokenDTO revolutToken) {

@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.model.entity.token;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,6 +9,7 @@ public class Token {
 
     @Id
     private String clientId;
+    @Column(length = 800)
     private String token;
     private String tokenType;
     private Integer expiresId;

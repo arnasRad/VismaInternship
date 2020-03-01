@@ -18,7 +18,8 @@ public class DnbRequestBuilderService {
     }
 
     public HttpEntity<String> getRequest() {
-        JSONObject body = new JSONObject(ssn);
+        JSONObject body = new JSONObject();
+        body.put("ssn", ssn);
         return new HttpEntity<>(body.toString(), dnbHeaderBuilderService.getHttpHeaders());
     }
 
