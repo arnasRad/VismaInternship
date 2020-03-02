@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.request;
 
-import com.arnasrad.vismainternship.model.dto.account.AccountDto;
 import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDto;
+import com.arnasrad.vismainternship.model.dto.account.AccountDto;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
-import com.arnasrad.vismainternship.model.dto.account.AccountDto;
 import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDto;
+import com.arnasrad.vismainternship.model.dto.account.AccountDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.request.AccountService;

@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class DnbRequestBuilderService {
 
+    private final DnbHeaderBuilderService dnbHeaderBuilderService;
     @Value("${dnb.openbanking.ssn}")
     private String ssn;
-
-    private final DnbHeaderBuilderService dnbHeaderBuilderService;
 
     public DnbRequestBuilderService(DnbHeaderBuilderService dnbHeaderBuilderService) {
         this.dnbHeaderBuilderService = dnbHeaderBuilderService;

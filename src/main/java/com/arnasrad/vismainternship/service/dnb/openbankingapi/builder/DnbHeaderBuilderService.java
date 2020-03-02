@@ -2,7 +2,6 @@ package com.arnasrad.vismainternship.service.dnb.openbankingapi.builder;
 
 import com.arnasrad.vismainternship.model.entity.token.Token;
 import com.arnasrad.vismainternship.persistence.token.TokenRepository;
-import com.arnasrad.vismainternship.service.dnb.DnbTokenService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
