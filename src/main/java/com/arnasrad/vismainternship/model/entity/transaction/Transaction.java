@@ -31,26 +31,6 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String transactionId, String type, String state, Date createdAt, Date completedAt,
-                       String reference, String requestId, String reasonCode, Date updatedAt, Date scheduledFor,
-                       String relatedTransactionId, Merchant merchant, List<TransactionLegs> transactionLegs,
-                       TransactionCard card) {
-        this.transactionId = transactionId;
-        this.type = type;
-        this.state = state;
-        this.createdAt = createdAt;
-        this.completedAt = completedAt;
-        this.reference = reference;
-        this.requestId = requestId;
-        this.reasonCode = reasonCode;
-        this.updatedAt = updatedAt;
-        this.scheduledFor = scheduledFor;
-        this.relatedTransactionId = relatedTransactionId;
-        this.merchant = merchant;
-        this.transactionLegs = transactionLegs;
-        this.card = card;
-    }
-
     public Long getId() {
         return id;
     }

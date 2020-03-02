@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
+package com.arnasrad.vismainternship.service.dnb.psd2api.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyDto;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DNBCounterpartyService implements CounterpartyService {
+public class DnbCounterpartyService implements CounterpartyService {
 
     @Override
     public CounterpartyDto addCounterparty(String body) throws NoSuchFunctionalityException {

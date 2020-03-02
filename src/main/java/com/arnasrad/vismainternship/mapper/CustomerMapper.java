@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.customer.CustomerDto;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DNBCustomerDto;
+import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DnbCustomerDto;
 import com.arnasrad.vismainternship.model.entity.customer.Customer;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +17,8 @@ public class CustomerMapper {
         return customerDto;
     }
 
-    public DNBCustomerDto mapToDNBCustomerDto(Customer entity) {
-        DNBCustomerDto dnbCustomerDto = new DNBCustomerDto();
+    public DnbCustomerDto mapToDNBCustomerDto(Customer entity) {
+        DnbCustomerDto dnbCustomerDto = new DnbCustomerDto();
 
         dnbCustomerDto.setCustomerName(entity.getCustomerName());
         dnbCustomerDto.setSsn(entity.getSsn());
@@ -27,10 +27,20 @@ public class CustomerMapper {
     }
 
     public Customer mapToCustomerEntity(CustomerDto dto) {
-        return new Customer(dto.getCustomerName(), dto.getSsn());
+        Customer customer = new Customer();
+
+        customer.setCustomerName(dto.getCustomerName());
+        customer.setSsn(dto.getSsn());
+
+        return customer;
     }
 
-    public Customer mapToCustomerEntity(DNBCustomerDto dto) {
-        return new Customer(dto.getCustomerName(), dto.getSsn());
+    public Customer mapToCustomerEntity(DnbCustomerDto dto) {
+        Customer customer = new Customer();
+
+        customer.setCustomerName(dto.getCustomerName());
+        customer.setSsn(dto.getSsn());
+
+        return customer;
     }
 }

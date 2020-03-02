@@ -18,12 +18,6 @@ public class EstimatedTime {
     public EstimatedTime() {
     }
 
-    public EstimatedTime(String unit, Double min, Double max) {
-        this.unit = unit;
-        this.min = min;
-        this.max = max;
-    }
-
     public Long getId() {
         return id;
     }

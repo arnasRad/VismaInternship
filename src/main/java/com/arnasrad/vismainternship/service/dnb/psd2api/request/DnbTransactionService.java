@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
+package com.arnasrad.vismainternship.service.dnb.psd2api.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dto.transaction.TransactionDto;
@@ -9,7 +9,7 @@ import com.arnasrad.vismainternship.service.request.TransactionService;
 import java.util.Date;
 import java.util.List;
 
-public class DNBTransactionService implements TransactionService {
+public class DnbTransactionService implements TransactionService {
 
     @Override
     public TransactionDto getTransaction(String id) throws NoSuchFunctionalityException {

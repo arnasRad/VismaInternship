@@ -23,18 +23,6 @@ public class CounterpartyAccount {
     public CounterpartyAccount() {
     }
 
-    public CounterpartyAccount(String counterpartyAccountId, String currency, String type, String accountNo, String iban, String sortCode, String routingNumber, String bic, String recipientCharges) {
-        this.counterpartyAccountId = counterpartyAccountId;
-        this.currency = currency;
-        this.type = type;
-        this.accountNo = accountNo;
-        this.iban = iban;
-        this.sortCode = sortCode;
-        this.routingNumber = routingNumber;
-        this.bic = bic;
-        this.recipientCharges = recipientCharges;
-    }
-
     public Long getId() {
         return id;
     }

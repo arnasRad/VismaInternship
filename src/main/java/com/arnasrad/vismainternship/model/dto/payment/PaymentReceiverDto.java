@@ -16,11 +16,6 @@ public class PaymentReceiverDto implements Serializable {
     public PaymentReceiverDto() {
     }
 
-    public PaymentReceiverDto(String counterpartyId, String accountId) {
-        this.counterpartyId = counterpartyId;
-        this.accountId = accountId;
-    }
-
     public String getCounterpartyId() {
         return counterpartyId;
     }

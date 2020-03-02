@@ -18,13 +18,6 @@ public class AccountDetailsDto {
     public AccountDetailsDto() {
     }
 
-    public AccountDetailsDto(String iban, List<String> schemas, String accountNo, String bankCountry) {
-        this.iban = iban;
-        this.schemas = schemas;
-        this.accountNo = accountNo;
-        this.bankCountry = bankCountry;
-    }
-
     public String getIban() {
         return iban;
     }

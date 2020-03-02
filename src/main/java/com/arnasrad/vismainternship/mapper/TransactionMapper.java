@@ -201,7 +201,14 @@ public class TransactionMapper {
             return null;
         }
 
-        return new TransactionCard(dto.getCardNumber(), dto.getFirstName(), dto.getLastName(), dto.getPhone());
+        TransactionCard transactionCard = new TransactionCard();
+
+        transactionCard.setCardNumber(dto.getCardNumber());
+        transactionCard.setFirstName(dto.getFirstName());
+        transactionCard.setLastName(dto.getLastName());
+        transactionCard.setPhone(dto.getPhone());
+
+        return transactionCard;
     }
 
     public Merchant mapToMerchantEntity(MerchantDto dto) {

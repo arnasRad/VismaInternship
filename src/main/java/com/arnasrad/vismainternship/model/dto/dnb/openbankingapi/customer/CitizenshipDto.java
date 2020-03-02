@@ -10,10 +10,6 @@ public class CitizenshipDto {
     public CitizenshipDto() {
     }
 
-    public CitizenshipDto(String countryOfCitizenship) {
-        this.countryOfCitizenship = countryOfCitizenship;
-    }
-
     public String getCountryOfCitizenship() {
         return countryOfCitizenship;
     }

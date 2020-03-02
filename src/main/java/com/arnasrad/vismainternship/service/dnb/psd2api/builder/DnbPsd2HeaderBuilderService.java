@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.psd2api;
+package com.arnasrad.vismainternship.service.dnb.psd2api.builder;
 
 import com.arnasrad.vismainternship.model.entity.token.Token;
 import com.arnasrad.vismainternship.persistence.token.TokenRepository;
@@ -7,31 +7,32 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class DnbPsd2HeaderBuilderService {
 
     private final TokenRepository tokenRepository;
-    @Value("${dnb.api.keyHeader}")
-    private String apiKeyHeader;
-    @Value("${dnb.jwt.tokenHeader}")
-    private String jwtTokenHeader;
-    @Value("${dnb.apikey}")
-    private String apiKey;
-    @Value("${dnb.openbanking.ssn}")
-    private String ssn;
+    @Value("${dnb.psd2.psu-id}")
+    private String psuId;
+    @Value("${dnb.psd2.psu-ip-address}")
+    private String psuIpAddress;
+    @Value("${dnb.psd2.redirect-uri}")
+    private String redirectUri;
 
     public DnbPsd2HeaderBuilderService(TokenRepository tokenRepository) {
         this.tokenRepository = tokenRepository;
     }
 
     public HttpHeaders getAuthorizedHttpHeaders() {
-        Token token = tokenRepository.findById(ssn)
+        Token token = tokenRepository.findById(psuId)
                 .orElse(new Token());
 
-        String tokenString = token.getToken();
+        String consent = token.getToken();
 
         HttpHeaders httpHeaders = getHttpHeaders();
-        httpHeaders.add(jwtTokenHeader, tokenString);
+        httpHeaders.add("Consent-ID", consent);
+        httpHeaders.add("PSU-IP-Address", psuIpAddress);
 
         return httpHeaders;
     }
@@ -40,7 +41,10 @@ public class DnbPsd2HeaderBuilderService {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
         httpHeaders.add("Content-type", MediaType.APPLICATION_JSON_VALUE);
-        httpHeaders.add(apiKeyHeader, apiKey);
+        httpHeaders.add("X-Request_ID", UUID.randomUUID().toString());
+        httpHeaders.add("TPP-Redirect-Preferred", "true");
+        httpHeaders.add("TPP-Redirect-URI", redirectUri);
+        httpHeaders.add("PSU-ID", psuId);
 
         return httpHeaders;
     }

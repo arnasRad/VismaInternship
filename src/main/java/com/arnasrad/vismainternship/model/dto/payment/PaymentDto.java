@@ -16,12 +16,6 @@ public class PaymentDto {
     public PaymentDto() {
     }
 
-    public PaymentDto(String id, String state, Date completedAt) {
-        this.id = id;
-        this.state = state;
-        this.completedAt = completedAt;
-    }
-
     public String getId() {
         return id;
     }

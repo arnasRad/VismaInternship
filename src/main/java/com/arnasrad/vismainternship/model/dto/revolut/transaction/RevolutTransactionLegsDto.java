@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.model.dto.revolut.transaction;
 
-import com.arnasrad.vismainternship.model.dto.transaction.LegsCounterpartyDto;
 import com.arnasrad.vismainternship.model.dto.transaction.TransactionLegsDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,14 +13,6 @@ public class RevolutTransactionLegsDto extends TransactionLegsDto {
     private String billCurrency;
 
     public RevolutTransactionLegsDto() {
-    }
-
-    public RevolutTransactionLegsDto(String id, Double amount, String currency, String accountId,
-                                     LegsCounterpartyDto counterparty, String description, Double balance,
-                                     Double billAmount, String billCurrency) {
-        super(id, amount, currency, accountId, counterparty, description, balance);
-        this.billAmount = billAmount;
-        this.billCurrency = billCurrency;
     }
 
     public Double getBillAmount() {

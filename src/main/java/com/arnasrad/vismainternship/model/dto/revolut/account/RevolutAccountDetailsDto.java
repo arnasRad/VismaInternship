@@ -4,8 +4,6 @@ import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutAccountDetailsDto extends AccountDetailsDto {
 
@@ -27,22 +25,6 @@ public class RevolutAccountDetailsDto extends AccountDetailsDto {
     private EstimatedTimeDto estimatedTime;
 
     public RevolutAccountDetailsDto() {
-    }
-
-    public RevolutAccountDetailsDto(String iban, List<String> schemas, String accountNo, String bankCountry, String bic,
-                                    Boolean pooled, String uniqueReference, String sortCode, String routingNumber,
-                                    String beneficiary, BeneficiaryAddressDto beneficiaryAddress,
-                                    EstimatedTimeDto estimatedTime) {
-
-        super(iban, schemas, accountNo, bankCountry);
-        this.bic = bic;
-        this.pooled = pooled;
-        this.uniqueReference = uniqueReference;
-        this.sortCode = sortCode;
-        this.routingNumber = routingNumber;
-        this.beneficiary = beneficiary;
-        this.beneficiaryAddress = beneficiaryAddress;
-        this.estimatedTime = estimatedTime;
     }
 
     public String getBic() {

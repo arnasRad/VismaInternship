@@ -16,11 +16,6 @@ public class CountryTax {
     public CountryTax() {
     }
 
-    public CountryTax(String taxLiabilityCountry, String taxIdentificationNumber) {
-        this.taxLiabilityCountry = taxLiabilityCountry;
-        this.taxIdentificationNumber = taxIdentificationNumber;
-    }
-
     public Long getId() {
         return id;
     }

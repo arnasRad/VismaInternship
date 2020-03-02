@@ -18,14 +18,6 @@ public class Token {
     public Token() {
     }
 
-    public Token(String clientId, String token, String tokenType, Integer expiresId, String customerPublicId) {
-        this.clientId = clientId;
-        this.token = token;
-        this.tokenType = tokenType;
-        this.expiresId = expiresId;
-        this.customerPublicId = customerPublicId;
-    }
-
     public String getClientId() {
         return clientId;
     }

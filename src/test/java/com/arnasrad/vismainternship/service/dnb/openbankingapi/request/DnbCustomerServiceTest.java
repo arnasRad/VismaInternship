@@ -12,14 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 @ExtendWith(MockitoExtension.class)
-class DNBCustomerServiceTest {
+class DnbCustomerServiceTest {
 
     private String customersEndpoint;
     private String customerInfoEndpoint;
     private String currentCustomerInfoEndpoint;
 
     @InjectMocks
-    private DNBCustomerService dnbCustomerService;
+    private DnbCustomerService dnbCustomerService;
 
     @Mock
     private RestTemplate restTemplate;
@@ -36,7 +36,7 @@ class DNBCustomerServiceTest {
     @BeforeEach
     void init() {
 
-        MockitoAnnotations.initMocks(DNBCustomerServiceTest.class);
+        MockitoAnnotations.initMocks(DnbCustomerServiceTest.class);
         this.customersEndpoint = "https://developer-api-testmode.dnb.no/test-customers/v0";
         this.customerInfoEndpoint = "https://developer-api-testmode.dnb.no/customers/v0/current";
         this.currentCustomerInfoEndpoint = "https://developer-api-testmode.dnb.no/customers/v0/";

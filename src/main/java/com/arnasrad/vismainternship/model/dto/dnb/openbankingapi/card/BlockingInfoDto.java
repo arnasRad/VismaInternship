@@ -13,13 +13,6 @@ public class BlockingInfoDto {
     public BlockingInfoDto() {
     }
 
-    public BlockingInfoDto(boolean unblockAllowed, String performedBy, String timestamp, boolean blockAllowed) {
-        this.unblockAllowed = unblockAllowed;
-        this.performedBy = performedBy;
-        this.timestamp = timestamp;
-        this.blockAllowed = blockAllowed;
-    }
-
     public boolean isUnblockAllowed() {
         return unblockAllowed;
     }

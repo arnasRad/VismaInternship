@@ -24,18 +24,6 @@ public class Counterparty {
     public Counterparty() {
     }
 
-    public Counterparty(String counterpartyId, String country, String name, String phone, List<CounterpartyAccount> accounts, String profileType, String state, Date createdAt, Date updatedAt) {
-        this.counterpartyId = counterpartyId;
-        this.country = country;
-        this.name = name;
-        this.phone = phone;
-        this.accounts = accounts;
-        this.profileType = profileType;
-        this.state = state;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
     public Long getId() {
         return id;
     }

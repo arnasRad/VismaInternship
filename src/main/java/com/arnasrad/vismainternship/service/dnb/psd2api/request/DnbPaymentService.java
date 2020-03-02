@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
+package com.arnasrad.vismainternship.service.dnb.psd2api.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dto.payment.PaymentDto;
@@ -9,7 +9,7 @@ import com.arnasrad.vismainternship.service.request.PaymentService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DNBPaymentService implements PaymentService {
+public class DnbPaymentService implements PaymentService {
 
     @Override
     public PaymentDto createPayment(PaymentRequestDto body) throws NoSuchFunctionalityException {

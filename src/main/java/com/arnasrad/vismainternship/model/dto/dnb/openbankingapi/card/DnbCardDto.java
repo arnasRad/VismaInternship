@@ -4,7 +4,7 @@ import com.arnasrad.vismainternship.model.dto.card.CardDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DNBCardDto extends CardDto {
+public class DnbCardDto extends CardDto {
 
     private BlockingInfoDto blockingInfo;
     private String created;
@@ -13,20 +13,7 @@ public class DNBCardDto extends CardDto {
     private String cardHolderName;
     private String cardStatus;
 
-    public DNBCardDto() {
-    }
-
-    public DNBCardDto(String customerId, String cardId, String accountNumber, String creditBalance,
-                      String debitBalance, String cardType, String productName, BlockingInfoDto blockingInfo,
-                      String created, String lastChanged, String maskedCardNumber, String cardHolderName,
-                      String cardStatus) {
-        super(customerId, cardId, accountNumber, creditBalance, debitBalance, cardType, productName);
-        this.blockingInfo = blockingInfo;
-        this.created = created;
-        this.lastChanged = lastChanged;
-        this.maskedCardNumber = maskedCardNumber;
-        this.cardHolderName = cardHolderName;
-        this.cardStatus = cardStatus;
+    public DnbCardDto() {
     }
 
     public BlockingInfoDto getBlockingInfo() {

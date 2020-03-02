@@ -13,11 +13,6 @@ public class PaymentRequest {
     public PaymentRequest() {
     }
 
-    public PaymentRequest(String requestId, String state) {
-        this.requestId = requestId;
-        this.state = state;
-    }
-
     public String getRequestId() {
         return requestId;
     }

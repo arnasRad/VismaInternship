@@ -17,12 +17,6 @@ public class RevolutPaymentDto extends PaymentDto {
     public RevolutPaymentDto() {
     }
 
-    public RevolutPaymentDto(String id, String state, Date completedAt, String reasonCode, Date createdAt) {
-        super(id, state, completedAt);
-        this.reasonCode = reasonCode;
-        this.createdAt = createdAt;
-    }
-
     public String getReasonCode() {
         return reasonCode;
     }

@@ -3,7 +3,6 @@ package com.arnasrad.vismainternship.model.dto.counterparty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -17,15 +16,6 @@ public class CounterpartyDto {
     private List<CounterpartyAccountDto> accounts;
 
     public CounterpartyDto() {
-    }
-
-    public CounterpartyDto(String country, String id, String name, String phone,
-                           List<? extends CounterpartyAccountDto> accounts) {
-        this.country = country;
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.accounts = new ArrayList<>(accounts);
     }
 
     public String getCountry() {

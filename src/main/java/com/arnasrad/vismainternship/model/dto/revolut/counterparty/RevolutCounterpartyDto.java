@@ -1,12 +1,10 @@
 package com.arnasrad.vismainternship.model.dto.revolut.counterparty;
 
-import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyAccountDto;
 import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
-import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevolutCounterpartyDto extends CounterpartyDto {
@@ -20,16 +18,6 @@ public class RevolutCounterpartyDto extends CounterpartyDto {
     private Date updatedAt;
 
     public RevolutCounterpartyDto() {
-    }
-
-    public RevolutCounterpartyDto(String country, String id, String name, String phone,
-                                  List<CounterpartyAccountDto> accounts, String profileType, String state,
-                                  Date createdAt, Date updatedAt) {
-        super(country, id, name, phone, accounts);
-        this.profileType = profileType;
-        this.state = state;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public String getProfileType() {

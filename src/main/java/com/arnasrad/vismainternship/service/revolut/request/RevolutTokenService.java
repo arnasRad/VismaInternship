@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.revolut;
+package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.mapper.TokenMapper;
 import com.arnasrad.vismainternship.model.dto.token.RevolutTokenDto;

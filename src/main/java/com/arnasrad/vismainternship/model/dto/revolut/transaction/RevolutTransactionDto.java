@@ -28,21 +28,6 @@ public class RevolutTransactionDto extends TransactionDto {
     public RevolutTransactionDto() {
     }
 
-    public RevolutTransactionDto(String id, String type, String state, Date createdAt, Date completedAt,
-                                 String reference, String requestId, String reasonCode, Date updatedAt,
-                                 Date scheduledFor, String relatedTransactionId, MerchantDto merchant,
-                                 List<RevolutTransactionLegsDto> revolutTransactionLegs, TransactionCardDto card) {
-        super(id, type, state, createdAt, completedAt, reference);
-        this.requestId = requestId;
-        this.reasonCode = reasonCode;
-        this.updatedAt = updatedAt;
-        this.scheduledFor = scheduledFor;
-        this.relatedTransactionId = relatedTransactionId;
-        this.merchant = merchant;
-        this.revolutTransactionLegs = revolutTransactionLegs;
-        this.card = card;
-    }
-
     public String getRequestId() {
         return requestId;
     }

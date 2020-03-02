@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.mapper;
 
-import com.arnasrad.vismainternship.model.dto.token.DNBTokenDto;
+import com.arnasrad.vismainternship.model.dto.token.DnbTokenDto;
 import com.arnasrad.vismainternship.model.dto.token.RevolutTokenDto;
 import com.arnasrad.vismainternship.model.entity.token.Token;
 import org.springframework.stereotype.Component;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenMapper {
 
-    public DNBTokenDto mapToDNBTokenDto(Token entity) {
-        DNBTokenDto dnbTokenDto = new DNBTokenDto();
+    public DnbTokenDto mapToDNBTokenDto(Token entity) {
+        DnbTokenDto dnbTokenDto = new DnbTokenDto();
 
         dnbTokenDto.setCustomerPublicId(entity.getCustomerPublicId());
         dnbTokenDto.setJwtToken(entity.getToken());
@@ -27,7 +27,7 @@ public class TokenMapper {
         return revolutTokenDto;
     }
 
-    public Token mapToTokenEntity(Token token, DNBTokenDto dto) {
+    public Token mapToTokenEntity(Token token, DnbTokenDto dto) {
         token.setClientId(dto.getClientId());
         token.setToken(dto.getJwtToken());
         token.setCustomerPublicId(dto.getCustomerPublicId());

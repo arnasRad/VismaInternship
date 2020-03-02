@@ -21,14 +21,6 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(String paymentId, String state, String reasonCode, Date createdAt, Date completedAt) {
-        this.paymentId = paymentId;
-        this.state = state;
-        this.reasonCode = reasonCode;
-        this.createdAt = createdAt;
-        this.completedAt = completedAt;
-    }
-
     public Long getId() {
         return id;
     }

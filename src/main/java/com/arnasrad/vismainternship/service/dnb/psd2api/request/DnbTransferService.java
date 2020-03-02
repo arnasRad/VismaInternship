@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
+package com.arnasrad.vismainternship.service.dnb.psd2api.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.enums.BankId;
@@ -7,7 +7,7 @@ import com.arnasrad.vismainternship.service.request.TransferService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DNBTransferService implements TransferService {
+public class DnbTransferService implements TransferService {
 
     @Override
     public String createTransfer(String body) throws NoSuchFunctionalityException {

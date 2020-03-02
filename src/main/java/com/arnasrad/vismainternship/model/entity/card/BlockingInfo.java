@@ -19,13 +19,6 @@ public class BlockingInfo {
     public BlockingInfo() {
     }
 
-    public BlockingInfo(boolean unblockAllowed, String performedBy, String timestamp, boolean blockAllowed) {
-        this.unblockAllowed = unblockAllowed;
-        this.performedBy = performedBy;
-        this.timestamp = timestamp;
-        this.blockAllowed = blockAllowed;
-    }
-
     public Long getId() {
         return id;
     }

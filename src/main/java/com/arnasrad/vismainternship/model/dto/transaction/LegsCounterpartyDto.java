@@ -14,12 +14,6 @@ public class LegsCounterpartyDto {
     public LegsCounterpartyDto() {
     }
 
-    public LegsCounterpartyDto(String id, String accountId, String type) {
-        this.id = id;
-        this.accountId = accountId;
-        this.type = type;
-    }
-
     public String getId() {
         return id;
     }

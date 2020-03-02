@@ -17,13 +17,6 @@ public class TransactionCardDto {
     public TransactionCardDto() {
     }
 
-    public TransactionCardDto(String cardNumber, String firstName, String lastName, String phone) {
-        this.cardNumber = cardNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-    }
-
     public String getCardNumber() {
         return cardNumber;
     }

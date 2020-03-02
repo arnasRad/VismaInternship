@@ -1,19 +1,13 @@
 package com.arnasrad.vismainternship.model.dto.dnb.psd2api;
 
-public class DNBAccountDto {
+public class DnbAccountDto {
 
     private String id;
     private String name;
     private Double balance;
 
-    public DNBAccountDto() {
+    public DnbAccountDto() {
 
-    }
-
-    public DNBAccountDto(String id, String name, Double balance) {
-        this.id = id;
-        this.name = name;
-        this.balance = balance;
     }
 
     public String getId() {

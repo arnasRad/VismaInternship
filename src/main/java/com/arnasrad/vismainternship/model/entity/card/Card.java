@@ -26,24 +26,6 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardId, String customerId, String accountNumber, String creditBalance, String debitBalance,
-                String cardType, String productName, BlockingInfo blockingInfo, String created, String lastChanged,
-                String maskedCardNumber, String cardHolderName, String cardStatus) {
-        this.cardId = cardId;
-        this.customerId = customerId;
-        this.accountNumber = accountNumber;
-        this.creditBalance = creditBalance;
-        this.debitBalance = debitBalance;
-        this.cardType = cardType;
-        this.productName = productName;
-        this.blockingInfo = blockingInfo;
-        this.created = created;
-        this.lastChanged = lastChanged;
-        this.maskedCardNumber = maskedCardNumber;
-        this.cardHolderName = cardHolderName;
-        this.cardStatus = cardStatus;
-    }
-
     public Long getId() {
         return id;
     }

@@ -19,13 +19,6 @@ public class TransactionCard {
     public TransactionCard() {
     }
 
-    public TransactionCard(String cardNumber, String firstName, String lastName, String phone) {
-        this.cardNumber = cardNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-    }
-
     public Long getId() {
         return id;
     }

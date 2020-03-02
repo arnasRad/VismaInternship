@@ -28,23 +28,6 @@ public class AccountDetails {
     public AccountDetails() {
     }
 
-    public AccountDetails(String accountNo, String iban, List<String> schemas, String bankCountry, String bic,
-                          Boolean pooled, String uniqueReference, String sortCode, String routingNumber,
-                          String beneficiary, BeneficiaryAddress beneficiaryAddress, EstimatedTime estimatedTime) {
-        this.accountNo = accountNo;
-        this.iban = iban;
-        this.schemas = schemas;
-        this.bankCountry = bankCountry;
-        this.bic = bic;
-        this.pooled = pooled;
-        this.uniqueReference = uniqueReference;
-        this.sortCode = sortCode;
-        this.routingNumber = routingNumber;
-        this.beneficiary = beneficiary;
-        this.beneficiaryAddress = beneficiaryAddress;
-        this.estimatedTime = estimatedTime;
-    }
-
     public Long getId() {
         return id;
     }

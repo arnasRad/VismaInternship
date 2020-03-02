@@ -1,15 +1,15 @@
-package com.arnasrad.vismainternship.service.dnb.psd2api;
+package com.arnasrad.vismainternship.service.dnb.psd2api.builder;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RequestBuilderService {
+public class DnbPsd2RequestBuilderService {
 
     private final DnbPsd2HeaderBuilderService dnbPsd2HeaderBuilderService;
     private final DnbPsd2RequestBodyBuilderService dnbPsd2RequestBodyBuilderService;
 
-    public RequestBuilderService(DnbPsd2HeaderBuilderService dnbPsd2HeaderBuilderService, DnbPsd2RequestBodyBuilderService dnbPsd2RequestBodyBuilderService) {
+    public DnbPsd2RequestBuilderService(DnbPsd2HeaderBuilderService dnbPsd2HeaderBuilderService, DnbPsd2RequestBodyBuilderService dnbPsd2RequestBodyBuilderService) {
         this.dnbPsd2HeaderBuilderService = dnbPsd2HeaderBuilderService;
         this.dnbPsd2RequestBodyBuilderService = dnbPsd2RequestBodyBuilderService;
     }

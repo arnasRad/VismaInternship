@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DNBCustomerInfoDto extends CustomerInfoDto {
+public class DnbCustomerInfoDto extends CustomerInfoDto {
 
     private String customerType;
     private List<CitizenshipDto> citizenship;
     private List<CountryTaxDto> countryTax;
 
-    public DNBCustomerInfoDto() {
+    public DnbCustomerInfoDto() {
     }
 
     public String getCustomerType() {

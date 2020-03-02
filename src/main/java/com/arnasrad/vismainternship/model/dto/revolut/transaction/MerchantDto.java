@@ -15,13 +15,6 @@ public class MerchantDto {
     public MerchantDto() {
     }
 
-    public MerchantDto(String name, String city, String categoryCode, String country) {
-        this.name = name;
-        this.city = city;
-        this.categoryCode = categoryCode;
-        this.country = country;
-    }
-
     public String getName() {
         return name;
     }

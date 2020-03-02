@@ -1,12 +1,12 @@
 package com.arnasrad.vismainternship.model.dto.token;
 
-public class DNBTokenDto {
+public class DnbTokenDto {
 
     private String customerPublicId;
     private String jwtToken;
     private String clientId;
 
-    public DNBTokenDto() {
+    public DnbTokenDto() {
     }
 
     public String getCustomerPublicId() {

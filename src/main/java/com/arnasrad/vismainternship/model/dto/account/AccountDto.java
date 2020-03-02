@@ -12,12 +12,6 @@ public class AccountDto {
     public AccountDto() {
     }
 
-    public AccountDto(String id, String name, Double balance) {
-        this.id = id;
-        this.name = name;
-        this.balance = balance;
-    }
-
     public String getId() {
         return id;
     }

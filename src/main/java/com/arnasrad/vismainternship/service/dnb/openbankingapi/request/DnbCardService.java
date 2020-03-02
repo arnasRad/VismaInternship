@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DNBCardDto;
+import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DnbCardDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.request.CardService;
@@ -15,24 +15,24 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class DNBCardService implements CardService {
+public class DnbCardService implements CardService {
 
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
     @Value("${dnb.openbanking.endpoint.cards}")
     private String cardsEndpoint;
 
-    public DNBCardService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService) {
+    public DnbCardService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService) {
         this.restTemplate = restTemplate;
         this.dnbRequestBuilderService = dnbRequestBuilderService;
     }
 
     @Override
-    public List<DNBCardDto> getCards() {
+    public List<DnbCardDto> getCards() {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<List<DNBCardDto>> responseEntity = restTemplate.exchange(cardsEndpoint, HttpMethod.GET,
-                authorizedHttpEntity, new ParameterizedTypeReference<List<DNBCardDto>>() {
+        ResponseEntity<List<DnbCardDto>> responseEntity = restTemplate.exchange(cardsEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, new ParameterizedTypeReference<List<DnbCardDto>>() {
                 });
 
         return responseEntity.getBody();

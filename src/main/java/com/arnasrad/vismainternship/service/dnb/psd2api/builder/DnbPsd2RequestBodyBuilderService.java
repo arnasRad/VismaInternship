@@ -1,4 +1,4 @@
-package com.arnasrad.vismainternship.service.dnb.psd2api;
+package com.arnasrad.vismainternship.service.dnb.psd2api.builder;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;

@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 public class DnbHeaderBuilderService {
 
     private final TokenRepository tokenRepository;
-    @Value("${dnb.api.keyHeader}")
+    @Value("${dnb.openbanking.keyHeader}")
     private String apiKeyHeader;
-    @Value("${dnb.jwt.tokenHeader}")
+    @Value("${dnb.openbanking.jwt.tokenHeader}")
     private String jwtTokenHeader;
-    @Value("${dnb.apikey}")
+    @Value("${dnb.openbanking.apikey}")
     private String apiKey;
     @Value("${dnb.openbanking.ssn}")
     private String ssn;

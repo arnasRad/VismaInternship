@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.account.AccountDto;
-import com.arnasrad.vismainternship.model.dto.dnb.psd2api.DNBAccountDto;
+import com.arnasrad.vismainternship.model.dto.dnb.psd2api.DnbAccountDto;
 import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDto;
 import com.arnasrad.vismainternship.model.entity.account.Account;
 import org.springframework.stereotype.Component;
@@ -19,8 +19,8 @@ public class AccountMapper {
         return accountDto;
     }
 
-    public DNBAccountDto mapToDnbAccountDto(Account entity) {
-        DNBAccountDto accountDto = new DNBAccountDto();
+    public DnbAccountDto mapToDnbAccountDto(Account entity) {
+        DnbAccountDto accountDto = new DnbAccountDto();
 
         accountDto.setId(entity.getAccountId());
         accountDto.setName(entity.getName());
@@ -54,7 +54,7 @@ public class AccountMapper {
         return account;
     }
 
-    public Account mapToAccountEntity(DNBAccountDto dto) {
+    public Account mapToAccountEntity(DnbAccountDto dto) {
         Account account = new Account();
 
         account.setAccountId(dto.getId());

@@ -18,16 +18,6 @@ public class BeneficiaryAddressDto {
     public BeneficiaryAddressDto() {
     }
 
-    public BeneficiaryAddressDto(String streetLine1, String streetLine2, String region, String city, String country,
-                                 String postcode) {
-        this.streetLine1 = streetLine1;
-        this.streetLine2 = streetLine2;
-        this.region = region;
-        this.city = city;
-        this.country = country;
-        this.postcode = postcode;
-    }
-
     public String getStreetLine1() {
         return streetLine1;
     }

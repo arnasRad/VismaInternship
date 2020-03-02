@@ -16,17 +16,6 @@ public class CardDto {
     public CardDto() {
     }
 
-    public CardDto(String customerId, String cardId, String accountNumber, String creditBalance, String debitBalance,
-                   String cardType, String productName) {
-        this.customerId = customerId;
-        this.cardId = cardId;
-        this.accountNumber = accountNumber;
-        this.creditBalance = creditBalance;
-        this.debitBalance = debitBalance;
-        this.cardType = cardType;
-        this.productName = productName;
-    }
-
     public String getCustomerId() {
         return customerId;
     }

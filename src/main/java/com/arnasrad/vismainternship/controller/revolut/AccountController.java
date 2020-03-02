@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("revolut-account-controller")
 public class AccountController {
 
     private final RevolutAccountService revolutAccountService;

@@ -24,20 +24,6 @@ public class TransactionLegs {
     public TransactionLegs() {
     }
 
-    public TransactionLegs(String transactionLegsId, Double amount, String currency, String accountId,
-                           LegsCounterparty counterparty, String description, Double balance, Double billAmount,
-                           String billCurrency) {
-        this.transactionLegsId = transactionLegsId;
-        this.amount = amount;
-        this.currency = currency;
-        this.accountId = accountId;
-        this.counterparty = counterparty;
-        this.description = description;
-        this.balance = balance;
-        this.billAmount = billAmount;
-        this.billCurrency = billCurrency;
-    }
-
     public Long getId() {
         return id;
     }

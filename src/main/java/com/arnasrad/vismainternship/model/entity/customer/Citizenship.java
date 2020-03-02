@@ -15,10 +15,6 @@ public class Citizenship {
     public Citizenship() {
     }
 
-    public Citizenship(String countryOfCitizenship) {
-        this.countryOfCitizenship = countryOfCitizenship;
-    }
-
     public Long getId() {
         return id;
     }

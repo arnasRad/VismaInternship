@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.builder.unit;
 
-import com.arnasrad.vismainternship.service.revolut.RevolutTokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutHeaderBuilderService;
+import com.arnasrad.vismainternship.service.revolut.request.RevolutTokenService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

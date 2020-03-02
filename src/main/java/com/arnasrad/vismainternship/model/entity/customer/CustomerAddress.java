@@ -21,15 +21,6 @@ public class CustomerAddress {
     public CustomerAddress() {
     }
 
-    public CustomerAddress(String postalCode, String postalAddressCountry, String postalCodeName, String addressLine1, String addressLine2, String addressLine3) {
-        this.postalCode = postalCode;
-        this.postalAddressCountry = postalAddressCountry;
-        this.postalCodeName = postalCodeName;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.addressLine3 = addressLine3;
-    }
-
     public Long getId() {
         return id;
     }

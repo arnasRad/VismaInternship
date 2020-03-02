@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 public class PaymentRequestMapper {
 
     public PaymentRequest mapToEntity(PaymentRequestDto dto) {
-        return new PaymentRequest(dto.getRequestId(), dto.getState());
+        PaymentRequest paymentRequest = new PaymentRequest();
+
+        paymentRequest.setRequestId(dto.getRequestId());
+        paymentRequest.setState(dto.getState());
+
+        return paymentRequest;
     }
 }

@@ -19,17 +19,6 @@ public class TransactionLegsDto {
     public TransactionLegsDto() {
     }
 
-    public TransactionLegsDto(String id, Double amount, String currency, String accountId,
-                              LegsCounterpartyDto counterparty, String description, Double balance) {
-        this.id = id;
-        this.amount = amount;
-        this.currency = currency;
-        this.accountId = accountId;
-        this.counterparty = counterparty;
-        this.description = description;
-        this.balance = balance;
-    }
-
     public String getId() {
         return id;
     }

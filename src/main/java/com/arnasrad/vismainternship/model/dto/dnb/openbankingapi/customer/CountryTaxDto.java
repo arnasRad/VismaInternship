@@ -11,11 +11,6 @@ public class CountryTaxDto {
     public CountryTaxDto() {
     }
 
-    public CountryTaxDto(String taxLiabilityCountry, String taxIdentificationNumber) {
-        this.taxLiabilityCountry = taxLiabilityCountry;
-        this.taxIdentificationNumber = taxIdentificationNumber;
-    }
-
     public String getTaxLiabilityCountry() {
         return taxLiabilityCountry;
     }

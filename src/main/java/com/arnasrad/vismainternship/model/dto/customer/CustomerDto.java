@@ -11,11 +11,6 @@ public class CustomerDto {
     public CustomerDto() {
     }
 
-    public CustomerDto(String customerName, String ssn) {
-        this.customerName = customerName;
-        this.ssn = ssn;
-    }
-
     public String getCustomerName() {
         return customerName;
     }

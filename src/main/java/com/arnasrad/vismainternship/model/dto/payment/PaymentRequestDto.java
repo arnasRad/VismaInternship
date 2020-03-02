@@ -22,18 +22,6 @@ public class PaymentRequestDto implements Serializable {
     public PaymentRequestDto() {
     }
 
-    public PaymentRequestDto(String requestId, String accountId, PaymentReceiverDto receiver, String bankId,
-                             Double amount, String currency, String reference, String state) {
-        this.requestId = requestId;
-        this.accountId = accountId;
-        this.receiver = receiver;
-        this.bankId = bankId;
-        this.amount = amount;
-        this.currency = currency;
-        this.reference = reference;
-        this.state = state;
-    }
-
     public String getRequestId() {
         return requestId;
     }

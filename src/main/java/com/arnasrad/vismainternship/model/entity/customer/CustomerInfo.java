@@ -26,21 +26,6 @@ public class CustomerInfo {
     public CustomerInfo() {
     }
 
-    public CustomerInfo(String customerId, String firstName, String lastName, CustomerAddress address, String phone,
-                        String email, String countryOfBirth, String customerType, List<Citizenship> citizenship,
-                        List<CountryTax> countryTax) {
-        this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.countryOfBirth = countryOfBirth;
-        this.customerType = customerType;
-        this.citizenship = citizenship;
-        this.countryTax = countryTax;
-    }
-
     public Long getId() {
         return id;
     }

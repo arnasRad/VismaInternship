@@ -12,12 +12,6 @@ public class EstimatedTimeDto {
     public EstimatedTimeDto() {
     }
 
-    public EstimatedTimeDto(String unit, Double min, Double max) {
-        this.unit = unit;
-        this.min = min;
-        this.max = max;
-    }
-
     public String getUnit() {
         return unit;
     }

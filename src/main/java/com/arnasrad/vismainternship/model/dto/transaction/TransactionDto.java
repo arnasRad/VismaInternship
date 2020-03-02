@@ -20,15 +20,6 @@ public class TransactionDto {
     public TransactionDto() {
     }
 
-    public TransactionDto(String id, String type, String state, Date createdAt, Date completedAt, String reference) {
-        this.id = id;
-        this.type = type;
-        this.state = state;
-        this.createdAt = createdAt;
-        this.completedAt = completedAt;
-        this.reference = reference;
-    }
-
     public String getId() {
         return id;
     }

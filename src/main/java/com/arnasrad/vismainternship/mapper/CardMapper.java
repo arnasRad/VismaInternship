@@ -2,7 +2,7 @@ package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.card.CardDto;
 import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.BlockingInfoDto;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DNBCardDto;
+import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DnbCardDto;
 import com.arnasrad.vismainternship.model.entity.card.BlockingInfo;
 import com.arnasrad.vismainternship.model.entity.card.Card;
 import org.springframework.stereotype.Component;
@@ -24,8 +24,8 @@ public class CardMapper {
         return cardDto;
     }
 
-    public DNBCardDto mapToDnbCardDto(Card entity) {
-        DNBCardDto dnbCardDto = new DNBCardDto();
+    public DnbCardDto mapToDnbCardDto(Card entity) {
+        DnbCardDto dnbCardDto = new DnbCardDto();
         BlockingInfoDto blockingInfoDto = mapToBlockingInfoDto(entity.getBlockingInfo());
 
         dnbCardDto.setCustomerId(entity.getCustomerId());
@@ -70,7 +70,7 @@ public class CardMapper {
         return card;
     }
 
-    public Card mapToCardEntity(DNBCardDto dto) {
+    public Card mapToCardEntity(DnbCardDto dto) {
         Card card = new Card();
         BlockingInfo blockingInfo = mapToBlockingInfoEntity(dto.getBlockingInfo());
 

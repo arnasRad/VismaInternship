@@ -18,12 +18,6 @@ public class LegsCounterparty {
     public LegsCounterparty() {
     }
 
-    public LegsCounterparty(String legsCounterpartyId, String accountId, String type) {
-        this.legsCounterpartyId = legsCounterpartyId;
-        this.accountId = accountId;
-        this.type = type;
-    }
-
     public Long getId() {
         return id;
     }
