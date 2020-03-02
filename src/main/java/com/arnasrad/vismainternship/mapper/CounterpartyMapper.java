@@ -13,44 +13,44 @@ import java.util.List;
 @Component
 public class CounterpartyMapper {
 
-    public CounterpartyDto mapToCounterpartyDTO(Counterparty entity) {
-        CounterpartyDto counterpartyDTO = new CounterpartyDto();
-        List<CounterpartyAccountDto> counterpartyAccountDtos = mapToCounterpartyAccountDTOArray(entity.getAccounts());
+    public CounterpartyDto mapToCounterpartyDto(Counterparty entity) {
+        CounterpartyDto counterpartyDto = new CounterpartyDto();
+        List<CounterpartyAccountDto> counterpartyAccountDtos = mapToCounterpartyAccountDtoArray(entity.getAccounts());
 
-        counterpartyDTO.setCountry(entity.getCountry());
-        counterpartyDTO.setId(entity.getCounterpartyId());
-        counterpartyDTO.setName(entity.getName());
-        counterpartyDTO.setPhone(entity.getPhone());
-        counterpartyDTO.setAccounts(counterpartyAccountDtos);
+        counterpartyDto.setCountry(entity.getCountry());
+        counterpartyDto.setId(entity.getCounterpartyId());
+        counterpartyDto.setName(entity.getName());
+        counterpartyDto.setPhone(entity.getPhone());
+        counterpartyDto.setAccounts(counterpartyAccountDtos);
 
-        return counterpartyDTO;
+        return counterpartyDto;
     }
 
-    public RevolutCounterpartyDto mapToRevolutCounterpartyDTO(Counterparty entity) {
-        RevolutCounterpartyDto revolutCounterpartyDTO = (RevolutCounterpartyDto) mapToCounterpartyDTO(entity);
+    public RevolutCounterpartyDto mapToRevolutCounterpartyDto(Counterparty entity) {
+        RevolutCounterpartyDto revolutCounterpartyDto = (RevolutCounterpartyDto) mapToCounterpartyDto(entity);
 
-        revolutCounterpartyDTO.setProfileType(entity.getProfileType());
-        revolutCounterpartyDTO.setState(entity.getState());
-        revolutCounterpartyDTO.setCreatedAt(entity.getCreatedAt());
-        revolutCounterpartyDTO.setUpdatedAt(entity.getUpdatedAt());
+        revolutCounterpartyDto.setProfileType(entity.getProfileType());
+        revolutCounterpartyDto.setState(entity.getState());
+        revolutCounterpartyDto.setCreatedAt(entity.getCreatedAt());
+        revolutCounterpartyDto.setUpdatedAt(entity.getUpdatedAt());
 
-        return revolutCounterpartyDTO;
+        return revolutCounterpartyDto;
     }
 
-    public CounterpartyAccountDto mapToCounterpartyAccountDTO(CounterpartyAccount entity) {
-        CounterpartyAccountDto counterpartyAccountDTO = new CounterpartyAccountDto();
+    public CounterpartyAccountDto mapToCounterpartyAccountDto(CounterpartyAccount entity) {
+        CounterpartyAccountDto counterpartyAccountDto = new CounterpartyAccountDto();
 
-        counterpartyAccountDTO.setId(entity.getCounterpartyAccountId());
-        counterpartyAccountDTO.setCurrency(entity.getCurrency());
-        counterpartyAccountDTO.setType(entity.getType());
-        counterpartyAccountDTO.setAccountNo(entity.getAccountNo());
-        counterpartyAccountDTO.setIban(entity.getIban());
-        counterpartyAccountDTO.setSortCode(entity.getSortCode());
-        counterpartyAccountDTO.setRoutingNumber(entity.getRoutingNumber());
-        counterpartyAccountDTO.setBic(entity.getBic());
-        counterpartyAccountDTO.setRecipientCharges(entity.getRecipientCharges());
+        counterpartyAccountDto.setId(entity.getCounterpartyAccountId());
+        counterpartyAccountDto.setCurrency(entity.getCurrency());
+        counterpartyAccountDto.setType(entity.getType());
+        counterpartyAccountDto.setAccountNo(entity.getAccountNo());
+        counterpartyAccountDto.setIban(entity.getIban());
+        counterpartyAccountDto.setSortCode(entity.getSortCode());
+        counterpartyAccountDto.setRoutingNumber(entity.getRoutingNumber());
+        counterpartyAccountDto.setBic(entity.getBic());
+        counterpartyAccountDto.setRecipientCharges(entity.getRecipientCharges());
 
-        return counterpartyAccountDTO;
+        return counterpartyAccountDto;
     }
 
     public Counterparty mapToCounterpartyEntity(CounterpartyDto dto) {
@@ -99,11 +99,11 @@ public class CounterpartyMapper {
         return counterpartyAccount;
     }
 
-    public List<CounterpartyAccountDto> mapToCounterpartyAccountDTOArray(List<CounterpartyAccount> counterpartyAccounts) {
+    public List<CounterpartyAccountDto> mapToCounterpartyAccountDtoArray(List<CounterpartyAccount> counterpartyAccounts) {
         List<CounterpartyAccountDto> counterpartyAccountDtos = new ArrayList<>();
 
         for (CounterpartyAccount counterpartyAccount : counterpartyAccounts) {
-            counterpartyAccountDtos.add(mapToCounterpartyAccountDTO(counterpartyAccount));
+            counterpartyAccountDtos.add(mapToCounterpartyAccountDto(counterpartyAccount));
         }
 
         return counterpartyAccountDtos;
@@ -112,8 +112,8 @@ public class CounterpartyMapper {
     public List<CounterpartyAccount> mapToCounterpartyAccountEntityList(List<CounterpartyAccountDto> counterpartyAccountDtos) {
         List<CounterpartyAccount> counterpartyAccounts = new ArrayList<>();
 
-        for (CounterpartyAccountDto counterpartyAccountDTO : counterpartyAccountDtos) {
-            counterpartyAccounts.add(mapToCounterpartyAccountEntity(counterpartyAccountDTO));
+        for (CounterpartyAccountDto counterpartyAccountDto : counterpartyAccountDtos) {
+            counterpartyAccounts.add(mapToCounterpartyAccountEntity(counterpartyAccountDto));
         }
 
         return counterpartyAccounts;

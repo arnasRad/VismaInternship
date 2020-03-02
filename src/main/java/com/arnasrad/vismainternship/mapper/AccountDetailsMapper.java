@@ -12,59 +12,59 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountDetailsMapper {
 
-    public AccountDetailsDto mapToAccountDetailsDTO(AccountDetails entity) {
-        AccountDetailsDto accountDetailsDTO = new AccountDetailsDto();
+    public AccountDetailsDto mapToAccountDetailsDto(AccountDetails entity) {
+        AccountDetailsDto accountDetailsDto = new AccountDetailsDto();
 
-        accountDetailsDTO.setAccountNo(entity.getAccountNo());
-        accountDetailsDTO.setIban(entity.getIban());
-        accountDetailsDTO.setSchemas(entity.getSchemas());
-        accountDetailsDTO.setBankCountry(entity.getBankCountry());
+        accountDetailsDto.setAccountNo(entity.getAccountNo());
+        accountDetailsDto.setIban(entity.getIban());
+        accountDetailsDto.setSchemas(entity.getSchemas());
+        accountDetailsDto.setBankCountry(entity.getBankCountry());
 
-        return accountDetailsDTO;
+        return accountDetailsDto;
     }
 
-    public RevolutAccountDetailsDto mapToRevolutAccountDetailsDTO(AccountDetails entity) {
-        RevolutAccountDetailsDto revolutAccountDetailsDTO = new RevolutAccountDetailsDto();
-        BeneficiaryAddressDto beneficiaryAddressDTO = mapToBeneficiaryAddressDTO(entity.getBeneficiaryAddress());
-        EstimatedTimeDto estimatedTimeDTO = mapToEstimatedTimeDTO(entity.getEstimatedTime());
+    public RevolutAccountDetailsDto mapToRevolutAccountDetailsDto(AccountDetails entity) {
+        RevolutAccountDetailsDto revolutAccountDetailsDto = new RevolutAccountDetailsDto();
+        BeneficiaryAddressDto beneficiaryAddressDto = mapToBeneficiaryAddressDto(entity.getBeneficiaryAddress());
+        EstimatedTimeDto estimatedTimeDto = mapToEstimatedTimeDto(entity.getEstimatedTime());
 
-        revolutAccountDetailsDTO.setAccountNo(entity.getAccountNo());
-        revolutAccountDetailsDTO.setIban(entity.getIban());
-        revolutAccountDetailsDTO.setSchemas(entity.getSchemas());
-        revolutAccountDetailsDTO.setBankCountry(entity.getBankCountry());
-        revolutAccountDetailsDTO.setBic(entity.getBic());
-        revolutAccountDetailsDTO.setPooled(entity.getPooled());
-        revolutAccountDetailsDTO.setUniqueReference(entity.getUniqueReference());
-        revolutAccountDetailsDTO.setSortCode(entity.getSortCode());
-        revolutAccountDetailsDTO.setRoutingNumber(entity.getRoutingNumber());
-        revolutAccountDetailsDTO.setBeneficiary(entity.getBeneficiary());
-        revolutAccountDetailsDTO.setBeneficiaryAddress(beneficiaryAddressDTO);
-        revolutAccountDetailsDTO.setEstimatedTime(estimatedTimeDTO);
+        revolutAccountDetailsDto.setAccountNo(entity.getAccountNo());
+        revolutAccountDetailsDto.setIban(entity.getIban());
+        revolutAccountDetailsDto.setSchemas(entity.getSchemas());
+        revolutAccountDetailsDto.setBankCountry(entity.getBankCountry());
+        revolutAccountDetailsDto.setBic(entity.getBic());
+        revolutAccountDetailsDto.setPooled(entity.getPooled());
+        revolutAccountDetailsDto.setUniqueReference(entity.getUniqueReference());
+        revolutAccountDetailsDto.setSortCode(entity.getSortCode());
+        revolutAccountDetailsDto.setRoutingNumber(entity.getRoutingNumber());
+        revolutAccountDetailsDto.setBeneficiary(entity.getBeneficiary());
+        revolutAccountDetailsDto.setBeneficiaryAddress(beneficiaryAddressDto);
+        revolutAccountDetailsDto.setEstimatedTime(estimatedTimeDto);
 
-        return revolutAccountDetailsDTO;
+        return revolutAccountDetailsDto;
     }
 
-    public BeneficiaryAddressDto mapToBeneficiaryAddressDTO(BeneficiaryAddress entity) {
-        BeneficiaryAddressDto beneficiaryAddressDTO = new BeneficiaryAddressDto();
+    public BeneficiaryAddressDto mapToBeneficiaryAddressDto(BeneficiaryAddress entity) {
+        BeneficiaryAddressDto beneficiaryAddressDto = new BeneficiaryAddressDto();
 
-        beneficiaryAddressDTO.setStreetLine1(entity.getStreetLine1());
-        beneficiaryAddressDTO.setStreetLine2(entity.getStreetLine2());
-        beneficiaryAddressDTO.setRegion(entity.getRegion());
-        beneficiaryAddressDTO.setCity(entity.getCity());
-        beneficiaryAddressDTO.setCountry(entity.getCountry());
-        beneficiaryAddressDTO.setPostcode(entity.getPostcode());
+        beneficiaryAddressDto.setStreetLine1(entity.getStreetLine1());
+        beneficiaryAddressDto.setStreetLine2(entity.getStreetLine2());
+        beneficiaryAddressDto.setRegion(entity.getRegion());
+        beneficiaryAddressDto.setCity(entity.getCity());
+        beneficiaryAddressDto.setCountry(entity.getCountry());
+        beneficiaryAddressDto.setPostcode(entity.getPostcode());
 
-        return beneficiaryAddressDTO;
+        return beneficiaryAddressDto;
     }
 
-    public EstimatedTimeDto mapToEstimatedTimeDTO(EstimatedTime entity) {
-        EstimatedTimeDto estimatedTimeDTO = new EstimatedTimeDto();
+    public EstimatedTimeDto mapToEstimatedTimeDto(EstimatedTime entity) {
+        EstimatedTimeDto estimatedTimeDto = new EstimatedTimeDto();
 
         entity.setUnit(entity.getUnit());
         entity.setMin(entity.getMin());
         entity.setMax(entity.getMax());
 
-        return estimatedTimeDTO;
+        return estimatedTimeDto;
     }
 
     public AccountDetails mapToAccountDetailsEntity(AccountDetailsDto dto) {

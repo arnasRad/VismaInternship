@@ -8,22 +8,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerMapper {
 
-    public CustomerDto mapToCustomerDTO(Customer entity) {
-        CustomerDto customerDTO = new CustomerDto();
+    public CustomerDto mapToCustomerDto(Customer entity) {
+        CustomerDto customerDto = new CustomerDto();
 
-        customerDTO.setCustomerName(entity.getCustomerName());
-        customerDTO.setSsn(entity.getSsn());
+        customerDto.setCustomerName(entity.getCustomerName());
+        customerDto.setSsn(entity.getSsn());
 
-        return customerDTO;
+        return customerDto;
     }
 
-    public DNBCustomerDto mapToDNBCustomerDTO(Customer entity) {
-        DNBCustomerDto dnbCustomerDTO = new DNBCustomerDto();
+    public DNBCustomerDto mapToDNBCustomerDto(Customer entity) {
+        DNBCustomerDto dnbCustomerDto = new DNBCustomerDto();
 
-        dnbCustomerDTO.setCustomerName(entity.getCustomerName());
-        dnbCustomerDTO.setSsn(entity.getSsn());
+        dnbCustomerDto.setCustomerName(entity.getCustomerName());
+        dnbCustomerDto.setSsn(entity.getSsn());
 
-        return dnbCustomerDTO;
+        return dnbCustomerDto;
     }
 
     public Customer mapToCustomerEntity(CustomerDto dto) {

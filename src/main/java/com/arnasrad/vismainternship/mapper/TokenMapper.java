@@ -8,23 +8,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenMapper {
 
-    public DNBTokenDto mapToDNBTokenDTO(Token entity) {
-        DNBTokenDto dnbTokenDTO = new DNBTokenDto();
+    public DNBTokenDto mapToDNBTokenDto(Token entity) {
+        DNBTokenDto dnbTokenDto = new DNBTokenDto();
 
-        dnbTokenDTO.setCustomerPublicId(entity.getCustomerPublicId());
-        dnbTokenDTO.setJwtToken(entity.getToken());
+        dnbTokenDto.setCustomerPublicId(entity.getCustomerPublicId());
+        dnbTokenDto.setJwtToken(entity.getToken());
 
-        return dnbTokenDTO;
+        return dnbTokenDto;
     }
 
-    public RevolutTokenDto mapToRevolutTokenDTO(Token entity) {
-        RevolutTokenDto revolutTokenDTO = new RevolutTokenDto();
+    public RevolutTokenDto mapToRevolutTokenDto(Token entity) {
+        RevolutTokenDto revolutTokenDto = new RevolutTokenDto();
 
-        revolutTokenDTO.setAccessToken(entity.getToken());
-        revolutTokenDTO.setTokenType(entity.getTokenType());
-        revolutTokenDTO.setExpiresId(entity.getExpiresId());
+        revolutTokenDto.setAccessToken(entity.getToken());
+        revolutTokenDto.setTokenType(entity.getTokenType());
+        revolutTokenDto.setExpiresId(entity.getExpiresId());
 
-        return revolutTokenDTO;
+        return revolutTokenDto;
     }
 
     public Token mapToTokenEntity(Token token, DNBTokenDto dto) {

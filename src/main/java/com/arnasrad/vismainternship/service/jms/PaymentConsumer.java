@@ -25,16 +25,16 @@ public class PaymentConsumer {
     }
 
     @JmsListener(destination = "#{@paymentQueueName}")
-    public void consume(PaymentRequestDto paymentRequestDTO)
+    public void consume(PaymentRequestDto paymentRequestDto)
             throws NoSuchFunctionalityException, EntryNotFoundException {
-        PaymentRequest paymentRequest = paymentMessageState.findAndUpdate(paymentRequestDTO,
+        PaymentRequest paymentRequest = paymentMessageState.findAndUpdate(paymentRequestDto,
                 MessageState.PROCESSING.getState());
         logger.info("Payment request processing");
 
-        String bank = paymentRequestDTO.getBankId();
+        String bank = paymentRequestDto.getBankId();
         PaymentService paymentService = paymentServiceFactory.getService(bank);
 
-        paymentService.createPayment(paymentRequestDTO);
+        paymentService.createPayment(paymentRequestDto);
         paymentMessageState.update(paymentRequest, MessageState.PROCESSED.getState());
         logger.info("Payment request processed");
     }

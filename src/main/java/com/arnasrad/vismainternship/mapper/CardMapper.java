@@ -10,50 +10,50 @@ import org.springframework.stereotype.Component;
 @Component
 public class CardMapper {
 
-    public CardDto mapToCardDTO(Card entity) {
-        CardDto cardDTO = new CardDto();
+    public CardDto mapToCardDto(Card entity) {
+        CardDto cardDto = new CardDto();
 
-        cardDTO.setCustomerId(entity.getCustomerId());
-        cardDTO.setCardId(entity.getCardId());
-        cardDTO.setAccountNumber(entity.getAccountNumber());
-        cardDTO.setCreditBalance(entity.getCreditBalance());
-        cardDTO.setDebitBalance(entity.getDebitBalance());
-        cardDTO.setCardType(entity.getCardType());
-        cardDTO.setProductName(entity.getProductName());
+        cardDto.setCustomerId(entity.getCustomerId());
+        cardDto.setCardId(entity.getCardId());
+        cardDto.setAccountNumber(entity.getAccountNumber());
+        cardDto.setCreditBalance(entity.getCreditBalance());
+        cardDto.setDebitBalance(entity.getDebitBalance());
+        cardDto.setCardType(entity.getCardType());
+        cardDto.setProductName(entity.getProductName());
 
-        return cardDTO;
+        return cardDto;
     }
 
-    public DNBCardDto mapToDnbCardDTO(Card entity) {
-        DNBCardDto dnbCardDTO = new DNBCardDto();
-        BlockingInfoDto blockingInfoDTO = mapToBlockingInfoDTO(entity.getBlockingInfo());
+    public DNBCardDto mapToDnbCardDto(Card entity) {
+        DNBCardDto dnbCardDto = new DNBCardDto();
+        BlockingInfoDto blockingInfoDto = mapToBlockingInfoDto(entity.getBlockingInfo());
 
-        dnbCardDTO.setCustomerId(entity.getCustomerId());
-        dnbCardDTO.setCardId(entity.getCardId());
-        dnbCardDTO.setAccountNumber(entity.getAccountNumber());
-        dnbCardDTO.setCreditBalance(entity.getCreditBalance());
-        dnbCardDTO.setDebitBalance(entity.getDebitBalance());
-        dnbCardDTO.setCardType(entity.getCardType());
-        dnbCardDTO.setProductName(entity.getProductName());
-        dnbCardDTO.setBlockingInfo(blockingInfoDTO);
-        dnbCardDTO.setCreated(entity.getCreated());
-        dnbCardDTO.setLastChanged(entity.getLastChanged());
-        dnbCardDTO.setMaskedCardNumber(entity.getMaskedCardNumber());
-        dnbCardDTO.setCardHolderName(entity.getCardHolderName());
-        dnbCardDTO.setCardStatus(entity.getCardStatus());
+        dnbCardDto.setCustomerId(entity.getCustomerId());
+        dnbCardDto.setCardId(entity.getCardId());
+        dnbCardDto.setAccountNumber(entity.getAccountNumber());
+        dnbCardDto.setCreditBalance(entity.getCreditBalance());
+        dnbCardDto.setDebitBalance(entity.getDebitBalance());
+        dnbCardDto.setCardType(entity.getCardType());
+        dnbCardDto.setProductName(entity.getProductName());
+        dnbCardDto.setBlockingInfo(blockingInfoDto);
+        dnbCardDto.setCreated(entity.getCreated());
+        dnbCardDto.setLastChanged(entity.getLastChanged());
+        dnbCardDto.setMaskedCardNumber(entity.getMaskedCardNumber());
+        dnbCardDto.setCardHolderName(entity.getCardHolderName());
+        dnbCardDto.setCardStatus(entity.getCardStatus());
 
-        return dnbCardDTO;
+        return dnbCardDto;
     }
 
-    public BlockingInfoDto mapToBlockingInfoDTO(BlockingInfo entity) {
-        BlockingInfoDto blockingInfoDTO = new BlockingInfoDto();
+    public BlockingInfoDto mapToBlockingInfoDto(BlockingInfo entity) {
+        BlockingInfoDto blockingInfoDto = new BlockingInfoDto();
 
-        blockingInfoDTO.setUnblockAllowed(entity.isUnblockAllowed());
-        blockingInfoDTO.setBlockAllowed(entity.isBlockAllowed());
-        blockingInfoDTO.setPerformedBy(entity.getPerformedBy());
-        blockingInfoDTO.setTimestamp(entity.getTimestamp());
+        blockingInfoDto.setUnblockAllowed(entity.isUnblockAllowed());
+        blockingInfoDto.setBlockAllowed(entity.isBlockAllowed());
+        blockingInfoDto.setPerformedBy(entity.getPerformedBy());
+        blockingInfoDto.setTimestamp(entity.getTimestamp());
 
-        return blockingInfoDTO;
+        return blockingInfoDto;
     }
 
     public Card mapToCardEntity(CardDto dto) {

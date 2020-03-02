@@ -46,11 +46,11 @@ public class DnbTokenService implements TokenService {
         save(newToken);
     }
 
-    private void save(DNBTokenDto dnbTokenDTO) {
-        Token token = tokenRepository.findById(dnbTokenDTO.getClientId())
+    private void save(DNBTokenDto dnbTokenDto) {
+        Token token = tokenRepository.findById(dnbTokenDto.getClientId())
                 .orElse(new Token());
 
-        token = tokenMapper.mapToTokenEntity(token, dnbTokenDTO);
+        token = tokenMapper.mapToTokenEntity(token, dnbTokenDto);
         tokenRepository.save(token);
     }
 

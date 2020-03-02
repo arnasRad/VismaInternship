@@ -9,39 +9,39 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountMapper {
 
-    public AccountDto mapToAccountDTO(Account entity) {
-        AccountDto accountDTO = new AccountDto();
+    public AccountDto mapToAccountDto(Account entity) {
+        AccountDto accountDto = new AccountDto();
 
-        accountDTO.setId(entity.getAccountId());
-        accountDTO.setName(entity.getName());
-        accountDTO.setBalance(entity.getBalance());
+        accountDto.setId(entity.getAccountId());
+        accountDto.setName(entity.getName());
+        accountDto.setBalance(entity.getBalance());
 
-        return accountDTO;
+        return accountDto;
     }
 
-    public DNBAccountDto mapToDnbAccountDTO(Account entity) {
-        DNBAccountDto accountDTO = new DNBAccountDto();
+    public DNBAccountDto mapToDnbAccountDto(Account entity) {
+        DNBAccountDto accountDto = new DNBAccountDto();
 
-        accountDTO.setId(entity.getAccountId());
-        accountDTO.setName(entity.getName());
-        accountDTO.setBalance(entity.getBalance());
+        accountDto.setId(entity.getAccountId());
+        accountDto.setName(entity.getName());
+        accountDto.setBalance(entity.getBalance());
 
-        return accountDTO;
+        return accountDto;
     }
 
-    public RevolutAccountDto mapToRevolutAccountDTO(Account entity) {
-        RevolutAccountDto revolutAccountDTO = new RevolutAccountDto();
+    public RevolutAccountDto mapToRevolutAccountDto(Account entity) {
+        RevolutAccountDto revolutAccountDto = new RevolutAccountDto();
 
-        revolutAccountDTO.setId(entity.getAccountId());
-        revolutAccountDTO.setName(entity.getName());
-        revolutAccountDTO.setBalance(entity.getBalance());
-        revolutAccountDTO.setCurrency(entity.getCurrency());
-        revolutAccountDTO.setState(entity.getState());
-        revolutAccountDTO.setPublic(entity.getPublic());
-        revolutAccountDTO.setCreatedAt(entity.getCreatedAt());
-        revolutAccountDTO.setUpdatedAt(entity.getUpdatedAt());
+        revolutAccountDto.setId(entity.getAccountId());
+        revolutAccountDto.setName(entity.getName());
+        revolutAccountDto.setBalance(entity.getBalance());
+        revolutAccountDto.setCurrency(entity.getCurrency());
+        revolutAccountDto.setState(entity.getState());
+        revolutAccountDto.setPublic(entity.getPublic());
+        revolutAccountDto.setCreatedAt(entity.getCreatedAt());
+        revolutAccountDto.setUpdatedAt(entity.getUpdatedAt());
 
-        return revolutAccountDTO;
+        return revolutAccountDto;
     }
 
     public Account mapToAccountEntity(AccountDto dto) {

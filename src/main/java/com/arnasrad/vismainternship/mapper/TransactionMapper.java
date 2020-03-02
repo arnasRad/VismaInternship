@@ -16,114 +16,114 @@ import java.util.List;
 @Component
 public class TransactionMapper {
 
-    public TransactionDto mapToTransactionDTO(Transaction entity) {
-        TransactionDto transactionDTO = new TransactionDto();
+    public TransactionDto mapToTransactionDto(Transaction entity) {
+        TransactionDto transactionDto = new TransactionDto();
 
-        transactionDTO.setId(entity.getTransactionId());
-        transactionDTO.setType(entity.getType());
-        transactionDTO.setState(entity.getState());
-        transactionDTO.setCreatedAt(entity.getCreatedAt());
-        transactionDTO.setCompletedAt(entity.getCompletedAt());
-        transactionDTO.setReference(entity.getReference());
+        transactionDto.setId(entity.getTransactionId());
+        transactionDto.setType(entity.getType());
+        transactionDto.setState(entity.getState());
+        transactionDto.setCreatedAt(entity.getCreatedAt());
+        transactionDto.setCompletedAt(entity.getCompletedAt());
+        transactionDto.setReference(entity.getReference());
 
-        return transactionDTO;
+        return transactionDto;
     }
 
-    public RevolutTransactionDto mapToRevolutTransactionDTO(Transaction entity) {
-        RevolutTransactionDto revolutTransactionDTO = new RevolutTransactionDto();
-        MerchantDto merchantDTO = mapToMerchantDTO(entity.getMerchant());
+    public RevolutTransactionDto mapToRevolutTransactionDto(Transaction entity) {
+        RevolutTransactionDto revolutTransactionDto = new RevolutTransactionDto();
+        MerchantDto merchantDto = mapToMerchantDto(entity.getMerchant());
         List<RevolutTransactionLegsDto> revolutTransactionLegsDtoList =
-                mapToRevolutTransactionLegsDTOArray(entity.getTransactionLegs());
-        TransactionCardDto transactionCardDTO = mapToTransactionCardDTO(entity.getCard());
+                mapToRevolutTransactionLegsDtoArray(entity.getTransactionLegs());
+        TransactionCardDto transactionCardDto = mapToTransactionCardDto(entity.getCard());
 
-        revolutTransactionDTO.setId(entity.getRequestId());
-        revolutTransactionDTO.setType(entity.getType());
-        revolutTransactionDTO.setState(entity.getState());
-        revolutTransactionDTO.setCreatedAt(entity.getCreatedAt());
-        revolutTransactionDTO.setCompletedAt(entity.getCompletedAt());
-        revolutTransactionDTO.setReference(entity.getReference());
-        revolutTransactionDTO.setRequestId(entity.getRequestId());
-        revolutTransactionDTO.setReasonCode(entity.getReasonCode());
-        revolutTransactionDTO.setUpdatedAt(entity.getUpdatedAt());
-        revolutTransactionDTO.setScheduledFor(entity.getScheduledFor());
-        revolutTransactionDTO.setRelatedTransactionId(entity.getRelatedTransactionId());
-        revolutTransactionDTO.setMerchant(merchantDTO);
-        revolutTransactionDTO.setRevolutTransactionLegs(revolutTransactionLegsDtoList);
-        revolutTransactionDTO.setCard(transactionCardDTO);
+        revolutTransactionDto.setId(entity.getRequestId());
+        revolutTransactionDto.setType(entity.getType());
+        revolutTransactionDto.setState(entity.getState());
+        revolutTransactionDto.setCreatedAt(entity.getCreatedAt());
+        revolutTransactionDto.setCompletedAt(entity.getCompletedAt());
+        revolutTransactionDto.setReference(entity.getReference());
+        revolutTransactionDto.setRequestId(entity.getRequestId());
+        revolutTransactionDto.setReasonCode(entity.getReasonCode());
+        revolutTransactionDto.setUpdatedAt(entity.getUpdatedAt());
+        revolutTransactionDto.setScheduledFor(entity.getScheduledFor());
+        revolutTransactionDto.setRelatedTransactionId(entity.getRelatedTransactionId());
+        revolutTransactionDto.setMerchant(merchantDto);
+        revolutTransactionDto.setRevolutTransactionLegs(revolutTransactionLegsDtoList);
+        revolutTransactionDto.setCard(transactionCardDto);
 
-        return revolutTransactionDTO;
+        return revolutTransactionDto;
     }
 
-    public TransactionLegsDto mapToTransactionLegsDTO(TransactionLegs entity) {
-        TransactionLegsDto transactionLegsDTO = new TransactionLegsDto();
-        LegsCounterpartyDto legsCounterpartyDTO = mapToLegsCounterpartyDTO(entity.getCounterparty());
+    public TransactionLegsDto mapToTransactionLegsDto(TransactionLegs entity) {
+        TransactionLegsDto transactionLegsDto = new TransactionLegsDto();
+        LegsCounterpartyDto legsCounterpartyDto = mapToLegsCounterpartyDto(entity.getCounterparty());
 
-        transactionLegsDTO.setId(entity.getTransactionLegsId());
-        transactionLegsDTO.setAmount(entity.getAmount());
-        transactionLegsDTO.setCurrency(entity.getCurrency());
-        transactionLegsDTO.setAccountId(entity.getAccountId());
-        transactionLegsDTO.setCounterparty(legsCounterpartyDTO);
-        transactionLegsDTO.setDescription(entity.getDescription());
-        transactionLegsDTO.setBalance(entity.getBalance());
+        transactionLegsDto.setId(entity.getTransactionLegsId());
+        transactionLegsDto.setAmount(entity.getAmount());
+        transactionLegsDto.setCurrency(entity.getCurrency());
+        transactionLegsDto.setAccountId(entity.getAccountId());
+        transactionLegsDto.setCounterparty(legsCounterpartyDto);
+        transactionLegsDto.setDescription(entity.getDescription());
+        transactionLegsDto.setBalance(entity.getBalance());
 
-        return transactionLegsDTO;
+        return transactionLegsDto;
     }
 
-    public RevolutTransactionLegsDto mapToRevolutTransactionLegsDTO(TransactionLegs entity) {
-        RevolutTransactionLegsDto revolutTransactionLegsDTO = new RevolutTransactionLegsDto();
-        LegsCounterpartyDto legsCounterpartyDTO = mapToLegsCounterpartyDTO(entity.getCounterparty());
+    public RevolutTransactionLegsDto mapToRevolutTransactionLegsDto(TransactionLegs entity) {
+        RevolutTransactionLegsDto revolutTransactionLegsDto = new RevolutTransactionLegsDto();
+        LegsCounterpartyDto legsCounterpartyDto = mapToLegsCounterpartyDto(entity.getCounterparty());
 
-        revolutTransactionLegsDTO.setId(entity.getTransactionLegsId());
-        revolutTransactionLegsDTO.setAmount(entity.getAmount());
-        revolutTransactionLegsDTO.setCurrency(entity.getCurrency());
-        revolutTransactionLegsDTO.setAccountId(entity.getAccountId());
-        revolutTransactionLegsDTO.setCounterparty(legsCounterpartyDTO);
-        revolutTransactionLegsDTO.setDescription(entity.getDescription());
-        revolutTransactionLegsDTO.setBalance(entity.getBalance());
-        revolutTransactionLegsDTO.setBillAmount(entity.getBillAmount());
-        revolutTransactionLegsDTO.setBillCurrency(entity.getBillCurrency());
+        revolutTransactionLegsDto.setId(entity.getTransactionLegsId());
+        revolutTransactionLegsDto.setAmount(entity.getAmount());
+        revolutTransactionLegsDto.setCurrency(entity.getCurrency());
+        revolutTransactionLegsDto.setAccountId(entity.getAccountId());
+        revolutTransactionLegsDto.setCounterparty(legsCounterpartyDto);
+        revolutTransactionLegsDto.setDescription(entity.getDescription());
+        revolutTransactionLegsDto.setBalance(entity.getBalance());
+        revolutTransactionLegsDto.setBillAmount(entity.getBillAmount());
+        revolutTransactionLegsDto.setBillCurrency(entity.getBillCurrency());
 
-        return revolutTransactionLegsDTO;
+        return revolutTransactionLegsDto;
     }
 
-    public TransactionCardDto mapToTransactionCardDTO(TransactionCard entity) {
+    public TransactionCardDto mapToTransactionCardDto(TransactionCard entity) {
         if (entity == null) {
             return null;
         }
 
-        TransactionCardDto transactionCardDTO = new TransactionCardDto();
+        TransactionCardDto transactionCardDto = new TransactionCardDto();
 
-        transactionCardDTO.setCardNumber(entity.getCardNumber());
-        transactionCardDTO.setFirstName(entity.getFirstName());
-        transactionCardDTO.setLastName(entity.getLastName());
-        transactionCardDTO.setPhone(entity.getPhone());
+        transactionCardDto.setCardNumber(entity.getCardNumber());
+        transactionCardDto.setFirstName(entity.getFirstName());
+        transactionCardDto.setLastName(entity.getLastName());
+        transactionCardDto.setPhone(entity.getPhone());
 
-        return transactionCardDTO;
+        return transactionCardDto;
     }
 
-    public MerchantDto mapToMerchantDTO(Merchant entity) {
+    public MerchantDto mapToMerchantDto(Merchant entity) {
         if (entity == null) {
             return null;
         }
 
-        MerchantDto merchantDTO = new MerchantDto();
+        MerchantDto merchantDto = new MerchantDto();
 
-        merchantDTO.setName(entity.getName());
-        merchantDTO.setCity(entity.getCity());
-        merchantDTO.setCategoryCode(entity.getCategoryCode());
-        merchantDTO.setCountry(entity.getCountry());
+        merchantDto.setName(entity.getName());
+        merchantDto.setCity(entity.getCity());
+        merchantDto.setCategoryCode(entity.getCategoryCode());
+        merchantDto.setCountry(entity.getCountry());
 
-        return merchantDTO;
+        return merchantDto;
     }
 
-    public LegsCounterpartyDto mapToLegsCounterpartyDTO(LegsCounterparty entity) {
-        LegsCounterpartyDto legsCounterpartyDTO = new LegsCounterpartyDto();
+    public LegsCounterpartyDto mapToLegsCounterpartyDto(LegsCounterparty entity) {
+        LegsCounterpartyDto legsCounterpartyDto = new LegsCounterpartyDto();
 
-        legsCounterpartyDTO.setId(entity.getAccountId());
-        legsCounterpartyDTO.setAccountId(entity.getAccountId());
-        legsCounterpartyDTO.setType(entity.getType());
+        legsCounterpartyDto.setId(entity.getAccountId());
+        legsCounterpartyDto.setAccountId(entity.getAccountId());
+        legsCounterpartyDto.setType(entity.getType());
 
-        return legsCounterpartyDTO;
+        return legsCounterpartyDto;
     }
 
     public Transaction mapToTransactionEntity(TransactionDto dto) {
@@ -229,11 +229,11 @@ public class TransactionMapper {
         return legsCounterparty;
     }
 
-    public List<RevolutTransactionLegsDto> mapToRevolutTransactionLegsDTOArray(List<TransactionLegs> revolutTransactionLegs) {
+    public List<RevolutTransactionLegsDto> mapToRevolutTransactionLegsDtoArray(List<TransactionLegs> revolutTransactionLegs) {
         List<RevolutTransactionLegsDto> revolutTransactionLegsDtos = new ArrayList<>();
 
         for (TransactionLegs revolutCounterpartyAccount : revolutTransactionLegs) {
-            revolutTransactionLegsDtos.add(mapToRevolutTransactionLegsDTO(revolutCounterpartyAccount));
+            revolutTransactionLegsDtos.add(mapToRevolutTransactionLegsDto(revolutCounterpartyAccount));
         }
 
         return revolutTransactionLegsDtos;
@@ -242,8 +242,8 @@ public class TransactionMapper {
     public List<TransactionLegs> mapToTransactionLegsEntityList(List<RevolutTransactionLegsDto> revolutTransactionLegsDtos) {
         List<TransactionLegs> revolutTransactionLegs = new ArrayList<>();
 
-        for (RevolutTransactionLegsDto revolutTransactionLegsDTO : revolutTransactionLegsDtos) {
-            revolutTransactionLegs.add(mapToTransactionLegsEntity(revolutTransactionLegsDTO));
+        for (RevolutTransactionLegsDto revolutTransactionLegsDto : revolutTransactionLegsDtos) {
+            revolutTransactionLegs.add(mapToTransactionLegsEntity(revolutTransactionLegsDto));
         }
 
         return revolutTransactionLegs;

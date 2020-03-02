@@ -18,15 +18,15 @@ public class PaymentMessageState {
         this.paymentRequestRepository = paymentRequestRepository;
     }
 
-    public PaymentRequest mapAndSave(PaymentRequestDto paymentRequestDTO, String state) {
-        PaymentRequest paymentRequest = paymentRequestMapper.mapToEntity(paymentRequestDTO);
+    public PaymentRequest mapAndSave(PaymentRequestDto paymentRequestDto, String state) {
+        PaymentRequest paymentRequest = paymentRequestMapper.mapToEntity(paymentRequestDto);
         paymentRequest.setState(state);
         return paymentRequestRepository.save(paymentRequest);
     }
 
-    public PaymentRequest findAndUpdate(PaymentRequestDto paymentRequestDTO, String state) throws EntryNotFoundException {
+    public PaymentRequest findAndUpdate(PaymentRequestDto paymentRequestDto, String state) throws EntryNotFoundException {
         PaymentRequest paymentRequest =
-                paymentRequestRepository.findById(paymentRequestDTO.getRequestId())
+                paymentRequestRepository.findById(paymentRequestDto.getRequestId())
                         .orElseThrow(() -> new EntryNotFoundException("PaymentRequest entry not found"));
         paymentRequest.setState(state);
         return paymentRequestRepository.save(paymentRequest);

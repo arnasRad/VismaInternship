@@ -8,26 +8,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class PaymentMapper {
 
-    public PaymentDto mapToPaymentDTO(Payment entity) {
-        PaymentDto paymentDTO = new PaymentDto();
+    public PaymentDto mapToPaymentDto(Payment entity) {
+        PaymentDto paymentDto = new PaymentDto();
 
-        paymentDTO.setId(entity.getPaymentId());
-        paymentDTO.setState(entity.getState());
-        paymentDTO.setCompletedAt(entity.getCompletedAt());
+        paymentDto.setId(entity.getPaymentId());
+        paymentDto.setState(entity.getState());
+        paymentDto.setCompletedAt(entity.getCompletedAt());
 
-        return paymentDTO;
+        return paymentDto;
     }
 
-    public RevolutPaymentDto mapToRevolutPaymentDTO(Payment entity) {
-        RevolutPaymentDto revolutPaymentDTO = new RevolutPaymentDto();
+    public RevolutPaymentDto mapToRevolutPaymentDto(Payment entity) {
+        RevolutPaymentDto revolutPaymentDto = new RevolutPaymentDto();
 
-        revolutPaymentDTO.setId(entity.getPaymentId());
-        revolutPaymentDTO.setState(entity.getState());
-        revolutPaymentDTO.setCompletedAt(entity.getCompletedAt());
-        revolutPaymentDTO.setReasonCode(entity.getReasonCode());
-        revolutPaymentDTO.setCreatedAt(entity.getCreatedAt());
+        revolutPaymentDto.setId(entity.getPaymentId());
+        revolutPaymentDto.setState(entity.getState());
+        revolutPaymentDto.setCompletedAt(entity.getCompletedAt());
+        revolutPaymentDto.setReasonCode(entity.getReasonCode());
+        revolutPaymentDto.setCreatedAt(entity.getCreatedAt());
 
-        return revolutPaymentDTO;
+        return revolutPaymentDto;
     }
 
     public Payment mapToPaymentEntity(PaymentDto dto) {

@@ -17,59 +17,59 @@ import java.util.List;
 @Component
 public class CustomerInfoMapper {
 
-    public CustomerInfoDto mapToCustomerInfoDTO(CustomerInfo entity) {
-        CustomerInfoDto customerInfoDTO = new CustomerInfoDto();
-        CustomerAddressDto customerAddressDTO = mapToCustomerAddressDTO(entity.getAddress());
+    public CustomerInfoDto mapToCustomerInfoDto(CustomerInfo entity) {
+        CustomerInfoDto customerInfoDto = new CustomerInfoDto();
+        CustomerAddressDto customerAddressDto = mapToCustomerAddressDto(entity.getAddress());
 
-        customerInfoDTO.setCustomerId(entity.getCustomerId());
-        customerInfoDTO.setFirstName(entity.getFirstName());
-        customerInfoDTO.setLastName(entity.getLastName());
-        customerInfoDTO.setAddress(customerAddressDTO);
-        customerInfoDTO.setPhone(entity.getPhone());
-        customerInfoDTO.setEmail(entity.getEmail());
-        customerInfoDTO.setCountryOfBirth(entity.getCountryOfBirth());
+        customerInfoDto.setCustomerId(entity.getCustomerId());
+        customerInfoDto.setFirstName(entity.getFirstName());
+        customerInfoDto.setLastName(entity.getLastName());
+        customerInfoDto.setAddress(customerAddressDto);
+        customerInfoDto.setPhone(entity.getPhone());
+        customerInfoDto.setEmail(entity.getEmail());
+        customerInfoDto.setCountryOfBirth(entity.getCountryOfBirth());
 
-        return customerInfoDTO;
+        return customerInfoDto;
     }
 
-    public DNBCustomerInfoDto mapToDNBCustomerInfoDTO(CustomerInfo entity) {
-        DNBCustomerInfoDto dnbCustomerInfoDTO = new DNBCustomerInfoDto();
-        CustomerAddressDto dnbCustomerAddressDto = mapToCustomerAddressDTO(entity.getAddress());
-        List<CitizenshipDto> citizenshipDtos = mapToCitizenshipDTOArray(entity.getCitizenship());
-        List<CountryTaxDto> countryTaxDtos = mapToCountryTaxDTOArray(entity.getCountryTax());
+    public DNBCustomerInfoDto mapToDNBCustomerInfoDto(CustomerInfo entity) {
+        DNBCustomerInfoDto dnbCustomerInfoDto = new DNBCustomerInfoDto();
+        CustomerAddressDto dnbCustomerAddressDto = mapToCustomerAddressDto(entity.getAddress());
+        List<CitizenshipDto> citizenshipDtos = mapToCitizenshipDtoArray(entity.getCitizenship());
+        List<CountryTaxDto> countryTaxDtos = mapToCountryTaxDtoArray(entity.getCountryTax());
 
-        dnbCustomerInfoDTO.setCustomerId(entity.getCustomerId());
-        dnbCustomerInfoDTO.setFirstName(entity.getFirstName());
-        dnbCustomerInfoDTO.setLastName(entity.getLastName());
-        dnbCustomerInfoDTO.setAddress(dnbCustomerAddressDto);
-        dnbCustomerInfoDTO.setPhone(entity.getPhone());
-        dnbCustomerInfoDTO.setEmail(entity.getEmail());
-        dnbCustomerInfoDTO.setCountryOfBirth(entity.getCountryOfBirth());
-        dnbCustomerInfoDTO.setCustomerType(entity.getCustomerType());
-        dnbCustomerInfoDTO.setCitizenship(citizenshipDtos);
-        dnbCustomerInfoDTO.setCountryTax(countryTaxDtos);
+        dnbCustomerInfoDto.setCustomerId(entity.getCustomerId());
+        dnbCustomerInfoDto.setFirstName(entity.getFirstName());
+        dnbCustomerInfoDto.setLastName(entity.getLastName());
+        dnbCustomerInfoDto.setAddress(dnbCustomerAddressDto);
+        dnbCustomerInfoDto.setPhone(entity.getPhone());
+        dnbCustomerInfoDto.setEmail(entity.getEmail());
+        dnbCustomerInfoDto.setCountryOfBirth(entity.getCountryOfBirth());
+        dnbCustomerInfoDto.setCustomerType(entity.getCustomerType());
+        dnbCustomerInfoDto.setCitizenship(citizenshipDtos);
+        dnbCustomerInfoDto.setCountryTax(countryTaxDtos);
 
-        return dnbCustomerInfoDTO;
+        return dnbCustomerInfoDto;
     }
 
-    public CustomerAddressDto mapToCustomerAddressDTO(CustomerAddress entity) {
-        CustomerAddressDto customerAddressDTO = new CustomerAddressDto();
+    public CustomerAddressDto mapToCustomerAddressDto(CustomerAddress entity) {
+        CustomerAddressDto customerAddressDto = new CustomerAddressDto();
 
-        customerAddressDTO.setPostalCodeName(entity.getPostalCodeName());
-        customerAddressDTO.setPostalCode(entity.getPostalCode());
-        customerAddressDTO.setPostalAddressCountry(entity.getPostalAddressCountry());
-        customerAddressDTO.setAddressLine1(entity.getAddressLine1());
-        customerAddressDTO.setAddressLine2(entity.getAddressLine2());
-        customerAddressDTO.setAddressLine3(entity.getAddressLine3());
+        customerAddressDto.setPostalCodeName(entity.getPostalCodeName());
+        customerAddressDto.setPostalCode(entity.getPostalCode());
+        customerAddressDto.setPostalAddressCountry(entity.getPostalAddressCountry());
+        customerAddressDto.setAddressLine1(entity.getAddressLine1());
+        customerAddressDto.setAddressLine2(entity.getAddressLine2());
+        customerAddressDto.setAddressLine3(entity.getAddressLine3());
 
-        return customerAddressDTO;
+        return customerAddressDto;
     }
 
-    public CitizenshipDto mapToCitizenshipDTO(Citizenship entity) {
+    public CitizenshipDto mapToCitizenshipDto(Citizenship entity) {
         return new CitizenshipDto(entity.getCountryOfCitizenship());
     }
 
-    public CountryTaxDto mapToCountryTaxDTO(CountryTax entity) {
+    public CountryTaxDto mapToCountryTaxDto(CountryTax entity) {
         return new CountryTaxDto(entity.getTaxLiabilityCountry(), entity.getTaxIdentificationNumber());
     }
 
@@ -129,21 +129,21 @@ public class CustomerInfoMapper {
         return new CountryTax(dto.getTaxLiabilityCountry(), dto.getTaxIdentificationNumber());
     }
 
-    public List<CitizenshipDto> mapToCitizenshipDTOArray(List<Citizenship> citizenships) {
+    public List<CitizenshipDto> mapToCitizenshipDtoArray(List<Citizenship> citizenships) {
         List<CitizenshipDto> citizenshipDtos = new ArrayList<>();
 
         for (Citizenship citizenship : citizenships) {
-            citizenshipDtos.add(mapToCitizenshipDTO(citizenship));
+            citizenshipDtos.add(mapToCitizenshipDto(citizenship));
         }
 
         return citizenshipDtos;
     }
 
-    public List<CountryTaxDto> mapToCountryTaxDTOArray(List<CountryTax> countryTaxes) {
+    public List<CountryTaxDto> mapToCountryTaxDtoArray(List<CountryTax> countryTaxes) {
         List<CountryTaxDto> countryTaxDtos = new ArrayList<>();
 
         for (CountryTax countryTax : countryTaxes) {
-            countryTaxDtos.add(mapToCountryTaxDTO(countryTax));
+            countryTaxDtos.add(mapToCountryTaxDto(countryTax));
         }
 
         return countryTaxDtos;
@@ -152,8 +152,8 @@ public class CustomerInfoMapper {
     public List<Citizenship> mapToCitizenshipEntityList(List<CitizenshipDto> citizenshipDtos) {
         List<Citizenship> citizenships = new ArrayList<>();
 
-        for (CitizenshipDto citizenshipDTO : citizenshipDtos) {
-            citizenships.add(mapToCitizenshipEntity(citizenshipDTO));
+        for (CitizenshipDto citizenshipDto : citizenshipDtos) {
+            citizenships.add(mapToCitizenshipEntity(citizenshipDto));
         }
 
         return citizenships;
@@ -162,8 +162,8 @@ public class CustomerInfoMapper {
     public List<CountryTax> mapToCountryTaxEntityList(List<CountryTaxDto> countryTaxDtos) {
         List<CountryTax> countryTaxes = new ArrayList<>();
 
-        for (CountryTaxDto countryTaxDTO : countryTaxDtos) {
-            countryTaxes.add(mapToCountryTaxEntity(countryTaxDTO));
+        for (CountryTaxDto countryTaxDto : countryTaxDtos) {
+            countryTaxes.add(mapToCountryTaxEntity(countryTaxDto));
         }
 
         return countryTaxes;
