@@ -1,16 +1,16 @@
 package com.arnasrad.vismainternship.mapper;
 
-import com.arnasrad.vismainternship.model.dto.account.AccountDTO;
-import com.arnasrad.vismainternship.model.dto.dnb.psd2api.DNBAccountDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDTO;
+import com.arnasrad.vismainternship.model.dto.account.AccountDto;
+import com.arnasrad.vismainternship.model.dto.dnb.psd2api.DNBAccountDto;
+import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDto;
 import com.arnasrad.vismainternship.model.entity.account.Account;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountMapper {
 
-    public AccountDTO mapToAccountDTO(Account entity) {
-        AccountDTO accountDTO = new AccountDTO();
+    public AccountDto mapToAccountDTO(Account entity) {
+        AccountDto accountDTO = new AccountDto();
 
         accountDTO.setId(entity.getAccountId());
         accountDTO.setName(entity.getName());
@@ -19,8 +19,8 @@ public class AccountMapper {
         return accountDTO;
     }
 
-    public DNBAccountDTO mapToDnbAccountDTO(Account entity) {
-        DNBAccountDTO accountDTO = new DNBAccountDTO();
+    public DNBAccountDto mapToDnbAccountDTO(Account entity) {
+        DNBAccountDto accountDTO = new DNBAccountDto();
 
         accountDTO.setId(entity.getAccountId());
         accountDTO.setName(entity.getName());
@@ -29,8 +29,8 @@ public class AccountMapper {
         return accountDTO;
     }
 
-    public RevolutAccountDTO mapToRevolutAccountDTO(Account entity) {
-        RevolutAccountDTO revolutAccountDTO = new RevolutAccountDTO();
+    public RevolutAccountDto mapToRevolutAccountDTO(Account entity) {
+        RevolutAccountDto revolutAccountDTO = new RevolutAccountDto();
 
         revolutAccountDTO.setId(entity.getAccountId());
         revolutAccountDTO.setName(entity.getName());
@@ -44,7 +44,7 @@ public class AccountMapper {
         return revolutAccountDTO;
     }
 
-    public Account mapToAccountEntity(AccountDTO dto) {
+    public Account mapToAccountEntity(AccountDto dto) {
         Account account = new Account();
 
         account.setAccountId(dto.getId());
@@ -54,7 +54,7 @@ public class AccountMapper {
         return account;
     }
 
-    public Account mapToAccountEntity(DNBAccountDTO dto) {
+    public Account mapToAccountEntity(DNBAccountDto dto) {
         Account account = new Account();
 
         account.setAccountId(dto.getId());
@@ -64,7 +64,7 @@ public class AccountMapper {
         return account;
     }
 
-    public Account mapToAccountEntity(RevolutAccountDTO dto) {
+    public Account mapToAccountEntity(RevolutAccountDto dto) {
         Account account = new Account();
 
         account.setAccountId(dto.getId());

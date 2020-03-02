@@ -1,10 +1,10 @@
 package com.arnasrad.vismainternship.service.revolut.testdata;
 
 import com.arnasrad.vismainternship.mapping.JsonMapper;
-import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.counterparty.RevolutCounterpartyDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionDTO;
+import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDto;
+import com.arnasrad.vismainternship.model.dto.revolut.counterparty.RevolutCounterpartyDto;
+import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDto;
+import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionDto;
 
 import java.util.List;
 
@@ -12,15 +12,15 @@ public class RevolutObjectTestData {
 
     private static final JsonMapper mapper = new JsonMapper();
 
-    public static List<RevolutAccountDTO> getTestAccounts() {
+    public static List<RevolutAccountDto> getTestAccounts() {
 
-        return mapper.getObjectListFromString(RevolutStringTestData.getAccountsString(), RevolutAccountDTO.class);
+        return mapper.getObjectListFromString(RevolutStringTestData.getAccountsString(), RevolutAccountDto.class);
     }
 
-    public static RevolutCounterpartyDTO getTestCounterparty() {
+    public static RevolutCounterpartyDto getTestCounterparty() {
 
         return mapper.getObjectFromString(RevolutStringTestData.getCounterpartyString(),
-                RevolutCounterpartyDTO.class);
+                RevolutCounterpartyDto.class);
     }
 
 //    public static JSONObject getTestCounterpartyRequestBody() {
@@ -29,25 +29,25 @@ public class RevolutObjectTestData {
 //                CounterpartyRequestBody.class);
 //    }
 
-    public static List<RevolutCounterpartyDTO> getTestCounterpartyList() {
+    public static List<RevolutCounterpartyDto> getTestCounterpartyList() {
 
         return mapper.getObjectListFromString(RevolutStringTestData.getCounterpartyListString(),
-                RevolutCounterpartyDTO.class);
+                RevolutCounterpartyDto.class);
     }
 
-    public static RevolutPaymentDTO getPayment() {
+    public static RevolutPaymentDto getPayment() {
 
-        return mapper.getObjectFromString(RevolutStringTestData.getPaymentString(), RevolutPaymentDTO.class);
+        return mapper.getObjectFromString(RevolutStringTestData.getPaymentString(), RevolutPaymentDto.class);
     }
 
-    public static List<RevolutTransactionDTO> getTransactionList() {
+    public static List<RevolutTransactionDto> getTransactionList() {
 
         return mapper.getObjectListFromString(RevolutStringTestData.getTransactionListString(),
-                RevolutTransactionDTO.class);
+                RevolutTransactionDto.class);
     }
 
-    public static RevolutTransactionDTO getTransaction() {
+    public static RevolutTransactionDto getTransaction() {
 
-        return mapper.getObjectFromString(RevolutStringTestData.getTransactionString(), RevolutTransactionDTO.class);
+        return mapper.getObjectFromString(RevolutStringTestData.getTransactionString(), RevolutTransactionDto.class);
     }
 }

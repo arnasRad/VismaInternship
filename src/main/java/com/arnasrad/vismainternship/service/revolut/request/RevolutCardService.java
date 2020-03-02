@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
-import com.arnasrad.vismainternship.model.dto.card.CardDTO;
+import com.arnasrad.vismainternship.model.dto.card.CardDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.request.CardService;
@@ -13,7 +13,7 @@ import java.util.List;
 public class RevolutCardService implements CardService {
 
     @Override
-    public List<CardDTO> getCards() throws NoSuchFunctionalityException {
+    public List<CardDto> getCards() throws NoSuchFunctionalityException {
         throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
                 "getCards"));
     }

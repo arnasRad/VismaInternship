@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.mapper;
 
-import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyAccountDTO;
-import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.counterparty.RevolutCounterpartyDTO;
+import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyAccountDto;
+import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyDto;
+import com.arnasrad.vismainternship.model.dto.revolut.counterparty.RevolutCounterpartyDto;
 import com.arnasrad.vismainternship.model.entity.counterparty.Counterparty;
 import com.arnasrad.vismainternship.model.entity.counterparty.CounterpartyAccount;
 import org.springframework.stereotype.Component;
@@ -13,21 +13,21 @@ import java.util.List;
 @Component
 public class CounterpartyMapper {
 
-    public CounterpartyDTO mapToCounterpartyDTO(Counterparty entity) {
-        CounterpartyDTO counterpartyDTO = new CounterpartyDTO();
-        List<CounterpartyAccountDTO> counterpartyAccountDTOS = mapToCounterpartyAccountDTOArray(entity.getAccounts());
+    public CounterpartyDto mapToCounterpartyDTO(Counterparty entity) {
+        CounterpartyDto counterpartyDTO = new CounterpartyDto();
+        List<CounterpartyAccountDto> counterpartyAccountDtos = mapToCounterpartyAccountDTOArray(entity.getAccounts());
 
         counterpartyDTO.setCountry(entity.getCountry());
         counterpartyDTO.setId(entity.getCounterpartyId());
         counterpartyDTO.setName(entity.getName());
         counterpartyDTO.setPhone(entity.getPhone());
-        counterpartyDTO.setAccounts(counterpartyAccountDTOS);
+        counterpartyDTO.setAccounts(counterpartyAccountDtos);
 
         return counterpartyDTO;
     }
 
-    public RevolutCounterpartyDTO mapToRevolutCounterpartyDTO(Counterparty entity) {
-        RevolutCounterpartyDTO revolutCounterpartyDTO = (RevolutCounterpartyDTO) mapToCounterpartyDTO(entity);
+    public RevolutCounterpartyDto mapToRevolutCounterpartyDTO(Counterparty entity) {
+        RevolutCounterpartyDto revolutCounterpartyDTO = (RevolutCounterpartyDto) mapToCounterpartyDTO(entity);
 
         revolutCounterpartyDTO.setProfileType(entity.getProfileType());
         revolutCounterpartyDTO.setState(entity.getState());
@@ -37,8 +37,8 @@ public class CounterpartyMapper {
         return revolutCounterpartyDTO;
     }
 
-    public CounterpartyAccountDTO mapToCounterpartyAccountDTO(CounterpartyAccount entity) {
-        CounterpartyAccountDTO counterpartyAccountDTO = new CounterpartyAccountDTO();
+    public CounterpartyAccountDto mapToCounterpartyAccountDTO(CounterpartyAccount entity) {
+        CounterpartyAccountDto counterpartyAccountDTO = new CounterpartyAccountDto();
 
         counterpartyAccountDTO.setId(entity.getCounterpartyAccountId());
         counterpartyAccountDTO.setCurrency(entity.getCurrency());
@@ -53,7 +53,7 @@ public class CounterpartyMapper {
         return counterpartyAccountDTO;
     }
 
-    public Counterparty mapToCounterpartyEntity(CounterpartyDTO dto) {
+    public Counterparty mapToCounterpartyEntity(CounterpartyDto dto) {
         Counterparty counterparty = new Counterparty();
         List<CounterpartyAccount> counterpartyAccounts = mapToCounterpartyAccountEntityList(dto.getAccounts());
 
@@ -66,7 +66,7 @@ public class CounterpartyMapper {
         return counterparty;
     }
 
-    public Counterparty mapToCounterpartyEntity(RevolutCounterpartyDTO dto) {
+    public Counterparty mapToCounterpartyEntity(RevolutCounterpartyDto dto) {
         Counterparty counterparty = new Counterparty();
         List<CounterpartyAccount> counterpartyAccounts = mapToCounterpartyAccountEntityList(dto.getAccounts());
 
@@ -83,7 +83,7 @@ public class CounterpartyMapper {
         return counterparty;
     }
 
-    public CounterpartyAccount mapToCounterpartyAccountEntity(CounterpartyAccountDTO dto) {
+    public CounterpartyAccount mapToCounterpartyAccountEntity(CounterpartyAccountDto dto) {
         CounterpartyAccount counterpartyAccount = new CounterpartyAccount();
 
         counterpartyAccount.setCounterpartyAccountId(dto.getId());
@@ -99,20 +99,20 @@ public class CounterpartyMapper {
         return counterpartyAccount;
     }
 
-    public List<CounterpartyAccountDTO> mapToCounterpartyAccountDTOArray(List<CounterpartyAccount> counterpartyAccounts) {
-        List<CounterpartyAccountDTO> counterpartyAccountDTOS = new ArrayList<>();
+    public List<CounterpartyAccountDto> mapToCounterpartyAccountDTOArray(List<CounterpartyAccount> counterpartyAccounts) {
+        List<CounterpartyAccountDto> counterpartyAccountDtos = new ArrayList<>();
 
         for (CounterpartyAccount counterpartyAccount : counterpartyAccounts) {
-            counterpartyAccountDTOS.add(mapToCounterpartyAccountDTO(counterpartyAccount));
+            counterpartyAccountDtos.add(mapToCounterpartyAccountDTO(counterpartyAccount));
         }
 
-        return counterpartyAccountDTOS;
+        return counterpartyAccountDtos;
     }
 
-    public List<CounterpartyAccount> mapToCounterpartyAccountEntityList(List<CounterpartyAccountDTO> counterpartyAccountDTOS) {
+    public List<CounterpartyAccount> mapToCounterpartyAccountEntityList(List<CounterpartyAccountDto> counterpartyAccountDtos) {
         List<CounterpartyAccount> counterpartyAccounts = new ArrayList<>();
 
-        for (CounterpartyAccountDTO counterpartyAccountDTO : counterpartyAccountDTOS) {
+        for (CounterpartyAccountDto counterpartyAccountDTO : counterpartyAccountDtos) {
             counterpartyAccounts.add(mapToCounterpartyAccountEntity(counterpartyAccountDTO));
         }
 

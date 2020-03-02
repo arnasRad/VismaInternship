@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.mapper.TransactionMapper;
-import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionDTO;
+import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionDto;
 import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.persistence.transaction.TransactionRepository;
@@ -43,23 +43,23 @@ public class RevolutTransactionService implements TransactionService {
     }
 
     @Override
-    public RevolutTransactionDTO getTransaction(String id) {
+    public RevolutTransactionDto getTransaction(String id) {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<RevolutTransactionDTO> responseEntity = restTemplate.exchange(transactionEndpoint.concat(id),
-                HttpMethod.GET, authorizedHttpEntity, RevolutTransactionDTO.class);
+        ResponseEntity<RevolutTransactionDto> responseEntity = restTemplate.exchange(transactionEndpoint.concat(id),
+                HttpMethod.GET, authorizedHttpEntity, RevolutTransactionDto.class);
 
         return responseEntity.getBody();
     }
 
     @Override
-    public List<RevolutTransactionDTO> getTransactions(String counterparty, Date from, Date to, Integer count) {
+    public List<RevolutTransactionDto> getTransactions(String counterparty, Date from, Date to, Integer count) {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
         String transactionsURI = revolutRequestURLBuilderService.getTransactionsURI(counterparty, from, to, count);
 
-        ResponseEntity<List<RevolutTransactionDTO>> responseEntity = restTemplate.exchange(transactionsURI,
-                HttpMethod.GET, authorizedHttpEntity, new ParameterizedTypeReference<List<RevolutTransactionDTO>>() {
+        ResponseEntity<List<RevolutTransactionDto>> responseEntity = restTemplate.exchange(transactionsURI,
+                HttpMethod.GET, authorizedHttpEntity, new ParameterizedTypeReference<List<RevolutTransactionDto>>() {
                 });
 
         return responseEntity.getBody();
@@ -72,7 +72,7 @@ public class RevolutTransactionService implements TransactionService {
     }
 
     public void saveTransaction(String id) {
-        RevolutTransactionDTO transaction = getTransaction(id);
+        RevolutTransactionDto transaction = getTransaction(id);
         Transaction revolutTransaction = revolutTransactionMapper.mapToTransactionEntity(transaction);
         transactionRepository.save(revolutTransaction);
     }

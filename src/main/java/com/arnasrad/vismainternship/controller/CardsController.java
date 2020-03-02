@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller;
 
-import com.arnasrad.vismainternship.model.dto.card.CardDTO;
+import com.arnasrad.vismainternship.model.dto.card.CardDto;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.CardServiceFactory;
 import com.arnasrad.vismainternship.service.request.CardService;
@@ -19,7 +19,7 @@ public class CardsController {
     }
 
     @GetMapping("/interbanking/cards")
-    public List<? extends CardDTO> getCards(@RequestParam String bank)
+    public List<? extends CardDto> getCards(@RequestParam String bank)
             throws NoSuchFunctionalityException {
         CardService service = cardServiceFactory.getService(bank);
         return service.getCards();

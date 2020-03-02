@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb;
 
 import com.arnasrad.vismainternship.mapper.TokenMapper;
-import com.arnasrad.vismainternship.model.dto.token.DNBTokenDTO;
+import com.arnasrad.vismainternship.model.dto.token.DNBTokenDto;
 import com.arnasrad.vismainternship.model.entity.token.Token;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.persistence.token.TokenRepository;
@@ -38,15 +38,15 @@ public class DnbTokenService implements TokenService {
     public void refresh() {
         HttpEntity<String> httpEntity = dnbRequestBuilderService.getRequest();
 
-        ResponseEntity<DNBTokenDTO> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
-                httpEntity, DNBTokenDTO.class);
+        ResponseEntity<DNBTokenDto> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
+                httpEntity, DNBTokenDto.class);
 
-        DNBTokenDTO newToken = responseEntity.getBody();
+        DNBTokenDto newToken = responseEntity.getBody();
         newToken.setClientId(ssn);
         save(newToken);
     }
 
-    private void save(DNBTokenDTO dnbTokenDTO) {
+    private void save(DNBTokenDto dnbTokenDTO) {
         Token token = tokenRepository.findById(dnbTokenDTO.getClientId())
                 .orElse(new Token());
 

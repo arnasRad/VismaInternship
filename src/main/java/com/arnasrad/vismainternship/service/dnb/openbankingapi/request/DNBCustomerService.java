@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DNBCustomerDTO;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DNBCustomerInfoDTO;
+import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DNBCustomerDto;
+import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DNBCustomerInfoDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.dnb.openbankingapi.builder.DnbRequestBuilderService;
 import com.arnasrad.vismainternship.service.request.CustomerService;
@@ -33,32 +33,32 @@ public class DNBCustomerService implements CustomerService {
     }
 
     @Override
-    public List<DNBCustomerDTO> getCustomers() {
+    public List<DNBCustomerDto> getCustomers() {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getRequest();
 
-        ResponseEntity<List<DNBCustomerDTO>> responseEntity = restTemplate.exchange(customersEndpoint, HttpMethod.GET,
-                authorizedHttpEntity, new ParameterizedTypeReference<List<DNBCustomerDTO>>() {
+        ResponseEntity<List<DNBCustomerDto>> responseEntity = restTemplate.exchange(customersEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, new ParameterizedTypeReference<List<DNBCustomerDto>>() {
                 });
 
         return responseEntity.getBody();
     }
 
     @Override
-    public DNBCustomerInfoDTO getCurrentCustomerInfo() {
+    public DNBCustomerInfoDto getCurrentCustomerInfo() {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<DNBCustomerInfoDTO> responseEntity = restTemplate.exchange(currentCustomerInfoEndpoint,
-                HttpMethod.GET, authorizedHttpEntity, DNBCustomerInfoDTO.class);
+        ResponseEntity<DNBCustomerInfoDto> responseEntity = restTemplate.exchange(currentCustomerInfoEndpoint,
+                HttpMethod.GET, authorizedHttpEntity, DNBCustomerInfoDto.class);
 
         return responseEntity.getBody();
     }
 
     @Override
-    public DNBCustomerInfoDTO getCustomerInfo(String ssn) {
+    public DNBCustomerInfoDto getCustomerInfo(String ssn) {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<DNBCustomerInfoDTO> responseEntity = restTemplate.exchange(customerInfoEndpoint.concat(ssn),
-                HttpMethod.GET, authorizedHttpEntity, DNBCustomerInfoDTO.class);
+        ResponseEntity<DNBCustomerInfoDto> responseEntity = restTemplate.exchange(customerInfoEndpoint.concat(ssn),
+                HttpMethod.GET, authorizedHttpEntity, DNBCustomerInfoDto.class);
 
         return responseEntity.getBody();
     }

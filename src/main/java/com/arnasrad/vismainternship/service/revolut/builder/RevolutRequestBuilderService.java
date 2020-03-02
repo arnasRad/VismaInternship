@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.builder;
 
-import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDto;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +34,7 @@ public class RevolutRequestBuilderService {
         return new HttpEntity<>(body, headers);
     }
 
-    public HttpEntity<String> getPaymentRequest(PaymentRequestDTO body) {
+    public HttpEntity<String> getPaymentRequest(PaymentRequestDto body) {
         JSONObject receiverJson = new JSONObject();
         receiverJson.put("counterparty_id", body.getReceiver().getCounterpartyId());
         receiverJson.put("account_id", body.getReceiver().getAccountId());

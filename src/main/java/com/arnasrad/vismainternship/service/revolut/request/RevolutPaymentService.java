@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
 import com.arnasrad.vismainternship.mapper.PaymentMapper;
-import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDto;
+import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDto;
 import com.arnasrad.vismainternship.model.entity.payment.Payment;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.persistence.payment.PaymentRepository;
@@ -37,13 +37,13 @@ public class RevolutPaymentService implements PaymentService {
     }
 
     @Override
-    public RevolutPaymentDTO createPayment(PaymentRequestDTO body) {
+    public RevolutPaymentDto createPayment(PaymentRequestDto body) {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getPaymentRequest(body);
 
-        ResponseEntity<RevolutPaymentDTO> responseEntity = restTemplate.postForEntity(paymentEndpoint,
-                authorizedHttpEntity, RevolutPaymentDTO.class);
+        ResponseEntity<RevolutPaymentDto> responseEntity = restTemplate.postForEntity(paymentEndpoint,
+                authorizedHttpEntity, RevolutPaymentDto.class);
 
-        RevolutPaymentDTO payment = responseEntity.getBody();
+        RevolutPaymentDto payment = responseEntity.getBody();
         Payment revolutPayment = revolutPaymentMapper.mapToPaymentEntity(payment);
         paymentRepository.save(revolutPayment);
         revolutTransactionService.saveTransaction(payment.getId());

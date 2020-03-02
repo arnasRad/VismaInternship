@@ -1,15 +1,15 @@
 package com.arnasrad.vismainternship.mapper;
 
-import com.arnasrad.vismainternship.model.dto.payment.PaymentDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDTO;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentDto;
+import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDto;
 import com.arnasrad.vismainternship.model.entity.payment.Payment;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PaymentMapper {
 
-    public PaymentDTO mapToPaymentDTO(Payment entity) {
-        PaymentDTO paymentDTO = new PaymentDTO();
+    public PaymentDto mapToPaymentDTO(Payment entity) {
+        PaymentDto paymentDTO = new PaymentDto();
 
         paymentDTO.setId(entity.getPaymentId());
         paymentDTO.setState(entity.getState());
@@ -18,8 +18,8 @@ public class PaymentMapper {
         return paymentDTO;
     }
 
-    public RevolutPaymentDTO mapToRevolutPaymentDTO(Payment entity) {
-        RevolutPaymentDTO revolutPaymentDTO = new RevolutPaymentDTO();
+    public RevolutPaymentDto mapToRevolutPaymentDTO(Payment entity) {
+        RevolutPaymentDto revolutPaymentDTO = new RevolutPaymentDto();
 
         revolutPaymentDTO.setId(entity.getPaymentId());
         revolutPaymentDTO.setState(entity.getState());
@@ -30,7 +30,7 @@ public class PaymentMapper {
         return revolutPaymentDTO;
     }
 
-    public Payment mapToPaymentEntity(PaymentDTO dto) {
+    public Payment mapToPaymentEntity(PaymentDto dto) {
         Payment payment = new Payment();
 
         payment.setPaymentId(dto.getId());
@@ -40,7 +40,7 @@ public class PaymentMapper {
         return payment;
     }
 
-    public Payment mapToPaymentEntity(RevolutPaymentDTO dto) {
+    public Payment mapToPaymentEntity(RevolutPaymentDto dto) {
         Payment payment = new Payment();
 
         payment.setPaymentId(dto.getId());

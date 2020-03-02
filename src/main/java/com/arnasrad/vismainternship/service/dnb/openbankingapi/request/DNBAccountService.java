@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.dnb.openbankingapi.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
-import com.arnasrad.vismainternship.model.dto.account.AccountDTO;
-import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDTO;
+import com.arnasrad.vismainternship.model.dto.account.AccountDto;
+import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.request.AccountService;
@@ -14,19 +14,19 @@ import java.util.List;
 public class DNBAccountService implements AccountService {
 
     @Override
-    public List<AccountDTO> getAccounts() throws NoSuchFunctionalityException {
+    public List<AccountDto> getAccounts() throws NoSuchFunctionalityException {
         throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
                 "getAccounts"));
     }
 
     @Override
-    public AccountDTO getAccount(String id) throws NoSuchFunctionalityException {
+    public AccountDto getAccount(String id) throws NoSuchFunctionalityException {
         throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
                 "getAccount"));
     }
 
     @Override
-    public List<AccountDetailsDTO> getAccountDetails(String id) throws NoSuchFunctionalityException {
+    public List<AccountDetailsDto> getAccountDetails(String id) throws NoSuchFunctionalityException {
         throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
                 "getAccountDetails"));
     }

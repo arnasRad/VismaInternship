@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller;
 
-import com.arnasrad.vismainternship.model.dto.transaction.TransactionDTO;
+import com.arnasrad.vismainternship.model.dto.transaction.TransactionDto;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.TransactionServiceFactory;
 import com.arnasrad.vismainternship.service.request.TransactionService;
@@ -22,14 +22,14 @@ public class TransactionController {
     }
 
     @GetMapping("/interbanking/transaction")
-    public TransactionDTO getTransactions(@RequestParam String bank, @RequestParam String id)
+    public TransactionDto getTransactions(@RequestParam String bank, @RequestParam String id)
             throws NoSuchFunctionalityException {
         TransactionService service = transactionServiceFactory.getService(bank);
         return service.getTransaction(id);
     }
 
     @GetMapping("/interbanking/transactions")
-    public List<? extends TransactionDTO> getTransactions(@RequestParam String bank,
+    public List<? extends TransactionDto> getTransactions(@RequestParam String bank,
                                                           @RequestParam(required = false) String counterparty,
                                                           @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date from,
                                                           @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date to,

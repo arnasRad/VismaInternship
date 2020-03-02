@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut;
 
 import com.arnasrad.vismainternship.mapper.TokenMapper;
-import com.arnasrad.vismainternship.model.dto.token.RevolutTokenDTO;
+import com.arnasrad.vismainternship.model.dto.token.RevolutTokenDto;
 import com.arnasrad.vismainternship.model.entity.token.Token;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.persistence.token.TokenRepository;
@@ -39,15 +39,15 @@ public class RevolutTokenService implements TokenService {
     public void refresh() {
         HttpEntity<MultiValueMap<String, String>> httpEntity = revolutRequestBuilderService.getTokenRequest();
 
-        ResponseEntity<RevolutTokenDTO> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
-                httpEntity, RevolutTokenDTO.class);
+        ResponseEntity<RevolutTokenDto> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
+                httpEntity, RevolutTokenDto.class);
 
-        RevolutTokenDTO newToken = responseEntity.getBody();
+        RevolutTokenDto newToken = responseEntity.getBody();
         newToken.setClientId(clientId);
         save(newToken);
     }
 
-    private void save(RevolutTokenDTO revolutToken) {
+    private void save(RevolutTokenDto revolutToken) {
         Token token = tokenRepository.findById(revolutToken.getClientId())
                 .orElse(new Token());
 

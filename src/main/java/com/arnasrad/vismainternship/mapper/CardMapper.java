@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.mapper;
 
-import com.arnasrad.vismainternship.model.dto.card.CardDTO;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.BlockingInfoDTO;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DNBCardDTO;
+import com.arnasrad.vismainternship.model.dto.card.CardDto;
+import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.BlockingInfoDto;
+import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DNBCardDto;
 import com.arnasrad.vismainternship.model.entity.card.BlockingInfo;
 import com.arnasrad.vismainternship.model.entity.card.Card;
 import org.springframework.stereotype.Component;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CardMapper {
 
-    public CardDTO mapToCardDTO(Card entity) {
-        CardDTO cardDTO = new CardDTO();
+    public CardDto mapToCardDTO(Card entity) {
+        CardDto cardDTO = new CardDto();
 
         cardDTO.setCustomerId(entity.getCustomerId());
         cardDTO.setCardId(entity.getCardId());
@@ -24,9 +24,9 @@ public class CardMapper {
         return cardDTO;
     }
 
-    public DNBCardDTO mapToDnbCardDTO(Card entity) {
-        DNBCardDTO dnbCardDTO = new DNBCardDTO();
-        BlockingInfoDTO blockingInfoDTO = mapToBlockingInfoDTO(entity.getBlockingInfo());
+    public DNBCardDto mapToDnbCardDTO(Card entity) {
+        DNBCardDto dnbCardDTO = new DNBCardDto();
+        BlockingInfoDto blockingInfoDTO = mapToBlockingInfoDTO(entity.getBlockingInfo());
 
         dnbCardDTO.setCustomerId(entity.getCustomerId());
         dnbCardDTO.setCardId(entity.getCardId());
@@ -45,8 +45,8 @@ public class CardMapper {
         return dnbCardDTO;
     }
 
-    public BlockingInfoDTO mapToBlockingInfoDTO(BlockingInfo entity) {
-        BlockingInfoDTO blockingInfoDTO = new BlockingInfoDTO();
+    public BlockingInfoDto mapToBlockingInfoDTO(BlockingInfo entity) {
+        BlockingInfoDto blockingInfoDTO = new BlockingInfoDto();
 
         blockingInfoDTO.setUnblockAllowed(entity.isUnblockAllowed());
         blockingInfoDTO.setBlockAllowed(entity.isBlockAllowed());
@@ -56,7 +56,7 @@ public class CardMapper {
         return blockingInfoDTO;
     }
 
-    public Card mapToCardEntity(CardDTO dto) {
+    public Card mapToCardEntity(CardDto dto) {
         Card card = new Card();
 
         card.setCardId(dto.getCardId());
@@ -70,7 +70,7 @@ public class CardMapper {
         return card;
     }
 
-    public Card mapToCardEntity(DNBCardDTO dto) {
+    public Card mapToCardEntity(DNBCardDto dto) {
         Card card = new Card();
         BlockingInfo blockingInfo = mapToBlockingInfoEntity(dto.getBlockingInfo());
 
@@ -91,7 +91,7 @@ public class CardMapper {
         return card;
     }
 
-    public BlockingInfo mapToBlockingInfoEntity(BlockingInfoDTO dto) {
+    public BlockingInfo mapToBlockingInfoEntity(BlockingInfoDto dto) {
         BlockingInfo blockingInfo = new BlockingInfo();
 
         blockingInfo.setUnblockAllowed(dto.isUnblockAllowed());

@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.jms;
 
 import com.arnasrad.vismainternship.mapper.PaymentRequestMapper;
-import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDto;
 import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
 import com.arnasrad.vismainternship.model.exception.EntryNotFoundException;
 import com.arnasrad.vismainternship.persistence.payment.PaymentRequestRepository;
@@ -18,13 +18,13 @@ public class PaymentMessageState {
         this.paymentRequestRepository = paymentRequestRepository;
     }
 
-    public PaymentRequest mapAndSave(PaymentRequestDTO paymentRequestDTO, String state) {
+    public PaymentRequest mapAndSave(PaymentRequestDto paymentRequestDTO, String state) {
         PaymentRequest paymentRequest = paymentRequestMapper.mapToEntity(paymentRequestDTO);
         paymentRequest.setState(state);
         return paymentRequestRepository.save(paymentRequest);
     }
 
-    public PaymentRequest findAndUpdate(PaymentRequestDTO paymentRequestDTO, String state) throws EntryNotFoundException {
+    public PaymentRequest findAndUpdate(PaymentRequestDto paymentRequestDTO, String state) throws EntryNotFoundException {
         PaymentRequest paymentRequest =
                 paymentRequestRepository.findById(paymentRequestDTO.getRequestId())
                         .orElseThrow(() -> new EntryNotFoundException("PaymentRequest entry not found"));

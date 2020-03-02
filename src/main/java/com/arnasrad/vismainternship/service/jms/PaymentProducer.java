@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.jms;
 
-import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDto;
 import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
 import com.arnasrad.vismainternship.model.enums.MessageState;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class PaymentProducer {
         this.paymentQueue = paymentQueue;
     }
 
-    public void send(String bank, PaymentRequestDTO body) {
+    public void send(String bank, PaymentRequestDto body) {
         body.setBankId(bank);
         body.setRequestId(UUID.randomUUID().toString());
         PaymentRequest paymentRequest = paymentMessageState.mapAndSave(body, MessageState.ACCEPTED.getState());

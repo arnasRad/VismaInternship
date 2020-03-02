@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.jms;
 
-import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDTO;
+import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDto;
 import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
 import com.arnasrad.vismainternship.model.enums.MessageState;
 import com.arnasrad.vismainternship.model.exception.EntryNotFoundException;
@@ -25,7 +25,7 @@ public class PaymentConsumer {
     }
 
     @JmsListener(destination = "#{@paymentQueueName}")
-    public void consume(PaymentRequestDTO paymentRequestDTO)
+    public void consume(PaymentRequestDto paymentRequestDTO)
             throws NoSuchFunctionalityException, EntryNotFoundException {
         PaymentRequest paymentRequest = paymentMessageState.findAndUpdate(paymentRequestDTO,
                 MessageState.PROCESSING.getState());

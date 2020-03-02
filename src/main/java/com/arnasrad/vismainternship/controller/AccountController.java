@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.controller;
 
-import com.arnasrad.vismainternship.model.dto.account.AccountDTO;
+import com.arnasrad.vismainternship.model.dto.account.AccountDto;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.factory.AccountServiceFactory;
 import com.arnasrad.vismainternship.service.request.AccountService;
@@ -20,7 +20,7 @@ public class AccountController {
     }
 
     @GetMapping("/interbanking/accounts")
-    public List<? extends AccountDTO> getAccounts(@RequestParam String bank)
+    public List<? extends AccountDto> getAccounts(@RequestParam String bank)
             throws NoSuchFunctionalityException {
         AccountService service = accountServiceFactory.getService(bank);
         return service.getAccounts();

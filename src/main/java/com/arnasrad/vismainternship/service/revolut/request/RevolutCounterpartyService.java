@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.model.dto.revolut.counterparty.RevolutCounterpartyDTO;
+import com.arnasrad.vismainternship.model.dto.revolut.counterparty.RevolutCounterpartyDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.request.CounterpartyService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
@@ -33,23 +33,23 @@ public class RevolutCounterpartyService implements CounterpartyService {
     }
 
     @Override
-    public RevolutCounterpartyDTO addCounterparty(String body) {
+    public RevolutCounterpartyDto addCounterparty(String body) {
         JSONObject jsonObject = new JSONObject(body);
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedJsonRequestWithBody(jsonObject);
 
-        ResponseEntity<RevolutCounterpartyDTO> responseEntity = restTemplate.postForEntity(counterpartyEndpoint,
-                authorizedHttpEntity, RevolutCounterpartyDTO.class);
+        ResponseEntity<RevolutCounterpartyDto> responseEntity = restTemplate.postForEntity(counterpartyEndpoint,
+                authorizedHttpEntity, RevolutCounterpartyDto.class);
 
         return responseEntity.getBody();
     }
 
     @Override
-    public List<RevolutCounterpartyDTO> getCounterparties() {
+    public List<RevolutCounterpartyDto> getCounterparties() {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
-        ResponseEntity<List<RevolutCounterpartyDTO>> responseEntity = restTemplate.exchange(counterpartiesEndpoint,
+        ResponseEntity<List<RevolutCounterpartyDto>> responseEntity = restTemplate.exchange(counterpartiesEndpoint,
                 HttpMethod.GET, authorizedHttpEntity,
-                new ParameterizedTypeReference<List<RevolutCounterpartyDTO>>() {
+                new ParameterizedTypeReference<List<RevolutCounterpartyDto>>() {
                 });
 
         return responseEntity.getBody();

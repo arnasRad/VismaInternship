@@ -1,9 +1,9 @@
 package com.arnasrad.vismainternship.mapper;
 
-import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.account.BeneficiaryAddressDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.account.EstimatedTimeDTO;
-import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDetailsDTO;
+import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDto;
+import com.arnasrad.vismainternship.model.dto.revolut.account.BeneficiaryAddressDto;
+import com.arnasrad.vismainternship.model.dto.revolut.account.EstimatedTimeDto;
+import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDetailsDto;
 import com.arnasrad.vismainternship.model.entity.account.AccountDetails;
 import com.arnasrad.vismainternship.model.entity.account.BeneficiaryAddress;
 import com.arnasrad.vismainternship.model.entity.account.EstimatedTime;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountDetailsMapper {
 
-    public AccountDetailsDTO mapToAccountDetailsDTO(AccountDetails entity) {
-        AccountDetailsDTO accountDetailsDTO = new AccountDetailsDTO();
+    public AccountDetailsDto mapToAccountDetailsDTO(AccountDetails entity) {
+        AccountDetailsDto accountDetailsDTO = new AccountDetailsDto();
 
         accountDetailsDTO.setAccountNo(entity.getAccountNo());
         accountDetailsDTO.setIban(entity.getIban());
@@ -23,10 +23,10 @@ public class AccountDetailsMapper {
         return accountDetailsDTO;
     }
 
-    public RevolutAccountDetailsDTO mapToRevolutAccountDetailsDTO(AccountDetails entity) {
-        RevolutAccountDetailsDTO revolutAccountDetailsDTO = new RevolutAccountDetailsDTO();
-        BeneficiaryAddressDTO beneficiaryAddressDTO = mapToBeneficiaryAddressDTO(entity.getBeneficiaryAddress());
-        EstimatedTimeDTO estimatedTimeDTO = mapToEstimatedTimeDTO(entity.getEstimatedTime());
+    public RevolutAccountDetailsDto mapToRevolutAccountDetailsDTO(AccountDetails entity) {
+        RevolutAccountDetailsDto revolutAccountDetailsDTO = new RevolutAccountDetailsDto();
+        BeneficiaryAddressDto beneficiaryAddressDTO = mapToBeneficiaryAddressDTO(entity.getBeneficiaryAddress());
+        EstimatedTimeDto estimatedTimeDTO = mapToEstimatedTimeDTO(entity.getEstimatedTime());
 
         revolutAccountDetailsDTO.setAccountNo(entity.getAccountNo());
         revolutAccountDetailsDTO.setIban(entity.getIban());
@@ -44,8 +44,8 @@ public class AccountDetailsMapper {
         return revolutAccountDetailsDTO;
     }
 
-    public BeneficiaryAddressDTO mapToBeneficiaryAddressDTO(BeneficiaryAddress entity) {
-        BeneficiaryAddressDTO beneficiaryAddressDTO = new BeneficiaryAddressDTO();
+    public BeneficiaryAddressDto mapToBeneficiaryAddressDTO(BeneficiaryAddress entity) {
+        BeneficiaryAddressDto beneficiaryAddressDTO = new BeneficiaryAddressDto();
 
         beneficiaryAddressDTO.setStreetLine1(entity.getStreetLine1());
         beneficiaryAddressDTO.setStreetLine2(entity.getStreetLine2());
@@ -57,8 +57,8 @@ public class AccountDetailsMapper {
         return beneficiaryAddressDTO;
     }
 
-    public EstimatedTimeDTO mapToEstimatedTimeDTO(EstimatedTime entity) {
-        EstimatedTimeDTO estimatedTimeDTO = new EstimatedTimeDTO();
+    public EstimatedTimeDto mapToEstimatedTimeDTO(EstimatedTime entity) {
+        EstimatedTimeDto estimatedTimeDTO = new EstimatedTimeDto();
 
         entity.setUnit(entity.getUnit());
         entity.setMin(entity.getMin());
@@ -67,7 +67,7 @@ public class AccountDetailsMapper {
         return estimatedTimeDTO;
     }
 
-    public AccountDetails mapToAccountDetailsEntity(AccountDetailsDTO dto) {
+    public AccountDetails mapToAccountDetailsEntity(AccountDetailsDto dto) {
         AccountDetails accountDetails = new AccountDetails();
 
         accountDetails.setAccountNo(dto.getAccountNo());
@@ -78,7 +78,7 @@ public class AccountDetailsMapper {
         return accountDetails;
     }
 
-    public AccountDetails mapToAccountDetailsEntity(RevolutAccountDetailsDTO dto) {
+    public AccountDetails mapToAccountDetailsEntity(RevolutAccountDetailsDto dto) {
         AccountDetails accountDetails = new AccountDetails();
         BeneficiaryAddress beneficiaryAddress = mapToBeneficiaryAddressEntity(dto.getBeneficiaryAddress());
         EstimatedTime estimatedTime = mapToEstimatedTimeEntity(dto.getEstimatedTime());
@@ -99,7 +99,7 @@ public class AccountDetailsMapper {
         return accountDetails;
     }
 
-    public BeneficiaryAddress mapToBeneficiaryAddressEntity(BeneficiaryAddressDTO dto) {
+    public BeneficiaryAddress mapToBeneficiaryAddressEntity(BeneficiaryAddressDto dto) {
         BeneficiaryAddress beneficiaryAddress = new BeneficiaryAddress();
 
         beneficiaryAddress.setStreetLine1(dto.getStreetLine1());
@@ -112,7 +112,7 @@ public class AccountDetailsMapper {
         return beneficiaryAddress;
     }
 
-    public EstimatedTime mapToEstimatedTimeEntity(EstimatedTimeDTO dto) {
+    public EstimatedTime mapToEstimatedTimeEntity(EstimatedTimeDto dto) {
         EstimatedTime estimatedTime = new EstimatedTime();
 
         estimatedTime.setUnit(dto.getUnit());
