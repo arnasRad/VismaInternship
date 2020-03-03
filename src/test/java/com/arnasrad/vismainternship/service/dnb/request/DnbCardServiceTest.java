@@ -1,6 +1,5 @@
-package com.arnasrad.vismainternship.service.dnb.openbankingapi;
+package com.arnasrad.vismainternship.service.dnb.request;
 
-import com.arnasrad.vismainternship.service.dnb.request.DnbTokenService;
 import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,12 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 @ExtendWith(MockitoExtension.class)
-class DnbTokenServiceTest {
+class DnbCardServiceTest {
 
-    private String tokenEndpoint;
+    private String cardsEndpoint;
 
     @InjectMocks
-    private DnbTokenService dnbTokenService;
+    private DnbCardService dnbCardService;
 
     @Mock
     private RestTemplate restTemplate;
@@ -35,9 +34,9 @@ class DnbTokenServiceTest {
     @BeforeEach
     void init() {
 
-        MockitoAnnotations.initMocks(DnbTokenServiceTest.class);
-        this.tokenEndpoint = "https://developer-api-testmode.dnb.no/tokens/v0";
-        this.dnbTokenService.setRefreshTokenEndpoint(tokenEndpoint);
+        MockitoAnnotations.initMocks(DnbCardServiceTest.class);
+        this.cardsEndpoint = "https://developer-api-testmode.dnb.no/cards/v0/";
+        this.dnbCardService.setCardsEndpoint(cardsEndpoint);
     }
 
 }

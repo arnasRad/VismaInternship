@@ -1,5 +1,6 @@
 package com.arnasrad.vismainternship.mapper;
 
+import com.arnasrad.vismainternship.model.dto.token.DnbConsentDto;
 import com.arnasrad.vismainternship.model.dto.token.DnbTokenDto;
 import com.arnasrad.vismainternship.model.dto.token.RevolutTokenDto;
 import com.arnasrad.vismainternship.model.entity.token.Token;
@@ -40,6 +41,13 @@ public class TokenMapper {
         token.setToken(dto.getAccessToken());
         token.setTokenType(dto.getTokenType());
         token.setExpiresId(dto.getExpiresId());
+
+        return token;
+    }
+
+    public Token mapToTokenEntity(Token token, DnbConsentDto dto) {
+        token.setClientId(dto.getClientId());
+        token.setToken(dto.getConsentId());
 
         return token;
     }

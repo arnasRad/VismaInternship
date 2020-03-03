@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.account.AccountDto;
-import com.arnasrad.vismainternship.model.dto.dnb.psd2api.DnbAccountDto;
+import com.arnasrad.vismainternship.model.dto.dnb.account.DnbAccountDto;
 import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDto;
 import com.arnasrad.vismainternship.model.entity.account.Account;
 import org.springframework.stereotype.Component;

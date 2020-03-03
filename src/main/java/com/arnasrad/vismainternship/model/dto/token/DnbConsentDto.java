@@ -1,53 +1,41 @@
 package com.arnasrad.vismainternship.model.dto.token;
 
-public class DnbConsentDto {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.hateoas.RepresentationModel;
 
-    private DnbConsentAccessDto access;
-    private boolean combinedServiceIndicator;
-    private int frequencyPerDay;
-    private boolean recurringIndicator;
-    private String validUntil;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class DnbConsentDto extends RepresentationModel<DnbConsentDto> {
+
+    private String consentId;
+    private String consentStatus;
+//    @JsonProperty("_links")
+//    private Link links;
+    private String clientId;
 
     public DnbConsentDto() {
     }
 
-    public DnbConsentAccessDto getAccess() {
-        return access;
+    public String getConsentId() {
+        return consentId;
     }
 
-    public void setAccess(DnbConsentAccessDto access) {
-        this.access = access;
+    public void setConsentId(String consentId) {
+        this.consentId = consentId;
     }
 
-    public boolean isCombinedServiceIndicator() {
-        return combinedServiceIndicator;
+    public String getConsentStatus() {
+        return consentStatus;
     }
 
-    public void setCombinedServiceIndicator(boolean combinedServiceIndicator) {
-        this.combinedServiceIndicator = combinedServiceIndicator;
+    public void setConsentStatus(String consentStatus) {
+        this.consentStatus = consentStatus;
     }
 
-    public int getFrequencyPerDay() {
-        return frequencyPerDay;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setFrequencyPerDay(int frequencyPerDay) {
-        this.frequencyPerDay = frequencyPerDay;
-    }
-
-    public boolean isRecurringIndicator() {
-        return recurringIndicator;
-    }
-
-    public void setRecurringIndicator(boolean recurringIndicator) {
-        this.recurringIndicator = recurringIndicator;
-    }
-
-    public String getValidUntil() {
-        return validUntil;
-    }
-
-    public void setValidUntil(String validUntil) {
-        this.validUntil = validUntil;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 }

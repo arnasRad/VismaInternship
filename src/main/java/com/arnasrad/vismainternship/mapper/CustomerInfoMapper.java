@@ -2,9 +2,9 @@ package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.customer.CustomerAddressDto;
 import com.arnasrad.vismainternship.model.dto.customer.CustomerInfoDto;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.CitizenshipDto;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.CountryTaxDto;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DnbCustomerInfoDto;
+import com.arnasrad.vismainternship.model.dto.dnb.customer.CitizenshipDto;
+import com.arnasrad.vismainternship.model.dto.dnb.customer.CountryTaxDto;
+import com.arnasrad.vismainternship.model.dto.dnb.customer.DnbCustomerInfoDto;
 import com.arnasrad.vismainternship.model.entity.customer.Citizenship;
 import com.arnasrad.vismainternship.model.entity.customer.CountryTax;
 import com.arnasrad.vismainternship.model.entity.customer.CustomerAddress;

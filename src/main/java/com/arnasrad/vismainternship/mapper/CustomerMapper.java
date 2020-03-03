@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.customer.CustomerDto;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.customer.DnbCustomerDto;
+import com.arnasrad.vismainternship.model.dto.dnb.customer.DnbCustomerDto;
 import com.arnasrad.vismainternship.model.entity.customer.Customer;
 import org.springframework.stereotype.Component;
 

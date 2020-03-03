@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.card.CardDto;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.BlockingInfoDto;
-import com.arnasrad.vismainternship.model.dto.dnb.openbankingapi.card.DnbCardDto;
+import com.arnasrad.vismainternship.model.dto.dnb.card.BlockingInfoDto;
+import com.arnasrad.vismainternship.model.dto.dnb.card.DnbCardDto;
 import com.arnasrad.vismainternship.model.entity.card.BlockingInfo;
 import com.arnasrad.vismainternship.model.entity.card.Card;
 import org.springframework.stereotype.Component;

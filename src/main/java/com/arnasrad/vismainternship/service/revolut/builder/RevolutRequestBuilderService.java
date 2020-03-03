@@ -35,17 +35,7 @@ public class RevolutRequestBuilderService {
     }
 
     public HttpEntity<String> getPaymentRequest(PaymentRequestDto body) {
-        JSONObject receiverJson = new JSONObject();
-        receiverJson.put("counterparty_id", body.getReceiver().getCounterpartyId());
-        receiverJson.put("account_id", body.getReceiver().getAccountId());
-
-        JSONObject paymentRequestJson = new JSONObject();
-        paymentRequestJson.put("request_id", body.getRequestId());
-        paymentRequestJson.put("account_id", body.getAccountId());
-        paymentRequestJson.put("receiver", receiverJson);
-        paymentRequestJson.put("amount", body.getAmount());
-        paymentRequestJson.put("currency", body.getCurrency());
-        paymentRequestJson.put("reference", body.getReference());
+        JSONObject paymentRequestJson = revolutRequestBodyBuilderService.getPaymentRequestBody(body);
 
         return getAuthorizedJsonRequestWithBody(paymentRequestJson);
     }

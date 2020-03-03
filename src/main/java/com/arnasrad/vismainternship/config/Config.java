@@ -2,13 +2,22 @@ package com.arnasrad.vismainternship.config;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import javax.jms.Queue;
+import javax.net.ssl.SSLContext;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.*;
+import java.security.cert.CertificateException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,8 +37,38 @@ public class Config {
     }
 
     @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
+    public RestTemplate restTemplate() throws KeyStoreException, IOException, UnrecoverableKeyException,
+            NoSuchAlgorithmException, CertificateException, KeyManagementException {
+        char[] password = "admin".toCharArray();
+        KeyStore clientStore = getPKCS12KeyStore(password);
+
+        SSLContext sslContext = SSLContextBuilder.create()
+                .setProtocol("TLS")
+                .loadKeyMaterial(clientStore, password)
+                .build();
+//        SSLContextBuilder sslContextBuilder = new SSLContextBuilder();
+//        sslContextBuilder.setProtocol("TLS");
+//        sslContextBuilder.loadKeyMaterial(clientStore, "admin".toCharArray());
+
+//        SSLConnectionSocketFactory sslConnectionSocketFactory =
+//                new SSLConnectionSocketFactory(sslContextBuilder.build());
+
+//        CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).build();
+        HttpClient client = HttpClients.custom().setSSLContext(sslContext).build();
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(client);
+        requestFactory.setConnectTimeout(5000);
+        requestFactory.setReadTimeout(5000);
+
+        return new RestTemplate(requestFactory);
+    }
+
+    private KeyStore getPKCS12KeyStore(char[] password) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
+        KeyStore keyStore = KeyStore.getInstance("PKCS12");
+        FileInputStream fileInputStream = new FileInputStream("src/main/resources/static/certificates/dnb" +
+                "/pkprivatecertificate.p12");
+        keyStore.load(fileInputStream, password);
+
+        return keyStore;
     }
 
     @Bean
