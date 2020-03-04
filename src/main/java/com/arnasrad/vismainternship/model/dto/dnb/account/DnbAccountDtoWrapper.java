@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DnbAccountListDto extends RepresentationModel<DnbAccountDto>  {
+public class DnbAccountDtoWrapper extends RepresentationModel<DnbAccountDto>  {
 
     private List<DnbAccountDto> accounts;
 
-    public DnbAccountListDto() {
+    public DnbAccountDtoWrapper() {
     }
 
     public List<DnbAccountDto> getAccounts() {
@@ -27,7 +27,7 @@ public class DnbAccountListDto extends RepresentationModel<DnbAccountDto>  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        DnbAccountListDto that = (DnbAccountListDto) o;
+        DnbAccountDtoWrapper that = (DnbAccountDtoWrapper) o;
         return Objects.equals(getAccounts(), that.getAccounts());
     }
 

@@ -3,8 +3,7 @@ package com.arnasrad.vismainternship.service.dnb.request;
 import com.arnasrad.vismainternship.model.ErrorMessages;
 import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDto;
 import com.arnasrad.vismainternship.model.dto.account.AccountDto;
-import com.arnasrad.vismainternship.model.dto.dnb.account.DnbAccountDto;
-import com.arnasrad.vismainternship.model.dto.dnb.account.DnbAccountListDto;
+import com.arnasrad.vismainternship.model.dto.dnb.account.DnbAccountDtoWrapper;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.dnb.builder.DnbPsd2RequestBuilderService;
@@ -49,15 +48,15 @@ public class DnbAccountService implements AccountService {
                 "getAccountDetails"));
     }
 
-    public DnbAccountListDto getAccountList() {
+    public DnbAccountDtoWrapper getAccountList() {
         HttpEntity<String> authorizedHttpEntity = dnbPsd2RequestBuilderService.getAuthorizedRequest();
 
 //        ResponseEntity<String> responseEntity = restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
 //                authorizedHttpEntity, String.class);
 //
 //        return responseEntity.getBody();
-        ResponseEntity<DnbAccountListDto> responseEntity = restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
-                authorizedHttpEntity, DnbAccountListDto.class);
+        ResponseEntity<DnbAccountDtoWrapper> responseEntity = restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, DnbAccountDtoWrapper.class);
 
         return responseEntity.getBody();
     }
