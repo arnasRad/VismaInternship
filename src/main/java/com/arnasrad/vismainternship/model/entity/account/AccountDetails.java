@@ -20,6 +20,7 @@ public class AccountDetails {
     private String sortCode;
     private String routingNumber;
     private String beneficiary;
+    private String usage;
     @ManyToOne
     private BeneficiaryAddress beneficiaryAddress;
     @ManyToOne
@@ -122,6 +123,14 @@ public class AccountDetails {
 
     public void setBeneficiaryAddress(BeneficiaryAddress beneficiaryAddress) {
         this.beneficiaryAddress = beneficiaryAddress;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public void setUsage(String usage) {
+        this.usage = usage;
     }
 
     public EstimatedTime getEstimatedTime() {

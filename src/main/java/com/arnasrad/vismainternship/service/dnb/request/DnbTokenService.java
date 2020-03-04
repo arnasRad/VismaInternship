@@ -41,6 +41,7 @@ public class DnbTokenService implements TokenService {
         ResponseEntity<DnbTokenDto> responseEntity = restTemplate.exchange(refreshTokenEndpoint, HttpMethod.POST,
                 httpEntity, DnbTokenDto.class);
 
+
         DnbTokenDto newToken = responseEntity.getBody();
         newToken.setClientId(ssn);
         save(newToken);

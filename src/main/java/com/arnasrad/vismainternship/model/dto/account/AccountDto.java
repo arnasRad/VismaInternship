@@ -10,6 +10,7 @@ public class AccountDto {
     private Double balance;
 
     public AccountDto() {
+
     }
 
     public String getId() {
@@ -34,14 +35,5 @@ public class AccountDto {
 
     public void setBalance(Double balance) {
         this.balance = balance;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", balance=" + balance +
-                '}';
     }
 }

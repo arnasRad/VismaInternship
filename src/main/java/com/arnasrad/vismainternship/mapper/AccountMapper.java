@@ -2,9 +2,14 @@ package com.arnasrad.vismainternship.mapper;
 
 import com.arnasrad.vismainternship.model.dto.account.AccountDto;
 import com.arnasrad.vismainternship.model.dto.dnb.account.DnbAccountDto;
+import com.arnasrad.vismainternship.model.dto.dnb.account.DnbBalance;
+import com.arnasrad.vismainternship.model.dto.dnb.account.DnbBalanceAmount;
 import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDto;
 import com.arnasrad.vismainternship.model.entity.account.Account;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public class AccountMapper {
@@ -22,9 +27,17 @@ public class AccountMapper {
     public DnbAccountDto mapToDnbAccountDto(Account entity) {
         DnbAccountDto accountDto = new DnbAccountDto();
 
-        accountDto.setId(entity.getAccountId());
+        DnbBalanceAmount dnbBalanceAmount = new DnbBalanceAmount();
+        dnbBalanceAmount.setAmount(String.valueOf(entity.getBalance()));
+        dnbBalanceAmount.setCurrency(entity.getCurrency());
+
+        DnbBalance dnbBalance = new DnbBalance();
+        dnbBalance.setBalanceAmount(dnbBalanceAmount);
+
         accountDto.setName(entity.getName());
-        accountDto.setBalance(entity.getBalance());
+        accountDto.setBalances(Collections.singletonList(dnbBalance));
+        accountDto.setCurrency(entity.getCurrency());
+        accountDto.setName(entity.getName());
 
         return accountDto;
     }
@@ -57,9 +70,12 @@ public class AccountMapper {
     public Account mapToAccountEntity(DnbAccountDto dto) {
         Account account = new Account();
 
-        account.setAccountId(dto.getId());
+        DnbBalanceAmount dnbBalanceAmount = dto.getBalances().get(0).getBalanceAmount();
+
         account.setName(dto.getName());
-        account.setBalance(dto.getBalance());
+        account.setBalance(Double.valueOf(dnbBalanceAmount.getAmount()));
+        account.setCurrency(dnbBalanceAmount.getCurrency());
+        account.setState(dto.getStatus().getStatus());
 
         return account;
     }
