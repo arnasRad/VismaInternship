@@ -1,14 +1,9 @@
 package com.arnasrad.vismainternship.mapper.revolut;
 
 import com.arnasrad.vismainternship.model.dto.PaymentDto;
-import com.arnasrad.vismainternship.model.dto.PaymentRequestDto;
-import com.arnasrad.vismainternship.model.dto.revolut.payment.PaymentReceiverDto;
 import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentDto;
-import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentRequestDto;
 import com.arnasrad.vismainternship.model.entity.payment.Payment;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Component
 public class RevolutPaymentMapper {

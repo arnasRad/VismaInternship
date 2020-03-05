@@ -1,11 +1,5 @@
 package com.arnasrad.vismainternship.service.jms;
 
-import com.arnasrad.vismainternship.mapper.revolut.RevolutPaymentRequestMapper;
-import com.arnasrad.vismainternship.model.dto.PaymentRequestDto;
-import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentRequestDto;
-import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
-import com.arnasrad.vismainternship.model.exception.EntryNotFoundException;
-import com.arnasrad.vismainternship.persistence.payment.PaymentRequestRepository;
 import org.springframework.stereotype.Service;
 
 @Service

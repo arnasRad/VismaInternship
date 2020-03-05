@@ -1,29 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request.unit;
 
-import com.arnasrad.vismainternship.model.dto.revolut.account.RevolutAccountDto;
-import com.arnasrad.vismainternship.service.revolut.builder.RevolutRequestBuilderService;
-import com.arnasrad.vismainternship.service.revolut.request.RevolutAccountService;
-import com.arnasrad.vismainternship.service.revolut.testdata.RevolutObjectTestData;
-import com.arnasrad.vismainternship.service.revolut.testdata.RevolutStringTestData;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RevolutAccountDtoDtoServiceTest {

@@ -8,8 +8,6 @@ import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentRequ
 import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class RevolutPaymentRequestMapper {
 
@@ -25,6 +23,7 @@ public class RevolutPaymentRequestMapper {
     public PaymentRequest mapToEntity(PaymentRequestDto dto) {
         PaymentRequest paymentRequest = new PaymentRequest();
 
+        // TODO: implement QueueEntry entity
         paymentRequest.setRequestId("TODO");
         paymentRequest.setState("TODO");
 

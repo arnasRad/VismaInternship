@@ -5,6 +5,8 @@ import com.arnasrad.vismainternship.model.enums.DnbTransactionStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.hateoas.RepresentationModel;
 
+import java.util.Objects;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DnbPaymentDetailsDto extends RepresentationModel<DnbAccountDto> {
 
@@ -88,5 +90,29 @@ public class DnbPaymentDetailsDto extends RepresentationModel<DnbAccountDto> {
 
     public void setTransactionStatus(DnbTransactionStatus transactionStatus) {
         this.transactionStatus = transactionStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DnbPaymentDetailsDto that = (DnbPaymentDetailsDto) o;
+        return Objects.equals(getCreditorAccount(), that.getCreditorAccount()) &&
+                Objects.equals(getCreditorAddress(), that.getCreditorAddress()) &&
+                Objects.equals(getCreditorAgent(), that.getCreditorAgent()) &&
+                Objects.equals(getCreditorName(), that.getCreditorName()) &&
+                Objects.equals(getDebtorAccount(), that.getDebtorAccount()) &&
+                Objects.equals(getEndToEndIdentification(), that.getEndToEndIdentification()) &&
+                Objects.equals(getInstructedAmount(), that.getInstructedAmount()) &&
+                Objects.equals(getRemittanceInformationUnstructured(), that.getRemittanceInformationUnstructured()) &&
+                getTransactionStatus() == that.getTransactionStatus();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getCreditorAccount(), getCreditorAddress(), getCreditorAgent(),
+                getCreditorName(), getDebtorAccount(), getEndToEndIdentification(), getInstructedAmount(),
+                getRemittanceInformationUnstructured(), getTransactionStatus());
     }
 }

@@ -1,16 +1,12 @@
 package com.arnasrad.vismainternship.service.jms;
 
 import com.arnasrad.vismainternship.model.dto.PaymentRequestDto;
-import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentRequestDto;
-import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
-import com.arnasrad.vismainternship.model.enums.MessageState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.jms.Queue;
-import java.util.UUID;
 
 @Service
 public class PaymentProducer {
