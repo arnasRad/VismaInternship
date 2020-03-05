@@ -1,6 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb.builder;
 
-import com.arnasrad.vismainternship.model.dto.token.DnbConsentRequestDto;
+import com.arnasrad.vismainternship.model.dto.dnb.payment.DnbPaymentRequestDto;
+import com.arnasrad.vismainternship.model.dto.dnb.token.DnbConsentRequestDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -29,6 +30,10 @@ public class DnbPsd2RequestBuilderService {
 
     public HttpEntity<String> getAuthorizedRequest() {
         return new HttpEntity<>(dnbPsd2HeaderBuilderService.getAuthorizedHttpHeaders());
+    }
+
+    public HttpEntity<DnbPaymentRequestDto> getAuthorizedRequest(DnbPaymentRequestDto requestDto) {
+        return new HttpEntity<>(requestDto, dnbPsd2HeaderBuilderService.getAuthorizedHttpHeaders());
     }
 
     public HttpEntity<String> getRequestWithSSN() {

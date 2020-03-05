@@ -28,9 +28,6 @@ public class Transaction {
     @ManyToOne
     private TransactionCard card;
 
-    public Transaction() {
-    }
-
     public Long getId() {
         return id;
     }

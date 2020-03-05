@@ -7,9 +7,6 @@ public class CitizenshipDto {
 
     private String countryOfCitizenship;
 
-    public CitizenshipDto() {
-    }
-
     public String getCountryOfCitizenship() {
         return countryOfCitizenship;
     }

@@ -12,9 +12,6 @@ public class MerchantDto {
     private String categoryCode;
     private String country;
 
-    public MerchantDto() {
-    }
-
     public String getName() {
         return name;
     }

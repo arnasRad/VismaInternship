@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.dnb.request;
 
 import com.arnasrad.vismainternship.mapper.TokenMapper;
-import com.arnasrad.vismainternship.model.dto.token.DnbConsentDto;
-import com.arnasrad.vismainternship.model.dto.token.DnbConsentRequestDto;
+import com.arnasrad.vismainternship.model.dto.dnb.token.DnbConsentDto;
+import com.arnasrad.vismainternship.model.dto.dnb.token.DnbConsentRequestDto;
 import com.arnasrad.vismainternship.model.entity.token.Token;
 import com.arnasrad.vismainternship.persistence.token.TokenRepository;
 import com.arnasrad.vismainternship.service.dnb.builder.DnbPsd2RequestBuilderService;

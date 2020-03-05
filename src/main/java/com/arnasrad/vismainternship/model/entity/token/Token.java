@@ -15,9 +15,6 @@ public class Token {
     private Integer expiresId;
     private String customerPublicId;
 
-    public Token() {
-    }
-
     public String getClientId() {
         return clientId;
     }

@@ -20,9 +20,6 @@ public class CounterpartyAccount {
     private String bic;
     private String recipientCharges;
 
-    public CounterpartyAccount() {
-    }
-
     public Long getId() {
         return id;
     }

@@ -21,9 +21,6 @@ public class Counterparty {
     private Date createdAt;
     private Date updatedAt;
 
-    public Counterparty() {
-    }
-
     public Long getId() {
         return id;
     }

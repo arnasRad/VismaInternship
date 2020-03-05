@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb.request;
 
 import com.arnasrad.vismainternship.model.ErrorMessages;
-import com.arnasrad.vismainternship.model.dto.counterparty.CounterpartyDto;
+import com.arnasrad.vismainternship.model.dto.CounterpartyDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
 import com.arnasrad.vismainternship.service.request.CounterpartyService;
@@ -19,7 +19,7 @@ public class DnbCounterpartyService implements CounterpartyService {
     }
 
     @Override
-    public List<? extends CounterpartyDto> getCounterparties() throws NoSuchFunctionalityException {
+    public List<CounterpartyDto> getCounterparties() throws NoSuchFunctionalityException {
         throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
                 "getCounterparties"));
     }

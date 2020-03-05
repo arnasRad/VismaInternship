@@ -1,6 +1,5 @@
 package com.arnasrad.vismainternship.model.dto.revolut.transaction;
 
-import com.arnasrad.vismainternship.model.dto.transaction.TransactionDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,24 +7,37 @@ import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RevolutTransactionDto extends TransactionDto {
+public class RevolutTransactionDto {
 
+    private String id;
     @JsonProperty("request_id")
     private String requestId;
     @JsonProperty("reason_code")
     private String reasonCode;
-    @JsonProperty("updated_at")
-    private Date updatedAt;
+    private String type;
+    private String state;
+    private String reference;
     @JsonProperty("scheduled_for")
     private Date scheduledFor;
     @JsonProperty("related_transaction_id")
     private String relatedTransactionId;
+    @JsonProperty("created_at")
+    private Date createdAt;
+    @JsonProperty("completed_at")
+    private Date completedAt;
+    @JsonProperty("updated_at")
+    private Date updatedAt;
     private MerchantDto merchant;
     @JsonProperty("legs")
-    private List<RevolutTransactionLegsDto> revolutTransactionLegs;
+    private List<TransactionLegsDto> transactionLegs;
     private TransactionCardDto card;
 
-    public RevolutTransactionDto() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getRequestId() {
@@ -44,12 +56,28 @@ public class RevolutTransactionDto extends TransactionDto {
         this.reasonCode = reasonCode;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public String getType() {
+        return type;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public Date getScheduledFor() {
@@ -68,6 +96,30 @@ public class RevolutTransactionDto extends TransactionDto {
         this.relatedTransactionId = relatedTransactionId;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getCompletedAt() {
+        return completedAt;
+    }
+
+    public void setCompletedAt(Date completedAt) {
+        this.completedAt = completedAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public MerchantDto getMerchant() {
         return merchant;
     }
@@ -76,12 +128,12 @@ public class RevolutTransactionDto extends TransactionDto {
         this.merchant = merchant;
     }
 
-    public List<RevolutTransactionLegsDto> getRevolutTransactionLegs() {
-        return revolutTransactionLegs;
+    public List<TransactionLegsDto> getTransactionLegs() {
+        return transactionLegs;
     }
 
-    public void setRevolutTransactionLegs(List<RevolutTransactionLegsDto> revolutTransactionLegs) {
-        this.revolutTransactionLegs = revolutTransactionLegs;
+    public void setTransactionLegs(List<TransactionLegsDto> transactionLegs) {
+        this.transactionLegs = transactionLegs;
     }
 
     public TransactionCardDto getCard() {

@@ -13,9 +13,6 @@ public class CountryTax {
     @ManyToOne
     private CustomerInfo customerInfo;
 
-    public CountryTax() {
-    }
-
     public Long getId() {
         return id;
     }

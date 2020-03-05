@@ -1,6 +1,8 @@
 package com.arnasrad.vismainternship.service.jms;
 
-import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDto;
+import com.arnasrad.vismainternship.mapper.revolut.RevolutPaymentRequestMapper;
+import com.arnasrad.vismainternship.model.dto.PaymentRequestDto;
+import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentRequestDto;
 import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
 import com.arnasrad.vismainternship.model.enums.MessageState;
 import com.arnasrad.vismainternship.model.exception.EntryNotFoundException;
@@ -27,15 +29,15 @@ public class PaymentConsumer {
     @JmsListener(destination = "#{@paymentQueueName}")
     public void consume(PaymentRequestDto paymentRequestDto)
             throws NoSuchFunctionalityException, EntryNotFoundException {
-        PaymentRequest paymentRequest = paymentMessageState.findAndUpdate(paymentRequestDto,
-                MessageState.PROCESSING.getState());
+//        PaymentRequest paymentRequest = paymentMessageState.findAndUpdate(paymentRequestDto,
+//                MessageState.PROCESSING.getState());
         logger.info("Payment request processing");
 
-        String bank = paymentRequestDto.getBankId();
+        String bank = paymentRequestDto.getBankName();
         PaymentService paymentService = paymentServiceFactory.getService(bank);
 
         paymentService.createPayment(paymentRequestDto);
-        paymentMessageState.update(paymentRequest, MessageState.PROCESSED.getState());
+//        paymentMessageState.update(paymentRequest, MessageState.PROCESSED.getState());
         logger.info("Payment request processed");
     }
 }

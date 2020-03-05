@@ -15,9 +15,6 @@ public class LegsCounterparty {
     private String accountId;
     private String type;
 
-    public LegsCounterparty() {
-    }
-
     public Long getId() {
         return id;
     }

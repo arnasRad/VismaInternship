@@ -14,9 +14,6 @@ public class Customer {
     private String ssn;
     private String customerName;
 
-    public Customer() {
-    }
-
     public Long getId() {
         return id;
     }

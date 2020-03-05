@@ -18,9 +18,6 @@ public class BeneficiaryAddress {
     private String country;
     private String postcode;
 
-    public BeneficiaryAddress() {
-    }
-
     public Long getId() {
         return id;
     }

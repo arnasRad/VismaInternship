@@ -18,9 +18,6 @@ public class CustomerAddress {
     private String addressLine2;
     private String addressLine3;
 
-    public CustomerAddress() {
-    }
-
     public Long getId() {
         return id;
     }

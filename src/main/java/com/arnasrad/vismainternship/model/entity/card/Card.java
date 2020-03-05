@@ -23,9 +23,6 @@ public class Card {
     private String cardHolderName;
     private String cardStatus;
 
-    public Card() {
-    }
-
     public Long getId() {
         return id;
     }

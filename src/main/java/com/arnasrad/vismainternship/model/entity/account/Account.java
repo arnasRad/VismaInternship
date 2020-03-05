@@ -21,9 +21,6 @@ public class Account {
     private Date createdAt;
     private Date updatedAt;
 
-    public Account() {
-    }
-
     public Long getId() {
         return id;
     }

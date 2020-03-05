@@ -18,9 +18,6 @@ public class Payment {
     private Date createdAt;
     private Date completedAt;
 
-    public Payment() {
-    }
-
     public Long getId() {
         return id;
     }

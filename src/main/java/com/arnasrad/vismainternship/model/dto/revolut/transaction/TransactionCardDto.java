@@ -14,9 +14,6 @@ public class TransactionCardDto {
     private String lastName;
     private String phone;
 
-    public TransactionCardDto() {
-    }
-
     public String getCardNumber() {
         return cardNumber;
     }

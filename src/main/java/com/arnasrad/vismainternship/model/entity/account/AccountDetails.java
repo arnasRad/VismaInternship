@@ -26,9 +26,6 @@ public class AccountDetails {
     @ManyToOne
     private EstimatedTime estimatedTime;
 
-    public AccountDetails() {
-    }
-
     public Long getId() {
         return id;
     }

@@ -15,9 +15,6 @@ public class BeneficiaryAddressDto {
     private String country;
     private String postcode;
 
-    public BeneficiaryAddressDto() {
-    }
-
     public String getStreetLine1() {
         return streetLine1;
     }

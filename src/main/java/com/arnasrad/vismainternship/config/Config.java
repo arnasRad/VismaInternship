@@ -46,14 +46,7 @@ public class Config {
                 .setProtocol("TLS")
                 .loadKeyMaterial(clientStore, password)
                 .build();
-//        SSLContextBuilder sslContextBuilder = new SSLContextBuilder();
-//        sslContextBuilder.setProtocol("TLS");
-//        sslContextBuilder.loadKeyMaterial(clientStore, "admin".toCharArray());
 
-//        SSLConnectionSocketFactory sslConnectionSocketFactory =
-//                new SSLConnectionSocketFactory(sslContextBuilder.build());
-
-//        CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).build();
         HttpClient client = HttpClients.custom().setSSLContext(sslContext).build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(client);
         requestFactory.setConnectTimeout(5000);
@@ -80,7 +73,7 @@ public class Config {
     public ActiveMQConnectionFactory activeMQConnectionFactory() {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
         factory.setBrokerURL(brokerUrl);
-        factory.setTrustedPackages(new ArrayList<>(Arrays.asList("com.arnasrad.vismainternship.model.dto.payment")));
+        factory.setTrustedPackages(new ArrayList<>(Arrays.asList("com.arnasrad.vismainternship.model.dto")));
         return factory;
     }
 

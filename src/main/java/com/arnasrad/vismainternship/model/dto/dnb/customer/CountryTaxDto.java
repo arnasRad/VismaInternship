@@ -8,9 +8,6 @@ public class CountryTaxDto {
     private String taxLiabilityCountry;
     private String taxIdentificationNumber;
 
-    public CountryTaxDto() {
-    }
-
     public String getTaxLiabilityCountry() {
         return taxLiabilityCountry;
     }

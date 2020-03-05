@@ -11,9 +11,6 @@ public class DnbAccountDtoWrapper extends RepresentationModel<DnbAccountDto>  {
 
     private List<DnbAccountDto> accounts;
 
-    public DnbAccountDtoWrapper() {
-    }
-
     public List<DnbAccountDto> getAccounts() {
         return accounts;
     }

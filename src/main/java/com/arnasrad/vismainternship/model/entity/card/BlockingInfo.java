@@ -16,9 +16,6 @@ public class BlockingInfo {
     private String timestamp;
     private boolean blockAllowed;
 
-    public BlockingInfo() {
-    }
-
     public Long getId() {
         return id;
     }

@@ -20,9 +20,6 @@ public class DnbAccountDto extends RepresentationModel<DnbAccountDto> {
     private DnbAccountStatus status;
     private DnbAccountUsage usage;
 
-    public DnbAccountDto() {
-    }
-
     public List<DnbBalance> getBalances() {
         return balances;
     }

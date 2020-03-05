@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
-import com.arnasrad.vismainternship.mapper.TransactionMapper;
+import com.arnasrad.vismainternship.mapper.revolut.RevolutTransactionMapper;
+import com.arnasrad.vismainternship.model.dto.TransactionDto;
 import com.arnasrad.vismainternship.model.dto.revolut.transaction.RevolutTransactionDto;
-import com.arnasrad.vismainternship.model.entity.transaction.Transaction;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.persistence.transaction.TransactionRepository;
 import com.arnasrad.vismainternship.service.request.TransactionService;
@@ -26,14 +26,14 @@ public class RevolutTransactionService implements TransactionService {
     private final RevolutRequestBuilderService revolutRequestBuilderService;
     private final RevolutRequestURLBuilderService revolutRequestURLBuilderService;
     private final TransactionRepository transactionRepository;
-    private final TransactionMapper revolutTransactionMapper;
+    private final RevolutTransactionMapper revolutTransactionMapper;
     @Value("${revolut.endpoint.transaction}")
     private String transactionEndpoint;
 
     public RevolutTransactionService(RestTemplate restTemplate,
                                      RevolutRequestBuilderService revolutRequestBuilderService,
                                      TransactionRepository transactionRepository,
-                                     TransactionMapper revolutTransactionMapper,
+                                     RevolutTransactionMapper revolutTransactionMapper,
                                      RevolutRequestURLBuilderService revolutRequestURLBuilderService) {
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
@@ -43,17 +43,18 @@ public class RevolutTransactionService implements TransactionService {
     }
 
     @Override
-    public RevolutTransactionDto getTransaction(String id) {
+    public TransactionDto getTransaction(String id) {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
         ResponseEntity<RevolutTransactionDto> responseEntity = restTemplate.exchange(transactionEndpoint.concat(id),
                 HttpMethod.GET, authorizedHttpEntity, RevolutTransactionDto.class);
 
-        return responseEntity.getBody();
+        RevolutTransactionDto revolutTransactionDto = responseEntity.getBody();
+        return revolutTransactionMapper.mapToTransactionDto(revolutTransactionDto);
     }
 
     @Override
-    public List<RevolutTransactionDto> getTransactions(String counterparty, Date from, Date to, Integer count) {
+    public List<TransactionDto> getTransactions(String counterparty, Date from, Date to, Integer count) {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
         String transactionsURI = revolutRequestURLBuilderService.getTransactionsURI(counterparty, from, to, count);
@@ -62,7 +63,8 @@ public class RevolutTransactionService implements TransactionService {
                 HttpMethod.GET, authorizedHttpEntity, new ParameterizedTypeReference<List<RevolutTransactionDto>>() {
                 });
 
-        return responseEntity.getBody();
+        List<RevolutTransactionDto> revolutTransactionDtoList = responseEntity.getBody();
+        return revolutTransactionMapper.mapToTransactionDtoList(revolutTransactionDtoList);
     }
 
 
@@ -71,11 +73,11 @@ public class RevolutTransactionService implements TransactionService {
         return BankId.REVOLUT_ID.getBank();
     }
 
-    public void saveTransaction(String id) {
-        RevolutTransactionDto transaction = getTransaction(id);
-        Transaction revolutTransaction = revolutTransactionMapper.mapToTransactionEntity(transaction);
-        transactionRepository.save(revolutTransaction);
-    }
+//    public void saveTransaction(String id) {
+//        TransactionDto transaction = getTransaction(id);
+//        Transaction revolutTransaction = revolutTransactionMapper.mapToTransactionEntity(transaction);
+//        transactionRepository.save(revolutTransaction);
+//    }
 
     public void setTransactionEndpoint(String transactionEndpoint) {
         this.transactionEndpoint = transactionEndpoint;

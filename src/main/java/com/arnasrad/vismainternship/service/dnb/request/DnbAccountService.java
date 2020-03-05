@@ -1,8 +1,9 @@
 package com.arnasrad.vismainternship.service.dnb.request;
 
+import com.arnasrad.vismainternship.mapper.dnb.DnbAccountMapper;
 import com.arnasrad.vismainternship.model.ErrorMessages;
-import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDto;
-import com.arnasrad.vismainternship.model.dto.account.AccountDto;
+import com.arnasrad.vismainternship.model.dto.AccountDto;
+import com.arnasrad.vismainternship.model.dto.dnb.account.DnbAccountDto;
 import com.arnasrad.vismainternship.model.dto.dnb.account.DnbAccountDtoWrapper;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.model.exception.NoSuchFunctionalityException;
@@ -24,37 +25,37 @@ public class DnbAccountService implements AccountService {
     private String accountsEndpoint;
     private final DnbPsd2RequestBuilderService dnbPsd2RequestBuilderService;
     private final RestTemplate restTemplate;
+    private final DnbAccountMapper dnbAccountMapper;
 
-    public DnbAccountService(DnbPsd2RequestBuilderService dnbPsd2RequestBuilderService, RestTemplate restTemplate) {
+    public DnbAccountService(DnbPsd2RequestBuilderService dnbPsd2RequestBuilderService, RestTemplate restTemplate,
+                             DnbAccountMapper dnbAccountMapper) {
         this.dnbPsd2RequestBuilderService = dnbPsd2RequestBuilderService;
         this.restTemplate = restTemplate;
+        this.dnbAccountMapper = dnbAccountMapper;
     }
 
     @Override
     public List<AccountDto> getAccounts() throws NoSuchFunctionalityException {
-        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
-                "getAccounts"));
+        HttpEntity<String> authorizedHttpEntity = dnbPsd2RequestBuilderService.getAuthorizedRequest();
+
+        ResponseEntity<DnbAccountDtoWrapper> responseEntity = restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
+                authorizedHttpEntity, DnbAccountDtoWrapper.class);
+
+        DnbAccountDtoWrapper accountsWrapper = responseEntity.getBody();
+        List<DnbAccountDto> dnbAccountDtoList = accountsWrapper.getAccounts();
+
+        return dnbAccountMapper.mapToAccountDtoList(dnbAccountDtoList);
     }
 
     @Override
-    public AccountDto getAccount(String id) throws NoSuchFunctionalityException {
+    public AccountDto getAccount(String iban) throws NoSuchFunctionalityException {
         throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
                 "getAccount"));
-    }
-
-    @Override
-    public List<AccountDetailsDto> getAccountDetails(String id) throws NoSuchFunctionalityException {
-        throw new NoSuchFunctionalityException(String.format(ErrorMessages.NO_SUCH_FUNCTIONALITY, getBankId(),
-                "getAccountDetails"));
     }
 
     public DnbAccountDtoWrapper getAccountList() {
         HttpEntity<String> authorizedHttpEntity = dnbPsd2RequestBuilderService.getAuthorizedRequest();
 
-//        ResponseEntity<String> responseEntity = restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
-//                authorizedHttpEntity, String.class);
-//
-//        return responseEntity.getBody();
         ResponseEntity<DnbAccountDtoWrapper> responseEntity = restTemplate.exchange(accountsEndpoint, HttpMethod.GET,
                 authorizedHttpEntity, DnbAccountDtoWrapper.class);
 

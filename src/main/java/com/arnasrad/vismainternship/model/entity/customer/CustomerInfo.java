@@ -23,9 +23,6 @@ public class CustomerInfo {
     @OneToMany(cascade = CascadeType.ALL)
     private List<CountryTax> countryTax;
 
-    public CustomerInfo() {
-    }
-
     public Long getId() {
         return id;
     }

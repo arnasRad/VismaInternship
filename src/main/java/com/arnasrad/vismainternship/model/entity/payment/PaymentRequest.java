@@ -10,9 +10,6 @@ public class PaymentRequest {
     private String requestId;
     private String state;
 
-    public PaymentRequest() {
-    }
-
     public String getRequestId() {
         return requestId;
     }

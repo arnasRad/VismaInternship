@@ -1,5 +1,7 @@
 package com.arnasrad.vismainternship.service.revolut.request;
 
+import com.arnasrad.vismainternship.mapper.revolut.RevolutCounterpartyMapper;
+import com.arnasrad.vismainternship.model.dto.CounterpartyDto;
 import com.arnasrad.vismainternship.model.dto.revolut.counterparty.RevolutCounterpartyDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
 import com.arnasrad.vismainternship.service.request.CounterpartyService;
@@ -20,6 +22,7 @@ public class RevolutCounterpartyService implements CounterpartyService {
 
     private final RestTemplate restTemplate;
     private final RevolutRequestBuilderService revolutRequestBuilderService;
+    private final RevolutCounterpartyMapper revolutCounterpartyMapper;
     @Value("${revolut.endpoint.counterparty}")
     private String counterpartyEndpoint;
     @Value("${revolut.endpoint.counterparties}")
@@ -27,24 +30,27 @@ public class RevolutCounterpartyService implements CounterpartyService {
     @Value("${revolut.endpoint.delete-counterparty}")
     private String deleteCounterpartyEndpoint;
 
-    public RevolutCounterpartyService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService) {
+    public RevolutCounterpartyService(RestTemplate restTemplate, RevolutRequestBuilderService revolutRequestBuilderService, RevolutCounterpartyMapper revolutCounterpartyMapper) {
         this.restTemplate = restTemplate;
         this.revolutRequestBuilderService = revolutRequestBuilderService;
+        this.revolutCounterpartyMapper = revolutCounterpartyMapper;
     }
 
     @Override
-    public RevolutCounterpartyDto addCounterparty(String body) {
+    public CounterpartyDto addCounterparty(String body) {
         JSONObject jsonObject = new JSONObject(body);
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedJsonRequestWithBody(jsonObject);
 
         ResponseEntity<RevolutCounterpartyDto> responseEntity = restTemplate.postForEntity(counterpartyEndpoint,
                 authorizedHttpEntity, RevolutCounterpartyDto.class);
 
-        return responseEntity.getBody();
+        RevolutCounterpartyDto counterpartyDto = responseEntity.getBody();
+
+        return revolutCounterpartyMapper.mapToCounterpartyDto(counterpartyDto);
     }
 
     @Override
-    public List<RevolutCounterpartyDto> getCounterparties() {
+    public List<CounterpartyDto> getCounterparties() {
         HttpEntity<String> authorizedHttpEntity = revolutRequestBuilderService.getAuthorizedRequest();
 
         ResponseEntity<List<RevolutCounterpartyDto>> responseEntity = restTemplate.exchange(counterpartiesEndpoint,
@@ -52,7 +58,8 @@ public class RevolutCounterpartyService implements CounterpartyService {
                 new ParameterizedTypeReference<List<RevolutCounterpartyDto>>() {
                 });
 
-        return responseEntity.getBody();
+        List<RevolutCounterpartyDto> revolutCounterpartyDtoList = responseEntity.getBody();
+        return revolutCounterpartyMapper.mapToCounterpartyDtoList(revolutCounterpartyDtoList);
     }
 
     @Override

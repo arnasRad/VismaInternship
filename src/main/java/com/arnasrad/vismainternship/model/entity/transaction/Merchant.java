@@ -16,9 +16,6 @@ public class Merchant {
     private String categoryCode;
     private String country;
 
-    public Merchant() {
-    }
-
     public Long getId() {
         return id;
     }

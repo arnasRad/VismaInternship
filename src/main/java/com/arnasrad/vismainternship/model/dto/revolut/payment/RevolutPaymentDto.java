@@ -1,20 +1,36 @@
 package com.arnasrad.vismainternship.model.dto.revolut.payment;
 
-import com.arnasrad.vismainternship.model.dto.payment.PaymentDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RevolutPaymentDto extends PaymentDto {
+public class RevolutPaymentDto {
 
+    private String id;
+    private String state;
     @JsonProperty("reason_code")
     private String reasonCode;
     @JsonProperty("created_at")
     private Date createdAt;
+    @JsonProperty("completed_at")
+    private Date completedAt;
 
-    public RevolutPaymentDto() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getReasonCode() {
@@ -31,5 +47,13 @@ public class RevolutPaymentDto extends PaymentDto {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Date getCompletedAt() {
+        return completedAt;
+    }
+
+    public void setCompletedAt(Date completedAt) {
+        this.completedAt = completedAt;
     }
 }

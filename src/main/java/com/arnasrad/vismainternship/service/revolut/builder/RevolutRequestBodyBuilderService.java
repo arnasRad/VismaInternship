@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.revolut.builder;
 
-import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDto;
+import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentRequestDto;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class RevolutRequestBodyBuilderService {
         return params;
     }
     
-    public JSONObject getPaymentRequestBody(PaymentRequestDto requestDto) {
+    public JSONObject getPaymentRequestBody(RevolutPaymentRequestDto requestDto) {
         JSONObject receiverJson = new JSONObject();
         receiverJson.put("counterparty_id", requestDto.getReceiver().getCounterpartyId());
         receiverJson.put("account_id", requestDto.getReceiver().getAccountId());

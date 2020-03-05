@@ -1,30 +1,46 @@
 package com.arnasrad.vismainternship.model.dto.revolut.account;
 
-import com.arnasrad.vismainternship.model.dto.account.AccountDetailsDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RevolutAccountDetailsDto extends AccountDetailsDto {
+public class RevolutAccountDetailsDto {
 
+    @JsonProperty("account_no")
+    private String accountNo;
+    private String iban;
     private String bic;
-    private Boolean pooled;
     private String uniqueReference;
-
+    private Boolean pooled;
+    private List<String> schemas;
+    @JsonProperty("bank_country")
+    private String bankCountry;
     @JsonProperty("sort_code")
     private String sortCode;
-
     @JsonProperty("routing_number")
     private String routingNumber;
-
     private String beneficiary;
     @JsonProperty("beneficiary_address")
     private BeneficiaryAddressDto beneficiaryAddress;
-
     @JsonProperty("estimated_time")
     private EstimatedTimeDto estimatedTime;
 
-    public RevolutAccountDetailsDto() {
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 
     public String getBic() {
@@ -35,6 +51,14 @@ public class RevolutAccountDetailsDto extends AccountDetailsDto {
         this.bic = bic;
     }
 
+    public String getUniqueReference() {
+        return uniqueReference;
+    }
+
+    public void setUniqueReference(String uniqueReference) {
+        this.uniqueReference = uniqueReference;
+    }
+
     public Boolean getPooled() {
         return pooled;
     }
@@ -43,12 +67,20 @@ public class RevolutAccountDetailsDto extends AccountDetailsDto {
         this.pooled = pooled;
     }
 
-    public String getUniqueReference() {
-        return uniqueReference;
+    public List<String> getSchemas() {
+        return schemas;
     }
 
-    public void setUniqueReference(String uniqueReference) {
-        this.uniqueReference = uniqueReference;
+    public void setSchemas(List<String> schemas) {
+        this.schemas = schemas;
+    }
+
+    public String getBankCountry() {
+        return bankCountry;
+    }
+
+    public void setBankCountry(String bankCountry) {
+        this.bankCountry = bankCountry;
     }
 
     public String getSortCode() {

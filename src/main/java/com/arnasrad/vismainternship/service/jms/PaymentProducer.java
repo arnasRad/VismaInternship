@@ -1,6 +1,7 @@
 package com.arnasrad.vismainternship.service.jms;
 
-import com.arnasrad.vismainternship.model.dto.payment.PaymentRequestDto;
+import com.arnasrad.vismainternship.model.dto.PaymentRequestDto;
+import com.arnasrad.vismainternship.model.dto.revolut.payment.RevolutPaymentRequestDto;
 import com.arnasrad.vismainternship.model.entity.payment.PaymentRequest;
 import com.arnasrad.vismainternship.model.enums.MessageState;
 import org.slf4j.Logger;
@@ -25,14 +26,12 @@ public class PaymentProducer {
         this.paymentQueue = paymentQueue;
     }
 
-    public void send(String bank, PaymentRequestDto body) {
-        body.setBankId(bank);
-        body.setRequestId(UUID.randomUUID().toString());
-        PaymentRequest paymentRequest = paymentMessageState.mapAndSave(body, MessageState.ACCEPTED.getState());
+    public void send(PaymentRequestDto body) {
+//        PaymentRequest paymentRequest = paymentMessageState.mapAndSave(body, MessageState.ACCEPTED.getState());
         logger.info("Payment request accepted");
 
         jmsTemplate.convertAndSend(paymentQueue, body);
-        paymentMessageState.update(paymentRequest, MessageState.IN_QUEUE.getState());
+//        paymentMessageState.update(paymentRequest, MessageState.IN_QUEUE.getState());
         logger.info("Payment request in queue");
     }
 }

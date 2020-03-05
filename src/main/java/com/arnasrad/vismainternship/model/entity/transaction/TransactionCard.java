@@ -16,9 +16,6 @@ public class TransactionCard {
     private String lastName;
     private String phone;
 
-    public TransactionCard() {
-    }
-
     public Long getId() {
         return id;
     }

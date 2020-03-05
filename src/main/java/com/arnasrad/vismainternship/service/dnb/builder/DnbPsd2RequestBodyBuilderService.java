@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.service.dnb.builder;
 
-import com.arnasrad.vismainternship.model.dto.token.DnbConsentRequestDto;
+import com.arnasrad.vismainternship.model.dto.dnb.token.DnbConsentRequestDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;

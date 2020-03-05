@@ -3,19 +3,14 @@ package com.arnasrad.vismainternship.model.dto.dnb.account;
 import com.arnasrad.vismainternship.model.enums.DnbBalanceType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.Date;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DnbBalance {
 
     private DnbBalanceAmount balanceAmount;
     private DnbBalanceType balanceType;
-    private Date lastChangeDateTime;
+    private String lastChangeDateTime;
     private String lastCommittedTransaction;
-    private Date referenceDate;
-
-    public DnbBalance() {
-    }
+    private String referenceDate;
 
     public DnbBalanceAmount getBalanceAmount() {
         return balanceAmount;
@@ -33,11 +28,11 @@ public class DnbBalance {
         this.balanceType = balanceType;
     }
 
-    public Date getLastChangeDateTime() {
+    public String getLastChangeDateTime() {
         return lastChangeDateTime;
     }
 
-    public void setLastChangeDateTime(Date lastChangeDateTime) {
+    public void setLastChangeDateTime(String lastChangeDateTime) {
         this.lastChangeDateTime = lastChangeDateTime;
     }
 
@@ -49,11 +44,11 @@ public class DnbBalance {
         this.lastCommittedTransaction = lastCommittedTransaction;
     }
 
-    public Date getReferenceDate() {
+    public String getReferenceDate() {
         return referenceDate;
     }
 
-    public void setReferenceDate(Date referenceDate) {
+    public void setReferenceDate(String referenceDate) {
         this.referenceDate = referenceDate;
     }
 }

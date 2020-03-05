@@ -9,9 +9,6 @@ public class EstimatedTimeDto {
     private Double min;
     private Double max;
 
-    public EstimatedTimeDto() {
-    }
-
     public String getUnit() {
         return unit;
     }

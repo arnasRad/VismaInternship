@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DnbBalanceAmount {
+
     private String amount;
     private String currency;
-
-    public DnbBalanceAmount() {
-    }
 
     public String getAmount() {
         return amount;

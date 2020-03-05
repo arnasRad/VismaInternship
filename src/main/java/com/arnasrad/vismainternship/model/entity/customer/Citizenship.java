@@ -12,9 +12,6 @@ public class Citizenship {
     @ManyToOne
     private CustomerInfo customerInfo;
 
-    public Citizenship() {
-    }
-
     public Long getId() {
         return id;
     }

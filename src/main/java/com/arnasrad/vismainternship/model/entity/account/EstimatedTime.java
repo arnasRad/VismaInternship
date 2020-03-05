@@ -15,9 +15,6 @@ public class EstimatedTime {
     private Double min;
     private Double max;
 
-    public EstimatedTime() {
-    }
-
     public Long getId() {
         return id;
     }

@@ -21,9 +21,6 @@ public class TransactionLegs {
     @ManyToOne
     private Transaction transaction;
 
-    public TransactionLegs() {
-    }
-
     public Long getId() {
         return id;
     }

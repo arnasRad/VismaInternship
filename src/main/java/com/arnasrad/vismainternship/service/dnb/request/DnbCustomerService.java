@@ -1,5 +1,9 @@
 package com.arnasrad.vismainternship.service.dnb.request;
 
+import com.arnasrad.vismainternship.mapper.dnb.DnbCustomerInfoMapper;
+import com.arnasrad.vismainternship.mapper.dnb.DnbCustomerMapper;
+import com.arnasrad.vismainternship.model.dto.CustomerDto;
+import com.arnasrad.vismainternship.model.dto.CustomerInfoDto;
 import com.arnasrad.vismainternship.model.dto.dnb.customer.DnbCustomerDto;
 import com.arnasrad.vismainternship.model.dto.dnb.customer.DnbCustomerInfoDto;
 import com.arnasrad.vismainternship.model.enums.BankId;
@@ -20,6 +24,8 @@ public class DnbCustomerService implements CustomerService {
 
     private final RestTemplate restTemplate;
     private final DnbRequestBuilderService dnbRequestBuilderService;
+    private final DnbCustomerMapper dnbCustomerMapper;
+    private final DnbCustomerInfoMapper dnbCustomerInfoMapper;
     @Value("${dnb.openbanking.endpoint.customers}")
     private String customersEndpoint;
     @Value("${dnb.openbanking.endpoint.current-customer-info}")
@@ -27,40 +33,44 @@ public class DnbCustomerService implements CustomerService {
     @Value("${dnb.openbanking.endpoint.customer-info}")
     private String customerInfoEndpoint;
 
-    public DnbCustomerService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService) {
+    public DnbCustomerService(RestTemplate restTemplate, DnbRequestBuilderService dnbRequestBuilderService,
+                              DnbCustomerMapper dnbCustomerMapper, DnbCustomerInfoMapper dnbCustomerInfoMapper) {
         this.restTemplate = restTemplate;
         this.dnbRequestBuilderService = dnbRequestBuilderService;
+        this.dnbCustomerMapper = dnbCustomerMapper;
+        this.dnbCustomerInfoMapper = dnbCustomerInfoMapper;
     }
 
     @Override
-    public List<DnbCustomerDto> getCustomers() {
+    public List<CustomerDto> getCustomers() {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getRequest();
 
         ResponseEntity<List<DnbCustomerDto>> responseEntity = restTemplate.exchange(customersEndpoint, HttpMethod.GET,
                 authorizedHttpEntity, new ParameterizedTypeReference<List<DnbCustomerDto>>() {
                 });
 
-        return responseEntity.getBody();
+        List<DnbCustomerDto> dnbCustomerDtoList = responseEntity.getBody();
+        return dnbCustomerMapper.mapToCustomerDtoList(dnbCustomerDtoList);
     }
 
-    @Override
-    public DnbCustomerInfoDto getCurrentCustomerInfo() {
+    public CustomerInfoDto getCurrentCustomerDetails() {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
 
         ResponseEntity<DnbCustomerInfoDto> responseEntity = restTemplate.exchange(currentCustomerInfoEndpoint,
                 HttpMethod.GET, authorizedHttpEntity, DnbCustomerInfoDto.class);
 
-        return responseEntity.getBody();
+        DnbCustomerInfoDto dnbCustomerInfoDto = responseEntity.getBody();
+        return dnbCustomerInfoMapper.mapToCustomerInfoDto(dnbCustomerInfoDto);
     }
 
-    @Override
-    public DnbCustomerInfoDto getCustomerInfo(String ssn) {
+    public CustomerInfoDto getCustomerDetails(String ssn) {
         HttpEntity<String> authorizedHttpEntity = dnbRequestBuilderService.getAuthorizedRequest();
 
         ResponseEntity<DnbCustomerInfoDto> responseEntity = restTemplate.exchange(customerInfoEndpoint.concat(ssn),
                 HttpMethod.GET, authorizedHttpEntity, DnbCustomerInfoDto.class);
 
-        return responseEntity.getBody();
+        DnbCustomerInfoDto dnbCustomerInfoDto = responseEntity.getBody();
+        return dnbCustomerInfoMapper.mapToCustomerInfoDto(dnbCustomerInfoDto);
     }
 
     public void setCustomersEndpoint(String customersEndpoint) {

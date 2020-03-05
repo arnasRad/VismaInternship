@@ -1,8 +1,8 @@
 package com.arnasrad.vismainternship.mapper;
 
-import com.arnasrad.vismainternship.model.dto.token.DnbConsentDto;
-import com.arnasrad.vismainternship.model.dto.token.DnbTokenDto;
-import com.arnasrad.vismainternship.model.dto.token.RevolutTokenDto;
+import com.arnasrad.vismainternship.model.dto.dnb.token.DnbConsentDto;
+import com.arnasrad.vismainternship.model.dto.dnb.token.DnbTokenDto;
+import com.arnasrad.vismainternship.model.dto.revolut.token.RevolutTokenDto;
 import com.arnasrad.vismainternship.model.entity.token.Token;
 import org.springframework.stereotype.Component;
 

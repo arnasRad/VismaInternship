@@ -10,9 +10,6 @@ public class BlockingInfoDto {
     private String timestamp;
     private boolean blockAllowed;
 
-    public BlockingInfoDto() {
-    }
-
     public boolean isUnblockAllowed() {
         return unblockAllowed;
     }
