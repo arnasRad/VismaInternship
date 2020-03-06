@@ -1,6 +1,7 @@
 package com.arnasrad.vismainternship.service.dnb.request;
 
 import com.arnasrad.vismainternship.mapper.dnb.DnbPaymentMapper;
+import com.arnasrad.vismainternship.mapper.dnb.DnbPaymentRequestMapper;
 import com.arnasrad.vismainternship.model.dto.PaymentDto;
 import com.arnasrad.vismainternship.model.dto.PaymentRequestDto;
 import com.arnasrad.vismainternship.model.dto.dnb.payment.DnbPaymentDetailsDto;
@@ -22,18 +23,21 @@ public class DnbPaymentService implements PaymentService {
     private final RestTemplate restTemplate;
     private final DnbPsd2RequestBuilderService requestBuilderService;
     private final DnbPaymentMapper dnbPaymentMapper;
+    private final DnbPaymentRequestMapper dnbPaymentRequestMapper;
     @Value("${dnb.psd2.endpoint.payments}")
     private String paymentsEndpoint;
 
-    public DnbPaymentService(RestTemplate restTemplate, DnbPsd2RequestBuilderService requestBuilderService, DnbPaymentMapper dnbPaymentMapper) {
+    public DnbPaymentService(RestTemplate restTemplate, DnbPsd2RequestBuilderService requestBuilderService,
+                             DnbPaymentMapper dnbPaymentMapper, DnbPaymentRequestMapper dnbPaymentRequestMapper) {
         this.restTemplate = restTemplate;
         this.requestBuilderService = requestBuilderService;
         this.dnbPaymentMapper = dnbPaymentMapper;
+        this.dnbPaymentRequestMapper = dnbPaymentRequestMapper;
     }
 
     @Override
     public PaymentDto createPayment(PaymentRequestDto body) {
-        DnbPaymentRequestDto dnbPaymentRequestDto = dnbPaymentMapper.mapToDnbPaymentRequestDto(body);
+        DnbPaymentRequestDto dnbPaymentRequestDto = dnbPaymentRequestMapper.mapToDnbPaymentRequestDto(body);
 
         HttpEntity<DnbPaymentRequestDto> authorizedHttpEntity =
                 requestBuilderService.getAuthorizedRequest(dnbPaymentRequestDto);

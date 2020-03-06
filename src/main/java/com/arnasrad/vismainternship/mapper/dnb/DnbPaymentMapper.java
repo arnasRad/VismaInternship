@@ -13,18 +13,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class DnbPaymentMapper {
 
-    public DnbPaymentRequestDto mapToDnbPaymentRequestDto(PaymentRequestDto paymentRequestDto) {
-        DnbPaymentRequestDto dnbPaymentRequestDto = new DnbPaymentRequestDto();
-
-        dnbPaymentRequestDto.setDebtorAccount(mapRequestToDebtorAccount(paymentRequestDto));
-        dnbPaymentRequestDto.setCreditorAccount(mapRequestToCreditorAccount(paymentRequestDto));
-        dnbPaymentRequestDto.setCreditorName(paymentRequestDto.getCreditor().getName());
-        dnbPaymentRequestDto.setInstructedAmount(mapRequestToInstructedAmount(paymentRequestDto));
-        dnbPaymentRequestDto.setRemittanceInformationUnstructured(paymentRequestDto.getReference());
-
-        return dnbPaymentRequestDto;
-    }
-
     public PaymentDto mapToPaymentDto(DnbPaymentDto dnbPaymentDto) {
         PaymentDto paymentDto = new PaymentDto();
 
@@ -32,28 +20,5 @@ public class DnbPaymentMapper {
         paymentDto.setState(dnbPaymentDto.getTransactionStatus().name());
 
         return paymentDto;
-    }
-
-    private AccountReference mapRequestToCreditorAccount(PaymentRequestDto paymentRequestDto) {
-        AccountReference creditorAccount = new AccountReference();
-        PaymentAccountReference creditor = paymentRequestDto.getCreditor();
-
-        creditorAccount.setBban(creditor.getIban());
-        return creditorAccount;
-    }
-
-    private Amount mapRequestToInstructedAmount(PaymentRequestDto paymentRequestDto) {
-        Amount instructedAmount = new Amount();
-        PaymentAmount requestInstructedAmount = paymentRequestDto.getInstructedAmount();
-
-        instructedAmount.setAmount(requestInstructedAmount.getAmount());
-        instructedAmount.setCurrency(requestInstructedAmount.getCurrency());
-        return instructedAmount;
-    }
-
-    private AccountReference mapRequestToDebtorAccount(PaymentRequestDto paymentRequestDto) {
-        AccountReference debtorAccount = new AccountReference();
-        debtorAccount.setBban(paymentRequestDto.getDebtor());
-        return debtorAccount;
     }
 }
