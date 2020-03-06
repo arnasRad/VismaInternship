@@ -1,7 +1,7 @@
 package com.arnasrad.vismainternship.model.dto.dnb.payment;
 
 
-import com.arnasrad.vismainternship.model.enums.DnbAccountPurposeCode;
+import com.arnasrad.vismainternship.model.enums.DnbPurposeCode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -20,7 +20,7 @@ public class DnbPaymentRequestDto {
     private String endToEndIdentification;
     @NotNull
     private Amount instructedAmount;
-    private DnbAccountPurposeCode purposeCode;
+    private DnbPurposeCode purposeCode;
     private RemittanceInformationStructured remittanceInformationStructured;
     private String remittanceInformationUnstructured;
     private String requestedExecutionDate;
@@ -85,11 +85,11 @@ public class DnbPaymentRequestDto {
         this.instructedAmount = instructedAmount;
     }
 
-    public DnbAccountPurposeCode getPurposeCode() {
+    public DnbPurposeCode getPurposeCode() {
         return purposeCode;
     }
 
-    public void setPurposeCode(DnbAccountPurposeCode purposeCode) {
+    public void setPurposeCode(DnbPurposeCode purposeCode) {
         this.purposeCode = purposeCode;
     }
 

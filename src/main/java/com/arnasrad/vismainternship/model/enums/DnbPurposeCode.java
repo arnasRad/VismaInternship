@@ -1,6 +1,6 @@
 package com.arnasrad.vismainternship.model.enums;
 
-public enum DnbAccountPurposeCode {
+public enum DnbPurposeCode {
     BKDF,
     BKFE,
     BKFM,
